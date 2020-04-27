@@ -1,0 +1,2457 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2015 hybris AG
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+-->
+
+<items xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="items.xsd">
+
+	<collectiontypes>
+		<collectiontype code="GenderList" elementtype="Gender" autocreate="true" generate="true" type="list"/>
+		<collectiontype code="SwatchColorSet" elementtype="SwatchColorEnum" autocreate="true" generate="true"
+		                type="set"/>
+		                
+		 <collectiontype code="sparTopNavigationBarComponentList"
+			elementtype="SparTopNavigationBarComponent" autocreate="true" generate="true"
+			type="list" />
+			
+			<collectiontype code="EmailAttachmentCollection" elementtype="EmailAttachment" 
+						autocreate="true" generate="true"/>
+						
+			<collectiontype elementtype="sparDailyRefundResult" code="sparDailyRefundResultList" autocreate="true" generate="true" type="list"/>
+			<collectiontype elementtype="SparCMSRestrictionDay" code="SparCMSRestrictionDayList" autocreate="true" generate="true" type="list"/>
+			<collectiontype elementtype="Warehouse" code="SparWarehouseList" autocreate="true" generate="true" type="list"/>
+		<collectiontype code="deliverySlotsList" elementtype="java.lang.String" autocreate="true"
+                        generate="false"
+                        type="list"/>
+        <collectiontype elementtype="SparDailyFraudResult" code="sparDailyFraudResultList" autocreate="true" generate="true" type="list" />
+	</collectiontypes>
+
+
+	<enumtypes>
+		<enumtype generate="true" code="SwatchColorEnum" autocreate="true" dynamic="true">
+			<value code="BLACK"/>
+			<value code="BLUE"/>
+			<value code="BROWN"/>
+			<value code="GREEN"/>
+			<value code="GREY"/>
+			<value code="ORANGE"/>
+			<value code="PINK"/>
+			<value code="PURPLE"/>
+			<value code="RED"/>
+			<value code="SILVER"/>
+			<value code="WHITE"/>
+			<value code="YELLOW"/>
+		</enumtype>
+		<enumtype generate="true" code="DeliveryTypeEnum" autocreate="true"
+			dynamic="true">
+			<value code="HD" />
+			<value code="CNC" />
+		</enumtype>
+		
+		<!--  Payment Mode & IPG Changes added - SPAR - Rohan_C START-->
+		<enumtype code="PaymentModeEnum" autocreate="true" generate="true">
+            <value code="creditcard"/>
+            <value code="cashondelivery"/>
+            <value code="wallet"/>
+            <value code="multiPaymentMode"/>
+           	<value code="voucherPaymentMode"/>
+           	<value code="landmarkReward"/>
+           	<value code="payTM"/>
+        </enumtype>
+        
+		<enumtype code="SparIPGDecisionEnum" autocreate="true" generate="true">
+            <value code="APPROVED"/>
+            <value code="DECLINED"/>
+            <value code="FAILED"/>
+        </enumtype>
+        
+        <enumtype generate="true" code="CheckoutPciOptionEnum"	autocreate="false" dynamic="true">
+			<value code="CUSTOM" />
+		</enumtype>
+		
+		<enumtype code="CreditCardType" autocreate="false" generate="false">
+			<value code="mastercard"/>
+			<value code="rupay"/>
+		</enumtype>
+        <!--  Payment Mode  & IPG Changes added - SPAR - Rohan_C END-->
+        
+<enumtype code="InclusionExclusionTypeEnum" autocreate="true" generate="true" dynamic="true">
+        <value code="IN" />
+		<value code="EXL" />
+        </enumtype>
+<enumtype generate="true" code="SparCMSRestrictionDay" autocreate="true" dynamic="true">		
+			<value code="MONDAY"/>
+			<value code="TUESDAY"/>
+			<value code="WEDNESDAY"/>
+			<value code="THURSDAY"/>
+			<value code="FRIDAY"/>
+			<value code="SATURDAY"/>
+			<value code="SUNDAY"/>
+		</enumtype>
+<enumtype generate="true" code="WalletFundingReasonEnum" autocreate="true" dynamic="true">		
+			<value code="SHORT_PICK"/>
+			<value code="DELAYED"/>
+			<value code="RETURN"/>
+			<value code="CANCELLATION"/>
+			<value code="MRP_CSP_CHANGE"/>
+		</enumtype>		
+		 <enumtype code="SparSitemapPageType" autocreate="true" generate="true" dynamic="true">
+          <value code="STATIC" />
+		  <value code="CATEGORY" />
+		  <value code="PRODUCT" />
+		  <value code="SUBCATEGORY" />
+		  <value code="LANDING" />
+        </enumtype>
+</enumtypes>
+ 
+	<relations>
+		<!-- PLP Rotating Image Banner START  -->
+		
+		<relation code="PlpBannersForRotatingComponent" generate="true" localized="false" autocreate="true">
+			<deployment table="PLPBannForRotCompRels" typecode="31004"/>
+			<sourceElement qualifier="plprotatingComponent" type="PlpRotatingImagesComponent" cardinality="many">
+				<modifiers read="true" write="true" search="true" optional="true" />
+			</sourceElement>
+			<targetElement qualifier="banners" type="BannerComponent" cardinality="many" collectiontype="list" ordered="true">
+				<modifiers read="true" write="true" search="true" optional="true" />
+			</targetElement>
+		</relation>
+		<!-- Pavan : rotating landmark component Start :: UAT
+		<relation code="BannersForLkRotatingComponents" generate="true" localized="false" autocreate="true">
+			<deployment table="LMKBannRotCompRel" typecode="31070"/>
+			<sourceElement qualifier="rotatingLandmarkComponent" type="RotatingLandmarkImagesComponent" cardinality="many">
+				<modifiers read="true" write="true" search="true" optional="true" />
+			</sourceElement>
+			<targetElement qualifier="banners" type="BannerComponent" cardinality="many" collectiontype="list" ordered="true">
+				<modifiers read="true" write="true" search="true" optional="true" />
+			</targetElement>
+		</relation>-->
+		
+		<!-- Pavan : rotating landmark component Start :: PROD-->
+		<relation code="BannersForLkRotatingComponent" generate="true" localized="false" autocreate="true">
+			<deployment table="LMKBannRotCompRels" typecode="31050"/>
+			<sourceElement qualifier="rotatingLandmarkComponent" type="RotatingLandmarkImagesComponent" cardinality="many">
+				<modifiers read="true" write="true" search="true" optional="true" />
+			</sourceElement>
+			<targetElement qualifier="banners" type="BannerComponent" cardinality="many" collectiontype="list" ordered="true">
+				<modifiers read="true" write="true" search="true" optional="true" />
+			</targetElement>
+		</relation>
+		
+		<!-- Pavan : rotating landmark component End  -->
+		<!-- PLP Rotating Image Banner END  -->
+		
+		<!-- Code change start by sumit for Spar Promise Banner -->
+		<relation code="HomePageBannersComponent" generate="true" localized="false" autocreate="true">
+			<deployment table="HomePageBannCompRels" typecode="31007"/>
+			<sourceElement qualifier="HomePageBannerComponent" type="HomePagePromiseBannerImagesComponent" cardinality="many">
+				<modifiers read="true" write="true" search="true" optional="true" />
+			</sourceElement>
+			<targetElement qualifier="banners" type="BannerComponent" cardinality="many" collectiontype="list" ordered="true">
+				<modifiers read="true" write="true" search="true" optional="true" />
+			</targetElement>
+		</relation>
+		<!-- Code change end here -->
+		
+		
+		<!--  added by pallavi for payment banner START --> 
+		<relation code="HomePagePaymentBannersComponent" generate="true" localized="false" autocreate="true">
+			
+			<sourceElement qualifier="HomePagePaymentBannerComponent" type="HomePagePaymentBannerImageComponent" cardinality="one">
+				<modifiers read="true" write="true" search="true" optional="true" />
+			</sourceElement>
+			<targetElement qualifier="banners" type="BannerComponent" cardinality="many" collectiontype="list" ordered="true">
+				<modifiers read="true" write="true" search="true" optional="true" />
+			</targetElement>		
+		</relation>
+		<!--  added by pallavi for payment banner END --> 
+		
+		<!-- PLP Carousel START  -->
+		<relation code="PlpProductsForProductCarouselComponent" generate="true" localized="false" autocreate="true">
+			<deployment table="PLPProdCarCompRels" typecode="31002"/>
+			<sourceElement qualifier="plpProductGridHeaderComponent" type="PlpProductGridHeaderComponent" cardinality="many">
+				<modifiers read="true" write="true" search="true" optional="true" />
+			</sourceElement>
+			<targetElement qualifier="products" type="Product" cardinality="many" collectiontype="list" ordered="true">
+				<modifiers read="true" write="true" search="true" optional="true" />
+			</targetElement>
+		</relation>
+		<relation code="PlpCategoriesForProductCarouselComponent" generate="true" localized="false" autocreate="true">
+			<deployment table="PLPCatsCarCompRels" typecode="31003"/>
+			<sourceElement qualifier="plpProductGridHeaderComponent" type="PlpProductGridHeaderComponent" cardinality="many">
+				<modifiers read="true" write="true" search="true" optional="true" />
+			</sourceElement>
+			<targetElement qualifier="categories" type="Category" cardinality="many" collectiontype="list" ordered="true">
+				<modifiers read="true" write="true" search="true" optional="true" />
+			</targetElement>
+		</relation>
+	<relation code="CategoriesCarouselComponent" generate="true"
+		localized="false" autocreate="true">
+		<deployment table="CatsompRels" typecode="10000" />
+		<sourceElement qualifier="categoryCarouselComponents"
+			type="CategoryCarouselComponent" cardinality="many">
+			<modifiers read="true" write="true" search="true" optional="true" />
+		</sourceElement>
+		<targetElement qualifier="categories" type="Category"
+			cardinality="many" collectiontype="list" ordered="true">
+			<modifiers read="true" write="true" search="true" optional="true" />
+		</targetElement>
+	</relation>
+	
+	
+		<!-- Start : Pavan -->
+	
+	<relation code="AddOnCategoriesCarouselComponent" generate="true"
+		localized="false" autocreate="true">
+		<deployment table="AdCatsompRels" typecode="9000" />
+		<sourceElement qualifier="addoncategoryCarouselComponents"
+			type="AddOnCategoryCarouselComponent" cardinality="many">
+			<modifiers read="true" write="true" search="true" optional="true" />
+		</sourceElement>
+		<targetElement qualifier="categories" type="Category"
+			cardinality="many" collectiontype="list" ordered="true">
+			<modifiers read="true" write="true" search="true" optional="true" />
+		</targetElement>
+	</relation>
+	
+	<!-- End : Pavan -->
+	
+	
+		<!-- New Design items Relation XML entry for Delivery Slot - Start -->
+		<relation code="DeliverySlot2WarehouseRel" autocreate="true" generate="false" localized="false">
+			<deployment table="DlvSlot2WarRel" typecode="31006" />
+			<sourceElement type="Warehouse" cardinality="many" qualifier="warehouses"/>
+			<targetElement type="DeliverySlot" qualifier="deliverySlots"
+				collectiontype="set" cardinality="many" ordered="false" >
+				<modifiers read="true" write="true" search="true"
+					optional="true" />
+			</targetElement>
+		</relation>
+		<!-- New Design items Relation XML entry for Delivery Slot - End -->
+		<!-- New Design items Relation XML entry for Inclusion Exclusion - Start -->
+		<relation code="InclusionExclusion2POSRel" autocreate="true" generate="false" localized="false">
+			<deployment table="InExl2POSRel" typecode="31009" />
+			<sourceElement type="InclusionExclusionEntry" cardinality="many" qualifier="inExlList"/>
+			<targetElement type="PointOfService" qualifier="stores"
+				collectiontype="list" cardinality="many" ordered="false" >
+				<modifiers read="true" write="true" search="true"
+					optional="true" />
+			</targetElement>
+		</relation>
+		<!-- New Design items Relation XML entry for Inclusion Exclusion - End -->
+		
+		<relation code="Customer2WalletDetails" autocreate="true" generate="false" localized="false">
+			<sourceElement type="Customer" cardinality="one" qualifier="customer"/>
+			<targetElement type="WalletDetails" qualifier="walletDetails"
+				collectiontype="list" cardinality="many" ordered="false" >
+				<modifiers read="true" write="true" search="true"
+					optional="true" />
+			</targetElement>
+		</relation>
+		<relation code="PromotionRestriction2WarehouseRel"
+			autocreate="true"
+			generate="true"
+			localized="false">
+			<deployment table="PromRestr2WarehouseRel" typecode="9111"/>
+			<sourceElement qualifier="warehouses" type="Warehouse" cardinality="many">
+				<description>Warehouses</description>
+				<modifiers read="true" write="true" search="true" optional="true"/>
+			</sourceElement>
+			<targetElement qualifier="sparWarehousePromotionRestriction" type="SparWarehousePromotionRestriction" cardinality="many">
+				<description>Promotion restrictions for warehouses</description>
+				<modifiers read="true" write="true" search="true" optional="true" partof="true"/>
+			</targetElement>
+			
+		</relation>
+		<!-- Pavan -->
+		<relation code="PromotionRestriction2CategoryRel"
+			autocreate="true"
+			generate="true"
+			localized="false">
+			<deployment table="PromRestr2CategoryRel" typecode="9112"/>
+					
+			<sourceElement qualifier="categories" type="Category" cardinality="many">
+				<description>Categories</description>
+				<modifiers read="true" write="true" search="true" optional="true"/>
+			</sourceElement>
+			<targetElement qualifier="sparCategoryPromotionRestriction" type="sparCategoryPromotionRestriction" cardinality="many">
+				<description>Promotion restrictions for category</description>
+				<modifiers read="true" write="true" search="true" optional="true" partof="true"/>
+			</targetElement>
+			
+		</relation>
+		<!-- Pavan -->
+		
+		<relation code="PromotionRestriction2AddressRel"
+                  autocreate="true"
+                  generate="true"
+                  localized="false">
+                  <deployment table="PromRestr2AddressRel" typecode="9115"/>
+                  <sourceElement qualifier="addresses" type="Address" cardinality="many">
+                        <description>Address</description>
+                        <modifiers read="true" write="true" search="true" optional="true"/>
+                  </sourceElement>
+                  <targetElement qualifier="sparAddressPromotionRestriction" type="SparAddressPromotionRestriction" cardinality="many">
+                        <description>Promotion restrictions for category</description>
+                        <modifiers read="true" write="true" search="true" optional="true" partof="true"/>
+                  </targetElement>
+                  
+         </relation>
+         
+         <relation code="VouRestr2WarehouseRel"
+			autocreate="true"
+			generate="true"
+			localized="false">
+			<deployment table="VouRestr2WarehouseRel" typecode="9113"/>
+			<sourceElement qualifier="warehouses" type="Warehouse" cardinality="many">
+				<description>Warehouses</description>
+				<modifiers read="true" write="true" search="true" optional="true"/>
+			</sourceElement>
+			<targetElement qualifier="sparWarehouseVoucherRestriction" type="sparWarehouseVoucherRestriction" cardinality="many">
+				<description>Voucher restrictions for warehouses</description>
+				<modifiers read="true" write="true" search="true" optional="true" partof="true"/>
+			</targetElement>
+		</relation>
+	</relations>
+
+	<itemtypes>
+		
+		<itemtype code="StockLevel"
+			jaloclass="de.hybris.platform.ordersplitting.jalo.StockLevel"
+			extends="GenericItem" autocreate="false" generate="false">
+			<attributes>
+				<attribute type="java.util.Date" qualifier="rmsModifiedTime">
+					<modifiers read="true" write="true" search="true" optional="true" />
+					<persistence type="property" />
+				</attribute>
+			</attributes>
+		</itemtype> 
+		
+		<itemtype code="SparFeedsErrorEmailProcess" extends="StoreFrontProcess"
+						autocreate="true" generate="true"
+						jaloclass="com.spar.hcl.core.jalo.process.SparFeedsErrorEmailProcess">
+						
+						<description>It represents  Feeds Error Email Process.</description>
+						<attributes>
+							<attribute qualifier="errorString" type="java.lang.String">
+								<persistence type="property" />
+								<description>Attribute contains errorString</description>
+							</attribute>
+							<attribute qualifier="fileAttachments" type="EmailAttachmentCollection">
+								<persistence type="property" />
+								<description>Attribute contains error file attachments</description>
+							</attribute>
+							<attribute qualifier="sourceFileName" type="java.lang.String">
+								<persistence type="property" />
+								<description>Attribute contains source file name.</description>
+							</attribute>
+						</attributes>
+			</itemtype>
+			
+			<itemtype code="SparDailyRefundReportEmailProcess" extends="StoreFrontProcess"
+				autocreate="true" generate="true"
+				jaloclass="com.spar.hcl.core.jalo.process.SparDailyRefundReportEmailProcess">
+				
+				<description>It represents Daily Refund Report Email Process.</description>
+				<attributes>
+					<attribute qualifier="status" type="java.lang.String">
+						<persistence type="property" />
+						<description>Attribute contains errorString</description>
+					</attribute>
+					<attribute qualifier="dailyRefundResults" type="sparDailyRefundResultList">
+						<persistence type="property" />
+						<description>Attribute contains errorString</description>
+					</attribute>
+				</attributes>
+			</itemtype>
+			
+			
+			
+			
+				
+			<itemtype code="SparDelayFeedNotificationEmailProcess" extends="StoreFrontProcess"
+				autocreate="true" generate="true"
+				jaloclass="com.spar.hcl.core.jalo.process.SparDelayFeedNotificationEmailProcess">
+				
+				<description>It represents Delay feed notification  Email Process.</description>
+				<attributes>
+					<attribute qualifier="status" type="java.lang.String">
+						<persistence type="property" />
+						<description>Attribute contains errorString</description>
+					</attribute>
+				</attributes>
+			</itemtype>
+			
+			
+			
+			<itemtype code="SparExpiredPromoArchErrorEmailProcess" extends="StoreFrontProcess"
+				autocreate="true" generate="true"
+				jaloclass="com.spar.hcl.core.jalo.process.SparExpiredPromoArchErrorEmailProcess">
+				
+				<description>It represents Expired Promo Arch Error Email Process.</description>
+				<attributes>
+					<attribute qualifier="errorPromoType" type="java.lang.String">
+						<persistence type="property" />
+						<description>Attribute contains type of promo with error while export</description>
+					</attribute>
+				</attributes>
+			</itemtype>
+			<!-- Change start by sumit for promotion story -->
+			
+			<itemtype code="RMSCorruptedPriceFeedDataProcess" extends="StoreFrontProcess"
+						autocreate="true" generate="true"
+						jaloclass="com.spar.hcl.core.jalo.process.RMSCorruptedPriceFeedDataProcess">
+						
+						<description>It represents  Feeds Error Email Process.</description>
+						<attributes>
+							<attribute qualifier="errorString" type="java.util.Map">
+								<persistence type="property" />
+								<description>Attribute contains errorString</description>
+							</attribute>
+							<attribute qualifier="fileAttachments" type="EmailAttachmentCollection">
+								<persistence type="property" />
+								<description>Attribute contains error file attachments</description>
+							</attribute>
+							<attribute qualifier="sourceFileName" type="java.lang.String">
+								<persistence type="property" />
+								<description>Attribute contains source file name.</description>
+							</attribute>
+							<attribute qualifier="enviornment" type="java.lang.String">
+								<persistence type="property" />
+								<description>Enviornment in which the file is added to hot folder</description>
+							</attribute>
+							<attribute qualifier="totalRecords" type="java.lang.Integer">
+								<persistence type="property" />
+								<description>It will hold the count of the total records available</description>
+							</attribute>
+						</attributes>
+			</itemtype>
+			
+			<!-- Item Type for Need Help Email - Start -->
+			<itemtype code="SparNeedHelpEmailProcess" extends="StoreFrontProcess"
+				autocreate="true" generate="true"
+				jaloclass="com.spar.hcl.core.jalo.process.SparNeedHelpEmailProcess">
+					<attributes>
+						<attribute qualifier="helpType" type="java.lang.String">
+							<persistence type="property" />
+							<description>Attribute contains Type of Help required</description>
+						</attribute>
+						<attribute qualifier="customerName" type="java.lang.String">
+							<persistence type="property" />
+							<description>Attribute contains Customer Name</description>
+						</attribute>
+						<attribute qualifier="customerNumber" type="java.lang.String">
+							<persistence type="property" />
+							<description>Attribute contains Customer Number</description>
+						</attribute>
+						<attribute qualifier="desiredTime" type="java.lang.String">
+							<persistence type="property" />
+							<description>Attribute contains Customer's Desired Time</description>
+						</attribute>
+						<attribute qualifier="customerRemark" type="java.lang.String">
+							<persistence type="property" />
+							<description>Attribute contains Customer Remark</description>
+						</attribute>
+					</attributes>
+			</itemtype>
+			<!-- Item Type for Need Help Email - End -->
+			
+			
+			<!-- Item Type for GiftZone Email - Start -->
+			<itemtype code="SparGiftzoneContactUsEmailProcess" extends="StoreFrontProcess"
+				autocreate="true" generate="true"
+				jaloclass="com.spar.hcl.core.jalo.process.SparGiftzoneContactUsEmailProcess">
+					<attributes>
+						<attribute qualifier="customerName" type="java.lang.String">
+							<persistence type="property" />
+							<description>Attribute contains Customer Name required</description>
+						</attribute>
+						
+						<attribute qualifier="customerEmail" type="java.lang.String">
+							<persistence type="property" />
+							<description>Attribute contains Customer Email required</description>
+						</attribute>
+						
+						<attribute qualifier="customerContact" type="java.lang.String">
+							<persistence type="property" />
+							<description>Attribute contains Customer Contact required</description>
+						</attribute>
+						
+						<attribute qualifier="companyName" type="java.lang.String">
+							<persistence type="property" />
+							<description>Attribute contains Company Name</description>
+						</attribute>
+						
+						<attribute qualifier="customerCity" type="java.lang.String">
+							<persistence type="property" />
+							<description>Attribute contains Customer City required</description>
+						</attribute>
+						
+						<attribute qualifier="customerRemarks" type="java.lang.String">
+							<persistence type="property" />
+							<description>Attribute contains Customer Remarks</description>
+						</attribute>
+						
+					</attributes>
+			</itemtype>
+			<!-- Item Type for GiftZone Email - End -->
+			
+			<!-- Change end here -->
+			
+				<!-- Change start by Deepak for PLMS -->
+				<itemtype code="SparPLMSManualpickOrderEmailProcess" extends="StoreFrontProcess"
+				autocreate="true" generate="true"
+				jaloclass="com.spar.hcl.core.jalo.process.SparPLMSManualpickOrderEmailProcess">
+				
+				<description>It represents  SPAR PLMS Manual Pick Order Email Process.</description>
+				<attributes>
+						<attribute qualifier="order" type="Order" >
+						<persistence type="property" />
+						<description>Order Details to be sent</description>
+						</attribute>
+					
+				</attributes>
+				
+				</itemtype>
+				
+				<itemtype code="SparBlowhornFailedRequestOrderEmailProcess" extends="StoreFrontProcess"
+				autocreate="true" generate="true"
+				jaloclass="com.spar.hcl.core.jalo.process.SparBlowhornFailedRequestOrderEmailProcess">
+				
+				<description>It represents  SPAR PLMS Manual Pick Order Email Process.</description>
+				<attributes>
+						<attribute qualifier="order" type="Order" >
+						<persistence type="property" />
+						<description>Order Details to be sent</description>
+						</attribute>
+					
+				</attributes>
+				
+				</itemtype>
+				
+				
+				<itemtype code="SparLandmarkRegistrationEmailProcess" extends="StoreFrontProcess"
+					autocreate="true" generate="true"
+					jaloclass="com.spar.hcl.core.jalo.process.SparLandmarkRegistrationEmailProcess">
+					<description>It represents Landmark Registration Email Process.</description>
+					<attributes>
+							<attribute qualifier="order" type="Order" >
+							<persistence type="property" />
+							<description>Customer Enrollment Details to be sent</description>
+							</attribute>
+					</attributes>
+				</itemtype>
+				
+				<itemtype code="SparPaymentAmountEmailProcess" extends="StoreFrontProcess"
+				autocreate="true" generate="true"
+				jaloclass="com.spar.hcl.core.jalo.process.SparPaymentAmountEmailProcess">
+				<description>It represents Payment amount paid through credit card payment gateway Email Process.</description>
+				<attributes>
+						<attribute qualifier="order" type="Order" >
+						<persistence type="property" />
+						<description>Order Due Amount and Paid amount Details to be sent</description>
+						</attribute>
+					
+				</attributes>
+			</itemtype>	
+			
+			<itemtype code="SparLandmarkRedemptionEmailProcess" extends="StoreFrontProcess"
+					autocreate="true" generate="true"
+					jaloclass="com.spar.hcl.core.jalo.process.SparLandmarkRegistrationEmailProcess">
+					<description>It represents Landmark Redemption Email Process.</description>
+					<attributes>
+							<attribute qualifier="cart" type="Cart" >
+							<persistence type="property" />
+							<description>Email to be sent in case of after successful Card Payment LR down</description>
+							</attribute>
+					</attributes>
+				</itemtype>			
+				<!-- Change end here -->
+		
+		<itemtype code="AbstractOrder" autocreate="false" generate="false">
+			<description>additional attributes.</description>
+			<attributes>
+				<attribute qualifier="deliverySlot" type="java.lang.String" generate="true" autocreate="true">
+					<persistence type="property" />
+					<modifiers read="true" write="true" search="true" optional="true" />
+					<description>Attribute to store the delivery slot for an order.</description>
+				</attribute>
+				<attribute qualifier="pointOfService" type="java.lang.String" generate="true" autocreate="true">
+					<persistence type="property" />
+					<modifiers read="true" write="true" search="true" optional="true" />
+					<description>Attribute to store the point of service for an order.</description>
+				</attribute>
+				<attribute qualifier="deliveryDate" type="java.lang.String" generate="true" autocreate="true">
+					<persistence type="property" />
+					<modifiers read="true" write="true" search="true" optional="true" />
+					<description>Attribute to store the delivery date of an order.</description>
+				</attribute>
+				<attribute qualifier="orderDeliverySlot" type="DeliverySlot" generate="true" autocreate="true">
+					<persistence type="property" />
+					<modifiers read="true" write="true" search="true" optional="true" />
+					<description>Attribute to store the delivery slot for an order.</description>
+				</attribute>
+				<attribute qualifier="slotDeliveryDate" type="java.util.Date">
+					<modifiers read="true" write="true" search="true" optional="true"/>
+					<persistence type="property"/>
+				</attribute>
+				<attribute qualifier="orderPointOfService" type="PointOfService" generate="true" autocreate="true">
+					<persistence type="property" />
+					<modifiers read="true" write="true" search="true" optional="true" />
+					<description>Attribute to store the point of service for an order.</description>
+				</attribute>
+				
+			     <attribute qualifier="totalFoodCouponAmount" type="java.lang.Double" generate="true" autocreate="true">
+					<persistence type="property" />
+					<modifiers read="true" write="true" search="true" optional="true" />
+					<description>The total of applicable product cost on the category basis.</description>
+				</attribute>
+				<attribute qualifier="orderWarehouse" type="Warehouse" generate="true" autocreate="true">
+					<persistence type="property" />
+					<modifiers read="true" write="true" search="true" optional="true" />
+					<description>Attribute to store the Warehouse for an order. This is used for recalculation of Order </description>
+				</attribute>
+				<attribute qualifier="cncPhone" type="java.lang.String" generate="true" autocreate="true">
+					<persistence type="property" />
+					<modifiers read="true" write="true" search="true" optional="true" />
+					<description>Attribute to store the cnc phone number. optional</description>
+				</attribute>
+
+				<attribute qualifier="oderRetryNoShow" type="java.lang.Boolean" generate="true" autocreate="true">
+                     <modifiers read="true" write="true" search="true" optional="true"/>
+                     <persistence type="property"/>
+                </attribute>
+			
+				  <attribute qualifier="allDeliverySlots" type="deliverySlotsList" generate="true" autocreate="true">
+						<persistence type="property" />
+					<modifiers read="true" write="true" search="true" optional="true" />
+					<description>The total of applicable product cost on the category basis.</description>
+				</attribute>
+				<attribute qualifier="paidByWallet" type="java.lang.Double">
+             <description>Atribute to store amount paid by wallet .</description>
+                       <persistence type="property" >
+                        <columntype>
+	                    <value>java.math.BigDecimal</value>
+	                </columntype>
+	                </persistence>
+	                <defaultvalue>Double.valueOf(0.0d)</defaultvalue>
+                      <modifiers read="true" write="true" search="true" optional="true" />
+           </attribute>
+           <attribute qualifier="balanceDue" type="java.lang.Double">
+             <description>Atribute to store due amount .</description>
+                       <persistence type="property" >
+                        <columntype>
+	                    <value>java.math.BigDecimal</value>
+	                </columntype>
+	                </persistence>
+	                <defaultvalue>Double.valueOf(0.0d)</defaultvalue>
+                      <modifiers read="true" write="true" search="true" optional="true" />
+           </attribute>
+           
+           <attribute qualifier="paymentCaptureValue" type="java.lang.Double">
+					<description>Atribute to store due amount .</description>
+					<persistence type="property">
+						<columntype>
+							<value>java.math.BigDecimal</value>
+						</columntype>
+					</persistence>
+					<defaultvalue>Double.valueOf(0.0d)</defaultvalue>
+					<modifiers read="true" write="true" search="true"
+						optional="true" />
+				</attribute>
+				<attribute qualifier="savings" autocreate="true" type="java.lang.Double" generate="true">
+		            <persistence type="property">
+		                <columntype>
+		                    <value>java.math.BigDecimal</value>
+		                </columntype>
+		            </persistence>
+		            <modifiers read="true" write="true" search="false" optional="true"/>
+		            <defaultvalue>Double.valueOf(0.0d)</defaultvalue>
+		            <description>Attribute to store order saving</description>
+	            </attribute>
+	            <attribute qualifier="originalSubtotal" autocreate="true" type="java.lang.Double" generate="true">
+		           <persistence type="property">
+		                <columntype>
+		                    <value>java.math.BigDecimal</value>
+		                </columntype>
+		            </persistence>
+		            <modifiers read="true" write="true" search="true" optional="true"/>
+		            <defaultvalue>Double.valueOf(0.0d)</defaultvalue>
+		            <description>Attribute to store original order subtotal</description>
+	            </attribute>
+	            <attribute qualifier="originalTotalPrice" autocreate="true" type="java.lang.Double" generate="true">
+		            <persistence type="property">
+		                <columntype>
+		                    <value>java.math.BigDecimal</value>
+		                </columntype>
+		            </persistence>
+		            <modifiers read="true" write="true" search="true" optional="true"/>
+		            <defaultvalue>Double.valueOf(0.0d)</defaultvalue>
+		            <description>Attribute to store original order total</description>
+	            </attribute>
+		         <attribute qualifier="voucherDescription" type="java.lang.String" generate="true" autocreate="true">
+					<persistence type="property" />
+					<modifiers read="true" write="true" search="true" optional="true" />
+					<description>Attribute to store voucher related information</description>
+				</attribute>
+				<attribute qualifier="manualPick" type="java.lang.Boolean" generate="true" autocreate="true">
+					<persistence type="property" />
+					<modifiers read="true" write="true" search="true" optional="true" />
+					<defaultvalue>Boolean.FALSE</defaultvalue>
+					<description>Attribute to store Manual Push related information for pick and pack of an order</description>
+				</attribute>
+				<attribute qualifier="paidByVoucher" type="java.lang.Double">
+					<description>Atribute to store amount paid by voucher.</description>
+					<persistence type="property">
+						<columntype>
+							<value>java.math.BigDecimal</value>
+						</columntype>
+					</persistence>
+					<defaultvalue>Double.valueOf(0.0d)</defaultvalue>
+					<modifiers read="true" write="true" search="true" optional="true" />
+				</attribute>
+				<attribute qualifier="totalEqvPrice" type="java.lang.Double">
+					<description>Atribute to store total price after order level discount</description>
+					<persistence type="property">
+						<columntype>
+							<value>java.math.BigDecimal</value>
+						</columntype>
+					</persistence>
+					<defaultvalue>Double.valueOf(0.0d)</defaultvalue>
+					<modifiers read="true" write="true" search="true" optional="true" />
+				</attribute>
+				<attribute qualifier="paidByLandmarkReward" type="java.lang.Double">
+	            	 <description>Atribute to store amount paid by Landmark Reward Points.</description>
+	                       <persistence type="property" >
+	                        <columntype>
+		                    <value>java.math.BigDecimal</value>
+		                </columntype>
+		                </persistence>
+		                <defaultvalue>Double.valueOf(0.0d)</defaultvalue>
+	                      <modifiers read="true" write="true" search="true" optional="true" />
+	           	</attribute>
+	           	 <attribute qualifier="cartId" type="java.lang.String" generate="true" autocreate="true">
+					<persistence type="property" />
+					<modifiers read="true" write="true" search="true" optional="true" />
+					<description>Attribute to store Cart Id to send Landmark Reward redeemption API</description>
+				</attribute>
+				 <attribute qualifier="messageId" type="java.lang.String" generate="true" autocreate="true">
+					<persistence type="property" />
+					<modifiers read="true" write="true" search="true" optional="true" />
+					<description>Attribute to store CartID+CurrentTimeStamp(epoch format) to send Landmark Reward redeemption API</description>
+				</attribute>
+				<attribute qualifier="orderVia" type="java.lang.String">
+	                <modifiers read="true" write="true" optional="true"/>
+	                <persistence type="property"/>
+	            </attribute>
+			</attributes>
+			</itemtype>
+
+		<!-- Adding additional property to Abstract Order Entry for Pick and Pack -Start- -->
+		
+		<itemtype code="AbstractOrderEntry" autocreate="false" generate="false">
+			<description>additional attributes.</description>
+			<attributes>
+			<attribute qualifier="originalCSP" autocreate="true" type="java.lang.Double" generate="true">
+	            <persistence type="property">
+	                <columntype>
+	                    <value>java.math.BigDecimal</value>
+	                </columntype>
+	            </persistence>
+	            <modifiers read="true" write="true" search="false" optional="true"/>
+	            <defaultvalue>Double.valueOf(0.0d)</defaultvalue>
+	            <description>Attribute to store Item price, if there is any change in CSP</description>
+            </attribute>
+            <attribute qualifier="originalMRP" autocreate="true" type="java.lang.Double" generate="true">
+	            <persistence type="property">
+	                <columntype>
+	                    <value>java.math.BigDecimal</value>
+	                </columntype>
+	            </persistence>
+	            <modifiers read="true" write="true" search="false" optional="true"/>
+	            <defaultvalue>Double.valueOf(0.0d)</defaultvalue>
+	            <description>Attribute to store Item max price, if there is any change in MRP</description>
+            </attribute>
+            <attribute qualifier="originalQty" type="java.lang.Long" autocreate="true" generate="true">
+               <persistence type="property">
+	               <columntype>
+	                   <value>java.math.BigDecimal</value>
+	               </columntype>
+                </persistence>
+               <modifiers read="true" write="true" search="true" optional="true"/>
+         	   <defaultvalue>Long.valueOf(0)</defaultvalue>
+         	   <description>Attribute to store original quantity placed for a Line Item in an Order</description>
+            </attribute>
+			<attribute qualifier="shortPickQty" type="java.lang.Long" autocreate="true" generate="true">
+               <persistence type="property">
+	               <columntype>
+	                   <value>java.math.BigDecimal</value>
+	               </columntype>
+                </persistence>
+               <modifiers read="true" write="true" search="true" optional="true"/>
+         	   <defaultvalue>Long.valueOf(0)</defaultvalue>
+         	   <description>Attribute to store short pick quantity for a Line Item in an Order</description>
+            </attribute>
+            <attribute qualifier="savings" autocreate="true" type="java.lang.Double" generate="true">
+	            <persistence type="property">
+	                <columntype>
+	                    <value>java.math.BigDecimal</value>
+	                </columntype>
+	            </persistence>
+	            <modifiers read="true" write="true" search="false" optional="true"/>
+	            <defaultvalue>Double.valueOf(0.0d)</defaultvalue>
+	            <description>Attribute to store Item saving</description>
+            </attribute>
+            <attribute qualifier="combiOffer" type="boolean">
+				<persistence type="property" />
+				<modifiers optional="false" />
+				<defaultvalue>Boolean.FALSE</defaultvalue>
+				<description>If true shows combi offer for order entry</description>
+			</attribute>
+			<attribute  qualifier="shortPickReason" type="java.lang.String">
+				<persistence type="property"/>
+				<description> It is to show the shortPick Reason for each Order Entry.</description>
+			</attribute>
+			   <attribute qualifier="unitMRP" autocreate="true" type="java.lang.Double" generate="true">
+	            <persistence type="property">
+	                <columntype>
+	                    <value>java.math.BigDecimal</value>
+	                </columntype>
+	            </persistence>
+	            <modifiers read="true" write="true" search="false" optional="true"/>
+	            <defaultvalue>Double.valueOf(0.0d)</defaultvalue>
+	            <description>Attribute to store the changed max price, if there is any change in MRP</description>
+            </attribute>
+			</attributes>
+		</itemtype>
+		
+		<!-- Adding additional property to Abstract Order Entry for Pick and Pack -End -->
+		
+		<!-- Adding additional property to Consignment Entry for Pick and Pack -Start -->
+		
+		<itemtype code="ConsignmentEntry" autocreate="false" generate="false">
+			<description>additional attributes.</description>
+			<attributes>
+				<attribute qualifier="shortPickQty" type="java.lang.Long" autocreate="true" generate="true">
+                    <persistence type="property">
+	                    <columntype>
+	                        <value>java.math.BigDecimal</value>
+	                    </columntype>
+                    </persistence>
+                    <modifiers read="true" write="true" search="true" optional="true"/>
+                    <description>Attribute to store short pick quantity for a Line Item</description>
+            </attribute>
+			</attributes>
+		</itemtype>
+		
+		<!-- Adding additional property to Consignment Entry for Pick and Pack -End- -->	
+		
+		<!-- Table for storing the Home delivery service area for Spar -Start- -->
+		
+		<!-- <itemtype code="SparServiceArea" jaloclass="com.spar.hcl.core.service.delivery.SparServiceArea" autocreate="true" generate="true" extends="GenericItem">
+			<deployment table="SparServiceArea" typecode="31010" />
+				<attributes>
+					<attribute qualifier="areaId" type="java.lang.Integer" >
+						<modifiers read="true" write="true" search="true" optional="true"/>
+						<persistence type="property"/>
+						<description>Unique ID for the given Area.</description>
+					</attribute>
+					<attribute qualifier="displayName" type="java.lang.String" >
+						<modifiers read="true" write="true" search="true" optional="true"/>
+						<persistence type="property"/>
+					</attribute>
+					<attribute qualifier="area" type="java.lang.String" >
+						<modifiers read="true" write="true" search="true" optional="true"/>
+						<persistence type="property"/>
+						<description>Field to store the Area/locality in a City.</description>
+					</attribute>
+					<attribute qualifier="pincode" type="java.lang.Integer" >
+						<modifiers read="true" write="true" search="true" optional="true"/>
+						<persistence type="property"/>
+						<description>Pincode of the given Area.</description>
+					</attribute>
+					<attribute qualifier="defaultStore" type="java.lang.String" >
+						<modifiers read="true" write="true" search="true" optional="true"/>
+						<persistence type="property"/>
+						<description>Default/Nearest Store for the given Area.</description>
+					</attribute>
+					<attribute qualifier="defaultCncCenter" type="java.lang.String" >
+						<modifiers read="true" write="true" search="true" optional="true"/>
+						<persistence type="property"/>
+						<description>Default/Nearest CNC center for the given Area.</description>
+					</attribute>
+					<attribute qualifier="city" type="java.lang.String" >
+						<modifiers read="true" write="true" search="true" optional="true"/>
+						<persistence type="property"/>
+						<description>City in which the stored area is located.</description>
+					</attribute>
+					<attribute qualifier="active" type="java.lang.Boolean" >
+						<modifiers read="true" write="true" search="true" optional="true"/>
+						<persistence type="property"/>
+                    	<description>Boolean to decide if Area to be active or not.</description>
+					</attribute>
+				</attributes>
+		</itemtype> -->
+		<!-- Table for storing the Home delivery service area for Spar -End- -->
+		
+		<!-- Table for storing List of Cities for SPAR -Start- Tanveers -->
+		<itemtype code="SparCities" jaloclass="com.spar.hcl.core.service.delivery.SparCities" autocreate="true" generate="true" extends="GenericItem">
+			<deployment table="SparCities" typecode="31011" />
+				<attributes>
+					<attribute qualifier="city" type="java.lang.String" >
+						<modifiers read="true" write="true" search="true" optional="true"/>
+						<persistence type="property"/>
+					</attribute>
+					<attribute qualifier="status" type="java.lang.Boolean" >
+						<modifiers read="true" write="true" search="true" optional="true"/>
+						<persistence type="property"/>
+					</attribute>
+				</attributes>
+		</itemtype>
+		
+		
+		
+		<!-- Table for storing List of Cities for SPAR -GiftZOne- pavan.sr -->
+		<itemtype code="SparGiftZoneContactUs" jaloclass="com.spar.hcl.core.service.giftzone.SparGiftZoneContactUs" autocreate="true" generate="true" extends="GenericItem">
+			<deployment table="SparGiftZoneContactUs" typecode="31013" />
+				<attributes>
+					<attribute qualifier="customerName" type="java.lang.String" >
+						<modifiers read="true" write="true" search="true" optional="true"/>
+						<persistence type="property"/>
+					</attribute>
+					
+					<attribute qualifier="customerEmail" type="java.lang.String" >
+						<modifiers read="true" write="true" search="true" optional="true"/>
+						<persistence type="property"/>
+					</attribute>
+					
+					<attribute qualifier="customerContact" type="java.lang.String" >
+						<modifiers read="true" write="true" search="true" optional="true"/>
+						<persistence type="property"/>
+					</attribute>
+					
+					<attribute qualifier="companyName" type="java.lang.String" >
+						<modifiers read="true" write="true" search="true" optional="true"/>
+						<persistence type="property"/>
+					</attribute>
+					
+					<attribute qualifier="customerCity" type="java.lang.String" >
+						<modifiers read="true" write="true" search="true" optional="true"/>
+						<persistence type="property"/>
+					</attribute>
+					
+					<attribute qualifier="customerRemarks" type="java.lang.String" >
+						<modifiers read="true" write="true" search="true" optional="true"/>
+						<persistence type="property"/>
+					</attribute>
+					
+				</attributes>
+		</itemtype>
+		
+		
+		
+		
+		<!-- Table for storing List of Cities for SPAR -End- Tanveers -->
+		
+		<itemtype code="DeliverySlot" jaloclass="com.spar.hcl.deliveryslot.jalo.DeliverySlot" autocreate="true" generate="true" extends="GenericItem">
+			<deployment table="DeliverySlot" typecode="31000" />
+				<attributes>
+					<attribute qualifier="slotId" type="java.lang.Integer" >
+						<modifiers read="true" write="true" search="true" optional="true"/>
+						<persistence type="property"/>
+					</attribute>
+					<attribute qualifier="slotDescription" type="java.lang.String" >
+						<modifiers read="true" write="true" search="true" optional="true"/>
+						<persistence type="property"/>
+					</attribute>
+					<attribute qualifier="minimumOrderTimeSlot" type="java.lang.Integer" >
+						<modifiers read="true" write="true" search="true" optional="true"/>
+						<persistence type="property"/>
+					</attribute>
+					<attribute qualifier="maximumOrderTimeSlot" type="java.lang.Integer" >
+						<modifiers read="true" write="true" search="true" optional="true"/>
+						<persistence type="property"/>
+					</attribute>
+					<attribute qualifier="orderingDay" type="java.lang.Integer" >
+						<description>Used for Delivery SLot Information</description>
+						<modifiers read="true" write="true" search="true" optional="true"/>
+						<persistence type="property"/>
+					</attribute>
+					<attribute qualifier="deliveryType" type="DeliveryTypeEnum" >
+						<modifiers read="true" write="true" search="true" optional="true"/>
+						<defaultvalue>em().getEnumerationValue("DeliveryTypeEnum", "HD")</defaultvalue>
+						<persistence type="property"/>
+					</attribute>
+					<attribute qualifier="active" type="java.lang.Boolean" >
+						<modifiers read="true" write="true" search="true" optional="true"/>
+						<persistence type="property"/>
+					</attribute>
+					<attribute qualifier="availableSlot" type="java.lang.Boolean" >
+						<modifiers read="true" write="true" search="true" optional="true"/>
+						<persistence type="property"/>
+					</attribute>
+					<attribute qualifier="homeDeliveryId" type="java.lang.Double">
+						<modifiers read="true" write="true" search="true" optional="true"/>
+						<persistence type="property"/>
+					</attribute>
+					<attribute qualifier="slotOrdersCapacity" type="java.lang.Integer">
+						<modifiers read="true" write="true" search="true" optional="true"/>
+						<persistence type="property"/>
+						<description>Attribute to store maximum order capacity per delivery slot.</description>
+					</attribute>
+					<attribute qualifier="isHourlyDeliverySlotType" type="java.lang.Boolean" >
+						<persistence type="property"/>
+						<modifiers optional="true" />
+						<defaultvalue>Boolean.FALSE</defaultvalue>
+						<description>If true then this Delivery Slot will be display for Hourly Delivery Slots</description>
+					</attribute>
+				</attributes>
+			</itemtype>
+			
+			<itemtype code="Warehouse" autocreate="false" generate="false">
+			<description>additional attributes.</description>
+				<attributes>
+					<attribute qualifier="maxOrdersPerDeliverySlot" type="java.lang.Integer" generate="true" autocreate="true">
+						<persistence type="property" />
+						<modifiers read="true" write="true" search="true" optional="true" />
+						<description>Attribute to store maximum order per delivery slot.</description>
+					</attribute>
+					<attribute qualifier="active" type="java.lang.Boolean" >
+						<modifiers read="true" write="true" search="true" optional="true"/>
+						<persistence type="property"/>
+					</attribute>
+					<attribute qualifier="enabledHourlyDeliverySlots" type="java.lang.Boolean" >
+						<persistence type="property"/>
+						<modifiers optional="true" />
+						<defaultvalue>Boolean.FALSE</defaultvalue>
+						<description>If true, it means this warehouse will have Hourly Delivery Slots</description>
+					</attribute>
+				</attributes>
+			</itemtype>
+			
+			<!-- New Design items XML entry for Delivery Slot - End - -->
+			
+			<itemtype code="planoGram" jaloclass="de.hybris.platform.plano.jalo.PlanoGram" autocreate="true" generate="true" extends="GenericItem">
+			<deployment table="PlanoGram" typecode="31001" />
+					<attributes>
+						<attribute qualifier="warehouse" type="java.lang.Integer">
+						<persistence type="property" />
+						<modifiers read="true" write="true" search="true" optional="true" />
+					</attribute>
+					<attribute qualifier="productId" type="java.lang.Integer" >
+						<modifiers read="true" write="true" search="true" optional="false"/>
+						<persistence type="property"/>
+					</attribute>
+					<attribute qualifier="productName" type="java.lang.String" >
+						<modifiers read="true" write="true" search="true" optional="true"/>
+						<persistence type="property"/>
+					</attribute>
+					
+					<attribute qualifier="aisleNo" type="java.lang.String" >
+						<modifiers read="true" write="true" search="true" optional="true"/>
+						<persistence type="property"/>
+					</attribute>
+					
+					<attribute qualifier="bay" type="java.lang.Integer" >
+						<modifiers read="true" write="true" search="true" optional="true"/>
+						<persistence type="property"/>
+					</attribute>
+					
+					<attribute qualifier="shelf" type="java.lang.Integer" >
+						<modifiers read="true" write="true" search="true" optional="true"/>
+						<persistence type="property"/>
+					</attribute>
+					
+					<attribute qualifier="position" type="java.lang.Integer" >
+						<modifiers read="true" write="true" search="true" optional="true"/>
+						<persistence type="property"/>
+					</attribute>
+					
+					<attribute qualifier="facing" type="java.lang.Integer" >
+						<modifiers read="true" write="true" search="true" optional="true"/>
+						<persistence type="property"/>
+					</attribute>
+<!-- 					<attribute qualifier="catalogversion" type="java.lang.String"> -->
+<!-- 						<description>The catalog to which the planogram belongs to</description> -->
+<!-- 						<persistence type="property"/> -->
+<!-- 						<modifiers optional="false"/> -->
+<!-- 					</attribute> -->
+				</attributes>
+			</itemtype>
+			
+		 <itemtype code="CMSNavigationNode" jaloclass="de.hybris.platform.cms2.jalo.navigation.CMSNavigationNode" extends="CMSItem"
+			autocreate="false" generate="false">
+			<!-- <deployment table="CMSNavigationNode" typecode="1088" /> -->
+			<attributes>
+			<attribute qualifier="previewIcon" type="Media">
+					<persistence type="property" />
+				</attribute>
+			</attributes>
+		</itemtype>
+		
+		<!-- Added for new cms link media attribute pallavi	-->
+		<itemtype code="CMSLinkComponent" generate="false" jaloclass="de.hybris.platform.cms2.jalo.contents.components.CMSLinkComponent"
+			extends="SimpleCMSComponent" autocreate="false">
+			<attributes>
+				<attribute qualifier="previewIcon" type="Media">
+					<persistence type="property" />
+				</attribute>
+					</attributes>
+			</itemtype>	
+			<!-- Added for new cms link media attribute	-->	
+			
+		<itemtype code="SparTopNavigationBarComponent" autocreate="true"
+				generate="true" extends="SimpleCMSComponent"
+				jaloclass="de.hybris.platform.acceleratorcms.jalo.components.NavigationBarComponent">
+				<description>It represents navigation bar component that contains cms navigation node. Nodes structure can be built in a hierarchical way.</description>
+				<attributes>
+					<attribute type="NavigationBarMenuLayout" qualifier="dropDownLayout">
+						<persistence type="property" />
+						<defaultvalue>em().getEnumerationValue("NavigationBarMenuLayout", "AUTO")</defaultvalue>
+						<modifiers />
+						<description>Determines the way navigation drop down is positioned.</description>
+					</attribute>
+
+					<attribute type="CMSNavigationNode" qualifier="navigationNode">
+						<persistence type="property" />
+						<modifiers />
+						<description>The cms navigation node of this navigation bar component.</description>
+					</attribute>
+
+					<attribute type="java.lang.Integer" qualifier="wrapAfter">
+						<persistence type="property" />
+						<defaultvalue>java.lang.Integer.valueOf(10)</defaultvalue>
+						<modifiers />
+						<description>Determines the number of navigation nodes when the following elements will be wrapped.</description>
+					</attribute>
+
+					<attribute type="CMSLinkComponent" qualifier="link">
+						<persistence type="property" />
+						<modifiers optional="false" />
+						<description>The cms link component that is attached to this bar component.</description>
+					</attribute>
+
+					<attribute type="java.lang.String" qualifier="styleClass">
+						<persistence type="property" />
+						<modifiers />
+						<description>CSS style class of this bar component.</description>
+					</attribute>
+				</attributes>
+			</itemtype>
+
+
+
+        <itemtype code="SparNavigationBarCollectionComponent"
+				autocreate="true" generate="true" extends="SimpleCMSComponent"
+				jaloclass="de.hybris.platform.acceleratorcms.jalo.components.NavigationBarCollectionComponent">
+				<description>It represents account navigation bar component that contains cms navigation node.</description>
+				<attributes>
+					<attribute qualifier="components" type="sparTopNavigationBarComponentList">
+						<persistence type="property" />
+						<modifiers />
+						<description>A collection of navigation bar components</description>
+					</attribute>
+				</attributes>
+			</itemtype>
+			
+			<itemtype code="CategoryCarouselComponent" autocreate="true"
+				generate="true" extends="SimpleCMSComponent"
+				jaloclass="de.hybris.platform.cms2lib.components.CategoryCarouselComponent">
+				<attributes>
+					<attribute type="CarouselScroll" qualifier="scroll">
+						<persistence type="property" />
+						<modifiers optional="false" />
+						<defaultvalue>em().getEnumerationValue("CarouselScroll","one")</defaultvalue>
+					</attribute>
+					<attribute qualifier="title" type="localized:java.lang.String">
+						<persistence type="property" />
+						<modifiers />
+						<description>Localized title of the component.</description>
+					</attribute>
+					<attribute qualifier="popup" type="boolean">
+						<persistence type="property" />
+						<modifiers optional="false" />
+						<defaultvalue>Boolean.TRUE</defaultvalue>
+						<description>If true shows a popup else redirects to products page</description>
+					</attribute>
+				</attributes>
+			</itemtype>
+			
+			
+			<!-- Pavan : Added for new category carousel -->
+			<itemtype code="AddOnCategoryCarouselComponent" autocreate="true"
+				generate="true" extends="SimpleCMSComponent"
+				jaloclass="de.hybris.platform.cms2lib.components.AddOnCategoryCarouselComponent">
+				<attributes>
+					<attribute type="CarouselScroll" qualifier="scroll">
+						<persistence type="property" />
+						<modifiers optional="false" />
+						<defaultvalue>em().getEnumerationValue("CarouselScroll","one")</defaultvalue>
+					</attribute>
+					<attribute qualifier="title" type="localized:java.lang.String">
+						<persistence type="property" />
+						<modifiers />
+						<description>Localized title of the component.</description>
+					</attribute>
+					<attribute qualifier="popup" type="boolean">
+						<persistence type="property" />
+						<modifiers optional="false" />
+						<defaultvalue>Boolean.TRUE</defaultvalue>
+						<description>If true shows a popup else redirects to products page</description>
+					</attribute>
+				</attributes>
+			</itemtype>
+			<!-- Pavan :  end of Added for new category carousel -->
+			
+			
+			
+		<itemtype code="BannerComponent" autocreate="false" generate="false" extends="AbstractBannerComponent"
+			jaloclass="de.hybris.platform.cms2lib.components.BannerComponent">
+			<attributes>
+							
+				<attribute qualifier="bottomImage" type="Media">
+					<persistence type="property" />
+				</attribute>	
+               <attribute qualifier="title" type="localized:java.lang.String">
+					<persistence type="property" />
+					<modifiers />
+					<description>Localized text of the component.</description>
+				</attribute>				
+			</attributes>
+		</itemtype>
+		
+		<itemtype code="Category" autocreate="false" generate="false">
+            <attributes>
+                <attribute type="java.lang.Boolean" qualifier="isAvailableForFoodCoupon">
+                    <persistence type="property"/>
+                    <modifiers optional="true" />
+                    <defaultvalue>Boolean.FALSE</defaultvalue>
+                    <description>Category level attribute for food coupon  value</description>
+                </attribute>
+                
+                <attribute type="java.lang.Boolean" qualifier="isProductShownMP">
+                    <persistence type="property"/>
+                    <modifiers optional="true" />
+                    <defaultvalue>Boolean.FALSE</defaultvalue>
+                    <description>Product level attribute for displaying MP</description>
+                </attribute>
+                     <attribute qualifier="sparTitle" type="java.lang.String" >
+						<modifiers read="true" write="true" search="true" optional="true"/>
+						<persistence type="property"/>
+					</attribute>
+					<attribute qualifier="sparCategoryTitle" type="java.lang.String" >
+						<modifiers read="true" write="true" search="true" optional="true"/>
+						<persistence type="property"/>
+					</attribute>
+                
+            </attributes>
+        </itemtype>
+		
+		<!-- TypeGroups are for structure of this file only -->
+
+		<typegroup name="Components">
+			
+			<itemtype code="LeftNavBreadcrumbComponent" autocreate="true"
+				generate="true" extends="SimpleCMSComponent"
+				jaloclass="de.hybris.platform.acceleratorcms.jalo.components.LeftNavBreadcrumbComponent">
+				<description>A component showing the Side Nav tag</description>
+			</itemtype>
+		</typegroup>
+		
+		<typegroup name="Apparel">
+			<itemtype code="ApparelProduct" extends="Product"
+			          autocreate="true" generate="true"
+			          jaloclass="com.spar.hcl.core.jalo.ApparelProduct">
+				<description>Base apparel product extension that contains additional attributes.</description>
+				<attributes>
+					<attribute qualifier="genders" type="GenderList">
+						<description>List of genders that the ApparelProduct is designed for</description>
+						<modifiers/>
+						<persistence type="property"/>
+					</attribute>
+				</attributes>
+			</itemtype>
+
+			<itemtype code="ApparelStyleVariantProduct" extends="VariantProduct"
+			          autocreate="true" generate="true"
+			          jaloclass="com.spar.hcl.core.jalo.ApparelStyleVariantProduct">
+				<description>Apparel style variant type that contains additional attribute describing variant style.
+				</description>
+				<attributes>
+					<attribute qualifier="style" type="localized:java.lang.String"
+					           metatype="VariantAttributeDescriptor">
+						<description>Color/Pattern of the product.</description>
+						<modifiers/>
+						<persistence type="property"/>
+					</attribute>
+
+					<attribute qualifier="swatchColors" type="SwatchColorSet">
+						<description>A normalized color mapping to a standardized front-end navigable name.
+						</description>
+						<modifiers/>
+						<persistence type="property"/>
+					</attribute>
+				</attributes>
+
+			</itemtype>
+
+			<itemtype code="ApparelSizeVariantProduct" extends="ApparelStyleVariantProduct"
+			          autocreate="true" generate="true"
+			          jaloclass="com.spar.hcl.core.jalo.ApparelSizeVariantProduct">
+				<description>Apparel size variant type that contains additional attribute describing variant size.
+				</description>
+				<attributes>
+					<attribute qualifier="size" type="localized:java.lang.String"
+					           metatype="VariantAttributeDescriptor">
+						<description>Size of the product.</description>
+						<modifiers/>
+						<persistence type="property"/>
+					</attribute>
+				</attributes>
+			</itemtype>
+		</typegroup>
+		
+		<typegroup name="Electronics">
+			<itemtype code="ElectronicsColorVariantProduct" extends="VariantProduct"
+          autocreate="true" generate="true"
+          jaloclass="com.spar.hcl.core.jalo.ElectronicsColorVariantProduct">
+				 <description>Electronics color variant type that contains additional attribute describing variant color.
+				</description>
+				<attributes>
+					<attribute qualifier="color" type="localized:java.lang.String"
+					           metatype="VariantAttributeDescriptor">
+						<description>Color of the product.</description>
+						<modifiers/>
+						<persistence type="property"/>
+					</attribute>
+				</attributes>
+			</itemtype>
+			
+            
+		</typegroup>
+		
+		<!--  Extending Product to have product attributes for Pick List Start-->
+		<typegroup name="spar">
+		
+			<itemtype code="SparVariantProduct" extends="VariantProduct"
+			          autocreate="true" generate="true"
+			          jaloclass="com.spar.hcl.core.jalo.SparVariantProduct">
+				<description>Spar variant type that contains additional attribute describing variant info.
+				</description>
+				<attributes>
+					<attribute qualifier="unitCondition" type="localized:java.lang.String"
+					           metatype="VariantAttributeDescriptor">
+						<description>Unit for Variants.</description>
+						<modifiers/>
+						<persistence type="property"/>
+					</attribute>
+					 <attribute qualifier="childSKUs" type="java.lang.String">
+                        <description>Defines child Product SKUs.</description>
+                        <persistence type="property" />
+                    </attribute>
+				</attributes>
+			</itemtype>
+			
+			
+            <itemtype code="Product" autocreate="false" generate="false">
+                <description>Extending the Product type from core with additional attributes.</description>
+                <attributes>
+                    <attribute qualifier="internalOnly" type="java.lang.Boolean">
+                        <description>Defines if the product should be sold to hybris employees only.</description>
+                        <persistence type="property" />
+                    </attribute>
+                    <attribute qualifier="productType" type="java.lang.String">
+                        <description>Defines product attribute to understand if the product type is odd/regular.</description>
+                        <persistence type="property" />
+                    </attribute>
+        
+                    <attribute qualifier="itemPickingTime" type="java.lang.String">
+                        <description>Defines item Picking Time attribute to know the picking time.</description>
+                        <persistence type="property" />
+                    </attribute>
+  
+        		    <attribute qualifier="storageType" type="java.lang.String">
+                        <description>Defines attribute for storage Type.</description>
+                        <persistence type="property" />
+                    </attribute>
+              
+	                <attribute qualifier="ERPCreatedDate" type="java.util.Date">
+                        <description>Defines attribute for CREATE_DATETIME.</description>
+                        <persistence type="property" />
+                    </attribute>
+              		
+              		<attribute qualifier="ERPDescription" type="localized:java.lang.String">
+                        <description>Defines attribute for ITEM_DESC.</description>
+                        <persistence type="property">
+                        	<columntype>
+	                            <value>HYBRIS.LONG_STRING</value>
+	                        </columntype>
+	                    </persistence>
+                    </attribute>
+                    
+                    <attribute qualifier="ERPBarcode" type="java.lang.String">
+                        <description>Defines attribute for BARCODE.</description>
+                        <persistence type="property" />
+                    </attribute>
+                    
+                    <attribute qualifier="ERPShortDescription" type="localized:java.lang.String">
+                        <description>Defines attribute for SHORT_DESC.</description>
+                        <persistence type="property">
+                        	<columntype>
+	                            <value>HYBRIS.LONG_STRING</value>
+	                        </columntype>
+	                    </persistence>
+                    </attribute>
+                    
+                    <attribute qualifier="newItem" type="java.lang.Boolean">
+                        <description>Defines attribute for About Item New.</description>
+                        <persistence type="property" />
+                    </attribute>
+                    
+                    <attribute qualifier="ingredientDescription" type="localized:java.lang.String">
+                        <description>Defines attribute for Ingredient description.</description>
+                        <persistence type="property">
+                        	<columntype>
+	                            <value>HYBRIS.LONG_STRING</value>
+	                        </columntype>
+	                    </persistence>
+                    </attribute>
+                    
+                    <attribute qualifier="modelNumber" type="java.lang.String">
+                        <description>Defines attribute for Model Number.</description>
+                        <persistence type="property" />
+                    </attribute>
+                                        
+                    <attribute qualifier="disclaimer" type="localized:java.lang.String">
+                        <description>Defines attribute for Disclaimer.</description>
+                        <persistence type="property">
+                        	<columntype>
+	                            <value>HYBRIS.LONG_STRING</value>
+	                        </columntype>
+	                    </persistence>
+                    </attribute>
+                    
+                    <attribute qualifier="pickingAndPacking" type="localized:java.lang.String">
+                        <description>Defines attribute for Picking and Packing.</description>
+                        <persistence type="property">
+                        	<columntype>
+	                            <value>HYBRIS.LONG_STRING</value>
+	                        </columntype>
+	                    </persistence>
+                    </attribute>
+                    
+                    <attribute qualifier="brand" type="localized:java.lang.String">
+                        <description>Defines attribute for Brand.</description>
+                        <persistence type="property">
+                        	<columntype>
+	                            <value>HYBRIS.LONG_STRING</value>
+	                        </columntype>
+	                    </persistence>
+                    </attribute>
+                    
+                    <attribute qualifier="subBrand" type="localized:java.lang.String">
+                        <description>Defines attribute for Sub Brand.</description>
+                        <persistence type="property">
+                        	<columntype>
+	                            <value>HYBRIS.LONG_STRING</value>
+	                        </columntype>
+	                    </persistence>
+                    </attribute>
+	                
+	                <attribute qualifier="functionalName" type="localized:java.lang.String">
+                        <description>Defines attribute for Functional Name.</description>
+                        <persistence type="property">
+                        	<columntype>
+	                            <value>HYBRIS.LONG_STRING</value>
+	                        </columntype>
+	                    </persistence>
+                    </attribute>
+                    
+                    <attribute qualifier="variant" type="localized:java.lang.String">
+                        <description>Defines attribute for Variant.</description>
+                        <persistence type="property">
+                        	<columntype>
+	                            <value>HYBRIS.LONG_STRING</value>
+	                        </columntype>
+	                    </persistence>
+                    </attribute>
+            		<!-- Start : Legal metrology -->
+                    <attribute qualifier="produceEAN" type="java.lang.String">
+                        <description>Defines Product EAN.</description>
+                        <persistence type="property" />
+                    </attribute>
+                    <attribute qualifier="productBrand" type="java.lang.String">
+                        <description>Defines Product Brand.</description>
+                        <persistence type="property" />
+                    </attribute>
+                    <attribute qualifier="manufacture" type="java.lang.String">
+                        <description>Defines Product manufacture.</description>
+                        <persistence type="property" />
+                    </attribute>
+                    <attribute qualifier="importedBy" type="java.lang.String">
+                        <description>Defines Product Import detail.</description>
+                        <persistence type="property" />
+                    </attribute>
+                    <attribute qualifier="netQuantity" type="java.lang.String">
+                        <description>Defines Product net quantity.</description>
+                        <persistence type="property" />
+                    </attribute>
+                    <attribute qualifier="productSize" type="java.lang.String">
+                        <description>Defines Product size.</description>
+                        <persistence type="property" />
+                    </attribute>
+                    <attribute qualifier="bestBefore" type="java.lang.String">
+                        <description>Defines Product best before date.</description>
+                        <persistence type="property" />
+                    </attribute>
+                    <attribute qualifier="usedByDate" type="java.lang.String">
+                        <description>Defines Product expiry date.</description>
+                        <persistence type="property" />
+                    </attribute>
+                    <attribute qualifier="customercare" type="java.lang.String">
+                        <description>Defines Product customer care details.</description>
+                        <persistence type="property" />
+                    </attribute>
+                    <!-- End   : Legal metrology -->
+            		        
+	           	</attributes>
+            </itemtype>
+ 			<!--  Extending Product to have product attributes for Pick List End-->
+ 			
+ 			<itemtype code="Customer" generate="false" autocreate="false">
+                <attributes>
+                    <attribute qualifier="isInternal" type="java.lang.Boolean">
+                        <description>Defines if the customer is a spar internal employee.</description>
+                        <persistence type="dynamic" attributeHandler="dynamicHybrisCustomerAttributeBean" />
+                        <modifiers read="true" write="true" optional="true"
+                            unique="false" />
+                    </attribute>
+                    <attribute qualifier="totalWalletAmount" type="java.lang.Double">
+                        <description>Defines if the customer has wallet.</description>
+                       <persistence type="property" >
+                       <columntype>
+	                    <value>java.math.BigDecimal</value>
+	                </columntype>
+	                </persistence>
+	                <defaultvalue>Double.valueOf(0.0d)</defaultvalue>
+                      <modifiers read="true" write="true" search="true" optional="true" />
+                    </attribute>
+                </attributes>
+            </itemtype>
+            
+              <itemtype code="WalletDetails" jaloclass="com.spar.hcl.deliveryslot.jalo.WalletDetails" autocreate="true" generate="true" >
+              <deployment table="WalletDetails" typecode="31012"/>
+             <attributes>
+               <attribute qualifier="walletAmount" type="java.lang.Double">
+                        <description>Defines if the customer has wallet.</description>
+                       <persistence type="property" >
+                       <columntype>
+	                    <value>java.math.BigDecimal</value>
+	                </columntype>
+	                </persistence>
+	                <defaultvalue>Double.valueOf(0.0d)</defaultvalue>
+                      <modifiers read="true" write="true" search="true" optional="true" />
+                    </attribute>
+                    
+                    <attribute qualifier="walletFundingReason" type="WalletFundingReasonEnum">
+                        <description>Defines attribute for Variant.</description>
+                        <persistence type="property"/>
+                        <modifiers read="true" write="true" search="false" optional="true" />
+                    </attribute>
+                    <attribute qualifier="refundDate" type="java.util.Date">
+						<persistence type="property" />
+						<modifiers read="true" write="true" search="true" optional="true" />
+					</attribute>
+                     <attribute qualifier="walletOrder" type="Order">
+                        <description>Defines attribute for Variant.</description>
+                        <persistence type="property"/>
+                        <modifiers read="true" write="true" search="false" optional="true" />
+                    </attribute>
+                 	<attribute qualifier="customer" type="Customer">
+                        <description>Defines attribute for Variant.</description>
+                        <persistence type="property"/>
+                        <modifiers read="true" write="true" search="false" optional="true" />
+                    </attribute>
+                </attributes>
+              </itemtype>
+            
+			<!--  PLP product carousel & Rotating image  START -->
+			<itemtype code="PlpRotatingImagesComponent" generate="true" extends="SimpleCMSComponent" autocreate="true"
+			jaloclass="de.hybris.platform.cms2lib.components.PlpRotatingImagesComponent">
+			<attributes>
+				<attribute type="java.lang.Integer" qualifier="timeout">
+					<persistence type="property" />
+				</attribute>
+				<attribute type="RotatingImagesComponentEffect" qualifier="effect">
+					<persistence type="property" />
+					<defaultvalue>
+						em().getEnumerationValue("RotatingImagesComponentEffect","fade")
+					</defaultvalue>
+				</attribute>
+				</attributes>
+			</itemtype>
+			<!-- Pavan rotating landmark component : start-->
+			<itemtype code="RotatingLandmarkImagesComponent" generate="true" extends="SimpleCMSComponent" autocreate="true"
+			jaloclass="de.hybris.platform.cms2lib.components.RotatingLandmarkImagesComponent">
+			<attributes>
+				<attribute type="java.lang.Integer" qualifier="timeout">
+					<persistence type="property" />
+				</attribute>
+				<attribute type="RotatingImagesComponentEffect" qualifier="effect">
+					<persistence type="property" />
+					<defaultvalue>
+						em().getEnumerationValue("RotatingImagesComponentEffect","fade")
+					</defaultvalue>
+				</attribute>
+			</attributes>
+		</itemtype>
+		
+		<!-- Pavan rotating landmark component : end-->
+			
+			<!-- Code change start by sumit for spar promise banner -->
+			
+			<itemtype code="HomePagePromiseBannerImagesComponent" generate="true" extends="SimpleCMSComponent" autocreate="true"
+			jaloclass="com.spar.hcl.core.cms2lib.components.HomePagePromiseBannerImagesComponent">
+			<attributes>
+				<attribute type="java.lang.Integer" qualifier="timeout">
+					<persistence type="property" />
+				</attribute>
+				<attribute type="RotatingImagesComponentEffect" qualifier="effect">
+					<persistence type="property" />
+					<defaultvalue>
+						em().getEnumerationValue("RotatingImagesComponentEffect","fade")
+					</defaultvalue>
+				</attribute>
+				</attributes>
+			</itemtype>
+			<!-- Code change end here -->
+			<!-- added by pallavi for landmark banner on homepage-->
+			
+			
+			<itemtype code="HomePageLandmarkBannerImageComponent" generate="true" extends="SimpleCMSComponent" autocreate="true"
+			jaloclass="com.spar.hcl.core.cms2lib.components.HomePageLandmarkBannerImageComponent">
+			<attributes>
+				<attribute type="localized:Media" qualifier="Landmarkimage">
+            <persistence type="property" />
+        </attribute>
+        <attribute type="AbstractBannerComponent" qualifier="banner">
+            <persistence type="property" />
+        </attribute>
+        
+			</attributes>
+			</itemtype>	
+				
+			<!-- added by pallavi for landmark banner on homepage END-->
+			
+			<!-- added by pallavi for payment  banner on homepage-->
+			<itemtype code="HomePagePaymentBannerImageComponent" generate="true" extends="SimpleCMSComponent" autocreate="true"
+			jaloclass="com.spar.hcl.core.cms2lib.components.HomePagePaymentBannerImageComponent">
+			<attributes>
+			
+        <attribute type="BannerComponent" qualifier="banner">
+            <persistence type="property" />
+        </attribute>
+        
+			</attributes>
+			</itemtype>	
+			<!-- added by pallavi for payment banner on homepage-->
+						
+			<itemtype code="PlpProductGridHeaderComponent" autocreate="true" generate="true" extends="SimpleCMSComponent"
+			jaloclass="com.spar.hcl.platform.cms2lib.components.PlpProductGridHeaderComponent">
+				<description>Extends existing type with additional attributes.</description>
+				<attributes>
+					<attribute type="CarouselScroll" qualifier="scroll">
+						<persistence type="property" />
+						<modifiers optional="false" />
+						<defaultvalue>
+							em().getEnumerationValue("CarouselScroll","one")
+						</defaultvalue>					
+					</attribute>
+					<attribute type="CMSStringList" qualifier="productCodes">
+						<!-- since this is Collection(String) we MUST disable pre-fetching explicitly! -->
+						<custom-properties>
+	 						<property name="modelPrefetchMode"> <value>java.lang.Boolean.FALSE</value> </property>
+	 					</custom-properties>
+						<persistence type="jalo" />
+						<modifiers write="false" search="false" />
+					</attribute>
+					<attribute type="CMSStringList" qualifier="categoryCodes">
+						<!-- since this is Collection(String) we MUST disable pre-fetching explicitly! -->
+						<custom-properties>
+	 						<property name="modelPrefetchMode"> <value>java.lang.Boolean.FALSE</value> </property>
+	 					</custom-properties>
+						<persistence type="jalo" />
+						<modifiers write="false" search="false" />
+					</attribute>		
+					<attribute qualifier="title" type="localized:java.lang.String">
+						<persistence type="property" />
+						<modifiers />
+						<description>Localized title of the component.</description>
+					</attribute>
+					<attribute qualifier="searchQuery" type="java.lang.String">
+						<persistence type="property" />
+						<modifiers />
+						<description>A solr query string</description>
+					</attribute>
+					<attribute qualifier="categoryCode" type="java.lang.String">
+						<persistence type="property" />
+						<modifiers />
+						<description>A code for a category for a solr search</description>
+					</attribute>
+					<attribute qualifier="popup" type="boolean">
+						<persistence type="property" />
+						<modifiers optional="false" />
+						<defaultvalue>Boolean.TRUE</defaultvalue>
+						<description>If true shows a popup else redirects to products page</description>
+					</attribute>
+				</attributes>
+			</itemtype>
+			<!--  PLP product carousel & rotating image END -->		
+				
+			<!--register form START-->
+			<itemtype code="Customer" autocreate="false" generate="false">
+			<attributes>
+				<attribute qualifier="whetherEmployee" type="java.lang.Boolean">
+					<modifiers read="true" write="true" optional="true"/>
+                    <persistence type="property"/>
+                    <defaultvalue>Boolean.FALSE</defaultvalue>
+				</attribute>
+				<attribute qualifier="employeeCode" type="java.lang.String">
+					<persistence type="property" />
+					<modifiers read="true" write="true" search="true" optional="true" />
+					<description>Attribute to store the point of service for an order.</description>
+				</attribute>
+				<attribute qualifier="dateOfJoining" type="java.util.Date">
+					<persistence type="property" />
+					<modifiers read="true" write="true" search="true" optional="true" />
+					</attribute>
+					<attribute qualifier="dateOfBirth" type="java.util.Date">
+					<persistence type="property" />
+					<modifiers read="true" write="true" search="true" optional="true" />
+					</attribute>
+					<attribute qualifier="whetherSubscribedToPromotion" type="java.lang.Boolean">
+					<modifiers read="true" write="true" optional="true"/>
+                    <persistence type="property"/>
+                    <defaultvalue>Boolean.FALSE</defaultvalue>
+				</attribute>
+				<attribute qualifier="whetherSubscribedToLandmark" type="java.lang.Boolean">
+					<modifiers read="true" write="true" optional="false"/>
+                    <persistence type="property"/>
+                    <defaultvalue>Boolean.FALSE</defaultvalue>
+				</attribute>
+				<!-- Code change start by sumit -->
+                <attribute qualifier="custPrimaryMobNumber" type="java.lang.String">
+                    <persistence type="property" />
+					<modifiers read="true" write="true" search="true" optional="true" />
+                 </attribute>
+                 <attribute qualifier="isOTPValidate" type="java.lang.Boolean">
+                    <modifiers read="true" write="true" optional="true"/>
+                    <persistence type="property"/>
+                    <defaultvalue>Boolean.FALSE</defaultvalue>
+                 </attribute> 
+                 <attribute qualifier="isRegistrationOTPVerified" type="java.lang.Boolean">
+                    <modifiers read="true" write="true" optional="true"/>
+                    <persistence type="property"/>
+                    <defaultvalue>Boolean.FALSE</defaultvalue>
+                 </attribute>
+                 <attribute qualifier="isCheckoutOTPVerified" type="java.lang.Boolean">
+                    <modifiers read="true" write="true" optional="true"/>
+                    <persistence type="property"/>
+                    <defaultvalue>Boolean.FALSE</defaultvalue>
+                 </attribute>
+                 <attribute qualifier="custTitle" type="java.lang.String">
+					<persistence type="property" />
+					<modifiers read="true" write="true" search="true" optional="true" />
+				</attribute>  
+                 <attribute qualifier="firstName" type="java.lang.String">
+					<persistence type="property" />
+					<modifiers read="true" write="true" search="true" optional="true" />
+				</attribute>
+				<attribute qualifier="lastName" type="java.lang.String">
+					<persistence type="property" />
+					<modifiers read="true" write="true" search="true" optional="true" />
+				</attribute> 				              
+                   <!--  Change end here -->
+			</attributes>
+		</itemtype>
+			<!-- register form fileds END -->
+			
+			<!--  COD Payment Mode START -->
+			<itemtype code="CashOnDeliveryPaymentInfo"
+                  extends="PaymentInfo"
+                  jaloclass="de.hybris.platform.jalo.order.payment.PaymentInfo"
+                  autocreate="true"
+                  generate="false">
+        	</itemtype>
+			<!--  COD Payment Mode END -->  
+			<itemtype code="WalletPaymentInfo"
+                  extends="PaymentInfo"
+                  jaloclass="de.hybris.platform.jalo.order.payment.PaymentInfo"
+                  autocreate="true"
+                  generate="false">
+        	</itemtype>
+        	
+        	<itemtype code="LandmarkPaymentInfo"
+                  extends="PaymentInfo"
+                  jaloclass="de.hybris.platform.jalo.order.payment.PaymentInfo"
+                  autocreate="true"
+                  generate="false">
+        	</itemtype>
+        	
+        	<itemtype code="PayTMPaymentInfo"
+                  extends="PaymentInfo"
+                  jaloclass="de.hybris.platform.jalo.order.payment.PaymentInfo"
+                  autocreate="true"
+                  generate="false">
+        	</itemtype>
+        	
+        	<itemtype code="MultiPaymentMode"
+                  extends="PaymentInfo"
+                  jaloclass="de.hybris.platform.jalo.order.payment.PaymentInfo"
+                  autocreate="true"
+                  generate="false">
+        	</itemtype>
+        	
+        	 <itemtype code="VoucherPaymentMode"
+                  extends="PaymentInfo"
+                  jaloclass="de.hybris.platform.jalo.order.payment.PaymentInfo"
+                  autocreate="true"
+                  generate="false">
+        	</itemtype> 
+			
+			
+			<!-- register form fileds END -->
+				<itemtype code="Address" autocreate="false" generate="false">
+				<attributes>
+					<!-- <attribute qualifier="defaultStore" type="java.lang.String" >
+						<modifiers read="true" write="true" search="true" optional="true"/>
+						<persistence type="property"/>
+						<description>Default/Nearest Store for the Address.</description>
+					</attribute>
+					<attribute qualifier="defaultCncCenter" type="java.lang.String" >
+						<modifiers read="true" write="true" search="true" optional="true"/>
+						<persistence type="property"/>
+						<description>Default/Nearest CNC center for the given Address.</description>
+					</attribute>
+					<attribute qualifier="sparServiceArea" type="SparServiceArea" >
+						<modifiers read="true" write="true" search="true" optional="true"/>
+						<persistence type="property"/>
+                    	<description>Attribute to Store selected Service Area object in the Address.</description>
+					</attribute> -->
+                 <attribute qualifier="isOTPValidate" type="java.lang.Boolean">
+                    <modifiers read="true" write="true" optional="true"/>
+                    <persistence type="property"/>
+                    <defaultvalue>Boolean.FALSE</defaultvalue>
+                 </attribute>
+                 <attribute qualifier="longAddress" type="java.lang.String">
+                    <modifiers read="true" write="true" optional="true"/>
+                    <persistence type="property"/>
+                    <description>Attribute to store long formatted address suggested by google API.</description>
+                 </attribute>
+                  <attribute qualifier="mappedStore" type="java.lang.String">
+                    <modifiers read="true" write="true" optional="true"/>
+                    <persistence type="property"/>
+                    <description>Attribute to store mapped store.</description>
+                 </attribute>
+                 	</attributes>
+		         </itemtype>
+			<!--  SolrSort to include warehouse field - START - ROHAN_C -->  
+			<itemtype code="SparSolrSort" extends="SolrSort" autocreate="true" generate="true"
+				jaloclass="com.spar.hcl.core.jalo.solrsearch.config.SparSolrSort">
+				<description>Extending SolrSort type with additional attributes.</description>
+				<attributes>
+					<attribute qualifier="warehouse" type="java.lang.String">
+						<description>The Warehouse specific sort field to sort with.</description>
+						<modifiers unique="false" optional="true" />
+						<persistence type="property" />
+					</attribute>
+				</attributes>
+			</itemtype> 
+			
+			<!--  SolrSort to include warehouse field - END - ROHAN_C-->
+			
+			<itemtype code="SparZoneDeliveryMode"
+					 extends="ZoneDeliveryMode"
+					 jaloclass="com.spar.hcl.deliveryzone.jalo.SparZoneDeliveryMode"
+					 autocreate="true"
+					 generate="true">
+			</itemtype>
+			
+		<!-- 	Spar Plms item type -->
+			<itemtype code="PlmsRetryOrders" jaloclass="com.spar.hcl.jalo.cms.PlmsRetryOrders"
+			autocreate="true" generate="true">
+				<deployment table="PlmsRetryOrders" typecode="32005" />
+				<attributes>
+					<attribute qualifier="orderCode" type="java.lang.String">
+						<persistence type="property" />
+						<modifiers optional="false" initial="false" unique="true" />
+					</attribute>
+					<attribute qualifier="actionType" type="java.lang.String" >
+							<modifiers read="true" write="true" search="true"/>
+							<persistence type="property"/>
+					</attribute>
+					<attribute qualifier="markDeleted" type="java.lang.Boolean" >
+						<modifiers read="true" write="true" search="true" optional="true"/>
+						<defaultvalue>Boolean.FALSE</defaultvalue>
+						<persistence type="property"/>
+					</attribute>
+				</attributes>
+			</itemtype>
+			
+			 <itemtype code="SparPlmsOrders" jaloclass="com.spar.hcl.jalo.cms.SparPlmsOrders"
+	                          autocreate="true" generate="true">
+	            <deployment table="SparPlmsOrders" typecode="32001" />
+	            <attributes>
+	                 <attribute qualifier="orderCode" generate="true" autocreate="true" type="java.lang.String">
+	                     <persistence type="property" />
+	                 </attribute>
+	                 <attribute qualifier="actionType" type="java.lang.String" >
+	                     <modifiers read="true" write="true" search="true"/>
+	                     <persistence type="property"/>
+	                 </attribute>
+	            </attributes>
+	          </itemtype>
+	          
+	        <itemtype code="SparMobileAppVersion" jaloclass="com.spar.hcl.mobileapp.SparMobileAppVersion" autocreate="true" generate="true" extends="GenericItem">
+			<deployment table="SparMobileAppVersion" typecode="32006" />
+				<attributes>
+					<attribute qualifier="versionNumber" type="java.lang.String" >
+						<modifiers read="true" write="true" search="true" optional="false" unique="true"/>
+						<persistence type="property"/>
+					</attribute>
+					<attribute qualifier="forceUpgrade" type="java.lang.Boolean" >
+						<modifiers read="true" write="true" search="true" optional="true"/>
+						<persistence type="property"/>
+					</attribute>
+					<attribute qualifier="recommendUpgrade" type="java.lang.Boolean" >
+						<modifiers read="true" write="true" search="true" optional="true"/>
+						<persistence type="property"/>
+					</attribute>
+				</attributes>
+			</itemtype>
+			
+			<itemtype code="SparOnlineOfflineSKU" extends="GenericItem" jaloclass="com.spar.hcl.onlineofflinesku.SparOnlineOfflineSKU"
+					autocreate="true" generate="true">
+				<description>SparOnlineOfflineSKU type to maintain Online SKU to Offline SKU that will be send by ERP System via Feed File.
+				</description>
+				<deployment table="SparOnlineOfflineSKU" typecode="32009" />
+				<attributes>
+					<attribute qualifier="onlineSKU" type="java.lang.Integer" >
+						<description>Online SKU code</description>	
+						<modifiers read="true" write="true" search="true" optional="false"/>
+						<persistence type="property"/>
+					</attribute>
+					<attribute qualifier="offlineSKU" type="java.lang.Integer" >
+						<description>Offline SKU code</description>	
+						<modifiers read="true" write="true" search="true" optional="false"/>
+						<persistence type="property"/>
+					</attribute>
+					 <attribute qualifier="grammageRatio" autocreate="true" type="java.lang.Double" generate="true">
+			            <persistence type="property">
+			                <columntype>
+			                    <value>java.math.BigDecimal</value>
+			                </columntype>
+			            </persistence>
+			            <modifiers read="true" write="true" search="false" optional="true"/>
+			            <defaultvalue>Double.valueOf(0.0d)</defaultvalue>
+			            <description>Attribute to store Ratio of Online SKU grammage value / Offline SKU grammage value</description>
+		            </attribute>
+				</attributes>
+			</itemtype>
+        </typegroup>
+        
+        <typegroup name="Promotions">
+			<itemtype code="SparPromotionOrderRestriction"
+				extends="AbstractPromotionRestriction"
+				jaloclass="com.spar.hcl.jalo.promotions.SparPromotionOrderRestriction"
+				autocreate="true"
+				generate="true">
+ 			</itemtype>		
+ 			
+ 			<itemtype code="SparWarehousePromotionRestriction"
+				extends="AbstractPromotionRestriction"
+				jaloclass="com.spar.hcl.jalo.promotions.SparWarehousePromotionRestriction"
+				autocreate="true"
+				generate="true">
+ 			</itemtype>
+ 			<!-- Pavan -->
+ 			<itemtype code="SparCategoryPromotionRestriction"
+				extends="AbstractPromotionRestriction"
+				jaloclass="com.spar.hcl.jalo.promotions.SparCategoryPromotionRestriction"
+				autocreate="true"
+				generate="true">
+				<description>Spar Promotion Category Restriction</description>
+ 			</itemtype>
+ 			<!-- Pavan -->
+ 			
+ 			
+			<itemtype code="SparAddressPromotionRestriction"
+                 extends="AbstractPromotionRestriction"
+                 jaloclass="com.spar.hcl.jalo.promotions.SparAddressPromotionRestriction"
+                 autocreate="true"
+                 generate="true">
+                 <description>Spar Promotion Address Restriction</description>
+            </itemtype>
+		</typegroup>
+		
+		 <typegroup name="Voucher">
+            <itemtype code="SparVoucherOrderRestriction"
+            extends="OrderRestriction"
+            jaloclass="com.spar.hcl.jalo.vouchers.SparVoucherOrderRestriction"
+            autocreate="true"
+            generate="true">
+            </itemtype> 
+         <itemtype code="SparVoucherOrderCalculation" 
+	            extends="SerialVoucher" 
+	            jaloclass="com.spar.hcl.jalo.vouchers.SparVoucherOrderCalculation" 
+	            autocreate="true" 
+	            generate="true" 
+	            abstract="true">   
+             </itemtype>
+  		<itemtype code="SparRegularCustomerOrderTotalRestriction"
+         	   extends="RegularCustomerOrderTotalRestriction"
+            	jaloclass="com.spar.hcl.jalo.vouchers.SparRegularCustomerOrderTotalRestriction"
+            	autocreate="true"
+            	generate="true">
+        </itemtype>
+        <itemtype code="SparWarehouseVoucherRestriction"
+         	extends="OrderRestriction"
+            jaloclass="com.spar.hcl.jalo.vouchers.SparWarehouseVoucherRestriction"
+            autocreate="true"
+            generate="true">
+        </itemtype>               
+      </typegroup> 
+		
+        
+        <typegroup>
+        <itemtype code="BaseStore" autocreate="false" generate="false">
+            <description>Extending BaseStore type with additional attributes.</description>
+            <attributes>
+                <attribute type="java.lang.Double" qualifier="minOrderLimit">
+                    <description>Order Limit on Order.</description>
+                    <persistence type="property" />
+                </attribute>
+                
+                <attribute type="java.lang.Double" qualifier="minCCOrderLimit">
+                    <description>Order Limit for C N C.</description>
+                    <persistence type="property" />
+                </attribute>
+                <attribute type="java.lang.Double" qualifier="minHDOrderLimit">
+                    <description>Order Limit for Home Delivery.</description>
+                    <persistence type="property" />
+                </attribute>
+            </attributes>
+        </itemtype>
+        </typegroup>
+        
+        <typegroup name="CMSDayRestrictionGroup">
+        <itemtype code="SparCMSDayRestriction" jaloclass="com.spar.hcl.jalo.cms.SparCMSDayRestriction" extends="AbstractRestriction"
+			autocreate="true" generate="true">
+			<attributes>
+				<attribute qualifier="activeDays" generate="true" autocreate="true" type="SparCMSRestrictionDayList">
+					<persistence type="property" />
+				</attribute>
+				<attribute qualifier="description" redeclare="true" type="java.lang.String">
+					<persistence type="dynamic" attributeHandler="dayRestrictionDynamicDescription" />
+					<modifiers write="false" />
+				</attribute>
+			</attributes>
+		</itemtype>
+        </typegroup>
+        
+        <typegroup name="BannerRestrictionGroup">
+        <itemtype code="SparBannerWarehouseRestriction" jaloclass="com.spar.hcl.jalo.cms.SparBannerWarehouseRestriction" extends="AbstractRestriction"
+			autocreate="true" generate="true">
+			<attributes>
+				<attribute qualifier="warehouses" generate="true" autocreate="true" type="SparWarehouseList">
+					<persistence type="property" />
+				</attribute>
+			</attributes>
+		</itemtype>
+        </typegroup>
+        
+        <typegroup name="QueryResultGroup">
+	        <itemtype code="sparDailyRefundResult" jaloclass="com.spar.hcl.jalo.jobs.SparDailyRefundResult" autocreate="true" generate="true" >
+	        	<deployment table="SparDailyRefundResult" typecode="31005"/>
+	        	<attributes>
+					<attribute qualifier="orderNumber" type="java.lang.String">
+						<modifiers read="true" write="true" search="true" optional="true" />
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="orderDate" type="java.lang.String">
+						<modifiers read="true" write="true" search="true" optional="true" />
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="totalOrderValue" type="java.lang.String">
+						<modifiers read="true" write="true" search="true" optional="true" />
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="totalOrderDiscount" type="java.lang.String">
+						<modifiers read="true" write="true" search="true" optional="true" />
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="customerName" type="java.lang.String">
+						<modifiers read="true" write="true" search="true" optional="true" />
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="deliveryDate" type="java.lang.String">
+						<modifiers read="true" write="true" search="true" optional="true" />
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="deliverySlot" type="java.lang.String">
+						<modifiers read="true" write="true" search="true" optional="true" />
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="orderStatus" type="java.lang.String">
+						<modifiers read="true" write="true" search="true" optional="true" />
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="cardType" type="java.lang.String">
+						<modifiers read="true" write="true" search="true" optional="true" />
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="transactionId" type="java.lang.String">
+						<modifiers read="true" write="true" search="true" optional="true" />
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="mobileNumber" type="java.lang.String">
+						<modifiers read="true" write="true" search="true" optional="true" />
+						<persistence type="property" />
+					</attribute>
+					
+					<!-- new attributes in reports -->
+					<attribute qualifier="customerId" type="java.lang.String">
+						<modifiers read="true" write="true" search="true" optional="true" />
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="warehouse" type="java.lang.String">
+						<modifiers read="true" write="true" search="true" optional="true" />
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="employeeCode" type="java.lang.String">
+						<modifiers read="true" write="true" search="true" optional="true" />
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="paidByLandmarkReward" type="java.lang.String">
+						<modifiers read="true" write="true" search="true" optional="true" />
+						<persistence type="property" />
+					</attribute>
+				</attributes>
+	        </itemtype>
+	        
+	        <itemtype code="SparDailyFraudResult"
+				jaloclass="com.spar.hcl.jalo.jobs.SparDailyFraudResult" autocreate="true"
+				generate="true">
+				<deployment table="SparDailyFraudResult" typecode="31022" />
+				<attributes>
+					<attribute qualifier="orderNumber" type="java.lang.String">
+						<modifiers read="true" write="true" search="true"
+							optional="true" />
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="orderDate" type="java.lang.String">
+						<modifiers read="true" write="true" search="true"
+							optional="true" />
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="totalOrderValue" type="java.lang.String">
+						<modifiers read="true" write="true" search="true"
+							optional="true" />
+						<persistence type="property" />
+					</attribute>
+					<!-- new attributes in reports -->
+					<attribute qualifier="customerId" type="java.lang.String">
+						<modifiers read="true" write="true" search="true"
+							optional="true" />
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="customerName" type="java.lang.String">
+						<modifiers read="true" write="true" search="true"
+							optional="true" />
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="deliveryDate" type="java.lang.String">
+						<modifiers read="true" write="true" search="true"
+							optional="true" />
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="deliverySlot" type="java.lang.String">
+						<modifiers read="true" write="true" search="true"
+							optional="true" />
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="orderStatus" type="java.lang.String">
+						<modifiers read="true" write="true" search="true"
+							optional="true" />
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="cardType" type="java.lang.String">
+						<modifiers read="true" write="true" search="true"
+							optional="true" />
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="transactionId" type="java.lang.String">
+						<modifiers read="true" write="true" search="true"
+							optional="true" />
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="mobileNumber" type="java.lang.String">
+						<modifiers read="true" write="true" search="true"
+							optional="true" />
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="warehouse" type="java.lang.String">
+						<modifiers read="true" write="true" search="true"
+							optional="true" />
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="creditInBank" type="java.lang.String">
+						<modifiers read="true" write="true" search="true"
+							optional="true" />
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="diff" type="java.lang.String">
+						<modifiers read="true" write="true" search="true"
+							optional="true" />
+						<persistence type="property" />
+					</attribute>
+				</attributes>
+			</itemtype>
+        </typegroup>
+        
+       <typegroup>
+         <itemtype code="InclusionExclusionEntry" jaloclass="com.spar.hcl.deliveryslot.jalo.InclusionExclusionEntry" autocreate="true" generate="true" extends="GenericItem">
+         <description>This contains the each  entry for inclusion and exclusion list.</description>
+			<deployment table="InclusionExclusionEntry" typecode="32000" />
+				<attributes>
+				<attribute qualifier="entryCode" type="java.lang.String" >
+				  <description>This attribute uniquely identify each entry of area.</description>
+						<modifiers read="true" write="true" search="true" optional="true"/>
+						<persistence type="property"/>
+					</attribute>
+					<attribute qualifier="areaName" type="java.lang.String" >
+						<modifiers read="true" write="true" search="true" optional="true"/>
+						<persistence type="property"/>
+					</attribute>
+					<attribute qualifier="postalCode" type="java.lang.String" >
+						<modifiers read="true" write="true" search="true" optional="true"/>
+						<persistence type="property"/>
+					</attribute>
+					<attribute qualifier="areaType" type="InclusionExclusionTypeEnum" >
+						<modifiers read="true" write="true" search="true" optional="true"/>
+						<persistence type="property"/>
+					</attribute>
+				</attributes>
+			</itemtype>	
+        </typegroup>
+         <typegroup name="EmployeeDiscountPromotion">
+         	<itemtype code="SparEmployeeDiscountPromotion" extends="OrderPromotion" jaloclass="com.spar.hcl.jalo.promotions.SparEmployeeDiscountPromotion" autocreate="true" generate="true" >
+			<description>Promotion for the Spar Employee Group.</description>
+			<attributes>
+				<attribute
+					qualifier="discountpercentage"
+					autocreate="true"
+					generate="true"
+					type="java.lang.Double">
+					<description>Discount percenatge to be given to the Employee</description>
+					<persistence type="property"/>
+					<modifiers read="true" write="true" search="false" optional="true"/>
+				</attribute>
+				<attribute	qualifier="categories" type="CategoryCollection" autocreate="true" generate="true">
+					<description>Discount percenatge to be given to the Employee</description>
+					<persistence type="property"/>
+					<modifiers read="true" write="true" search="false" optional="true"/>
+				</attribute>
+			<attribute
+					qualifier="graceamount"
+					autocreate="true"
+					generate="true"
+					type="java.lang.Double">
+					<description>Grace Amount given to Employees.</description>
+					<persistence type="property"/>
+					<modifiers read="true" write="true" search="false" optional="true"/>
+				</attribute>
+			
+			
+			<attribute qualifier="messageFired" type="localized:java.lang.String">
+					<description>The message to show when the promotion has fired.</description>
+					<modifiers read="true" write="true" optional="true" />
+					<persistence type="property">
+						<columntype>
+							<value>HYBRIS.LONG_STRING</value>
+						</columntype>
+					</persistence>
+				</attribute>
+				<attribute qualifier="messageCouldHaveFired" type="localized:java.lang.String">
+					<description>The message to show when the promotion could have potentially fire.</description>
+					<modifiers read="true" write="true" optional="true" />
+					<persistence type="property">
+						<columntype>
+							<value>HYBRIS.LONG_STRING</value>
+						</columntype>
+					</persistence>
+				</attribute>
+			</attributes>
+			
+		</itemtype> 
+       <itemtype code="Customer" generate="false" autocreate="false">
+       <attributes>
+     			 <attribute qualifier="COActive" type="boolean">
+					<modifiers read="true" write="true" optional="true"/>
+					<description>Customer active or not from CO side. </description>
+                    <persistence type="property"/>
+                    <defaultvalue>Boolean.FALSE</defaultvalue>
+				</attribute>
+				<attribute qualifier="COemployeeCode" type="java.lang.String">
+					<persistence type="property" />
+					<modifiers read="true" write="true" search="true" optional="true" />
+					<description>Attribute to store the Employee code.</description>
+				</attribute>
+				<attribute qualifier="COdateOfJoining" type="java.util.Date">
+					<persistence type="property" />
+					<modifiers read="true" write="true" search="true" optional="true" />
+				</attribute>
+				<attribute qualifier="COdateOfBirth" type="java.util.Date">
+					<persistence type="property" />
+					<modifiers read="true" write="true" search="true" optional="true" />
+				</attribute>
+				<attribute	qualifier="COemployeediscountamount" autocreate="true" generate="true" type="java.lang.Double">
+					<description>Amount used by employee so far.it will be sent by CO Team </description>
+					<defaultvalue>Double.valueOf(0.0d)</defaultvalue>
+					<persistence type="property"/>
+					<modifiers read="true" write="true" search="false" optional="true"/>
+				</attribute>
+				<attribute qualifier="lrOptStatus" type="java.lang.Boolean">
+	                <modifiers read="true" write="true" optional="true"/>
+	                <persistence type="property"/>
+	                <defaultvalue>Boolean.FALSE</defaultvalue>
+	            </attribute>
+				<attribute qualifier="disableLRPrompt" type="java.lang.Boolean">
+	                <modifiers read="true" write="true" optional="true"/>
+	                <persistence type="property"/>
+	                <defaultvalue>Boolean.FALSE</defaultvalue>
+	            </attribute>
+	            <attribute qualifier="isEnrolledToLR" type="java.lang.Boolean">
+	                <modifiers read="true" write="true" optional="true"/>
+	                <persistence type="property"/>
+	                <defaultvalue>Boolean.FALSE</defaultvalue>
+	            </attribute>
+	            <attribute qualifier="loginVia" type="java.lang.String">
+	                <modifiers read="true" write="true" optional="true"/>
+	                <persistence type="property"/>
+	            </attribute>
+       </attributes>
+       </itemtype>
+       
+       <itemtype code="SparSiteMap" jaloclass="com.spar.hcl.deliveryslot.jalo.SparSiteMap" autocreate="true" generate="true" extends="GenericItem">
+         <description>This contains the each  entry for SparSiteMap.</description>
+			<deployment table="SparSiteMap" typecode="32102" />
+				<attributes>
+				     <attribute qualifier="code" type="java.lang.String" >
+				    <description>This attribute uniquely identify each entry of SparSiteMap.</description>
+						<modifiers read="true" write="true" search="true" optional="true" unique="true"/>
+						<persistence type="property"/>
+					</attribute>
+				    <attribute qualifier="location" type="java.lang.String" >
+						<modifiers read="true" write="true" search="true" optional="true"/>
+						<persistence type="property"/>
+					</attribute>
+					<attribute qualifier="changefreq" type="java.lang.String" >
+						<modifiers read="true" write="true" search="true" optional="true"/>
+						<persistence type="property"/>
+					</attribute>
+					<attribute qualifier="priority" type="java.lang.String" >
+						<modifiers read="true" write="true" search="true" optional="true"/>
+						<persistence type="property"/>
+					</attribute>
+					<attribute qualifier="pageType" type="SparSitemapPageType" >
+						<modifiers read="true" write="true" search="true" optional="true"/>
+						<persistence type="property"/>
+					</attribute>
+					<attribute qualifier="visible" type="java.lang.Boolean">
+                     <modifiers read="true" write="true" search="true" optional="true"/>
+                     <defaultvalue>Boolean.FALSE</defaultvalue>
+                     <persistence type="property"/>
+                     </attribute>
+				</attributes>
+			</itemtype>
+			
+			<itemtype code="SparDailyFraudReportEmailProcess" extends="StoreFrontProcess"
+				autocreate="true" generate="true"
+				jaloclass="com.spar.hcl.core.jalo.process.SparFraudReportEmailProcess">
+				<attributes>
+					<attribute qualifier="sparDailyFraud" type="sparDailyFraudResultList">
+						<persistence type="property" />
+						<description>Attribute contains Fraud Result details</description>
+					</attribute>
+				</attributes>
+			</itemtype>
+			
+			<itemtype code="Order" autocreate="false" generate="false">
+	            <attributes>
+	                <attribute autocreate="true" generate="true" qualifier="totalOrderQty" type="java.lang.Integer">
+	                	<modifiers write="false"/>
+	                    <persistence type="dynamic" attributeHandler="totalOrderQuantityAttributeHandler"/>
+	                    <description>Dynamic attribute for total Order Quantity</description>
+	                </attribute>
+					 <attribute autocreate="true" generate="true" qualifier="awb_number" type="java.lang.String">
+	                	<persistence type="property" />
+	                    <description>awb_number for blowhorn</description>
+	                    <modifiers read="true" write="true" search="true" optional="true" />
+	                </attribute>
+	            </attributes>
+        	</itemtype>
+			
+			<itemtype code="PointOfService" autocreate="false" generate="false">
+			<description>additional attributes.</description>
+				<attributes>
+					<attribute type="java.lang.Double" qualifier="storeCatchmentArea">
+	                    <description>Max catchment area of store</description>
+	                    <persistence type="property" />
+	                    <defaultvalue>Double.valueOf(5d)</defaultvalue>
+                      	<modifiers read="true" write="true" search="true" optional="true" />
+                	</attribute>
+				</attributes>
+			</itemtype>
+			
+			<itemtype code="SparFailedOnlineTransactions" jaloclass="com.spar.hcl.core.payment.ipg.strategies.SparFailedOnlineTransactions" autocreate="true" generate="true" extends="GenericItem">
+			<deployment table="sparFailedOnlineTrans" typecode="32007" />
+				<attributes>
+					<attribute qualifier="failedOrderNumber" type="java.lang.String" >
+						<modifiers read="true" write="true" search="true" optional="false" unique="true"/>
+						<persistence type="property"/>
+					</attribute>
+					<attribute autocreate="true" generate="true" qualifier="paymentGatewayResponse" type="java.lang.String">
+	                	<persistence type="property" />
+	                    <description>ICICI Payment gateway response</description>
+	                    <modifiers read="true" write="true" search="true" optional="true" />
+	                </attribute>
+	                 <attribute autocreate="true" generate="true" qualifier="pgCartData" type="java.lang.String">
+	                	<persistence type="property" />
+	                	<description>Cart value</description>
+	                    <modifiers read="true" write="true" search="true" optional="true" />
+	                </attribute>
+	                 <attribute autocreate="true" generate="true" qualifier="pgResponseTime" type="java.lang.String">
+	                	<persistence type="property" />
+	                	<description>ICICI Payment gateway response time</description>
+	                    <modifiers read="true" write="true" search="true" optional="true" />
+	                </attribute>
+	                 <attribute autocreate="true" generate="true" qualifier="refundStatus" type="java.lang.String">
+	                	<persistence type="property" />
+	                	<description>Refund Status</description>
+	                    <modifiers read="true" write="true" search="true" optional="true" />
+	                </attribute>
+				</attributes>
+			</itemtype>
+		</typegroup>
+	</itemtypes>
+	
+</items>

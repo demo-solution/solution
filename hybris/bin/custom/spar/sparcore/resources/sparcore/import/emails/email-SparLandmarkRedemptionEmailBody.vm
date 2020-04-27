@@ -1,0 +1,12 @@
+## messageSource=classpath:/sparcore/messages/email-SparLandmarkRedemptionEmail_$lang.properties
+Please Review and redeem Landmark Amount for below User details :
+<br> 
+<br>Mobile Number - ${ctx.customer.custPrimaryMobNumber}<br>
+<br>Redeem Amount - ${ctx.cart.paidByLandmarkReward}<br>
+<br>Store ID - ${ctx.storeId}<br>
+<br>MessageId - ${ctx.cart.messageId}<br>  
+<br>Cart Id - ${ctx.cart.cartId}<br>
+
+<br>
+Thanks and Regards, <br>
+Customer Care Team

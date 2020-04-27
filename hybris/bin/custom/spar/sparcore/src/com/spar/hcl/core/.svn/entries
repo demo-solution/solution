@@ -1,0 +1,118 @@
+10
+
+dir
+416
+http://10.2.7.20/svn/S6_Maintenance/custom/spar/sparcore/src/com/spar/hcl/core
+http://10.2.7.20/svn/S6_Maintenance
+
+
+
+2019-05-30T08:33:20.276602Z
+402
+pavan.sr
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+db735611-e5e1-473b-b638-8971ea245bcc
+
+employee
+dir
+
+helper
+dir
+
+media
+dir
+
+event
+dir
+
+brandbank
+dir
+
+stock
+dir
+
+services
+dir
+
+storefinder
+dir
+
+jalo
+dir
+
+suggestion
+dir
+
+email
+dir
+
+comparators
+dir
+
+cms2lib
+dir
+
+servicelayer
+dir
+
+inclusionexclusion
+dir
+
+jobs
+dir
+
+externaltax
+dir
+
+model
+dir
+
+service
+dir
+
+setup
+dir
+
+checkout
+dir
+
+search
+dir
+
+mobileverification
+dir
+
+strategies
+dir
+
+onlineOfflineSKU
+dir
+
+order
+dir
+
+constants
+dir
+
+payment
+dir
+
+util
+dir
+
+customeraccount
+dir
+

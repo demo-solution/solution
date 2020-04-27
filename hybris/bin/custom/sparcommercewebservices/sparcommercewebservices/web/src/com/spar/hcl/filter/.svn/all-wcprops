@@ -1,0 +1,41 @@
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/S6_Maintenance/!svn/ver/1/custom/sparcommercewebservices/web/src/com/spar/hcl/filter
+END
+ImprovedShallowEtagHeaderFilter.java
+K 25
+svn:wc:ra_dav:version-url
+V 126
+/svn/S6_Maintenance/!svn/ver/1/custom/sparcommercewebservices/web/src/com/spar/hcl/filter/ImprovedShallowEtagHeaderFilter.java
+END
+SessionAttributesFilter.java
+K 25
+svn:wc:ra_dav:version-url
+V 118
+/svn/S6_Maintenance/!svn/ver/1/custom/sparcommercewebservices/web/src/com/spar/hcl/filter/SessionAttributesFilter.java
+END
+BaseSiteCheckFilter.java
+K 25
+svn:wc:ra_dav:version-url
+V 114
+/svn/S6_Maintenance/!svn/ver/1/custom/sparcommercewebservices/web/src/com/spar/hcl/filter/BaseSiteCheckFilter.java
+END
+BaseSiteFilter.java
+K 25
+svn:wc:ra_dav:version-url
+V 109
+/svn/S6_Maintenance/!svn/ver/1/custom/sparcommercewebservices/web/src/com/spar/hcl/filter/BaseSiteFilter.java
+END
+FilterSpringUtil.java
+K 25
+svn:wc:ra_dav:version-url
+V 111
+/svn/S6_Maintenance/!svn/ver/1/custom/sparcommercewebservices/web/src/com/spar/hcl/filter/FilterSpringUtil.java
+END
+RestSessionFilter.java
+K 25
+svn:wc:ra_dav:version-url
+V 112
+/svn/S6_Maintenance/!svn/ver/1/custom/sparcommercewebservices/web/src/com/spar/hcl/filter/RestSessionFilter.java
+END

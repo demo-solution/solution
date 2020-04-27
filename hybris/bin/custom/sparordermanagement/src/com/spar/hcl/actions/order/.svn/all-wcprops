@@ -1,0 +1,41 @@
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/S6_Maintenance/!svn/ver/326/custom/sparordermanagement/src/com/spar/hcl/actions/order
+END
+CompleteOrderAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 113
+/svn/S6_Maintenance/!svn/ver/1/custom/sparordermanagement/src/com/spar/hcl/actions/order/CompleteOrderAction.java
+END
+CheckOrderAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 110
+/svn/S6_Maintenance/!svn/ver/1/custom/sparordermanagement/src/com/spar/hcl/actions/order/CheckOrderAction.java
+END
+VerifyOrderCompletionAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 121
+/svn/S6_Maintenance/!svn/ver/1/custom/sparordermanagement/src/com/spar/hcl/actions/order/VerifyOrderCompletionAction.java
+END
+SourceOrderAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 113
+/svn/S6_Maintenance/!svn/ver/326/custom/sparordermanagement/src/com/spar/hcl/actions/order/SourceOrderAction.java
+END
+GeocodeShippingAddressAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 122
+/svn/S6_Maintenance/!svn/ver/1/custom/sparordermanagement/src/com/spar/hcl/actions/order/GeocodeShippingAddressAction.java
+END
+AbstractOrderAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 113
+/svn/S6_Maintenance/!svn/ver/1/custom/sparordermanagement/src/com/spar/hcl/actions/order/AbstractOrderAction.java
+END

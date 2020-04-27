@@ -1,0 +1,74 @@
+#
+# Import the Solr configuration for the store
+#
+
+$prefix=spar
+
+$productCatalog=sparProductCatalog
+$catalogVersions=catalogVersions(catalog(id),version);
+$serverConfigName=sparSolrServerConfig
+$indexConfigName=sparSolrIndexConfig
+$searchConfigName=sparPageSize
+$facetSearchConfigName=sparIndex
+$facetSearchConfigDescription=Spar Solr Index
+$searchIndexNamePrefix=$prefix
+$solrIndexedType=sparProductType
+$indexBaseSite=$prefix
+$indexLanguages=en
+$indexCurrencies=INR
+$priceRangeINR=sparPriceRangeINR
+
+#
+# Setup the Solr server, indexer, and search configs
+#
+#### Offers tab index properties specific to warehouse.
+INSERT_UPDATE SolrIndexedProperty;solrIndexedType(identifier)[unique=true];name[unique=true];type(code);sortableType(code);currency[default=false];localized[default=false];multiValue[default=true];facet[default=true];facetType(code);facetSort(code);priority;visible;useForSpellchecking[default=false];useForAutocomplete[default=false];fieldValueProvider;facetDisplayNameProvider;customFacetSortProvider;topValuesProvider;rangeSets(name);valueProviderParameter
+;$solrIndexedType; promotionDiscount_20001            ;double;    ;true ;     ;   ;     ; ;Alpha ; 4000;true;     ;     ;sparPromotionPercentDiscountValueProvider    ;;;;;20001
+;$solrIndexedType; promotionDiscount_20003            ;double;    ;true ;     ;   ;     ; ;Alpha ; 4000;true;     ;     ;sparPromotionPercentDiscountValueProvider    ;;;;;20003
+;$solrIndexedType; promotionDiscount_20007            ;double;    ;true ;     ;   ;     ; ;Alpha ; 4000;true;     ;     ;sparPromotionPercentDiscountValueProvider    ;;;;;20007
+;$solrIndexedType; promotionDiscount_20010            ;double;    ;true ;     ;   ;     ; ;Alpha ; 4000;true;     ;     ;sparPromotionPercentDiscountValueProvider    ;;;;;20010
+;$solrIndexedType; promotionDiscount_40001            ;double;    ;true ;     ;   ;     ; ;Alpha ; 4000;true;     ;     ;sparPromotionPercentDiscountValueProvider    ;;;;;40001
+;$solrIndexedType; promotionDiscount_50001            ;double;    ;true ;     ;   ;     ; ;Alpha ; 4000;true;     ;     ;sparPromotionPercentDiscountValueProvider    ;;;;;50001
+;$solrIndexedType; promotionDiscount_60001            ;double;    ;true ;     ;   ;     ; ;Alpha ; 4000;true;     ;     ;sparPromotionPercentDiscountValueProvider    ;;;;;60001
+;$solrIndexedType; promotionDiscount_70001            ;double;    ;true ;     ;   ;     ; ;Alpha ; 4000;true;     ;     ;sparPromotionPercentDiscountValueProvider    ;;;;;70001
+;$solrIndexedType; promotionDiscount_20002            ;double;    ;true ;     ;   ;     ; ;Alpha ; 4000;true;     ;     ;sparPromotionPercentDiscountValueProvider    ;;;;;20002
+;$solrIndexedType; promotionDiscount_10003            ;double;    ;true ;     ;   ;     ; ;Alpha ; 4000;true;     ;     ;sparPromotionPercentDiscountValueProvider    ;;;;;10003
+;$solrIndexedType; promotionDiscount_10004            ;double;    ;true ;     ;   ;     ; ;Alpha ; 4000;true;     ;     ;sparPromotionPercentDiscountValueProvider    ;;;;;10004
+;$solrIndexedType; promotionDiscount_10006            ;double;    ;true ;     ;   ;     ; ;Alpha ; 4000;true;     ;     ;sparPromotionPercentDiscountValueProvider    ;;;;;10006
+;$solrIndexedType; promotionDiscount_10007            ;double;    ;true ;     ;   ;     ; ;Alpha ; 4000;true;     ;     ;sparPromotionPercentDiscountValueProvider    ;;;;;10007
+;$solrIndexedType; promotionDiscount_30003            ;double;    ;true ;     ;   ;     ; ;Alpha ; 4000;true;     ;     ;sparPromotionPercentDiscountValueProvider    ;;;;;30003
+;$solrIndexedType; promotionDiscount_30001            ;double;    ;true ;     ;   ;     ; ;Alpha ; 4000;true;     ;     ;sparPromotionPercentDiscountValueProvider    ;;;;;30001
+;$solrIndexedType; promotionDiscount_30005            ;double;    ;true ;     ;   ;     ; ;Alpha ; 4000;true;     ;     ;sparPromotionPercentDiscountValueProvider    ;;;;;30005
+;$solrIndexedType; promotionDiscount_20009            ;double;    ;true ;     ;   ;     ; ;Alpha ; 4000;true;     ;     ;sparPromotionPercentDiscountValueProvider    ;;;;;20009
+;$solrIndexedType; promotionDiscount_20011            ;double;    ;true ;     ;   ;     ; ;Alpha ; 4000;true;     ;     ;sparPromotionPercentDiscountValueProvider    ;;;;;20011
+;$solrIndexedType; promotionDiscount_50003            ;double;    ;true ;     ;   ;     ; ;Alpha ; 4000;true;     ;     ;sparPromotionPercentDiscountValueProvider    ;;;;;50003
+;$solrIndexedType; promotionDiscount_20013            ;double;    ;true ;     ;   ;     ; ;Alpha ; 4000;true;     ;     ;sparPromotionPercentDiscountValueProvider    ;;;;;20013
+;$solrIndexedType; promotionDiscount_30006            ;double;    ;true ;     ;   ;     ; ;Alpha ; 4000;true;     ;     ;sparPromotionPercentDiscountValueProvider    ;;;;;30006
+
+;$solrIndexedType; productOnBogo_20001            ;boolean;    ;true ;     ;   ;     ; ;Alpha ; 4000;true;     ;     ;sparProductOnBogoValueProvider    ;;;;;20001
+;$solrIndexedType; productOnBogo_20003            ;boolean;    ;true ;     ;   ;     ; ;Alpha ; 4000;true;     ;     ;sparProductOnBogoValueProvider    ;;;;;20003
+;$solrIndexedType; productOnBogo_20007            ;boolean;    ;true ;     ;   ;     ; ;Alpha ; 4000;true;     ;     ;sparProductOnBogoValueProvider    ;;;;;20007
+;$solrIndexedType; productOnBogo_20010            ;boolean;    ;true ;     ;   ;     ; ;Alpha ; 4000;true;     ;     ;sparProductOnBogoValueProvider    ;;;;;20010
+;$solrIndexedType; productOnBogo_40001            ;boolean;    ;true ;     ;   ;     ; ;Alpha ; 4000;true;     ;     ;sparProductOnBogoValueProvider    ;;;;;40001
+;$solrIndexedType; productOnBogo_50001            ;boolean;    ;true ;     ;   ;     ; ;Alpha ; 4000;true;     ;     ;sparProductOnBogoValueProvider    ;;;;;50001
+;$solrIndexedType; productOnBogo_60001            ;boolean;    ;true ;     ;   ;     ; ;Alpha ; 4000;true;     ;     ;sparProductOnBogoValueProvider    ;;;;;60001
+;$solrIndexedType; productOnBogo_70001            ;boolean;    ;true ;     ;   ;     ; ;Alpha ; 4000;true;     ;     ;sparProductOnBogoValueProvider    ;;;;;70001
+;$solrIndexedType; productOnBogo_20002            ;boolean;    ;true ;     ;   ;     ; ;Alpha ; 4000;true;     ;     ;sparProductOnBogoValueProvider    ;;;;;20002
+;$solrIndexedType; productOnBogo_10003            ;boolean;    ;true ;     ;   ;     ; ;Alpha ; 4000;true;     ;     ;sparProductOnBogoValueProvider    ;;;;;10003
+;$solrIndexedType; productOnBogo_10006            ;boolean;    ;true ;     ;   ;     ; ;Alpha ; 4000;true;     ;     ;sparProductOnBogoValueProvider    ;;;;;10006
+;$solrIndexedType; productOnBogo_10007            ;boolean;    ;true ;     ;   ;     ; ;Alpha ; 4000;true;     ;     ;sparProductOnBogoValueProvider    ;;;;;10007
+;$solrIndexedType; productOnBogo_30003            ;boolean;    ;true ;     ;   ;     ; ;Alpha ; 4000;true;     ;     ;sparProductOnBogoValueProvider    ;;;;;30003
+;$solrIndexedType; productOnBogo_30001            ;boolean;    ;true ;     ;   ;     ; ;Alpha ; 4000;true;     ;     ;sparProductOnBogoValueProvider    ;;;;;30001
+;$solrIndexedType; productOnBogo_30005            ;boolean;    ;true ;     ;   ;     ; ;Alpha ; 4000;true;     ;     ;sparProductOnBogoValueProvider    ;;;;;30005
+;$solrIndexedType; productOnBogo_20009            ;boolean;    ;true ;     ;   ;     ; ;Alpha ; 4000;true;     ;     ;sparProductOnBogoValueProvider    ;;;;;20009
+;$solrIndexedType; productOnBogo_20011            ;boolean;    ;true ;     ;   ;     ; ;Alpha ; 4000;true;     ;     ;sparProductOnBogoValueProvider    ;;;;;20011
+;$solrIndexedType; productOnBogo_50003            ;boolean;    ;true ;     ;   ;     ; ;Alpha ; 4000;true;     ;     ;sparProductOnBogoValueProvider    ;;;;;50003
+;$solrIndexedType; productOnBogo_20013            ;boolean;    ;true ;     ;   ;     ; ;Alpha ; 4000;true;     ;     ;sparProductOnBogoValueProvider    ;;;;;20013
+;$solrIndexedType; productOnBogo_30006            ;boolean;    ;true ;     ;   ;     ; ;Alpha ; 4000;true;     ;     ;sparProductOnBogoValueProvider    ;;;;;30006
+
+
+
+# Non-facet properties
+INSERT_UPDATE SolrIndexedProperty;solrIndexedType(identifier)[unique=true];name[unique=true];type(code);sortableType(code);currency[default=false];localized[default=false];multiValue[default=false];useForSpellchecking[default=false];useForAutocomplete[default=false];fieldValueProvider;valueProviderParameter
+;$solrIndexedType; promotionDiscountVariants    	  ;string;    		   ;    ;    ;true;    ;    ;sparVariantsPromotionDiscountValueProvider;
+;$solrIndexedType; productOnBogoVariants    	  ;string;    		   ;    ;    ;true;    ;    ;sparVariantsProductOnBogoValueProvider;

@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/S6_Maintenance/!svn/ver/317/custom/spar/sparcore/src/com/spar/hcl/jalo/vouchers
+END
+SparRegularCustomerOrderTotalRestriction.java
+K 25
+svn:wc:ra_dav:version-url
+V 128
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparcore/src/com/spar/hcl/jalo/vouchers/SparRegularCustomerOrderTotalRestriction.java
+END
+SparSerialVoucher.java
+K 25
+svn:wc:ra_dav:version-url
+V 107
+/svn/S6_Maintenance/!svn/ver/317/custom/spar/sparcore/src/com/spar/hcl/jalo/vouchers/SparSerialVoucher.java
+END
+SparVoucherOrderRestriction.java
+K 25
+svn:wc:ra_dav:version-url
+V 115
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparcore/src/com/spar/hcl/jalo/vouchers/SparVoucherOrderRestriction.java
+END
+SparWarehouseVoucherRestriction.java
+K 25
+svn:wc:ra_dav:version-url
+V 121
+/svn/S6_Maintenance/!svn/ver/175/custom/spar/sparcore/src/com/spar/hcl/jalo/vouchers/SparWarehouseVoucherRestriction.java
+END

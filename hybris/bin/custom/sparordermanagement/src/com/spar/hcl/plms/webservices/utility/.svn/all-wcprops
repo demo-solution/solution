@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/S6_Maintenance/!svn/ver/1/custom/sparordermanagement/src/com/spar/hcl/plms/webservices/utility
+END
+SparPLMSOrderSingleton.java
+K 25
+svn:wc:ra_dav:version-url
+V 127
+/svn/S6_Maintenance/!svn/ver/1/custom/sparordermanagement/src/com/spar/hcl/plms/webservices/utility/SparPLMSOrderSingleton.java
+END
+SparPLMSOrderTransferUtility.java
+K 25
+svn:wc:ra_dav:version-url
+V 133
+/svn/S6_Maintenance/!svn/ver/1/custom/sparordermanagement/src/com/spar/hcl/plms/webservices/utility/SparPLMSOrderTransferUtility.java
+END
+SparPLMSServerConnectionUtility.java
+K 25
+svn:wc:ra_dav:version-url
+V 136
+/svn/S6_Maintenance/!svn/ver/1/custom/sparordermanagement/src/com/spar/hcl/plms/webservices/utility/SparPLMSServerConnectionUtility.java
+END

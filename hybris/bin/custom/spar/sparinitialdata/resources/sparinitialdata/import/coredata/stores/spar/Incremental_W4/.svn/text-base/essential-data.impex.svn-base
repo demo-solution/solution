@@ -1,0 +1,36 @@
+INSERT_UPDATE CronJob;code[unique=true];job(code);singleExecutable;sessionLanguage(isocode)
+;sparServiceAreaImportCronJob;sparServiceAreaImportJob;false;en
+
+INSERT_UPDATE Trigger;cronjob(code)[unique=true];cronExpression
+;sparServiceAreaImportCronJob;0 0 6 1/1 * ? *
+
+
+# Payment modes added to support multiple payment modes(COD/CreditCard/Debit Card) in SPAR- START
+# Payment Modes
+
+INSERT_UPDATE StandardPaymentMode;code[unique=true];name[lang=en];description[lang=en];active;paymentinfotype(code)
+;cashondelivery;Cash On Delivery;Payment with COD;true;CashOnDeliveryPaymentInfo
+;creditcard;Credit Card;payment with creditcard;true;CreditCardPaymentInfo
+;wallet;Payment with wallet;Payment with Wallet;true;WalletPaymentInfo
+;multiPaymentMode;Payment with multi payment modes;Payment with multi payment modes;true;MultiPaymentMode
+;voucherPaymentMode;100% discount;100% discount;true;VoucherPaymentMode
+;landmarkReward;Payment with Landmark Rewards points;Payment with Landmark Rewards points;true;LandmarkPaymentInfo
+;payTM;Payment with PayTM;Payment with PayTM;true;PayTMPaymentInfo
+
+INSERT_UPDATE StandardPaymentModeValue;paymentmode(code)[unique=true];currency(isoCode)[unique=true];value;;;;
+;cashondelivery;INR;0;;;;
+;creditcard;INR;0;;;;
+
+
+REMOVE DeliveryMode;code[unique=true];active;net;supportedpaymentmodes(code);
+;HD;true;false;cashondelivery;
+;HD;true;false;creditcard;
+
+
+
+INSERT_UPDATE DeliveryMode;code[unique=true];active;net;supportedpaymentmodes(code);
+;standard-gross;true;false;cashondelivery,creditcard,wallet,multiPaymentMode,landmarkReward;payTM;;
+;free-standard-shipping;true;false;cashondelivery,creditcard,wallet,multiPaymentMode,landmarkReward;payTM;
+
+INSERT_UPDATE PickUpDeliveryMode;code[unique=true];active;supportedpaymentmodes(code);
+;pickup;true;cashondelivery,creditcard,wallet,multiPaymentMode,landmarkReward;payTM;

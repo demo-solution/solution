@@ -1,0 +1,59 @@
+K 25
+svn:wc:ra_dav:version-url
+V 109
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparstorefront/web/testsrc/com/spar/hcl/storefront/controllers/cms
+END
+CategoryFeatureComponentControllerTest.java
+K 25
+svn:wc:ra_dav:version-url
+V 153
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparstorefront/web/testsrc/com/spar/hcl/storefront/controllers/cms/CategoryFeatureComponentControllerTest.java
+END
+ProductFeatureComponentControllerTest.java
+K 25
+svn:wc:ra_dav:version-url
+V 152
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparstorefront/web/testsrc/com/spar/hcl/storefront/controllers/cms/ProductFeatureComponentControllerTest.java
+END
+ProductCarouselComponentControllerTest.java
+K 25
+svn:wc:ra_dav:version-url
+V 153
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparstorefront/web/testsrc/com/spar/hcl/storefront/controllers/cms/ProductCarouselComponentControllerTest.java
+END
+CartSuggestionComponentControllerTest.java
+K 25
+svn:wc:ra_dav:version-url
+V 152
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparstorefront/web/testsrc/com/spar/hcl/storefront/controllers/cms/CartSuggestionComponentControllerTest.java
+END
+ProductReferencesComponentControllerTest.java
+K 25
+svn:wc:ra_dav:version-url
+V 155
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparstorefront/web/testsrc/com/spar/hcl/storefront/controllers/cms/ProductReferencesComponentControllerTest.java
+END
+NavigationBarComponentControllerTest.java
+K 25
+svn:wc:ra_dav:version-url
+V 151
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparstorefront/web/testsrc/com/spar/hcl/storefront/controllers/cms/NavigationBarComponentControllerTest.java
+END
+PurchasedCategorySuggestionComponentControllerTest.java
+K 25
+svn:wc:ra_dav:version-url
+V 165
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparstorefront/web/testsrc/com/spar/hcl/storefront/controllers/cms/PurchasedCategorySuggestionComponentControllerTest.java
+END
+MiniCartComponentControllerTest.java
+K 25
+svn:wc:ra_dav:version-url
+V 146
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparstorefront/web/testsrc/com/spar/hcl/storefront/controllers/cms/MiniCartComponentControllerTest.java
+END
+DefaultCMSComponentControllerTest.java
+K 25
+svn:wc:ra_dav:version-url
+V 148
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparstorefront/web/testsrc/com/spar/hcl/storefront/controllers/cms/DefaultCMSComponentControllerTest.java
+END

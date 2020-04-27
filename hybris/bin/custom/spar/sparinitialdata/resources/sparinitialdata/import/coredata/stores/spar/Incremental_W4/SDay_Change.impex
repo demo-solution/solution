@@ -1,0 +1,18 @@
+#incremental impex for content catalog
+# ImpEx for Importing CMS Content
+# Macros / Replacement Parameter definitions
+$contentCatalog=sparContentCatalog
+$contentCatalogName=Spar Content Catalog
+$productCatalog=sparProductCatalog
+$productCatalogName=Spar Product Catalog
+
+$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
+$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
+$productCV=catalogVersion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
+$product=product(code, $productCV)
+$category=category(code, $productCV)
+
+## Rename linkName to Spar Brands from Republic maha sale
+INSERT_UPDATE CMSLinkComponent; $contentCV[unique=true];uid[unique=true];name;url;&linkRef;&componentRef; target(code)[default='sameWindow']; $category; $product;linkName;styleAttributes;
+;;SdayLink2;SdayLink2;/search/?q=%3Arelevance%3AbenefitType%3ASDAY;SdayLink2;SdayLink2;;;;SPAR Products
+;;SdayTopLink2;SdayTopLink2 ;/;SdayTopLink2;SdayTopLink2;;;;SPAR Products;data-toggle="dropdown" class="btn btn-green dropdown-toggle";

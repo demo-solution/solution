@@ -1,0 +1,35 @@
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/S6_Maintenance/!svn/ver/402/custom/spar/sparcore/resources
+END
+sparcore.build.number
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparcore/resources/sparcore.build.number
+END
+sparcore-backoffice-config.xml
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparcore/resources/sparcore-backoffice-config.xml
+END
+sparcore-items.xml
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/S6_Maintenance/!svn/ver/402/custom/spar/sparcore/resources/sparcore-items.xml
+END
+sparcore-spring.xml
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/S6_Maintenance/!svn/ver/351/custom/spar/sparcore/resources/sparcore-spring.xml
+END
+items.xsd
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparcore/resources/items.xsd
+END

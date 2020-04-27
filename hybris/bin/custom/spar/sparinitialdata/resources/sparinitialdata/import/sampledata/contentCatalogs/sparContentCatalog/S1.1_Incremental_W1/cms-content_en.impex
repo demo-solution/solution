@@ -1,0 +1,19 @@
+# ImpEx for Importing CMS Content
+# English Localisation
+
+# Macros / Replacement Parameter definitions
+$contentCatalog=sparContentCatalog
+
+$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
+$picture=media(code, $contentCV);
+$siteResource=jar:com.spar.hcl.initialdata.setup.InitialDataSystemSetup&/sparinitialdata/import/sampledata/contentCatalogs/$contentCatalog
+
+# Language
+$lang=en
+
+
+# CMS Link Components
+UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];linkName[lang=$lang]
+;;HealthDrinksCategoryLink;"Health Drinks"                 
+;;TeaCoffeeCategoryLink;"Tea & Coffee"                    
+;;BeveragesAdditivesCategoryLink;"Beverage Additives"           

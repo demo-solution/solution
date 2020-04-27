@@ -1,0 +1,87 @@
+## messageSource=classpath:/sparcore/messages/email-feedsError_$lang.properties
+#macro(genHtmlLinkStartTag $url)
+<a href="$url"><font color="#666666">
+#end
+#macro(genHtmlLinkEndTag)
+</font></a>
+#end
+#macro(genHtmlLink $url $textColor $bodyContent)
+<a href="$url"><font color="$textColor">$bodyContent</font></a>
+#end
+
+<html>
+	<head>
+	</head>
+	<body bgcolor="#e4e7e8">
+	<table width="100%" border="0" align="center" cellpadding="0" cellspacing="0" bgcolor="#e4e7e8">
+		<tr>
+			<td>&nbsp;</td>
+		</tr>
+		
+	
+		<tr>
+			<td>${ctx.messages.getMessage('salutation')}</td>
+		</tr>
+		
+			<tr>
+			<td>&nbsp;</td>
+		</tr>
+		
+			<tr>
+			
+			<td>${ctx.messages.getMessage('emailBodyline1', ${ctx.sourceFileName})}</td>
+		</tr>
+		
+		<tr>
+			<td align="center" valign="top">
+				<table width="610" border="6" align="center" cellpadding="0" cellspacing="0" bordercolor="#ebedee">
+					<tr>
+						<td align="center" valign="top" bgcolor="#FFFFFF">
+							<table width="570" cellpadding="0" cellspacing="0" border="0" align="center">
+								<tr>
+									<td valign="middle">&nbsp;</td>
+								</tr>
+								<tr>
+									<td valign="middle">
+									${ctx.cmsSlotContents.SiteLogo}
+									
+									</td>
+								</tr>
+								<tr>
+									<td align="center" valign="middle">
+									<div class="navigation" style="background: none repeat scroll 0 0 #00b0f0;">
+										<div class="ge_ddropdown">
+											&nbsp;
+										</div>
+									</div>
+									</td>
+								</tr>
+								<tr>
+									<td>&nbsp;</td>
+								</tr>
+								<tr>
+									<td align="left" valign="top">
+										<p><font color="#666666" size="2" face="Arial, Helvetica, sans-serif"></font></p>
+										
+										<p><font color="#666666" size="2" face="Arial, Helvetica, sans-serif"></font></p>
+								</td>
+								</tr>
+								<tr>
+									<td>&nbsp;</td>
+								</tr>
+								
+								<tr>
+									<td>&nbsp;</td>
+								</tr>
+							</table>
+						</td>
+					</tr>
+				</table>
+			</td>
+		</tr>
+		<tr>
+			<td>&nbsp;</td>
+		</tr>
+	</table>
+</body>
+</html>

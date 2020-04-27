@@ -1,0 +1,2 @@
+## messageSource=classpath:/sparcore/messages/email-SPARPLMSManualPickOrder_$lang.properties
+Order Needs to be picked manually

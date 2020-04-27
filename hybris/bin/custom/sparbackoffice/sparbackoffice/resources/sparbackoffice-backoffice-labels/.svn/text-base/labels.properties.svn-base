@@ -1,0 +1,32 @@
+#
+# [y] hybris Platform
+#
+# Copyright (c) 2000-2015 hybris AG
+# All rights reserved.
+#
+# This software is the confidential and proprietary information of hybris
+# ("Confidential Information"). You shall not disclose such Confidential
+# Information and shall use it only in accordance with the terms of the
+# license agreement you entered into with hybris.
+#
+
+# in this file you has possibility to override widget labels
+# syntax:
+# <widgetID>.<labelName>=value
+#
+# Example:
+# yourCustomLabel=value
+
+
+# WareHouse | Order | Line Item Changes at order level
+ordermanagementbackoffice.order.tab.picknpack = Pick & Pack
+ordermanagementbackoffice.consignment.noshowretry = Order No Show Retry
+ordermanagementbackoffice.order.hierarchy.itemCSP = CSP
+ordermanagementbackoffice.order.hierarchy.shortPickQuantity = ShortPick QTY
+ordermanagementbackoffice.order.hierarchy.originalCSP = Original CSP
+ordermanagementbackoffice.order.hierarchy.originalQty = Original Qty
+warehousingbackoffice.consignment.hierarchy.shortPickQuantity = ShortPick QTY
+ordermanagementbackoffice.consignment.deliveryList = Available Delivery Slots : Select Delivery Date and Delivery Slot from the given list. Click on edit and copy the delivery date (text before "-") paste it in Delivery Date text box. Similarly, Copy the delivery Slot(text after "-") and paste it in Delivery Slot text box.
+ordermanagementbackoffice.consignment.deliveryDate = Updated Delivery Date
+ordermanagementbackoffice.consignment.deliverySlot = Updated Delivery Slot
+ordermanagementbackoffice.section.order.pickpack.information = Order No Show  Section

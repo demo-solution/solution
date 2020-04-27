@@ -1,0 +1,2 @@
+## messageSource=classpath:/sparcore/messages/email-SparBlowhornFailedRequestOrder_$lang.properties
+${ctx.enviornment} : Blowhorn Failed Order request

@@ -1,0 +1,7 @@
+#cron job 
+# Cron job for daily refund report
+INSERT_UPDATE CronJob; code[unique=true];job(code);singleExecutable;sessionLanguage(isocode)
+;sparDelayFeedNotificationCronJob;sparDelayFeedNotificationJob;false;en
+
+#INSERT_UPDATE Trigger;cronjob(code)[unique=true];cronExpression
+#;sparDelayFeedNotificationCronJob;0 45 7 1/1 * ? *

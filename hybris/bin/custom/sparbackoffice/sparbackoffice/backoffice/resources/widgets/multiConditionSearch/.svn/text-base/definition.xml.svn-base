@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+
+<!-- Widget definition for Asset Tracker Search Condition-->
+
+<widget-definition xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="http://www.hybris.com/schema/cockpitng/widget-definition.xsd"
+    id="com.hybris.backoffice.widgets.multiConditionSearch">
+    <name>Multi Search Condition Adapter</name>
+    <description>Multi Search Condition Adapter</description>
+    <defaultTitle>Multi Search Condition Adapter</defaultTitle>
+    <author>Rohan_C</author>
+    <version>1.0</version>
+    <view src="none" />
+    <keywords>
+        <keyword>_hidden</keyword>
+    </keywords>
+    <controller class="com.spar.hcl.widgets.MultiConditionSearchController" />
+    <sockets>
+        <input id="nodeSelected" type="com.hybris.backoffice.navigation.NavigationNode"/>
+        <output id="outContext" type="com.hybris.backoffice.widgets.advancedsearch.impl.AdvancedSearchInitContext"/>
+    </sockets>
+</widget-definition>
+

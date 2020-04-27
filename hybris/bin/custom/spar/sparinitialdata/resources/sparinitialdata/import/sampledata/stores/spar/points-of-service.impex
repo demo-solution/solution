@@ -1,0 +1,153 @@
+# ImpEx for Spar Store
+#% impex.setLocale( Locale.ENGLISH ); 
+
+$storeUid=spar
+$productCatalog=sparProductCatalog
+$catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
+$storeImage=storeImage(qualifier, $catalogVersion)
+
+
+$standardHours=spar-india-standard-hours
+$weekendHours=spar-india-weekend-hours
+
+INSERT_UPDATE OpeningSchedule;code[unique=true];
+;$standardHours;
+;$weekendHours;
+
+INSERT_UPDATE WeekdayOpeningDay;openingSchedule(code)[unique=true];dayOfWeek(code)[unique=true];openingTime[dateformat=hh:mm];closingTime[dateformat=hh:mm];
+;$standardHours;MONDAY   ; 10:00; 22:00
+;$standardHours;TUESDAY  ; 10:00; 22:00
+;$standardHours;WEDNESDAY; 10:00; 22:00
+;$standardHours;THURSDAY ; 10:00; 22:00
+;$standardHours;FRIDAY   ; 10:00; 22:00
+;$standardHours;SATURDAY ; 10:00; 22:00
+
+;$weekendHours;MONDAY   ; 09:00; 17:00
+;$weekendHours;TUESDAY  ; 09:00; 17:00
+;$weekendHours;WEDNESDAY; 09:00; 17:00
+;$weekendHours;THURSDAY ; 09:00; 17:00
+;$weekendHours;FRIDAY   ; 09:00; 17:00
+;$weekendHours;SATURDAY ; 10:00; 17:00
+;$weekendHours;SUNDAY   ; 10:00; 17:00
+
+
+INSERT_UPDATE SpecialOpeningDay;openingSchedule(code)[unique=true];date[unique=true,dateformat=dd.MM.yyyy];closed;openingTime[dateformat=hh:mm];closingTime[dateformat=hh:mm]
+;$standardHours; 01.01.2014 ;true
+;$standardHours; 14.01.2014 ;true
+;$standardHours; 11.02.2014 ;true
+;$standardHours; 20.03.2014 ;true
+;$standardHours; 29.04.2014 ;true
+;$standardHours; 03.05.2014 ;true
+;$standardHours; 04.05.2014 ;true
+;$standardHours; 05.05.2014 ;true
+;$standardHours; 15.07.2014 ;true
+;$standardHours; 16.09.2014 ;true
+;$standardHours; 23.09.2014 ;true
+;$standardHours; 14.10.2014 ;true
+;$standardHours; 03.11.2014 ;true
+;$standardHours; 23.11.2014 ;true
+;$standardHours; 23.12.2014 ;true
+
+;$weekendHours; 01.01.2014 ;true
+;$weekendHours; 14.01.2014 ;true
+;$weekendHours; 11.02.2014 ;true
+;$weekendHours; 20.03.2014 ;true
+;$weekendHours; 29.04.2014 ;true
+;$weekendHours; 03.05.2014 ;true
+;$weekendHours; 04.05.2014 ;true
+;$weekendHours; 05.05.2014 ;true
+;$weekendHours; 15.07.2014 ;true
+;$weekendHours; 16.09.2014 ;true
+;$weekendHours; 23.09.2014 ;true
+;$weekendHours; 14.10.2014 ;true
+;$weekendHours; 03.11.2014 ;true
+;$weekendHours; 23.11.2014 ;true
+;$weekendHours; 23.12.2014 ;true
+
+
+REMOVE PointOfService;name[unique=true];type(code);address(&addrID);latitude;longitude;geocodeTimestamp[dateformat=dd-MM-yyyy];openingSchedule(code);basestore(uid)[default=$storeUid];features(code)
+;Nakano;STORE;addr1;35,7091;139,6732;29-04-2025;$standardHours
+;Shinbashi;STORE;addr2;35,6673;139,75429;29-04-2025;$standardHours
+;Spar_bannerghatta;STORE;addr5;12.9342565;77.6043993;29-04-2025;$standardHours
+;Spar_koramangala;STORE;addr6;12.936915;77.640726;29-04-2025;$standardHours
+;SPAR Mantri_Sq;STORE;addr7;13.001914;77.571336;29-04-2025;$standardHours
+;SPAR Kormangala_Kor;STORE;addr8;13.029799;77.604704;29-04-2025;$standardHours
+;POS bannerghatta;POS;addr9;12.9342565;77.6043993;29-04-2025;$standardHours
+;POS Kormangala;POS;addr10;12.936915;77.640726;29-04-2025;$standardHours
+;POS Mantri_Sq;POS;addr11;12.990489;77.570745;29-04-2025;$standardHours
+;POS Kormangala_Kor;POS;addr12;12.931729;77.569760;29-04-2025;$standardHours
+;SPAR OMR;STORE;addr2;12.992940;77.661630;29-04-2025;$standardHours
+;SPAR Elements Mall;STORE;addr5;13.063954;77.650361;29-04-2025;$weekendHours
+
+
+
+INSERT_UPDATE PointOfService;name[unique=true];type(code);address(&addrID);latitude;longitude;geocodeTimestamp[dateformat=dd-MM-yyyy];openingSchedule(code);basestore(uid)[default=$storeUid];features(code)
+;SPAR Bannerghatta;STORE;addr1;12.932308;77.603489;29-04-2025;$standardHours
+#;SPAR OMR;STORE;addr2;12.992940;77.661630;29-04-2025;$standardHours
+;SPAR Bhavani Nagar;POS;addr3;12.9342565;77.6043993;29-04-2025;$weekendHours
+;SPAR LMG CC;POS;addr4;12.9491242;77.6875552;29-04-2025;$weekendHours
+;SPAR Elements Mall;STORE;addr5;13.063954;77.650361;29-04-2025;$weekendHours
+;SPAR Bannerghatta HO;POS;addr6;12.9342565;77.6043993;29-04-2025;$weekendHours
+;SPAR LMG;STORE;addr7;12.9491242;77.6875552;29-04-2025;$weekendHours
+
+
+REMOVE Address;&addrID;streetname;streetnumber;postalcode[unique=true];town[unique=true];country(isocode);region(isocode);phone1;owner(PointOfService.name)[unique=true]
+;addr1;Waseda Dori;13;;Tokio;JP;;+81 1988 3600;Nakano
+;addr2;Hibiya Dori;20;;Tokio;JP;;+81 4649 8891;Shinbashi
+;addr5;Bannerghatta Main Road;39 3 and 44;560029 Bengaluru;Bengaluru;IN;;+91 80 41811600;Spar_bannerghatta
+;addr6;Koramangala 4th Block;100;560095 Bengaluru;Bengaluru;IN;;+91 80 41811600;Spar_koramangala
+;addr7;Mantri Square;Jai Bheema Nagar;560003 Bengaluru;Bengaluru;IN;;+91 80 41811600;SPAR Mantri_Sq
+;addr8;Koramangala 2nd Block;100;560032 Bengaluru;Bengaluru;IN;;+91 80 41811600;SPAR Kormangala_Kor
+;addr9;Bannerghatta Main Road;39 3 and 44;560029 Bengaluru;Bengaluru;IN;;+91 80 41811600;POS bannerghatta
+;addr10;Koramangala 4th Block;100;560095 Bengaluru;Bengaluru;IN;;+91 80 41811600;POS Kormangala
+;addr11;Mantri Square;Jai Bheema Nagar Sevashrama;560003 Bengaluru;Bengaluru;IN;;+91 80 41811600;POS Mantri_Sq
+;addr12;Koramangala 2nd Block;100;560032 Bengaluru;Bengaluru;IN;;+91 80 41811600;POS Kormangala_Kor
+;addr2;;Nagavarapalya Gopalan Signature Mall;6;Bengaluru;560016;IN;;+91-80-33207700;SPAR OMR
+;addr5;;Elements Mall MSR Regaliaa Elements;Survey No. 132 and 133 and 134 Thanisandra;Bengaluru;560077;IN;;+91-80-67294041;SPAR Elements Mall
+
+
+INSERT_UPDATE Address;&addrID;firstname;streetname;streetnumber;town[unique=true];postalcode[unique=true];country(isocode);region(isocode);phone1;owner(PointOfService.name)[unique=true]
+;addr1;SPAR Hypermarkets;39/3 & 44 Bannerghatta Main Road;Near Diary Circle;Bengaluru;560029;IN;IN-KA;+91 (80) 4179 6565;SPAR Bannerghatta
+#;addr2;;Nagavarapalya Gopalan Signature Mall;6;Bengaluru;560016;IN;;+91-80-33207700;SPAR OMR
+;addr3;SPAR Hypermarkets(Click &Collect Centre Next to Store Entrance);39/3 & 44 Bannerghatta Main Road,;Near Diary Circle,;Bengaluru;560029;IN;IN-KA;7337885299/296;SPAR Bhavani Nagar
+;addr4;Lifestyle International Pvt. Ltd.;;Yamlur P.O., Off HAL Airport Road,;Bengaluru;560037;IN;IN-KA;7337885299/296;SPAR LMG CC
+;addr5;;Elements Mall MSR Regaliaa Elements;Survey No. 132 and 133 and 134 Thanisandra;Bengaluru;560077;IN;;+91-80-67294041;SPAR Elements Mall
+;addr6;SPAR Head Office;2nd Floor,(Above SPAR Hypermarket), Max Hypermarket India Pvt. Ltd 39/3 & 44, Bannerghatta Main Road;Near Diary Circle;Bengaluru;560029;IN;IN-KA;7337885299/296;SPAR Bannerghatta HO
+;addr7;Lifestyle International Pvt. Ltd.;;Yamlur P.O., Off HAL Airport Road,;Bengaluru;560037;IN;IN-KA;7337885299/296;SPAR LMG
+
+
+INSERT_UPDATE StoreLocatorFeature;code[unique=true]
+;sundayWorkshops
+;buyOnlinePickupInStore
+
+UPDATE PointOfService;name[unique=true];features(code);
+;SPAR Bannerghatta;buyOnlinePickupInStore
+#;SPAR OMR;buyOnlinePickupInStore
+;SPAR Elements Mall;buyOnlinePickupInStore
+
+;SPAR Bhavani Nagar;buyOnlinePickupInStore
+;SPAR LMG CC;buyOnlinePickupInStore
+;SPAR Bannerghatta HO;buyOnlinePickupInStore
+;SPAR LMG;buyOnlinePickupInStore
+
+#;Spar_store1;buyOnlinePickupInStore;
+#;Spar_store2;buyOnlinePickupInStore;
+#;Spar_store3;buyOnlinePickupInStore;
+
+
+INSERT_UPDATE PoS2WarehouseRel;source(name)[unique=true];target(code)[unique=true]
+;SPAR Bannerghatta;20001
+;SPAR Bhavani Nagar;20001
+;SPAR LMG CC;20001
+;SPAR Bannerghatta HO;20001
+;SPAR LMG;20001
+
+#;SPAR OMR;20007
+;SPAR Elements Mall;20010
+
+#;POS bannerghatta;20001
+#;POS Kormangala;20002
+
+#;Spar_store1;20003
+#;Spar_store2;20007
+#;Spar_store3;20010

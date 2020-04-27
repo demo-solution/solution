@@ -1,0 +1,96 @@
+
+# put localizations of item types into this file
+# Note that you can also add special locatizations which 
+# can be retrieved with the 
+#
+# ...tools.localization.Localization.getLocalizedString(...)
+# 
+# methods.
+#
+# syntax for type localizations:
+#
+# type.<code of type>.name=XY
+# type.<code of type>.<qualifier of attribute>.name=XY
+# type.<code of type>.description=XY
+# type.<code of type>.<qualifier of attribute>.description=XY
+#
+# yourcustomlocalekey=value
+
+
+### Localization for type SparProductBOGOFPromotion
+
+type.SparProductBOGOFPromotion.name=Spar Promotion - Buy X get Y free
+type.SparProductBOGOFPromotion.description=SparProductBOGOFPromotion is based on ProductBOGOFPromotion except it automatically adds the product(s) with free count.
+type.SparProductBOGOFPromotion.qualifyingCount.name=Qualifying items count
+type.SparProductBOGOFPromotion.qualifyingCount.description=
+type.SparProductBOGOFPromotion.freeCount.name=Free items count
+type.SparProductBOGOFPromotion.freeCount.description=
+type.SparProductBOGOFPromotion.messageFired.name=Fired message
+type.SparProductBOGOFPromotion.messageFired.description= 
+type.SparProductBOGOFPromotion.messageCouldHaveFired.name=Could have fired message
+type.SparProductBOGOFPromotion.messageCouldHaveFired.description==
+type.SparProductBOGOFPromotion.messageFired.defaultvalue=These items qualify for our buy {0,number,integer} get {1,number,integer} free offer - You have saved {3}. Free item(s) have already been added in the cart.
+type.SparProductBOGOFPromotion.messageCouldHaveFired.defaultvalue=Buy {0,choice,1#one more item|1<another {0,number,integer} items} to qualify for our buy {1,number,integer} get {2,number,integer} free offer
+
+
+type.SparProductBXGYFPromotion.name=Spar Promotion - Buy XX get YY free
+type.SparProductBXGYFPromotion.freeProducts.name=Free Product
+type.SparProductBXGYFPromotion.description=SparProductBXGYFPromotion is based on ProductBOGOFPromotion, it automatically adds the product(s).In addition to ProductBOGOFPromotion, it also supports different types and number of items. 
+type.SparProductBXGYFPromotion.qualifyingCount.name=Qualifying items count
+type.SparProductBXGYFPromotion.qualifyingCount.description=
+type.SparProductBXGYFPromotion.freeCount.name=Free items count
+type.SparProductBXGYFPromotion.freeCount.description=
+type.SparProductBXGYFPromotion.messageFired.name=Fired message
+type.SparProductBXGYFPromotion.messageFired.description= 
+type.SparProductBXGYFPromotion.messageCouldHaveFired.name=Could have fired message
+type.SparProductBXGYFPromotion.messageCouldHaveFired.description==
+
+
+type.sparproductbxgyfpromotion.messageFired.defaultvalue=Buy {0} - {1} and get {2} - {3} free
+type.sparproductbxgyfpromotion.messageCouldHaveFired.defaultvalue=Buy {0} - {1} more to get {2} - {3} free
+
+type.SparCategoryItemAtFixedPricePromotion.name=Spar Promotion - Category Level - Buy X at fixed price
+type.SparCategoryItemAtFixedDiscPromotion.name=Spar Promotion - Category Level - Buy X at fixed discount
+
+type.sparcategoryitematfixedpricepromotion.messageFired.defaultvalue=Buy for Rs. {0} and get {4} at Rs.{2}- valid for {5}
+type.sparcategoryitematfixedpricepromotion.messageCouldHaveFired.defaultvalue=Shop for {6} more to get {4} at Rs. {2} - valid for {5}
+
+type.sparcategoryitematfixeddiscpromotion.messageFired.defaultvalue=Buy for Rs. {0} and get {3} at {2}% discount - valid for {4}
+type.sparcategoryitematfixeddiscpromotion.messageCouldHaveFired.defaultvalue=Shop for {5} more to get {3} at {2}% discount - valid for {4}
+
+
+############################# Order Level :: Category Promotion #######################
+type.sparorderthresholdfixeddiscountpromotion.name=Order threshold - Category Level Fixed Discount
+type.sparorderthresholdfixeddiscountpromotion.description=
+type.sparorderthresholdfixeddiscountpromotion.thresholdTotals.name=Order threshold
+type.sparorderthresholdfixeddiscountpromotion.thresholdTotals.description=
+type.sparorderthresholdfixeddiscountpromotion.discountPrices.name=Discount price
+type.sparorderthresholdfixeddiscountpromotion.discountPrices.description=
+type.sparorderthresholdfixeddiscountpromotion.messageFired.name=Fired message
+type.sparorderthresholdfixeddiscountpromotion.messageFired.description=
+type.sparorderthresholdfixeddiscountpromotion.messageCouldHaveFired.name=Potential to fire message
+type.sparorderthresholdfixeddiscountpromotion.messageCouldHaveFired.description=
+type.sparorderthresholdfixeddiscountpromotion.messageFired.defaultvalue=You saved {3} for spending over {1} : valid for {2}
+type.sparorderthresholdfixeddiscountpromotion.messageCouldHaveFired.defaultvalue=Spend {1} to get a discount of {3} - Spend another {5} to qualify : valid for {2}
+
+
+type.sparorderthresholdpercentdiscountpromotion.name=Order threshold - Category Level Percent Discount
+type.sparorderthresholdpercentdiscountpromotion.description=
+type.sparorderthresholdpercentdiscountpromotion.thresholdTotals.name=Order threshold
+type.sparorderthresholdpercentdiscountpromotion.thresholdTotals.description=
+type.sparorderthresholdpercentdiscountpromotion.discountPrices.name=Discount price
+type.sparorderthresholdpercentdiscountpromotion.discountPrices.description=
+type.sparorderthresholdpercentdiscountpromotion.messageFired.name=Fired message
+type.sparorderthresholdpercentdiscountpromotion.messageFired.description=
+type.sparorderthresholdpercentdiscountpromotion.messageCouldHaveFired.name=Potential to fire message
+type.sparorderthresholdpercentdiscountpromotion.messageCouldHaveFired.description=
+type.sparorderthresholdpercentdiscountpromotion.messageFired.defaultvalue=You saved {3}% for spending over {1} : valid for {2}
+type.sparorderthresholdpercentdiscountpromotion.messageCouldHaveFired.defaultvalue=Spend {1} to get a discount of {3}% - Spend another {5} to qualify : valid for {2}
+
+
+text.sparorderthresholdpercentdiscountpromotion.detaileddescription= \
+<div class="promo-detailedDescription"> \
+<div>Get a percentage off of the price of any of these products.</div> \
+<div>For example: <i>15% off of all garden furniture</i>, <i>10% off of all chart CDs</i>.</div> \
+<div>Each cart product in the set of qualifying products will have its price reduced by the specified percentage.</div> \
+</div>

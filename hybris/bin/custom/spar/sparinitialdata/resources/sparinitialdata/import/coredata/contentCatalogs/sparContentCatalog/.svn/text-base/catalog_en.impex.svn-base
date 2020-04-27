@@ -1,0 +1,11 @@
+#
+# Import the Content Catalog
+#
+
+# Language
+$lang=en
+$contentCatalog=sparContentCatalog
+
+# Create Content Catalog
+UPDATE ContentCatalog;id[unique=true];name[lang=$lang]
+;$contentCatalog;"Spar Content Catalog"

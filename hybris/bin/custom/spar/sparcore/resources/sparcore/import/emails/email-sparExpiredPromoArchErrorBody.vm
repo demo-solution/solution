@@ -1,0 +1,50 @@
+## messageSource=classpath:/sparcore/messages/email-sparExpiredPromoArchError_$lang.properties
+#macro(genHtmlLinkStartTag $url)
+<a href="$url"><font color="#666666">
+#end
+#macro(genHtmlLinkEndTag)
+</font></a>
+#end
+#macro(genHtmlLink $url $textColor $bodyContent)
+<a href="$url"><font color="$textColor">$bodyContent</font></a>
+#end
+
+
+<html>
+	<head>
+		<title>Expired Promotion Archive Error</title>
+		<style>
+			.email-wrapper{
+			 background:#ccc;
+			 font:normal 12px arial; 
+			 border:1px solid #000;
+			 border-bottom:none;
+			 border-right:none;
+			}
+			.email-text{
+			 font:normal 12px arial; 
+			}
+			.email-wrapper td{border-bottom:1px solid #000;padding:10px;border-right:1px solid #000;}
+			.email-wrapper td:last-child{border-right:1px solid #000;}
+			.email-wrapper .heading td{font-weight:bold;}
+		</style>
+	</head>
+	<body bgcolor="#e4e7e8">
+		<div>
+			<div class="email-text">
+				${ctx.messages.getMessage('salutation')}
+			</div>
+			&nbsp;
+			${ctx.messages.getMessage('body')} ${ctx.promoType}
+			&nbsp;
+			<div class="email-text">
+				<div>
+					${ctx.messages.getMessage('complimentaryClosing')}
+				</div>
+				<div>
+					${ctx.messages.getMessage('signature')}
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

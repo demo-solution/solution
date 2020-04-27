@@ -1,0 +1,47 @@
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparstorefront/web/src/com/spar/hcl/storefront/filters/btg
+END
+RequestParamsBtgFilter.java
+K 25
+svn:wc:ra_dav:version-url
+V 129
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparstorefront/web/src/com/spar/hcl/storefront/filters/btg/RequestParamsBtgFilter.java
+END
+BTGSegmentFilter.java
+K 25
+svn:wc:ra_dav:version-url
+V 123
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparstorefront/web/src/com/spar/hcl/storefront/filters/btg/BTGSegmentFilter.java
+END
+AbstractBtgFilter.java
+K 25
+svn:wc:ra_dav:version-url
+V 124
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparstorefront/web/src/com/spar/hcl/storefront/filters/btg/AbstractBtgFilter.java
+END
+RefererHeaderBtgFilter.java
+K 25
+svn:wc:ra_dav:version-url
+V 129
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparstorefront/web/src/com/spar/hcl/storefront/filters/btg/RefererHeaderBtgFilter.java
+END
+CategoryVisitedBtgFilter.java
+K 25
+svn:wc:ra_dav:version-url
+V 131
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparstorefront/web/src/com/spar/hcl/storefront/filters/btg/CategoryVisitedBtgFilter.java
+END
+AbstractPkResolvingBtgFilter.java
+K 25
+svn:wc:ra_dav:version-url
+V 135
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparstorefront/web/src/com/spar/hcl/storefront/filters/btg/AbstractPkResolvingBtgFilter.java
+END
+ProductVisitedBtgFilter.java
+K 25
+svn:wc:ra_dav:version-url
+V 130
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparstorefront/web/src/com/spar/hcl/storefront/filters/btg/ProductVisitedBtgFilter.java
+END

@@ -1,0 +1,2 @@
+## messageSource=classpath:/sparcore/messages/email-sparDelayFeed_$lang.properties
+${ctx.enviornment}:Price feed for today ${ctx.todayDate} not available at FTP location

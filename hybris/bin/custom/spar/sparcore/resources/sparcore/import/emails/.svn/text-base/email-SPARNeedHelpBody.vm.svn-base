@@ -1,0 +1,8 @@
+## messageSource=classpath:/sparcore/messages/email-SparNeedHelp_$lang.properties
+Customer Details:
+<br>
+<br>Type Of Help Required: - ${ctx.helpType}<br>
+<br>Customer Name: - ${ctx.customerName}<br>
+<br>Contact Number: - ${ctx.customerNumber}<br>
+<br>Customer Desired Time: - ${ctx.desiredTime}<br>
+<br>Customer Remarks: - ${ctx.customerRemark} <br>

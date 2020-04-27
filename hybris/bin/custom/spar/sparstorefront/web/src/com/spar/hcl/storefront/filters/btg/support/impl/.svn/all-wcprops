@@ -1,0 +1,35 @@
+K 25
+svn:wc:ra_dav:version-url
+V 114
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparstorefront/web/src/com/spar/hcl/storefront/filters/btg/support/impl
+END
+CategoryPkResolvingStrategy.java
+K 25
+svn:wc:ra_dav:version-url
+V 147
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparstorefront/web/src/com/spar/hcl/storefront/filters/btg/support/impl/CategoryPkResolvingStrategy.java
+END
+DefaultBTGSegmentStrategy.java
+K 25
+svn:wc:ra_dav:version-url
+V 145
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparstorefront/web/src/com/spar/hcl/storefront/filters/btg/support/impl/DefaultBTGSegmentStrategy.java
+END
+ProductPkResolvingStrategy.java
+K 25
+svn:wc:ra_dav:version-url
+V 146
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparstorefront/web/src/com/spar/hcl/storefront/filters/btg/support/impl/ProductPkResolvingStrategy.java
+END
+AbstractParsingPkResolvingStrategy.java
+K 25
+svn:wc:ra_dav:version-url
+V 154
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparstorefront/web/src/com/spar/hcl/storefront/filters/btg/support/impl/AbstractParsingPkResolvingStrategy.java
+END
+DefaultUrlParsingStrategy.java
+K 25
+svn:wc:ra_dav:version-url
+V 145
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparstorefront/web/src/com/spar/hcl/storefront/filters/btg/support/impl/DefaultUrlParsingStrategy.java
+END

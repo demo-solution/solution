@@ -1,0 +1,60 @@
+insert_update DeliverySlot;warehouses(code);slotId[unique=true];orderingDay[unique=true];deliveryType(code,itemtype(code));minimumOrderTimeSlot[unique=true];maximumOrderTimeSlot[unique=true];slotDescription;active;
+;20001,20007,20010;-5;1;HD:DeliveryTypeEnum;0;19;10:00 AM to 12:30 PM;true
+;20001,20007,20010;-5;2;HD:DeliveryTypeEnum;0;19;10:00 AM to 12:30 PM;true
+;20001,20007,20010;-5;2;HD:DeliveryTypeEnum;20;23;10:00 AM to 12:30 PM;true
+#### increasing number of days visibility to 6 for morning slot for HD
+;20001,20007,20010;-5;3;HD:DeliveryTypeEnum;0;19;10:00 AM to 12:30 PM;true
+;20001,20007,20010;-5;3;HD:DeliveryTypeEnum;20;23;10:00 AM to 12:30 PM;true
+;20001,20007,20010;-5;4;HD:DeliveryTypeEnum;0;19;10:00 AM to 12:30 PM;true
+;20001,20007,20010;-5;4;HD:DeliveryTypeEnum;20;23;10:00 AM to 12:30 PM;true
+;20001,20007,20010;-5;5;HD:DeliveryTypeEnum;0;19;10:00 AM to 12:30 PM;true
+;20001,20007,20010;-5;5;HD:DeliveryTypeEnum;20;23;10:00 AM to 12:30 PM;true
+;20001,20007,20010;-5;6;HD:DeliveryTypeEnum;0;19;10:00 AM to 12:30 PM;true
+;20001,20007,20010;-5;6;HD:DeliveryTypeEnum;20;23;10:00 AM to 12:30 PM;true
+### evening HD slots
+##5:00 PM To 7:30 PM slot before 12 pm
+;20001,20007,20010;1;2;HD:DeliveryTypeEnum;0;11;5:00 PM To 7:30 PM;true
+;20001,20007,20010;1;3;HD:DeliveryTypeEnum;0;11;5:00 PM To 7:30 PM;true
+;20001,20007,20010;1;4;HD:DeliveryTypeEnum;0;11;5:00 PM To 7:30 PM;true
+;20001,20007,20010;1;5;HD:DeliveryTypeEnum;0;11;5:00 PM To 7:30 PM;true
+;20001,20007,20010;1;6;HD:DeliveryTypeEnum;0;11;5:00 PM To 7:30 PM;true
+##5:00 PM To 7:30 PM slot after 12 pm
+;20001,20007,20010;1;2;HD:DeliveryTypeEnum;12;23;5:00 PM To 7:30 PM;true
+;20001,20007,20010;1;3;HD:DeliveryTypeEnum;12;23;5:00 PM To 7:30 PM;true
+;20001,20007,20010;1;4;HD:DeliveryTypeEnum;12;23;5:00 PM To 7:30 PM;true
+;20001,20007,20010;1;5;HD:DeliveryTypeEnum;12;23;5:00 PM To 7:30 PM;true
+;20001,20007,20010;1;6;HD:DeliveryTypeEnum;12;23;5:00 PM To 7:30 PM;true
+## 7:30 PM To 10:00 PM slot before 12 pm
+;20001,20007,20010;2;2;HD:DeliveryTypeEnum;0;11;7:30 PM To 10:00 PM;true
+;20001,20007,20010;2;3;HD:DeliveryTypeEnum;0;11;7:30 PM To 10:00 PM;true
+;20001,20007,20010;2;4;HD:DeliveryTypeEnum;0;11;7:30 PM To 10:00 PM;true
+;20001,20007,20010;2;5;HD:DeliveryTypeEnum;0;11;7:30 PM To 10:00 PM;true
+;20001,20007,20010;2;6;HD:DeliveryTypeEnum;0;11;7:30 PM To 10:00 PM;true
+##### 7:30 PM To 10:00 PM slot after 12 pm
+;20001,20007,20010;2;2;HD:DeliveryTypeEnum;12;23;7:30 PM To 10:00 PM;true
+;20001,20007,20010;2;3;HD:DeliveryTypeEnum;12;23;7:30 PM To 10:00 PM;true
+;20001,20007,20010;2;4;HD:DeliveryTypeEnum;12;23;7:30 PM To 10:00 PM;true
+;20001,20007,20010;2;5;HD:DeliveryTypeEnum;12;23;7:30 PM To 10:00 PM;true
+;20001,20007,20010;2;6;HD:DeliveryTypeEnum;12;23;7:30 PM To 10:00 PM;true
+##### cnc slot 4:00 PM To 5:00 PM,5:00 PM To 6:00 PM before 12 pm
+;20001,20007;7;2;CNC:DeliveryTypeEnum;0;11;4:00 PM To 5:00 PM:LMG;true
+;20001,20007;8;2;CNC:DeliveryTypeEnum;0;11;5:00 PM To 6:00 PM:SPAR;true
+;20001,20007;7;3;CNC:DeliveryTypeEnum;0;11;4:00 PM To 5:00 PM:LMG;true
+;20001,20007;8;3;CNC:DeliveryTypeEnum;0;11;5:00 PM To 6:00 PM:SPAR;true
+;20001,20007;7;4;CNC:DeliveryTypeEnum;0;11;4:00 PM To 5:00 PM:LMG;true
+;20001,20007;8;4;CNC:DeliveryTypeEnum;0;11;5:00 PM To 6:00 PM:SPAR;true
+;20001,20007;7;5;CNC:DeliveryTypeEnum;0;11;4:00 PM To 5:00 PM:LMG;true
+;20001,20007;8;5;CNC:DeliveryTypeEnum;0;11;5:00 PM To 6:00 PM:SPAR;true
+;20001,20007;7;6;CNC:DeliveryTypeEnum;0;11;4:00 PM To 5:00 PM:LMG;true
+;20001,20007;8;6;CNC:DeliveryTypeEnum;0;11;5:00 PM To 6:00 PM:SPAR;true
+##### cnc slot 4:00 PM To 5:00 PM,5:00 PM To 6:00 PM after 12 pm
+;20001,20007;7;6;CNC:DeliveryTypeEnum;12;23;4:00 PM To 5:00 PM:LMG;true
+;20001,20007;8;6;CNC:DeliveryTypeEnum;12;23;5:00 PM To 6:00 PM:SPAR;true
+;20001,20007;7;3;CNC:DeliveryTypeEnum;12;23;4:00 PM To 5:00 PM:LMG;true
+;20001,20007;8;3;CNC:DeliveryTypeEnum;12;23;5:00 PM To 6:00 PM:SPAR;true
+;20001,20007;7;4;CNC:DeliveryTypeEnum;12;23;4:00 PM To 5:00 PM:LMG;true
+;20001,20007;8;4;CNC:DeliveryTypeEnum;12;23;5:00 PM To 6:00 PM:SPAR;true
+;20001,20007;7;5;CNC:DeliveryTypeEnum;12;23;4:00 PM To 5:00 PM:LMG;true
+;20001,20007;8;5;CNC:DeliveryTypeEnum;12;23;5:00 PM To 6:00 PM:SPAR;true
+;20001,20007;7;6;CNC:DeliveryTypeEnum;12;23;4:00 PM To 5:00 PM:LMG;true
+;20001,20007;8;6;CNC:DeliveryTypeEnum;12;23;5:00 PM To 6:00 PM:SPAR;true

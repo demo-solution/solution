@@ -1,0 +1,2 @@
+## messageSource=classpath:/sparcore/messages/email-SparLandmarkRedemptionEmail_$lang.properties
+Alert: Landmark Reward Amount needs to be Redeemed as LR System is down.

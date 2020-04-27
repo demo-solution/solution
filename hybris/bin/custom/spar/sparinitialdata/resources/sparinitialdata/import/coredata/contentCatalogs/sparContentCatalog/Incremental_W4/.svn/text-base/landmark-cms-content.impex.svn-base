@@ -1,0 +1,102 @@
+# ImpEx for Importing CMS Content
+# Macros / Replacement Parameter definitions
+$contentCatalog=sparContentCatalog
+$contentCatalogName=Spar Content Catalog
+$productCatalog=sparProductCatalog
+$productCatalogName=Spar Product Catalog
+
+$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
+$productCV=catalogVersion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
+$picture=media(code, $contentCV);
+$image=image(code, $contentCV);
+$media=media(code, $contentCV);
+$page=page(uid, $contentCV);
+$contentPage=contentPage(uid, $contentCV);
+
+$product=product(code, $productCV)
+$category=category(code, $productCV)
+
+$siteResource=jar:com.spar.hcl.initialdata.setup.InitialDataSystemSetup&/sparinitialdata/import/sampledata/contentCatalogs/$contentCatalog
+$productResource=jar:com.spar.hcl.initialdata.setup.InitialDataSystemSetup&/sparinitialdata/import/sampledata/productCatalogs/$productCatalog
+$jarResourceCms=jar:com.spar.hcl.initialdata.setup.InitialDataSystemSetup&/sparinitialdata/import/sampledata/cockpits/cmscockpit
+
+$siteUid=spar
+
+$medias=medias(code, $contentCV);
+$lang=en
+$mediaContainer=media(qualifier, $contentCV)[lang=$lang];
+
+
+INSERT_UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];name;linkName;url;&linkRef; &componentRef; target(code)[default='sameWindow']; $category; $product;previewIcon(code, $contentCV);
+
+;;AccountLandmarkRewardLink;AccountLandmarkRewardLink;LandMark Rewards;/my-account/landmarkReward;AccountLandmarkRewardLink;AccountLandmarkRewardLink;;;;/images/wallet_icon.jpg;
+;;AccountViewLandmarkRewardLink;AccountViewLandmarkRewardLink;LANDMARK REWARDS;/my-account/landmarkReward;AccountViewLandmarkRewardLink;AccountViewLandmarkRewardLink;;;;
+  
+ # CMS Link Components
+UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];linkName[lang=$lang]
+;;AccountViewLandmarkRewardLink;"VIEW LANDMARK REWARDS DETAILS" 
+
+INSERT_UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];name;url;&linkRef ;&componentRef; target(code)[default='sameWindow']; $category;$product;
+;;AccountLandmarkRewardLink;AccountLandmarkRewardLink;/my-account/landmarkReward;AccountLandmarkRewardLink;AccountLandmarkRewardLink;;;;
+
+INSERT_UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];&linkRef;
+;;AccountProfileLink;AccountProfileLink;
+;;AccountOrderHistoryLink;AccountOrderHistoryLink;
+#;;AccountWalletLink;AccountWalletLink;
+
+# CMS Navigation Nodes #
+INSERT_UPDATE CMSNavigationNode;uid[unique=true];$contentCV[unique=true];name;parent(uid, $contentCV);links(&linkRef);&nodeRef;previewIcon(code, $contentCV);
+;AccountLandmarkRewardNavNode;;Landmark Rewards;SiteRootNode;AccountViewLandmarkRewardLink;AccountLandmarkRewardNavNode
+
+# Navigation Bar Component
+INSERT_UPDATE AccountNavigationComponent;$contentCV[unique=true];uid[unique=true];name;navigationNode(&nodeRef);styleClass;&componentRef
+;;AccountLandmarkRewardNavigationComponent;Account Landmark Reward Navigation Component;AccountLandmarkRewardNavNode;;AccountLandmarkRewardNavigationComponent
+
+# Account Navigation Bar Component
+INSERT_UPDATE AccountNavigationCollectionComponent;$contentCV[unique=true];uid[unique=true];name;components(uid, $contentCV);&componentRef
+;;AccountHomepageComponent;Account Homepage Component;AccountProfileNavigationComponent,AccountAddressBookNavigationComponent,AccountPaymentDetailsNavigationComponent,AccountOrderHistoryNavigationComponent,AccountLandmarkRewardNavigationComponent;AccountHomepageComponent
+
+INSERT_UPDATE JspIncludeComponent;$contentCV[unique=true];uid[unique=true];name;page;actions(uid,$contentCV);&componentRef
+;;AccountLandmarkRewardComponent;Landmark Reward Component;accountLandmarkRewardPage.jsp;;AccountLandmarkRewardComponent
+
+# CMS Navigation Nodes #
+INSERT_UPDATE CMSNavigationNode;uid[unique=true];$contentCV[unique=true];name;parent(uid, $contentCV);links(&linkRef);&nodeRef;previewIcon(code, $contentCV);
+;AccountLeftNavNode;;Your Account;SiteRootNode;AccountProfileLink,AccountOrderHistoryLink,AccountLandmarkRewardLink;AccountLeftNavNode
+
+# Navigation Bar Component
+INSERT_UPDATE AccountNavigationComponent;$contentCV[unique=true];uid[unique=true];name;navigationNode(&nodeRef);styleClass;&componentRef
+;;AccountLeftNavigationComponent;Account Left Navigation Component;AccountLeftNavNode;;AccountLeftNavigationComponent
+
+
+
+ ###### Account LandmarkReward
+# ContentSlot
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef);;;
+;;SideContent-LandmarkReward;Side Content Slot for My Account LandmarkReward;true;AccountLeftNavigationComponent;;;
+;;BodyContent-LandmarkReward;Body Content Slot for My Account LandmarkReward;true;AccountLandmarkRewardComponent;;;
+
+# Functional Content Pages
+INSERT_UPDATE ContentPage;$contentCV[unique=true];uid[unique=true];name;title[lang=$lang];masterTemplate(uid,$contentCV);label;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false'];previewImage(code, $contentCV)[default='ContentPageModel__function_preview']
+;;landmarkReward;Landmark Reward Page;"Landmark Reward";AccountPageTemplate;landmarkReward
+
+# ContentSlotForPage
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='landmarkReward']; contentSlot(uid,$contentCV)[unique=true]
+;;SideContent-landmarkReward-Slot;SideContent;;SideContent-LandmarkReward
+;;BodyContent-landmarkReward-Slot;BodyContent;;BodyContent-LandmarkReward
+
+
+INSERT_UPDATE CMSNavigationNode;$contentCV[unique=true];uid[unique=true];title[lang=$lang]
+;;AccountLandmarkRewardNavNode;"Landmark Rewards"
+
+# Site Logo
+INSERT_UPDATE Media;$contentCV[unique=true]; code[unique=true];realfilename;@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator]; mime[default='image/jpeg'];altText;folder(qualifier)[default='images']
+;;/images/wallet_icon.jpg;wallet_icon.jpg;$siteResource/images/wallet_icon.jpg;image/jpeg;Landmark Reward; 
+
+
+##PDP product reference capacity change
+UPDATE ProductReferencesComponent;$contentCV[unique=true]; uid[unique=true]; maximumNumberProducts
+;;Similar;25
+
+# CMS CartSuggestion Components
+INSERT_UPDATE CartSuggestionComponent;$contentCV[unique=true];uid[unique=true];visible
+									 ;                       ;CartSuggestions ;false

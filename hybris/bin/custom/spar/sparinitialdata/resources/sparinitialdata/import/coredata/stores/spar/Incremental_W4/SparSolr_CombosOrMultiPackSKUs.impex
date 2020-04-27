@@ -1,0 +1,24 @@
+#
+# Import the Solr configuration for the store
+#
+
+$prefix=spar
+
+$productCatalog=sparProductCatalog
+$catalogVersions=catalogVersions(catalog(id),version);
+$serverConfigName=sparSolrServerConfig
+$indexConfigName=sparSolrIndexConfig
+$searchConfigName=sparPageSize
+$facetSearchConfigName=sparIndex
+$facetSearchConfigDescription=Spar Solr Index
+$searchIndexNamePrefix=$prefix
+$solrIndexedType=sparProductType
+$indexBaseSite=$prefix
+$indexLanguages=en
+$indexCurrencies=INR
+$priceRangeINR=sparPriceRangeINR
+
+
+# Non-facet properties
+INSERT_UPDATE SolrIndexedProperty;solrIndexedType(identifier)[unique=true];name[unique=true];type(code);sortableType(code);currency[default=false];localized[default=false];multiValue[default=false];useForSpellchecking[default=false];useForAutocomplete[default=false];fieldValueProvider;valueProviderParameter
+;$solrIndexedType; childSKUsVariants  		  ;string;    		   ;    ;    ;true;    ;    ;sparVariantsChildSKUsValueProvider;

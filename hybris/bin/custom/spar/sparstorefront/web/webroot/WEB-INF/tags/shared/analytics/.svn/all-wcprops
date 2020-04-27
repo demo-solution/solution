@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/S6_Maintenance/!svn/ver/384/custom/spar/sparstorefront/web/webroot/WEB-INF/tags/shared/analytics
+END
+analytics.tag
+K 25
+svn:wc:ra_dav:version-url
+V 115
+/svn/S6_Maintenance/!svn/ver/262/custom/spar/sparstorefront/web/webroot/WEB-INF/tags/shared/analytics/analytics.tag
+END
+jirafe.tag
+K 25
+svn:wc:ra_dav:version-url
+V 110
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparstorefront/web/webroot/WEB-INF/tags/shared/analytics/jirafe.tag
+END
+implicit.tld
+K 25
+svn:wc:ra_dav:version-url
+V 112
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparstorefront/web/webroot/WEB-INF/tags/shared/analytics/implicit.tld
+END
+googleAnalytics.tag
+K 25
+svn:wc:ra_dav:version-url
+V 121
+/svn/S6_Maintenance/!svn/ver/384/custom/spar/sparstorefront/web/webroot/WEB-INF/tags/shared/analytics/googleAnalytics.tag
+END

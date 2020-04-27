@@ -1,0 +1,8 @@
+#
+# Import type system names
+#
+$lang=en
+
+INSERT_UPDATE ComposedType;code[unique=true];name[lang=$lang]
+;SparProductFixedPriceDiscountPromotion;SparProductFixedPriceDiscountPromotion
+;SparProductPercentDiscountPromotion;SparProductPercentDiscountPromotion

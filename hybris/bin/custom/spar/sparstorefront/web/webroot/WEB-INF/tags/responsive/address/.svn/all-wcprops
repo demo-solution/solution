@@ -1,0 +1,41 @@
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/svn/S6_Maintenance/!svn/ver/302/custom/spar/sparstorefront/web/webroot/WEB-INF/tags/responsive/address
+END
+addressFormElements.tag
+K 25
+svn:wc:ra_dav:version-url
+V 127
+/svn/S6_Maintenance/!svn/ver/302/custom/spar/sparstorefront/web/webroot/WEB-INF/tags/responsive/address/addressFormElements.tag
+END
+billingAddressFormElements.tag
+K 25
+svn:wc:ra_dav:version-url
+V 132
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparstorefront/web/webroot/WEB-INF/tags/responsive/address/billingAddressFormElements.tag
+END
+suggestedAddresses.tag
+K 25
+svn:wc:ra_dav:version-url
+V 124
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparstorefront/web/webroot/WEB-INF/tags/responsive/address/suggestedAddresses.tag
+END
+addressFormSelector.tag
+K 25
+svn:wc:ra_dav:version-url
+V 125
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparstorefront/web/webroot/WEB-INF/tags/responsive/address/addressFormSelector.tag
+END
+billAddressFormSelector.tag
+K 25
+svn:wc:ra_dav:version-url
+V 129
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparstorefront/web/webroot/WEB-INF/tags/responsive/address/billAddressFormSelector.tag
+END
+implicit.tld
+K 25
+svn:wc:ra_dav:version-url
+V 114
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparstorefront/web/webroot/WEB-INF/tags/responsive/address/implicit.tld
+END

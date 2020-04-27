@@ -1,0 +1,35 @@
+K 25
+svn:wc:ra_dav:version-url
+V 108
+/svn/S6_Maintenance/!svn/ver/316/custom/spar/sparstorefront/web/src/com/spar/hcl/storefront/validation/forms
+END
+SparAddressValidator.java
+K 25
+svn:wc:ra_dav:version-url
+V 134
+/svn/S6_Maintenance/!svn/ver/316/custom/spar/sparstorefront/web/src/com/spar/hcl/storefront/validation/forms/SparAddressValidator.java
+END
+SparRegistrationViaSocialMediaValidator.java
+K 25
+svn:wc:ra_dav:version-url
+V 153
+/svn/S6_Maintenance/!svn/ver/149/custom/spar/sparstorefront/web/src/com/spar/hcl/storefront/validation/forms/SparRegistrationViaSocialMediaValidator.java
+END
+SparRegistrationValidator.java
+K 25
+svn:wc:ra_dav:version-url
+V 139
+/svn/S6_Maintenance/!svn/ver/204/custom/spar/sparstorefront/web/src/com/spar/hcl/storefront/validation/forms/SparRegistrationValidator.java
+END
+SparOptionalRegistrationValidator.java
+K 25
+svn:wc:ra_dav:version-url
+V 145
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparstorefront/web/src/com/spar/hcl/storefront/validation/forms/SparOptionalRegistrationValidator.java
+END
+SparProfileValidator.java
+K 25
+svn:wc:ra_dav:version-url
+V 132
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparstorefront/web/src/com/spar/hcl/storefront/validation/forms/SparProfileValidator.java
+END

@@ -1,0 +1,65 @@
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/spartest/resources/jmeter/apparel
+END
+storeInputData.csv
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/spartest/resources/jmeter/apparel/storeInputData.csv
+END
+categoryInputData.csv
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/spartest/resources/jmeter/apparel/categoryInputData.csv
+END
+initializationSetup.csv
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/spartest/resources/jmeter/apparel/initializationSetup.csv
+END
+userInputData.csv
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/spartest/resources/jmeter/apparel/userInputData.csv
+END
+productInputData.csv
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/spartest/resources/jmeter/apparel/productInputData.csv
+END
+addToCartPickupInputData.csv
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/spartest/resources/jmeter/apparel/addToCartPickupInputData.csv
+END
+reviewInputData.csv
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/spartest/resources/jmeter/apparel/reviewInputData.csv
+END
+addToCartInputData.csv
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/spartest/resources/jmeter/apparel/addToCartInputData.csv
+END
+searchInputData.csv
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/spartest/resources/jmeter/apparel/searchInputData.csv
+END
+basketInputData.csv
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/spartest/resources/jmeter/apparel/basketInputData.csv
+END

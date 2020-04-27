@@ -1,0 +1,437 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2015 hybris AG
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+-->
+<configuration xmlns="hybris.de/schemas/hmc/generic"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="hybris.de/schemas/hmc/generic hmc.xsd">
+
+	<explorertree>
+		<group name="group.basecommerce" description="group.basecommerce.description" mode="append">
+			<typeref type="DeliverySlot" description="typeref.deliveryslot.description" />
+		</group>
+	</explorertree>
+	
+	<!-- Node for Spar Service Area DB in hmc - Tanveers -->
+	<!-- <explorertree>
+		<group name="group.basecommerce" description="group.basecommerce.description" mode="append">
+			<typeref type="SparServiceArea" description="typeref.sparservicearea.description" />
+		</group>
+	</explorertree> -->
+	
+	<!-- Configuration for extension sparcore -->
+
+	<type name="Consignment" mode="append">
+		<organizer>
+			<editor mode="append">
+				<tab name="properties" position="0" mode="append">
+					<section name="consignment.details">
+						<listlayout mode="append">
+							 <action type="item" classname="com.spar.hcl.core.hmc.PickupConfirmationHMCAction" name="btn.consignment.confirm.pickup"/>
+						</listlayout>
+					</section>
+				</tab>
+			</editor>
+		</organizer>
+	</type>
+	<type name="DeliverySlot" mode="append">
+		<organizer>
+			<search mode="replace">
+				<condition attribute="slotId"/>
+				<condition attribute="slotDescription"/>
+				<condition attribute="orderingDay"/>
+				<condition attribute="deliveryType"/>
+			</search>
+			<result defaultview="list" mode="replace">
+				<listview>
+					<itemlayout>
+						<attribute name="slotId" width="100"/>
+						<attribute name="slotDescription" width="200"/>
+						<attribute name="orderingDay" width="100"/>
+						<attribute name="deliveryType" width="100"/>
+						<attribute name="maximumOrderTimeSlot" width="100"/>
+						<attribute name="minimumOrderTimeSlot" width="100"/>
+						<attribute name="active" width="100"/>
+					</itemlayout>
+				</listview>
+			</result>
+			<editor>
+				<essentials>
+					<listlayout>
+						<attribute name="slotId"/>
+						<attribute name="slotDescription"/>
+						<attribute name="orderingDay"/>
+						<attribute name="deliveryType"/>
+						<attribute name="maximumOrderTimeSlot"/>
+						<attribute name="minimumOrderTimeSlot"/>
+						<attribute name="active"/>
+					</listlayout>
+				</essentials>
+				<tab name="properties" position="0" mode="append">
+					<section name="section.DeliverySlot.attributes" mode="append">
+						<listlayout>
+							<attribute name="slotId"/>
+							<attribute name="slotDescription"/>
+							<attribute name="orderingDay"/>
+							<attribute name="deliveryType"/>
+							<attribute name="maximumOrderTimeSlot"/>
+							<attribute name="minimumOrderTimeSlot"/>
+							<attribute name="active"/>
+						</listlayout>
+					</section>
+				</tab>
+			</editor>
+		</organizer>
+		<defaultreference mode="replace" searchattribute="slotId">
+			<itemlayout>
+				<attribute name="slotId"/>
+				<attribute name="slotDescription"/>
+				<attribute name="orderingDay"/>
+				<attribute name="deliveryType"/>
+				<attribute name="maximumOrderTimeSlot"/>
+				<attribute name="minimumOrderTimeSlot"/>
+				<attribute name="active"/>
+			</itemlayout>
+		</defaultreference>
+	</type>	
+	
+	<!-- Spar Service Area DB in hmc - Tanveers -->
+	<!-- <type name="SparServiceArea" mode="append">
+		<organizer>
+			<search mode="replace">
+				<condition attribute="areaId"/>
+				<condition attribute="area"/>
+				<condition attribute="pincode"/>
+				<condition attribute="defaultStore"/>
+				<condition attribute="city"/>
+			</search>
+			<result defaultview="list" mode="replace">
+				<listview>
+					<itemlayout>
+						<attribute name="areaId" width="100"/>
+						<attribute name="displayName" width="200"/>
+						<attribute name="area" width="200"/>
+						<attribute name="pincode" width="100"/>
+						<attribute name="defaultStore" width="100"/>
+						<attribute name="defaultCncCenter" width="100"/>
+						<attribute name="city" width="100"/>
+						<attribute name="active" width="100"/>
+					</itemlayout>
+				</listview>
+			</result>
+			<editor>
+				<essentials>
+					<listlayout>
+						<attribute name="areaId"/>
+						<attribute name="displayName"/>
+						<attribute name="area"/>
+						<attribute name="pincode"/>
+						<attribute name="defaultStore"/>
+						<attribute name="defaultCncCenter"/>
+						<attribute name="city"/>
+						<attribute name="active"/>
+					</listlayout>
+				</essentials>
+				<tab name="properties" position="0" mode="append">
+					<section name="section.SparServiceArea.attributes" mode="append">
+						<listlayout>
+							<attribute name="areaId"/>
+							<attribute name="displayName"/>
+							<attribute name="area"/>
+							<attribute name="pincode"/>
+							<attribute name="defaultStore"/>
+							<attribute name="defaultCncCenter"/>
+							<attribute name="city"/>
+							<attribute name="active"/>
+						</listlayout>
+					</section>
+				</tab>
+			</editor>
+		</organizer>
+		<defaultreference mode="replace" searchattribute="areaId">
+			<itemlayout>
+				<attribute name="areaId"/>
+				<attribute name="displayName"/>
+				<attribute name="area"/>
+				<attribute name="pincode"/>
+				<attribute name="defaultStore"/>
+				<attribute name="defaultCncCenter"/>
+				<attribute name="city"/>
+				<attribute name="active"/>
+			</itemlayout>
+		</defaultreference>
+	</type>	 -->
+	
+	<type name="SparProductPercentDiscountPromotion" mode="append">
+		<organizer>
+			<editor mode="append">
+				<tab name="tab.promotion.properties" mode="append">
+					<section name="section.promotion.description" mode="replace" position="0">
+						<listlayout>
+							<text name="text.productmultibuypromotion.detaileddescription" />
+						</listlayout>
+					</section>
+					<section name="section.promotion.prices" mode="replace">
+						<columnlayout leftwidth="370">
+							<row>
+								<attribute name="percentageDiscount" labelwidth="100" />
+								<text name="text.productpercentagediscountpromotion.percentagediscount" />
+							</row>
+						</columnlayout>
+					</section>
+				</tab>
+				
+			</editor>
+		</organizer>
+	</type>
+	
+	<type name="SparProductBXGYFPromotion" mode="append">
+		<organizer>
+			<editor mode="append">
+				<tab name="tab.promotion.properties" mode="append">
+					<section name="section.promotion.description" mode="replace" position="0">
+						<listlayout>
+							<text name="text.sparproductbxgyfpromotion.detaileddescription" />
+						</listlayout>
+					</section>
+					<section name="section.promotion.products" mode="replace">
+						<listlayout>
+							<attribute name="products" />
+							<attribute name="freeProducts" labelwidth="100">
+								<referencecollectioneditor autoperform="true" resortable="true" add="true" remove="true" create="false">
+									<itemlayout>
+										<attribute name="code" width="274"/>
+										<attribute name="name" width="274"/>
+									</itemlayout>
+								</referencecollectioneditor>
+							</attribute>
+						</listlayout>
+						<columnlayout leftwidth="370">
+							<row>
+								<text name="text.sparproductbxgyfpromotion.qualifyingoverview" />
+							</row>
+							<row>
+								<attribute name="qualifyingCount" labelwidth="100" />
+								<text name="text.sparproductbxgyfpromotion.qualifyingcount" />
+							</row>
+							<row>
+								<attribute name="freeCount" labelwidth="100" />
+								<text name="text.sparproductbxgyfpromotion.freecount" />
+							</row>
+						</columnlayout>
+					</section>
+				</tab>
+				<tab name="tab.promotion.messages" mode="append">
+					<section name="section.promotion.messages" mode="append">
+						<columnlayout leftwidth="500">
+							<row>
+								<text name="text.promotion.messages.overview" />
+							</row>
+							<row>
+								<text name="text.sparproductbxgyfpromotion.messagefired" />
+							</row>
+							<row>
+								<attribute name="messageFired" labelwidth="100" width="400">
+									<textareaeditor expanded="true" rows="5" />
+								</attribute>
+								<text name="text.sparproductbxgyfpromotion.messagefiredargs" />
+							</row>
+							<row>
+								<text name="text.sparproductbxgyfpromotion.messagecouldhavefired" />
+							</row>
+							<row>
+								<attribute name="messageCouldHaveFired" labelwidth="100" width="400">
+									<textareaeditor expanded="true" rows="5" />
+								</attribute>
+								<text name="text.sparproductbxgyfpromotion.messagecouldhavefiredargs" />
+							</row>
+						</columnlayout>
+					</section>
+				</tab>
+			</editor>
+		</organizer>
+	</type>
+	
+	
+	
+	<type name="SparCategoryItemAtFixedPricePromotion" mode="append">
+		<organizer>
+			<editor mode="append">
+				<tab name="tab.promotion.messages" mode="append">
+					<section name="section.promotion.messages" mode="replace">
+						<columnlayout leftwidth="500">
+							<row>
+								<text name="text.promotion.messages.overview" />
+							</row>
+							<row>
+								<text name="text.sparcategoryitematfixedpricepromotion.messagefired" />
+							</row>
+							<row>
+								<attribute name="messageFired" labelwidth="100" width="400">
+									<textareaeditor expanded="true" rows="5" />
+								</attribute>
+								<text name="text.sparcategoryitematfixedpricepromotion.messagefiredargs" />
+							</row>
+							<row>
+								<text name="text.sparcategoryitematfixedpricepromotion.messagecouldhavefired" />
+							</row>
+							<row>
+								<attribute name="messageCouldHaveFired" labelwidth="100" width="400">
+									<textareaeditor expanded="true" rows="5" />
+								</attribute>
+								<text name="text.sparcategoryitematfixedpricepromotion.messagecouldhavefiredargs" />
+							</row>
+						</columnlayout>
+					</section>
+				</tab>
+			</editor>
+		</organizer>
+	</type>
+	
+	
+	<type name="SparCategoryItemAtFixedDiscPromotion" mode="append">
+		<organizer>
+			<editor mode="append">
+				
+				<tab name="tab.promotion.messages" mode="replace">
+					<section name="section.promotion.messages" mode="append">
+						<columnlayout leftwidth="500">
+							<row>
+								<text name="text.promotion.messages.overview" />
+							</row>
+							<row>
+								<text name="text.sparcategoryitematfixeddiscpromotion.messagefired" />
+							</row>
+							<row>
+								<attribute name="messageFired" labelwidth="100" width="400">
+									<textareaeditor expanded="true" rows="5" />
+								</attribute>
+								<text name="text.sparcategoryitematfixeddiscpromotion.messagefiredargs" />
+							</row>
+							<row>
+								<text name="text.sparcategoryitematfixeddiscpromotion.messagecouldhavefired" />
+							</row>
+							<row>
+								<attribute name="messageCouldHaveFired" labelwidth="100" width="400">
+									<textareaeditor expanded="true" rows="5" />
+								</attribute>
+								<text name="text.sparcategoryitematfixeddiscpromotion.messagecouldhavefiredargs" />
+							</row>
+						</columnlayout>
+					</section>
+				</tab>
+			</editor>
+		</organizer>
+	</type>
+	
+	
+	<!--  Order Threshold Discount Promotion  -->
+	<type name="SparOrderThresholdFixedDiscountPromotion" mode="append">
+		<organizer>
+			<editor mode="append">
+				<tab name="tab.promotion.messages" mode="replace">
+					<section name="section.promotion.messages" mode="replace">
+						<columnlayout leftwidth="500">
+							<row>
+								<text name="text.promotion.messages.overview" />
+							</row>
+							<row>
+								<text name="text.sparorderthresholdfixeddiscountpromotion.messagefired" />
+							</row>
+							<row>
+								<attribute name="messageFired" labelwidth="100" width="400">
+									<textareaeditor expanded="true" rows="5" />
+								</attribute>
+								<text name="text.sparorderthresholdfixeddiscountpromotion.messagefiredargs" />
+							</row>
+							<row>
+								<text name="text.sparorderthresholdfixeddiscountpromotion.messagecouldhavefired" />
+							</row>
+							<row>
+								<attribute name="messageCouldHaveFired" labelwidth="100" width="400">
+									<textareaeditor expanded="true" rows="5" />
+								</attribute>
+								<text name="text.sparorderthresholdfixeddiscountpromotion.messagecouldhavefiredargs" />
+							</row>
+						</columnlayout>
+					</section>
+				</tab>
+			</editor>
+		</organizer>
+	</type>
+	
+	
+	
+	<type name="SparOrderThresholdPercentDiscountPromotion" mode="append">
+		<organizer>
+			<editor mode="append">
+				<tab name="tab.promotion.properties" mode="append">
+					<section name="section.promotion.description" mode="replace" position="0">
+						<listlayout>
+							<text name="text.sparorderthresholdpercentdiscountpromotion.detaileddescription" />
+						</listlayout>
+					</section>
+					<section name="section.promotion.prices">
+						<columnlayout leftwidth="370">
+							<row>
+								<attribute name="thresholdTotals" labelwidth="100">
+									<referencecollectioneditor editable="true" externalcreate="false" resortable="false" remove="true" create="true">
+										<itemlayout>
+											<attribute name="currency" width="60"/>
+											<attribute name="price" width="60"/>
+										</itemlayout>
+									</referencecollectioneditor>
+								</attribute>
+								<text name="text.sparorderthresholdpercentdiscountpromotion.thresholdtotals" />
+							</row>
+						
+					
+							<row>
+								<attribute name="percentageDiscount" labelwidth="100" />
+								<text name="text.sparorderthresholdpercentdiscountpromotion.percentagediscount" />
+							</row>
+						
+						</columnlayout>
+						
+					</section>
+				</tab>
+				<tab name="tab.promotion.messages" mode="append">
+					<section name="section.promotion.messages" mode="append">
+						<columnlayout leftwidth="500">
+							<row>
+								<text name="text.promotion.messages.overview" />
+							</row>
+							<row>
+								<text name="text.sparorderthresholdpercentdiscountpromotion.messagefired" />
+							</row>
+							<row>
+								<attribute name="messageFired" labelwidth="100" width="400">
+									<textareaeditor expanded="true" rows="5" />
+								</attribute>
+								<text name="text.sparorderthresholdpercentdiscountpromotion.messagefiredargs" />
+							</row>
+							<row>
+								<text name="text.sparorderthresholdpercentdiscountpromotion.messagecouldhavefired" />
+							</row>
+							<row>
+								<attribute name="messageCouldHaveFired" labelwidth="100" width="400">
+									<textareaeditor expanded="true" rows="5" />
+								</attribute>
+								<text name="text.sparorderthresholdpercentdiscountpromotion.messagecouldhavefiredargs" />
+							</row>
+						</columnlayout>
+					</section>
+				</tab>
+			</editor>
+		</organizer>
+	</type>
+	
+</configuration>

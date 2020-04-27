@@ -1,0 +1,9 @@
+# Languages
+INSERT_UPDATE Language;isocode[unique=true];fallbackLanguages(isocode);active[default=true]
+;en;;;
+INSERT_UPDATE ServicelayerJob;code[unique=true];springId[unique=true] 
+;sparImpPriceJob;sparImpPriceJob
+INSERT_UPDATE CronJob; code[unique=true];job(code);singleExecutable;sessionLanguage(isocode)
+;sparImpPriceCronJob;sparImpPriceJob;false;en
+INSERT_UPDATE Trigger;cronjob(code)[unique=true];cronExpression
+;sparImpPriceCronJob;0 0 11,14,17 1/1 * ? *

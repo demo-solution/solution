@@ -1,0 +1,35 @@
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/S6_Maintenance/!svn/ver/1/custom/sparcommercewebservices/web/src/com/spar/hcl/mapping/converters
+END
+DeliveryStatusConverter.java
+K 25
+svn:wc:ra_dav:version-url
+V 130
+/svn/S6_Maintenance/!svn/ver/1/custom/sparcommercewebservices/web/src/com/spar/hcl/mapping/converters/DeliveryStatusConverter.java
+END
+ConsignmentStatusConverter.java
+K 25
+svn:wc:ra_dav:version-url
+V 133
+/svn/S6_Maintenance/!svn/ver/1/custom/sparcommercewebservices/web/src/com/spar/hcl/mapping/converters/ConsignmentStatusConverter.java
+END
+OrderStatusConverter.java
+K 25
+svn:wc:ra_dav:version-url
+V 127
+/svn/S6_Maintenance/!svn/ver/1/custom/sparcommercewebservices/web/src/com/spar/hcl/mapping/converters/OrderStatusConverter.java
+END
+StockLevelStatusConverter.java
+K 25
+svn:wc:ra_dav:version-url
+V 132
+/svn/S6_Maintenance/!svn/ver/1/custom/sparcommercewebservices/web/src/com/spar/hcl/mapping/converters/StockLevelStatusConverter.java
+END
+ProductReferenceTypeEnumConverter.java
+K 25
+svn:wc:ra_dav:version-url
+V 140
+/svn/S6_Maintenance/!svn/ver/1/custom/sparcommercewebservices/web/src/com/spar/hcl/mapping/converters/ProductReferenceTypeEnumConverter.java
+END

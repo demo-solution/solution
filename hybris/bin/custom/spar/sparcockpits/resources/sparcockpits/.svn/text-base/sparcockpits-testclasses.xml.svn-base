@@ -1,0 +1,1 @@
+<?xml version="1.0" encoding="utf-8"?><testclasses><sparcockpits><testclass>com.spar.hcl.cockpits.cmscockpit.sitewizard.CMSSiteUtilsTest</testclass><testclass>com.spar.hcl.cockpits.jalo.YAcceleratorcockpitsTest</testclass><testclass>com.spar.hcl.cockpits.cmscockpit.CmsCockpitConfigurationTest</testclass></sparcockpits></testclasses>

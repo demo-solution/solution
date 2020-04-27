@@ -1,0 +1,13 @@
+## messageSource=classpath:/sparcore/messages/email-SPARPLMSManualPickOrder_$lang.properties
+Order details:
+<br>
+<br>Order ID - ${ctx.order.code}<br>
+<br>Store ID - ${ctx.order.OrderPointOfService.name}<br>
+<br>Delivery Date and slot - ${ctx.order.deliveryDate} and ${ctx.order.deliverySlot}<br>
+<br>Customer Name - ${ctx.customer.name}<br>
+<br>Customer mobile - ${ctx.customer.custPrimaryMobNumber} <br>
+<br>Order Type - ${ctx.order.paymentStatus} <br>
+<br>Amount Paid Online - ${ctx.order.paymentCaptureValue} <br>
+<br>Amount sent from Hybris to ICICI Payment Gateway(Balance Due) - ${ctx.order.balanceDue} <br>
+<br>Order Status - This order has been put into "FRAUD_CHECKED" status. Please review and do the needful. 
+

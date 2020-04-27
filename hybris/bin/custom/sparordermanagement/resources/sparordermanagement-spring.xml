@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2015 hybris AG
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+-->
+        
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+      
+    <import resource="sparordermanagement-process-definitions-spring.xml" />
+    
+    <context:annotation-config/>
+    
+    <!-- Listeners -->
+    <bean id="pickupConfirmationEventListener" class="com.spar.hcl.listeners.impl.PickupConfirmationEventListener" parent="abstractEventListener">
+        <property name="businessProcessService" ref="businessProcessService"/>
+    </bean>
+    
+    <bean id="createReturnEventListener" class="com.spar.hcl.events.CreateReturnEventListener" parent="abstractSiteEventListener">
+        <property name="businessProcessService" ref="businessProcessService"/>
+        <property name="modelService" ref="modelService"/>
+        <property name="baseStoreService" ref="baseStoreService"/>
+    </bean>
+    
+    <!-- Converters -->
+    <bean id="deliveryAddressGeocodeConverter" parent="abstractPopulatingConverter">
+        <property name="targetClass" value="de.hybris.platform.storelocator.data.AddressData"/>
+        <property name="populators">
+            <list merge="true">
+                <ref bean="deliveryAddressGeocodePopulator"/>
+            </list>
+        </property>
+    </bean>
+    
+    <bean id="deliveryAddressGeocodePopulator" class="com.spar.hcl.converters.AddressPopulator" />
+        
+	<!-- Order Check Service -->
+    <!-- Performs some basic validation for the order as part of the first stage of the process. -->
+    <alias name="defaultCheckOrderService" alias="checkOrderService"/>
+    <bean id="defaultCheckOrderService" class="com.spar.hcl.impl.DefaultCheckOrderService" />
+
+       <bean id="sourcingFilterProcessor" class="de.hybris.platform.warehousing.sourcing.filter.SourcingFilterProcessor">
+        <property name="filters">
+            <list>
+                <ref bean="sessionStoreLocationFilter"/>
+            </list>
+        </property>
+    </bean>
+    <bean name="sessionStoreLocationFilter"
+          class="com.spar.hcl.warehousing.sourcing.filter.impl.SessionStoreLocationFilter" parent="abstractBaseSourcingLocationFilter">
+        <!-- setting operator to NONE for the first filter -->
+        <property name="filterResultOperator" value="NONE"/>
+        <property name="sessionService" ref="sessionService" />
+        <property name="flexibleSearchService" ref="flexibleSearchService" />
+        
+    </bean>
+    
+    <!-- Sourcing Context -->
+    <alias alias="sourcingContextFactory" name="defaultSourcingContextFactory"/>
+    <bean id="defaultSourcingContextFactory" class="de.hybris.platform.warehousing.sourcing.context.impl.DefaultSourcingContextFactory">
+        <property name="sourcingLocationPopulators">
+            <set>
+                <!-- <ref bean="distanceSourcingLocationPopulator"/> -->
+                <ref bean="sparAvailabilitySourcingLocationPopulator"/>
+                <ref bean="prioritySourcingLocationPopulator"/>
+            </set>
+        </property>
+    </bean>
+    
+    <alias alias="warehouseStockService" name="defaultWarehouseStockService"/>
+    <bean id="defaultWarehouseStockService" class="de.hybris.platform.warehousing.stock.services.impl.DefaultWarehouseStockService">
+    	<property name="stockService" ref="stockService" />
+    	<property name="commerceStockLevelCalculationStrategy" ref="sparWarehousingAvailabilityCalculationStrategy" />
+    </bean>
+	
+	<bean id="pickupSourcingStrategyMapper"
+          class="de.hybris.platform.warehousing.sourcing.strategy.mapper.impl.PickupSourcingStrategyMapper">
+        <property name="strategy" ref="sparPickupSourcingStrategy"/>
+    </bean>
+
+	<alias name="sparDefaultSourcingPickupStrategy" alias="sparPickupSourcingStrategy"/>
+    <bean id="sparDefaultSourcingPickupStrategy" class="com.spar.hcl.warehousing.sourcing.strategy.impl.SparPickupStrategy" parent="pickupSourcingStrategy">
+        <property name="posSelectionStrategy" ref="sparPosSelectionStrategy" />
+        <property name="terminal" value="true"/>
+    </bean>
+	
+	<alias alias="sparPosSelectionStrategy" name="sparFirstPosSelectionStrategy"/>
+    <bean id="sparFirstPosSelectionStrategy" class="com.spar.hcl.warehousing.sourcing.context.impl.SparFirstPosSelectionStrategy"/>
+    
+    <alias alias="sparPlmsService" name="sparDefaultPlmsService"/>
+    <bean id="sparDefaultPlmsService" class="com.spar.hcl.plms.service.impl.SparDefaultPlmsService">
+        <property name="modelService" ref="modelService"/>
+        <property name="sparPlmsConverter" ref="sparPlmsConverter"/>
+        <property name="sparPlmsDao" ref="defaultSparPlmsDao"/>
+    </bean>
+	
+	<bean id="defaultSparPlmsDao" class="com.spar.hcl.core.plms.dao.impl.DefaultSparPlmsDao"
+		  parent="abstractItemDao" />
+		  	  
+	<bean id="SparPLMSConnectivityjob" class="com.spar.hcl.plms.webservices.jobs.SparPLMSConnectivityjob" autowire="byName">
+		<property name="sparPlmsService" ref="sparPlmsService"></property>
+		<property name="modelService" ref="modelService"/>
+	</bean>
+	
+	<alias alias="sparBlowhornService" name="sparDefaultBlowhornService"/>
+    <bean id="sparDefaultBlowhornService" class="com.spar.hcl.blowhorn.service.impl.SparDefaultBlowhornService">
+    </bean>
+    
+	<bean id="sparAvailabilitySourcingLocationPopulator" class="com.spar.hcl.populators.SparAvailabilitySourcingLocationPopulator"> 
+	      <property name="warehouseStockService" ref="warehouseStockService"/>
+	</bean>  
+</beans>

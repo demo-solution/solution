@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/S6_Maintenance/!svn/ver/1/custom/sparcommercewebservices/web/src/com/spar/hcl/v2/helper
+END
+StoresHelper.java
+K 25
+svn:wc:ra_dav:version-url
+V 110
+/svn/S6_Maintenance/!svn/ver/1/custom/sparcommercewebservices/web/src/com/spar/hcl/v2/helper/StoresHelper.java
+END
+AbstractHelper.java
+K 25
+svn:wc:ra_dav:version-url
+V 112
+/svn/S6_Maintenance/!svn/ver/1/custom/sparcommercewebservices/web/src/com/spar/hcl/v2/helper/AbstractHelper.java
+END
+ProductsHelper.java
+K 25
+svn:wc:ra_dav:version-url
+V 112
+/svn/S6_Maintenance/!svn/ver/1/custom/sparcommercewebservices/web/src/com/spar/hcl/v2/helper/ProductsHelper.java
+END
+OrdersHelper.java
+K 25
+svn:wc:ra_dav:version-url
+V 110
+/svn/S6_Maintenance/!svn/ver/1/custom/sparcommercewebservices/web/src/com/spar/hcl/v2/helper/OrdersHelper.java
+END

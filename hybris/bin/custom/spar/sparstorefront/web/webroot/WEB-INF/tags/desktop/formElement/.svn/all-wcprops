@@ -1,0 +1,47 @@
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparstorefront/web/webroot/WEB-INF/tags/desktop/formElement
+END
+formInputGroupArea.tag
+K 25
+svn:wc:ra_dav:version-url
+V 125
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparstorefront/web/webroot/WEB-INF/tags/desktop/formElement/formInputGroupArea.tag
+END
+formCheckbox.tag
+K 25
+svn:wc:ra_dav:version-url
+V 119
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparstorefront/web/webroot/WEB-INF/tags/desktop/formElement/formCheckbox.tag
+END
+formInputBox.tag
+K 25
+svn:wc:ra_dav:version-url
+V 119
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparstorefront/web/webroot/WEB-INF/tags/desktop/formElement/formInputBox.tag
+END
+formSelectBox.tag
+K 25
+svn:wc:ra_dav:version-url
+V 120
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparstorefront/web/webroot/WEB-INF/tags/desktop/formElement/formSelectBox.tag
+END
+formPasswordBox.tag
+K 25
+svn:wc:ra_dav:version-url
+V 122
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparstorefront/web/webroot/WEB-INF/tags/desktop/formElement/formPasswordBox.tag
+END
+formTextArea.tag
+K 25
+svn:wc:ra_dav:version-url
+V 119
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparstorefront/web/webroot/WEB-INF/tags/desktop/formElement/formTextArea.tag
+END
+implicit.tld
+K 25
+svn:wc:ra_dav:version-url
+V 115
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparstorefront/web/webroot/WEB-INF/tags/desktop/formElement/implicit.tld
+END

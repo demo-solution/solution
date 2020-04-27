@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparstorefront/web/src/com/spar/hcl/storefront/security/cookie
+END
+ServerCookie.java
+K 25
+svn:wc:ra_dav:version-url
+V 123
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparstorefront/web/src/com/spar/hcl/storefront/security/cookie/ServerCookie.java
+END
+EnhancedCookieGenerator.java
+K 25
+svn:wc:ra_dav:version-url
+V 134
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparstorefront/web/src/com/spar/hcl/storefront/security/cookie/EnhancedCookieGenerator.java
+END
+CustomerLocationCookieGenerator.java
+K 25
+svn:wc:ra_dav:version-url
+V 142
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparstorefront/web/src/com/spar/hcl/storefront/security/cookie/CustomerLocationCookieGenerator.java
+END
+CartRestoreCookieGenerator.java
+K 25
+svn:wc:ra_dav:version-url
+V 137
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparstorefront/web/src/com/spar/hcl/storefront/security/cookie/CartRestoreCookieGenerator.java
+END

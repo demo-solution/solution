@@ -1,0 +1,538 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2015 hybris AG
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+-->
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="beans.xsd">
+
+	<bean class="de.hybris.platform.commercefacades.product.data.VariantOptionData" >
+		<property name="name" type="String"/>
+		<property name="description" type="String"/>
+		<property name="brand" type="String"/>
+		<property name="subBrand" type="String"/>
+		<property name="unitCondition" type="String"/>
+		<property name="unitMRP" type="de.hybris.platform.commercefacades.product.data.PriceData"/>
+		<property name="savings" type="de.hybris.platform.commercefacades.product.data.PriceData"/>
+		<property name="images" type="java.util.Collection&lt;de.hybris.platform.commercefacades.product.data.ImageData>"/>
+		<property name="promoMessage" type="String"/>
+		<property name="offerType" type="String"/>
+		<property name="promotionDiscount" type="String"/>
+		<property name="productOnBogo" type="Boolean"/>
+	</bean>
+
+	<bean class="de.hybris.platform.commercefacades.product.data.ProductData">
+		<property name="genders" type="java.util.List&lt;com.spar.hcl.facades.product.data.GenderData>"/>
+		<property name="salesUnit" type="String"/>
+		<property name="unitMRP" type="de.hybris.platform.commercefacades.product.data.PriceData"/>
+		<property name="brand" type="String"/>
+		<property name="savings" type="de.hybris.platform.commercefacades.product.data.PriceData"/>
+		<property name="ERPDescription" type="String"/>
+		<property name="ERPVariantDescription" type="String"/>
+		<property name="ERPShortDescription" type="String"/>
+		<property name="featuredProductDesc" type="String"/>
+		<property name="featuredProductGrammage" type="String"/>
+		<property name="disclaimer" type="String"/>
+		<property name="pickingAndPacking" type="String"/>
+		<property name="modelNumber" type="String"/>
+		<property name="ingredientDescription" type="String"/>
+		<property name="storageType" type="String"/>
+		<property name="isProductShownMP" type="Boolean"/>
+		<property name="promoMessage" type="String"/>
+		<property name="offerType" type="String"/>
+		<property name="maxOrderQuantity" type="Integer"/>
+		<property name="childSKUs" type="String"/>
+		<property name="isAvailableForFoodCoupon" type="Boolean"/>
+		<property name="promotionDiscount" type="java.lang.Double"/>
+		<property name="productOnBogo" type="Boolean"/>
+		
+		<property name="produceEAN" type="String"/>
+		<property name="productBrand" type="String"/>
+		<property name="manufacture" type="String"/>
+		<property name="importedBy" type="String"/>
+		<property name="netQuantity" type="String"/>
+		<property name="productSize" type="String"/>
+		<property name="bestBefore" type="String"/>
+		<property name="usedByDate" type="String"/>
+		<property name="customercare" type="String"/>
+	</bean>
+
+	<bean class="com.spar.hcl.facades.product.data.GenderData">
+		<property name="code" type="String"/>
+		<property name="name" type="String"/>
+	</bean>
+	
+	<bean class="de.hybris.platform.commercefacades.user.data.AddressData">
+		<property name="dateOfBirth" type="java.util.Date"/>
+		<property name="area" type="String"/>
+		<property name="buildingName" type="String"/>
+		<property name="landmark" type="String"/>
+		<property name="OTP" type="String"/>
+		<property name="longAddress" type="String"/>
+		<property name="mappedStore" type="String"/>
+		<!-- <property name="defaultStore" type="String"/>
+		<property name="defaultCncCenter" type="String"/>
+		<property name="sparServiceArea" type="com.spar.hcl.facades.service.delivery.data.SparServiceAreaData"/> -->
+	</bean>
+	
+	<!--  Changes done for COD START -->
+	<!-- properties added for voucher story Sumit -->
+	<bean class="de.hybris.platform.commercefacades.order.data.AbstractOrderData">
+		<property name="orderDeliverySlot" type="com.spar.hcl.facades.deliverySlots.data.DeliverySlotData"/>
+		<property name="slotDeliveryDate" type="java.util.Date"/>
+		<property name="orderPointOfService" type="de.hybris.platform.commercefacades.storelocator.data.PointOfServiceData"/>
+		<property name="orderWarehouse" type="com.spar.hcl.facades.storelocator.data.WarehouseData"/>
+		<property name="paymentMode" type="com.spar.hcl.facades.order.data.PaymentModeData"/>
+		<property name="savings" type="de.hybris.platform.commercefacades.product.data.PriceData"/>
+		<property name="cncPhone" type="String"/>
+		<property name="combiOfferAppliedProductPromotion" type="java.util.List&lt;de.hybris.platform.commercefacades.product.data.PromotionResultData>"/>
+		<property name="appliedOrderPromotionTotal" type="de.hybris.platform.commercefacades.product.data.PriceData"/>
+		<property name="appliedVoucherTotal" type="java.util.List&lt;de.hybris.platform.commercefacades.voucher.data.VoucherData>"/>
+		<property name="voucherCode" type="String"/>
+		<property name="voucherValue" type="de.hybris.platform.commercefacades.product.data.PriceData"/>
+		<property name="appliedEmployeeDiscountPromotionTotal" type="de.hybris.platform.commercefacades.product.data.PriceData"/>
+	</bean>
+	
+	<bean class="de.hybris.platform.commercefacades.order.data.OrderEntryData">
+		<property name="savings" type="de.hybris.platform.commercefacades.product.data.PriceData"/>
+		<property name="combiOfferApplied" type="boolean"/>
+	</bean>
+	
+	
+	<bean class="de.hybris.platform.commercefacades.order.data.CartData" >
+		<property name="paymentMode" type="com.spar.hcl.facades.order.data.PaymentModeData" />
+		<property name="totalFoodCouponAmount" type="java.lang.Double"/>
+		<property name="balanceDue" type="de.hybris.platform.commercefacades.product.data.PriceData"/>	
+		<property name="paidByLandmarkReward" type="java.lang.Double"/>	
+		<property name="cartId" type="String"/>	
+		<property name="messageId" type="String"/>	
+	</bean>
+	<!--  Changes done for COD END -->
+	
+	<!--  Changes done service Area Offline Database -Start- -->
+	
+	<!-- <bean class="com.spar.hcl.facades.service.delivery.data.SparServiceAreaData">
+		<property name="areaId" type="Integer"/>
+		<property name="displayName" type="String"/>
+		<property name="area" type="String"/>
+		<property name="pincode" type="Integer"/>
+		<property name="defaultStore" type="String"/>
+		<property name="defaultCncCenter" type="String"/>
+		<property name="city" type="String"/>
+		<property name="active" type="Boolean"/>	
+	</bean> -->
+	<!--  Changes done service Area Offline Database -End- -->
+	
+	<bean class="com.spar.hcl.facades.service.delivery.data.SparCitiesData">
+		<property name="city" type="String"/>
+		<property name="status" type="Boolean"/>	
+	</bean>
+	
+	<bean class="com.spar.hcl.facades.service.delivery.data.SparGiftZoneContactUsData">
+		<property name="customerName" type="String"/>
+		<property name="customerEmail" type="String"/>	
+		<property name="customerContact" type="String"/>
+		<property name="companyName" type="String"/>	
+		<property name="customerCity" type="String"/>
+		<property name="customerRemarks" type="String"/>	
+	</bean>
+	
+	
+	
+	<bean class="com.spar.hcl.facades.deliverySlots.data.DeliverySlotData">
+		<property name="slotId" type="Integer"/>
+		<property name="orderingDay" type="Integer"/>
+		<property name="minimumOrderTimeSlot" type="Integer"/>
+		<property name="maximumOrderTimeSlot" type="Integer"/>
+		<property name="slotDescription" type="String"/>
+		<property name="deliveryType" type="String"/>
+		<property name="active" type="Boolean"/>
+		<property name="availableSlot" type="Boolean"/>	
+		<property name="homeDeliveryId" type="Double"/>
+		<property name="slotOrdersCapacity" type="Integer"/>
+		<property name="isHourlyDeliverySlotType" type="Boolean"/>
+	</bean>
+	
+	<bean class="de.hybris.platform.commercefacades.user.data.RegisterData">
+		<property name="whetherEmployee" type="Boolean"/>
+		<property name="employeeCode" type="String"/>
+		<property name="dateOfBirth" type="java.util.Date"/>
+		<property name="dateOfJoining" type="java.util.Date"/>
+		<property name="whetherSubscribedToPromotion" type="Boolean"/>
+		<property name="whetherSubscribedToLandmark" type="Boolean"/>
+		<property name="loginVia" type="String"/>
+	</bean>
+	
+	<bean class="de.hybris.platform.commercefacades.user.data.RegisterOptionalData">
+		<property name="phone" type="String"/>
+		<property name="dateOfBirth" type="java.util.Date"/>
+		<property name="townCity" type="String"/>
+		<property name="postcode" type="String"/>
+		<property name="line1" type="String"/>
+		<property name="line2" type="String"/>
+		<property name="area" type="String"/>
+		<property name="buildingName" type="String"/>
+		<property name="landmark" type="String"/>
+	</bean>
+
+	<!--  Changes done for COD START -->		
+	<bean class="com.spar.hcl.facades.order.data.PaymentModeData">
+		<property name="code" type="String"/>
+		<property name="name" type="String"/>
+	</bean>
+	<!--  Changes done for COD END -->
+	
+	<!--  Changes done for Delivery date and order details item for order history  START pallavi -->
+	<bean class="de.hybris.platform.commercefacades.order.data.OrderHistoryData">
+		<property name="delivered" type="java.util.Date"/>
+		<property name="orderData" type="de.hybris.platform.commercefacades.order.data.OrderData"/>
+		<property name="savings" type="de.hybris.platform.commercefacades.product.data.PriceData"/>
+		<property name="paidByWallet" type="de.hybris.platform.commercefacades.product.data.PriceData"/>
+	</bean>
+	<!--  Changes done for Delivery date and order details item for order history END -->
+	
+	<!-- Changes done for IPG ROHAN_C START -->
+	<bean
+		class="de.hybris.platform.acceleratorservices.payment.data.SignatureData">
+		<property name="txntype" type="String" />
+		<!--<description> Taxation type (Sale) supported by IPG.</description> -->
+		<!--</property> -->
+		<property name="mode" type="String" />
+		<!--<description> Payment mode (payonly) supported by IPG .</description> -->
+		<!--</property> -->
+		<property name="language" type="String" />
+		<!--<description> Language supported by IPG.</description> -->
+		<!--</property> -->
+		<property name="oid" type="String" />
+		<!--<description> A unique serial number that is transmitted for each transaction 
+			requests to IPG.  
+			</description> -->
+		<!--</property> -->
+		<property name="hash_algorithm" type="String" />
+		<!--<description>A public key used to encrypt data being transmitted to 
+			IPG.</description> -->
+		<!--</property> -->
+		<property name="timezone" type="String" />
+		<!--<description>The time zone supported for IPG.</description> -->
+		<!--</property> -->
+	</bean>
+	
+	<bean
+		class="de.hybris.platform.acceleratorservices.payment.data.OrderInfoData">
+		<property name="paymentMode" type="String" />
+		<!--<description> Additional general information about the order. Do not 
+			insert sensitive information in this field. THis property is used to determine paymentMode for an Order eg. COD/CreditCard/Netbanking. </description> -->
+		<!--</property> -->
+	</bean>
+	<!-- Changes done for IPG ROHAN_C END -->
+	
+	<bean class="de.hybris.platform.commercefacades.product.data.StockData">
+		
+		<property name="rmsModifiedDate" type="java.util.Date"/>
+	</bean>
+
+	<bean class="com.spar.hcl.facades.storelocator.data.WarehouseData">
+		<property name="name" type="String"/>
+		<property name="code" type="String"/>
+		<property name="pointOfService" type="java.util.List&lt;de.hybris.platform.commercefacades.storelocator.data.PointOfServiceData>"/>
+	</bean>
+
+	<bean class="de.hybris.platform.commercefacades.product.data.PromotionResultData">
+		<property name="appliedProductPromotionCount" type="Long"/>
+		<property name="totalDiscount" type="de.hybris.platform.commercefacades.product.data.PriceData"/>
+	</bean>
+	
+	<bean class="de.hybris.platform.commercefacades.order.data.PromotionOrderEntryConsumedData">
+		<property name="combiOfferApplicable" type="boolean"/>
+	</bean>
+
+   <bean class="com.spar.hcl.facades.inclusionexclusion.data.SparInExRequest">
+		<property name="areaName" type="String"/>
+		<property name="postalCode" type="String"/>
+		<property name="longfullAddress" type="String"/>
+	</bean>
+	
+	<bean class="com.spar.hcl.facades.inclusionexclusion.data.SparInExResponse">
+		<property name="code" type="String"/>
+		<property name="isInArealist" type="Boolean"/>
+		<property name="areaPOSlist" type="java.util.List&lt;de.hybris.platform.storelocator.model.PointOfServiceModel>"/>
+	</bean>
+	
+	<bean class="de.hybris.platform.commerceservices.order.CommerceCartModification">
+		<property name="bogoAddOrUpdateStatus" type="String"/>
+	</bean>
+	
+	<bean class="de.hybris.platform.commercefacades.order.data.CartModificationData">
+		<property name="bogoAddOrUpdateStatus" type="String"/>
+	</bean>	
+	
+	<bean class="de.hybris.platform.commercefacades.user.data.CustomerData"
+	      extends="de.hybris.platform.commercefacades.user.data.PrincipalData">
+	      <property name="paidByWallet" type="de.hybris.platform.commercefacades.product.data.PriceData"/>
+	      <property name="walletDetails" type="java.util.List&lt;com.spar.hcl.facades.wallet.data.WalletDetailsData>"/>
+	        <property name="custPrimaryMobNumber" type="String"/>
+	      <property name="dateOfBirth" type="java.util.Date"/>
+	     	 <property name="dateOfJoining" type="java.util.Date"/>
+	        <property name="whetherEmployee" type="Boolean"/>
+	         <property name="employeeCode" type="String"/>
+	         <property name="isOTPValidate" type="Boolean"/>
+	         <property name="lrOptStatus" type="Boolean"/>
+	         <property name="disableLRPrompt" type="Boolean"/>
+	         <property name="isEnrolledToLR" type="Boolean"/>
+	         <property name="loginVia" type="String"/>
+	      </bean>
+	      
+	<bean class="com.spar.hcl.facades.wallet.data.CalculatedWalletData">
+		 <property name="customerWalletTotal" type="de.hybris.platform.commercefacades.product.data.PriceData"/>
+		  <property name="orderWalletAmount" type="de.hybris.platform.commercefacades.product.data.PriceData"/>
+		   <property name="paidByWalletAmount" type="de.hybris.platform.commercefacades.product.data.PriceData"/>
+		   <property name="error" type="String"/>
+	</bean>  
+	
+	<bean class="com.spar.hcl.facades.wallet.data.WalletDetailsData">
+		 <property name="walletAmount" type="de.hybris.platform.commercefacades.product.data.PriceData"/>
+		 <property name="walletFundingReason" type="String"/>
+		 <property name="refundDate" type="java.util.Date"/>
+		 <property name="walletOrder" type="String"/>
+		 <property name="customer" type="String"/>
+	</bean>  
+	
+	<bean class="com.spar.hcl.facades.plms.SparOMSOrderData">
+		<property name="orderNo" type="String"></property>
+		<property name="storeId" type="String"></property>
+		<property name="onlineMarketCode" type="String"></property>
+		<property name="onlineMarketDesc" type="String"></property>
+		<property name="levelThreeCategory" type="String"></property>
+		<property name="aisleNo" type="String"></property>
+		<property name="bay" type="Integer"></property>
+		<property name="shelf" type="Integer"></property>
+		<property name="position" type="Integer"></property>
+		<property name="facing" type="Integer"></property>
+		<property name="itemCode" type="String"></property>
+		<property name="itemDesc" type="String"></property>
+		<property name="csp" type="int"></property>
+		<property name="mrp" type="Double"></property>
+		<property name="qty" type="Long"></property>
+		<property name="promoCheck" type="Boolean"></property>
+		<property name="promoCode" type="String"></property>
+		<property name="promoDesc" type="String"></property>
+		<property name="deliveryDate" type="String"></property>
+		<property name="deliverySlot" type="String"></property>
+		<property name="storageType" type="String"></property>
+		<property name="productType" type="String"></property>
+		<property name="purchaseType" type="String"></property>
+		<property name="itemPickingTime" type="String"></property>	
+	</bean>
+	
+	<bean class="com.spar.hcl.facades.plms.SparPLMSOrderData">
+		<property name="user" type="String"></property>
+		<property name="pass" type="String"></property>
+		<property name="omsdata" type="java.util.List&lt;com.spar.hcl.facades.plms.SparOMSOrderData>"></property>
+
+	</bean>
+	
+	<bean class="com.spar.hcl.facades.plms.SparPLMSUpdateOrderData">
+		<property name="user" type="String"></property>
+		<property name="pass" type="String"></property>
+		<property name="deliveryDate" type="String"></property>
+		<property name="deliverySlot" type="String"></property>
+		<property name="orderNo" type="String"></property>
+		<property name="orderNoShow" type="Boolean"></property>
+	</bean>
+	
+	<bean class="com.spar.hcl.facades.plms.SparPLMSCancelOrderData">
+		<property name="user" type="String"/>
+		<property name="pass" type="String"/>
+		<property name="orderNo" type="String"/>
+		<property name="cancelDateTime" type="String"/>
+	</bean>
+<bean class="com.spar.hcl.facades.plms.SparPLMSOrderDataHeader">
+		<property name="params" type="com.spar.hcl.facades.plms.SparPLMSOrderData"/>
+		<property name="method" type="String"></property>
+	</bean>
+	
+	<bean class="com.spar.hcl.facades.plms.SparPLMSUpdateOrderDataHeader">
+		<property name="params" type="com.spar.hcl.facades.plms.SparPLMSUpdateOrderData"/>
+		<property name="method" type="String"></property>
+	</bean>
+	
+	<bean class="com.spar.hcl.facades.plms.SparPLMSCancelOrderDataHeader">
+		<property name="params" type="com.spar.hcl.facades.plms.SparPLMSCancelOrderData"/>
+		<property name="method" type="String"></property>
+	</bean>
+	
+	<bean class="com.spar.hcl.facades.plms.SparPlmsOrderDataResponse">
+		<property name="result" type="com.spar.hcl.facades.plms.SparPlmsOrderDataResult"/>
+	</bean>
+	
+	<bean class="com.spar.hcl.facades.plms.SparPlmsOrderDataResult">
+		<property name="status" type="String"/>
+		<property name="error_code" type="String"/>
+		<property name="message" type="String"/>
+		<property name="Error_Type" type="String"/>
+		<property name="Error_Reason" type="String"/>
+		<property name="Error_Field_Value" type="String"/>
+	</bean>
+	
+	<bean class="com.spar.hcl.facades.sparsitemap.data.SparSiteMapData">
+		<property name="code" type="String"/>
+		<property name="location" type="String"/>
+		<property name="changefreq" type="String"/>
+		<property name="priority" type="String"/>
+		<property name="pageType" type="String"/>
+		<property name="visible" type="Boolean"/>
+		<property name="modifiedTime" type="java.util.Date"/>
+	</bean>
+	
+	<bean class="com.spar.hcl.facades.landmarkreward.SparLRUserEnrollDataResult">
+		<property name="result" type="boolean"/>
+		<property name="resultCode" type="String"/>
+		<property name="message" type="String"/>
+		<property name="cardNumber" type="String"/>
+		<property name="firstName" type="String"/>
+		<property name="lastName" type="String"/>
+	</bean>
+	
+	<bean class="com.spar.hcl.facades.landmarkreward.LRUserEnrollMemberData">
+	 	  <property name="lastName" type="String"/>
+	      <property name="country" type="String"/>
+	      <property name="motherTongue" type="String"/>
+	      <property name="occupation" type="String"/>
+	      <property name="gender" type="String"/>
+	      <property name="address3" type="String"/>
+	      <property name="address2" type="String"/>
+	      <property name="address1" type="String"/>
+	      <property name="city" type="String"/>
+	      <property name="mobileNumber" type="String"/>
+	      <property name="emailID" type="String"/>
+	      <property name="dateOfBirth" type="String"/>
+	      <property name="suburbanArea" type="String"/>
+	      <property name="firstName" type="String"/>
+	      <property name="nationality" type="String"/>
+	      <property name="pinCode" type="String"/>
+	      <property name="state" type="String"/>
+	      <property name="maritalStatus" type="String"/>
+	</bean>
+	
+	<bean class="com.spar.hcl.facades.landmarkreward.LRInputParamForGetMemberForLMSAPI">
+	 	  <property name="mobileNumber" type="String"/>
+	      <property name="cardNumber" type="String"/>
+	</bean>
+	
+	<bean class="com.spar.hcl.facades.landmarkreward.LRInputParamForRedemptionFromLMSAPI">
+	 	  <property name="redeemAmount" type="double"/>
+	      <property name="invoiceNumber" type="String"/>
+	      <property name="messageId" type="String"/>
+	      <property name="invoiceAmount" type="double"/>
+	      <property name="storeId" type="String"/>
+	      <property name="transactionDate" type="long"/>
+	      <property name="cardNumber" type="String"/>
+	</bean>
+	
+	<bean class="com.spar.hcl.facades.landmarkreward.SparLRUserDetailDataResult">
+	    <property name="result" type="boolean"/>
+		<property name="resultCode" type="String"/>
+		<property name="message" type="String"/>
+		<property name="mobileNumber" type="String"/>
+		<property name="cardNumber" type="String"/>
+		<property name="displayName" type="String"/>
+		<property name="emailID" type="String"/>
+		<property name="pointsAvailable" type="Double"/>
+		<property name="tierStatus" type="String"/>
+		<property name="okToAccrue" type="boolean"/>
+		<property name="okToRedeem" type="boolean"/>
+		<property name="active" type="boolean"/>
+		<property name="scbCard" type="boolean"/>
+		<property name="balanceAvailable" type="double"/>
+	 </bean>
+	 
+	<bean class="com.spar.hcl.facades.landmarkreward.SparLRRedemptionDataResult">
+	      <property name="result" type="boolean"/>
+		  <property name="resultCode" type="String"/>
+		  <property name="message" type="String"/>
+		  <property name="pointsAvailable" type="Double"/>
+	 </bean>
+	 
+	 <bean class="com.spar.hcl.facades.landmarkreward.SparValidateLRAmountResultData">
+	      <property name="enteredLRAmount" type="double"/>
+		  <property name="subTotal" type="de.hybris.platform.commercefacades.product.data.PriceData"/>
+		  <property name="remainingBalanceDue" type="de.hybris.platform.commercefacades.product.data.PriceData"/>
+		  <property name="totalPointsAvailable" type="double"/>
+		  <property name="isLRAmountValid" type="boolean"/>
+		  <property name="validationMessage" type="String"/>
+		  <property name="cardNumber" type="String"/>
+	 </bean>
+	 
+	 <bean class="de.hybris.platform.acceleratorservices.payment.data.CreateSubscriptionResult">
+		<property name="approval_code" type="String" />
+		<property name="response_hash" type="String" />
+		<property name="txndatetime" type="String" />
+	</bean>
+	
+	 <bean class="com.spar.hcl.facades.OnlineOfflineSKU.SparOnlineOfflineSKUData">
+		<property name="onlineSKU" type="Integer" />
+		<property name="offlineSKU" type="Integer" />
+		<property name="grammageRatio" type="java.lang.Double" />
+	</bean>
+	
+	<bean class="com.spar.hcl.facades.blowhorn.SparBlowhornProductDetailData">
+		<property name="item_name" type="String"></property>
+		<property name="item_quantity" type="String"></property>
+
+	</bean>
+	
+	<bean class="com.spar.hcl.facades.blowhorn.SparDeliveryAddressData">
+		<property name="customer_mobile" type="String"></property>
+		<property name="customer_email" type="String"></property>
+		<property name="customer_name" type="String"></property>
+		<property name="order_creation_time" type="String"></property>
+		<property name="slot_start_date_time" type="String"></property>
+		<property name="slot_end_date_time" type="String"></property>
+		<property name="delivery_address" type="String"></property>
+		<property name="delivery_lat" type="String"></property>
+		<property name="delivery_lon" type="String"></property>
+		<property name="delivery_postal_code" type="String"></property>
+		<property name="reference_number" type="String"></property>
+		<property name="item_details" type="java.util.List&lt;com.spar.hcl.facades.blowhorn.SparBlowhornProductDetailData>"></property>
+	</bean>
+	
+	
+	
+	 <bean class="com.spar.hcl.facades.blowhorn.SparBlowhornOrderData">
+		<property name="api_key" type="String"></property>
+		<property name="addressData" type="com.spar.hcl.facades.blowhorn.SparDeliveryAddressData"></property>
+
+	</bean>
+	
+	<bean class="com.spar.hcl.facades.blowhorn.SparBlowhornShipAddressOrderDataHeader">
+		<property name="params" type="com.spar.hcl.facades.blowhorn.SparBlowhornOrderData"/>
+		<property name="method" type="String"></property>
+	</bean>
+	
+	<bean class="com.spar.hcl.facades.blowhorn.SparBlowhornShipAddressOrderDataResponse">
+		<property name="status" type="String"/>
+		<property name="message" type="com.spar.hcl.facades.blowhorn.SparBlowhornOrderDataResult"/>
+	</bean>
+	
+	<bean class="com.spar.hcl.facades.blowhorn.SparBlowhornOrderDataResult">
+		<property name="awb_number" type="String"/>
+	</bean>
+	
+	
+	<bean class="com.spar.hcl.facades.blowhorn.SparCancelledOrderData">
+		<property name="orderId" type="String"></property>
+		<property name="mode" type="String"></property>
+	</bean>
+	
+	<bean class="com.spar.hcl.facades.blowhorn.SparBlowhornCancelledOrderDataResponse">
+		<property name="status" type="String"/>
+		<property name="message" type="String"/>
+	</bean>
+
+</beans>

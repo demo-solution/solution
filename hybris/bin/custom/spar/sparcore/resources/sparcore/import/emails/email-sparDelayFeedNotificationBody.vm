@@ -1,0 +1,43 @@
+## messageSource=classpath:/sparcore/messages/email-feedsError_$lang.properties
+#macro(genHtmlLinkStartTag $url)
+<a href="$url"><font color="#666666">
+#end
+#macro(genHtmlLinkEndTag)
+</font></a>
+#end
+#macro(genHtmlLink $url $textColor $bodyContent)
+<a href="$url"><font color="$textColor">$bodyContent</font></a>
+#end
+
+
+<html>
+	<head>
+		<title></title>
+		<style>
+			.email-wrapper{
+			 background:#ccc;
+			 font:normal 12px arial; 
+			 border:1px solid #000;
+			 border-bottom:none;
+			 border-right:none;
+			}
+			.email-text{
+			 font:normal 12px arial; 
+			}
+			.email-wrapper td{border-bottom:1px solid #000;padding:10px;border-right:1px solid #000;}
+			.email-wrapper td:last-child{border-right:1px solid #000;}
+			.email-wrapper .heading td{font-weight:bold;}
+		</style>
+	</head>
+	<body bgcolor="#e4e7e8">
+	
+	Dear User,<br><br>
+
+  The price feed for today ${ctx.todayDate} is not available at the required FTP location.
+  <br>
+  Please do the needful ASAP.
+<br><br>
+  Thanks
+
+	</body>
+</html>

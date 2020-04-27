@@ -1,0 +1,47 @@
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparstorefront/web/webroot/WEB-INF/tags/desktop/user
+END
+login.tag
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparstorefront/web/webroot/WEB-INF/tags/desktop/user/login.tag
+END
+guestRegister.tag
+K 25
+svn:wc:ra_dav:version-url
+V 113
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparstorefront/web/webroot/WEB-INF/tags/desktop/user/guestRegister.tag
+END
+guestCheckout.tag
+K 25
+svn:wc:ra_dav:version-url
+V 113
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparstorefront/web/webroot/WEB-INF/tags/desktop/user/guestCheckout.tag
+END
+updatePwd.tag
+K 25
+svn:wc:ra_dav:version-url
+V 109
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparstorefront/web/webroot/WEB-INF/tags/desktop/user/updatePwd.tag
+END
+forgottenPwd.tag
+K 25
+svn:wc:ra_dav:version-url
+V 112
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparstorefront/web/webroot/WEB-INF/tags/desktop/user/forgottenPwd.tag
+END
+implicit.tld
+K 25
+svn:wc:ra_dav:version-url
+V 108
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparstorefront/web/webroot/WEB-INF/tags/desktop/user/implicit.tld
+END
+register.tag
+K 25
+svn:wc:ra_dav:version-url
+V 108
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparstorefront/web/webroot/WEB-INF/tags/desktop/user/register.tag
+END

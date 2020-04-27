@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 108
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparcockpits/src/com/spar/hcl/cockpits/cmscockpit/browser/filters
+END
+AbstractUiExperienceFilter.java
+K 25
+svn:wc:ra_dav:version-url
+V 140
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparcockpits/src/com/spar/hcl/cockpits/cmscockpit/browser/filters/AbstractUiExperienceFilter.java
+END
+MobileUiExperienceBrowserFilter.java
+K 25
+svn:wc:ra_dav:version-url
+V 145
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparcockpits/src/com/spar/hcl/cockpits/cmscockpit/browser/filters/MobileUiExperienceBrowserFilter.java
+END
+DesktopUiExperienceBrowserFilter.java
+K 25
+svn:wc:ra_dav:version-url
+V 146
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparcockpits/src/com/spar/hcl/cockpits/cmscockpit/browser/filters/DesktopUiExperienceBrowserFilter.java
+END

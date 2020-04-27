@@ -1,0 +1,91 @@
+#incremental impex for content catalog
+
+
+# ImpEx for Importing CMS Content
+
+# Macros / Replacement Parameter definitions
+$contentCatalog=sparContentCatalog
+$contentCatalogName=Spar Content Catalog
+$productCatalog=sparProductCatalog
+$productCatalogName=Spar Product Catalog
+
+$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
+$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
+$productCV=catalogVersion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
+$picture=media(code, $contentCV);
+$image=image(code, $contentCV);
+$media=media(code, $contentCV);
+$page=page(uid, $contentCV);
+$contentPage=contentPage(uid, $contentCV);
+$bottomImage=bottomImage(code,$contentCV)
+
+$product=product(code, $productCV)
+$category=category(code, $productCV)
+
+$siteResource=jar:com.spar.hcl.initialdata.setup.InitialDataSystemSetup&/sparinitialdata/import/sampledata/contentCatalogs/$contentCatalog
+$productResource=jar:com.spar.hcl.initialdata.setup.InitialDataSystemSetup&/sparinitialdata/import/sampledata/productCatalogs/$productCatalog
+$jarResourceCms=jar:com.spar.hcl.initialdata.setup.InitialDataSystemSetup&/sparinitialdata/import/sampledata/cockpits/cmscockpit
+$jarResourceCms=jar:com.spar.hcl.initialdata.setup.InitialDataSystemSetup&/sparinitialdata/import/sampledata/cockpits/cmscockpit
+
+$wideContent=CMSImageComponent,BannerComponent
+$siteUid=spar
+
+$medias=medias(code, $contentCV);
+$lang=en
+$mediaContainer=media(qualifier, $contentCV)[lang=$lang];
+
+# Import config properties into impex macros
+UPDATE GenericItem[processor=de.hybris.platform.commerceservices.impex.impl.ConfigPropertyImportProcessor];pk[unique=true]
+$jarResourceCms=$config-jarResourceCmsValue
+$emailPackageName=$config-emailContextPackageName	
+
+# Import config properties into impex macros
+UPDATE GenericItem[processor=de.hybris.platform.commerceservices.impex.impl.ConfigPropertyImportProcessor];pk[unique=true]
+$emailResource=$config-emailResourceValue
+$siteUid=spar
+# Language
+$lang=en
+
+
+INSERT_UPDATE EmailPageTemplate;$contentCV[unique=true];uid[unique=true];name;active;frontendTemplateName;subject(code);htmlTemplate(code);restrictedPageTypes(code)
+;;SparLandmarkRegistrationEmailTemplate; Spar Landmark Customer Registration Email template;true;SparLandmarkRegistrationEmailTemplate;spar_LandmarkRegistration_Subject;spar_LandmarkRegistration_Body;EmailPage
+
+
+UPDATE EmailPageTemplate;$contentCV[unique=true];uid[unique=true];velocityTemplate[translator=de.hybris.platform.commerceservices.impex.impl.FileLoaderValueTranslator]
+;;SparLandmarkRegistrationEmailTemplate;$jarResourceCms/structure-view/structure_SparLandmarkRegistrationEmailTemplate.vm
+
+INSERT_UPDATE EmailPage;$contentCV[unique=true];uid[unique=true];name;masterTemplate(uid,$contentCV);defaultPage;approvalStatus(code)[default='approved']
+;;SparLandmarkRegistrationEmail;SPAR landmark Customer Registration Email;SparLandmarkRegistrationEmailTemplate;true
+
+UPDATE EmailPage;$contentCV[unique=true];uid[unique=true];
+;;SparLandmarkRegistrationEmail;EmailPageModel_preview
+
+UPDATE EmailPage;$contentCV[unique=true];uid[unique=true];fromEmail[lang=$lang];fromName[lang=$lang]
+;;SparLandmarkRegistrationEmail;"care@sparindia.com";"Customer Services Team"
+
+# Create Content Slots
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active
+;;EmailTopSlot;Default Email Top Slot;true
+;;EmailBottomSlot;Default Email Bottom Slot;true
+
+INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=true][default='SparLandmarkRegistrationEmailTemplate'];validComponentTypes(code)
+;SiteLogo;;;logo
+;TopContent;;$wideContent;
+;BottomContent;;$wideContent;
+
+INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];position[unique=true];pageTemplate(uid,$contentCV)[unique=true][default='SparLandmarkRegistrationEmailTemplate'];contentSlot(uid,$contentCV)[unique=true];allowOverwrite
+;;SiteLogo-SparLandmarkRegistrationEmail;SiteLogo;;EmailSiteLogoSlot;true
+;;TopContent-SparLandmarkRegistrationEmail;TopContent;;EmailTopSlot;true
+;;BottomContent-SparLandmarkRegistrationEmail;BottomContent;;EmailBottomSlot;true
+
+# Preview Image for use in the CMS Cockpit
+INSERT_UPDATE Media;$contentCV[unique=true];code[unique=true];mime;realfilename;@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator][forceWrite=true]
+;;EmailPageModel_preview;text/gif;EmailPageModel_preview.gif;$jarResourceCms/preview-images/EmailPageModel_preview.gif
+
+INSERT_UPDATE RendererTemplate;code[unique=true];contextClass;rendererType(code)[default='velocity']
+;spar_LandmarkRegistration_Body;$emailPackageName.SparLandmarkRegistrationEmailContext
+;spar_LandmarkRegistration_Subject;$emailPackageName.SparLandmarkRegistrationEmailContext
+
+UPDATE RendererTemplate;code[unique=true];description[lang=$lang];templateScript[lang=$lang,translator=de.hybris.platform.commerceservices.impex.impl.FileLoaderValueTranslator]
+;spar_LandmarkRegistration_Body;"spar landmark Customer Registration Body";$emailResource/email-SparLandmarkRegistrationEmailBody.vm
+;spar_LandmarkRegistration_Subject;"spar landmark Customer Registration Subject";$emailResource/email-SparLandmarkRegistrationEmailSubject.vm

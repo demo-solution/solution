@@ -1,0 +1,53 @@
+K 25
+svn:wc:ra_dav:version-url
+V 110
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparcockpits/resources/sparcockpits/reportcockpit/reports/sqlserver
+END
+salesPerCategoriesBySite.jrxml
+K 25
+svn:wc:ra_dav:version-url
+V 141
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparcockpits/resources/sparcockpits/reportcockpit/reports/sqlserver/salesPerCategoriesBySite.jrxml
+END
+topSellingProductsBySite.jrxml
+K 25
+svn:wc:ra_dav:version-url
+V 141
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparcockpits/resources/sparcockpits/reportcockpit/reports/sqlserver/topSellingProductsBySite.jrxml
+END
+salesByHourAndSite.jrxml
+K 25
+svn:wc:ra_dav:version-url
+V 135
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparcockpits/resources/sparcockpits/reportcockpit/reports/sqlserver/salesByHourAndSite.jrxml
+END
+totalSalesBySite.jrxml
+K 25
+svn:wc:ra_dav:version-url
+V 133
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparcockpits/resources/sparcockpits/reportcockpit/reports/sqlserver/totalSalesBySite.jrxml
+END
+salesByCountryAndSite.jrxml
+K 25
+svn:wc:ra_dav:version-url
+V 138
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparcockpits/resources/sparcockpits/reportcockpit/reports/sqlserver/salesByCountryAndSite.jrxml
+END
+salesPerRegionBySite.jrxml
+K 25
+svn:wc:ra_dav:version-url
+V 137
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparcockpits/resources/sparcockpits/reportcockpit/reports/sqlserver/salesPerRegionBySite.jrxml
+END
+averageOrderValueBySite.jrxml
+K 25
+svn:wc:ra_dav:version-url
+V 140
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparcockpits/resources/sparcockpits/reportcockpit/reports/sqlserver/averageOrderValueBySite.jrxml
+END
+orderVolumeBySite.jrxml
+K 25
+svn:wc:ra_dav:version-url
+V 134
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparcockpits/resources/sparcockpits/reportcockpit/reports/sqlserver/orderVolumeBySite.jrxml
+END

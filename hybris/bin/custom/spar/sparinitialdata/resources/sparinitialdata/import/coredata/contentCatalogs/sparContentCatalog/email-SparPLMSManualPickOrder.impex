@@ -1,0 +1,90 @@
+#incremental impex for content catalog
+
+
+# ImpEx for Importing CMS Content
+
+# Macros / Replacement Parameter definitions
+$contentCatalog=sparContentCatalog
+$contentCatalogName=Spar Content Catalog
+$productCatalog=sparProductCatalog
+$productCatalogName=Spar Product Catalog
+
+$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
+$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
+$productCV=catalogVersion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
+$picture=media(code, $contentCV);
+$image=image(code, $contentCV);
+$media=media(code, $contentCV);
+$page=page(uid, $contentCV);
+$contentPage=contentPage(uid, $contentCV);
+$bottomImage=bottomImage(code,$contentCV)
+
+$product=product(code, $productCV)
+$category=category(code, $productCV)
+
+$siteResource=jar:com.spar.hcl.initialdata.setup.InitialDataSystemSetup&/sparinitialdata/import/sampledata/contentCatalogs/$contentCatalog
+$productResource=jar:com.spar.hcl.initialdata.setup.InitialDataSystemSetup&/sparinitialdata/import/sampledata/productCatalogs/$productCatalog
+$jarResourceCms=jar:com.spar.hcl.initialdata.setup.InitialDataSystemSetup&/sparinitialdata/import/sampledata/cockpits/cmscockpit
+$jarResourceCms=jar:com.spar.hcl.initialdata.setup.InitialDataSystemSetup&/sparinitialdata/import/sampledata/cockpits/cmscockpit
+
+$wideContent=CMSImageComponent,BannerComponent
+$siteUid=spar
+
+$medias=medias(code, $contentCV);
+$lang=en
+$mediaContainer=media(qualifier, $contentCV)[lang=$lang];
+
+# Import config properties into impex macros
+UPDATE GenericItem[processor=de.hybris.platform.commerceservices.impex.impl.ConfigPropertyImportProcessor];pk[unique=true]
+$jarResourceCms=$config-jarResourceCmsValue
+$emailPackageName=$config-emailContextPackageName	
+
+# Import config properties into impex macros
+UPDATE GenericItem[processor=de.hybris.platform.commerceservices.impex.impl.ConfigPropertyImportProcessor];pk[unique=true]
+$emailResource=$config-emailResourceValue
+$siteUid=spar
+# Language
+$lang=en
+
+
+INSERT_UPDATE EmailPageTemplate;$contentCV[unique=true];uid[unique=true];name;active;frontendTemplateName;subject(code);htmlTemplate(code);restrictedPageTypes(code)
+;;SPARPLMSManualPickOrderEmailTemplate; Spar PLMS Manual Pick Order Email template;true;SPARPLMSManualPickOrderEmail;spar_ManulPick_Order_Subject;spar_ManulPick_Order_Body;EmailPage
+
+UPDATE EmailPageTemplate;$contentCV[unique=true];uid[unique=true];velocityTemplate[translator=de.hybris.platform.commerceservices.impex.impl.FileLoaderValueTranslator]
+;;SPARPLMSManualPickOrderEmailTemplate;$jarResourceCms/structure-view/structure_SPARPLMSManualPickOrderEmailTemplate.vm
+
+INSERT_UPDATE EmailPage;$contentCV[unique=true];uid[unique=true];name;masterTemplate(uid,$contentCV);defaultPage;approvalStatus(code)[default='approved']
+;;SPARPLMSManualPickOrderEmail;SPAR PLMS Manual Pick Order Email;SPARPLMSManualPickOrderEmailTemplate;true
+
+UPDATE EmailPage;$contentCV[unique=true];uid[unique=true];
+;;SPARPLMSManualPickOrderEmail;EmailPageModel_preview
+
+UPDATE EmailPage;$contentCV[unique=true];uid[unique=true];fromEmail[lang=$lang];fromName[lang=$lang]
+;;SPARPLMSManualPickOrderEmail;"care@sparindia.com";"Customer Services Team"
+
+# Create Content Slots
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active
+;;EmailTopSlot;Default Email Top Slot;true
+;;EmailBottomSlot;Default Email Bottom Slot;true
+
+INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=true][default='SPARPLMSManualPickOrderEmailTemplate'];validComponentTypes(code)
+;SiteLogo;;;logo
+;TopContent;;$wideContent;
+;BottomContent;;$wideContent;
+
+INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];position[unique=true];pageTemplate(uid,$contentCV)[unique=true][default='SPARPLMSManualPickOrderEmailTemplate'];contentSlot(uid,$contentCV)[unique=true];allowOverwrite
+;;SiteLogo-SPARPLMSManualPickOrderEmail;SiteLogo;;EmailSiteLogoSlot;true
+;;TopContent-SPARPLMSManualPickOrderEmail;TopContent;;EmailTopSlot;true
+;;BottomContent-SPARPLMSManualPickOrderEmail;BottomContent;;EmailBottomSlot;true
+
+# Preview Image for use in the CMS Cockpit
+INSERT_UPDATE Media;$contentCV[unique=true];code[unique=true];mime;realfilename;@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator][forceWrite=true]
+;;EmailPageModel_preview;text/gif;EmailPageModel_preview.gif;$jarResourceCms/preview-images/EmailPageModel_preview.gif
+
+INSERT_UPDATE RendererTemplate;code[unique=true];contextClass;rendererType(code)[default='velocity']
+;spar_ManulPick_Order_Body;$emailPackageName.SPARPLMSManualPickOrderContext
+;spar_ManulPick_Order_Subject;$emailPackageName.SPARPLMSManualPickOrderContext
+
+UPDATE RendererTemplate;code[unique=true];description[lang=$lang];templateScript[lang=$lang,translator=de.hybris.platform.commerceservices.impex.impl.FileLoaderValueTranslator]
+;spar_ManulPick_Order_Body;"spar Manual Pick Order Body";$emailResource/email-SPARPLMSManualPickOrderBody.vm
+;spar_ManulPick_Order_Subject;"spar Manual Pick Order Subject";$emailResource/email-SPARPLMSManualPickOrderSubject.vm

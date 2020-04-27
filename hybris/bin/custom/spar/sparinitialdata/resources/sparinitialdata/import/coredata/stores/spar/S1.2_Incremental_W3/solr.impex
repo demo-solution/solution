@@ -1,0 +1,72 @@
+
+#
+# Import the Solr configuration for the store
+#
+
+$storePrefix=spar
+
+$productCatalog=sparProductCatalog
+$classificationCatalog=SparClassification
+$currencies=INR
+$net=false
+$storeUid=$storePrefix
+$defaultCurrency=INR
+$languages=en
+$defaultLanguage=en
+#$unitedKingdom=GB,GG,IM,JE
+#$europeNotUK=AD,AL,AT,BA,BE,BG,BY,CH,CY,CZ,DE,DK,EE,ES,FI,FO,FR,GI,GL,GR,HR,HU,IE,IS,IT,LI,LT,LU,LV,MC,MD,ME,MK,MT,NL,NO,PL,PT,RO,RS,RU,SE,SI,SK,SM,TR,UA,VA
+$asianCountries=IN
+$deliveryCountries=$asianCountries
+$orderProcessCode=order-process
+$pickupInStoreMode=BUY_AND_COLLECT
+$customerAllowedToIgnoreSuggestions=true
+$paymentProvider=ICICI
+$promoGrp=sparPromoGrp
+$checkoutFlowGroup=responsiveCheckoutGroup
+
+$prefix=spar
+$catalogVersions=catalogVersions(catalog(id),version);
+$serverConfigName=sparSolrServerConfig
+$indexConfigName=sparSolrIndexConfig
+$searchConfigName=sparPageSize
+$facetSearchConfigName=sparIndex
+$facetSearchConfigDescription=Spar Solr Index
+$searchIndexNamePrefix=$prefix
+$solrIndexedType=sparProductType
+$indexBaseSite=$prefix
+$indexLanguages=en
+$indexCurrencies=INR
+$priceRangeINR=sparPriceRangeINR
+$discountRange=sparDiscountRange
+# Language
+$lang=en
+
+# Define the available sorts that are warehouse specific
+INSERT_UPDATE SparSolrSort;&sortRefID;indexedType(identifier)[unique=true];code[unique=true];useBoost;warehouse
+;sortRef1;$solrIndexedType;relevance_20001;true;20001
+;sortRef2;$solrIndexedType;relevance_20007;true;20007
+;sortRef5;$solrIndexedType;price-asc_20001;false;20001
+;sortRef6;$solrIndexedType;price-desc_20001;false;20001
+;sortRef7;$solrIndexedType;price-asc_20007;false;20007
+;sortRef8;$solrIndexedType;price-desc_20007;false;20007
+;sortRef9;$solrIndexedType;relevance_20010;true;20010
+;sortRef10;$solrIndexedType;price-asc_20010;false;20010
+;sortRef11;$solrIndexedType;price-desc_20010;false;20010
+
+INSERT_UPDATE SparSolrSort;&sortRefID;indexedType(identifier)[unique=true];code[unique=true];useBoost;warehouse;name[lang=en]
+;sortRef12;$solrIndexedType;popularity-asc_20001;false;20001;"Popularity"
+;sortRef17;$solrIndexedType;popularity-asc_20010;false;20010;"Popularity"
+
+# Define the available sorts
+INSERT_UPDATE SparSolrSort;&sortRefID;indexedType(identifier)[unique=true];code[unique=true];useBoost
+;sortRef3;$solrIndexedType;name-asc;false
+;sortRef4;$solrIndexedType;name-desc;false
+
+INSERT_UPDATE SolrSortField;sort(indexedType(identifier),code)[unique=true];fieldName[unique=true];ascending[unique=true]
+;$solrIndexedType:relevance_20010;popularity_20010;true
+;$solrIndexedType:popularity-asc_20010;popularity_20010;true
+
+# Declare the indexed type Product
+INSERT_UPDATE SolrIndexedType;identifier[unique=true];type(code);variant;sorts(&sortRefID)
+#Top-Rated is not required in SPAR
+;$solrIndexedType;Product;false;sortRef1,sortRef2,sortRef9,sortRef3,sortRef4,sortRef5,sortRef6,sortRef7,sortRef8,sortRef10,sortRef11,sortRef12,sortRef17

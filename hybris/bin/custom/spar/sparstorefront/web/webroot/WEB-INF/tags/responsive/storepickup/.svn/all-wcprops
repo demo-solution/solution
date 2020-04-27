@@ -1,0 +1,59 @@
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparstorefront/web/webroot/WEB-INF/tags/responsive/storepickup
+END
+clickPickupInStore.tag
+K 25
+svn:wc:ra_dav:version-url
+V 128
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparstorefront/web/webroot/WEB-INF/tags/responsive/storepickup/clickPickupInStore.tag
+END
+pickupStoreOpeningSchedule.tag
+K 25
+svn:wc:ra_dav:version-url
+V 136
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparstorefront/web/webroot/WEB-INF/tags/responsive/storepickup/pickupStoreOpeningSchedule.tag
+END
+pickupStoreResults.tag
+K 25
+svn:wc:ra_dav:version-url
+V 128
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparstorefront/web/webroot/WEB-INF/tags/responsive/storepickup/pickupStoreResults.tag
+END
+openingSchedule.tag
+K 25
+svn:wc:ra_dav:version-url
+V 125
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparstorefront/web/webroot/WEB-INF/tags/responsive/storepickup/openingSchedule.tag
+END
+pickupStorePopup.tag
+K 25
+svn:wc:ra_dav:version-url
+V 126
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparstorefront/web/webroot/WEB-INF/tags/responsive/storepickup/pickupStorePopup.tag
+END
+pickupStoreDetails.tag
+K 25
+svn:wc:ra_dav:version-url
+V 128
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparstorefront/web/webroot/WEB-INF/tags/responsive/storepickup/pickupStoreDetails.tag
+END
+openingSpecialDays.tag
+K 25
+svn:wc:ra_dav:version-url
+V 128
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparstorefront/web/webroot/WEB-INF/tags/responsive/storepickup/openingSpecialDays.tag
+END
+implicit.tld
+K 25
+svn:wc:ra_dav:version-url
+V 118
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparstorefront/web/webroot/WEB-INF/tags/responsive/storepickup/implicit.tld
+END
+pickupStoreStockLevel.tag
+K 25
+svn:wc:ra_dav:version-url
+V 131
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparstorefront/web/webroot/WEB-INF/tags/responsive/storepickup/pickupStoreStockLevel.tag
+END

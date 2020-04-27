@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+
+<!-- Widget definition for collection browser for Pick List-->
+
+<widget-definition id="spar.hybris.cockpitng.collectionBrowser"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="http://www.hybris.com/schema/cockpitng/widget-definition.xsd">
+
+	<name>Collection Browser</name>
+	<description>Displays objects in a table format</description>
+	<defaultTitle>Collection Browser</defaultTitle>
+	<author>Rohan_c</author>
+	<version>1.0</version>
+
+	<keywords>
+       <keyword>SparPickUp</keyword>
+    </keywords>
+    <sockets>
+        <input id="list" type="[T]" multiplicity="List" />
+		<input id="pageable" type="com.hybris.cockpitng.search.data.pageable.Pageable"/>
+        <input id="previousItemSelectorInvocation" type="[T]" />
+        <input id="nextItemSelectorInvocation" type="[T]" />
+		<input id="reset" type="java.util.Map"/>
+		<output id="selectedItem" type="[T]" />
+		<output id="selectedItems" type="[T]" multiplicity="List"/>
+		<output id="sortData" type="com.hybris.cockpitng.search.data.SortData" />
+        <output id="previousItemSelectorContext" type="com.hybris.cockpitng.widgets.navigation.NavigationItemSelectorContext"/>
+        <output id="nextItemSelectorContext" type="com.hybris.cockpitng.widgets.navigation.NavigationItemSelectorContext"/>
+        
+    </sockets>
+	<view src="collectionBrowser.zul" />
+	<controller
+		class="com.spar.hcl.widgets.SparCollectionBrowserController" />
+
+	<settings>
+		<setting key="actionSlotComponentId" default-value="listviewactions" type="String" />
+		<setting key="sparActionSlotComponentId" default-value="listviewactions" type="String" />
+		<setting key="colConfigCtxCode" default-value="listview" type="String" />
+		<setting key="itemRenderer" default-value="listViewRenderer" type="String" />
+		<setting key="multiSelect" default-value="FALSE" type="Boolean"/>
+		<setting key="pageSize" default-value="50" type="Integer"/>
+		<setting key="maxCharsInCell" default-value="70" type="Integer"/>
+		<setting key="listTitle" default-value=""/>
+        <setting key="listSubtitle" default-value=""/>
+		<setting key="asyncLoading" default-value="TRUE" type="Boolean"/>
+		<setting key="sortableListHeader" default-value="TRUE" type="Boolean"/>
+	</settings>
+
+</widget-definition>

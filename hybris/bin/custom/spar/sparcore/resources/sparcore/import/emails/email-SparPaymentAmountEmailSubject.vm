@@ -1,0 +1,2 @@
+## messageSource=classpath:/sparcore/messages/email-SparPaymentAmountEmail_$lang.properties
+Alert: Order has difference between Paid Amount Vs Order Balance Due.

@@ -1,0 +1,21 @@
+# ImpEx for Importing Units
+
+# Macros / Replacement Parameter definitions
+$classificationCatalog=SparClassification
+
+$systemVersion=systemVersion(catalog(id[default='$classificationCatalog']),version[default='2.0'])
+
+
+INSERT_UPDATE ClassificationAttributeUnit;code[unique=true];symbol;unitType;name[lang=en];$systemVersion[unique=true]
+ ;300;.;300;.
+ ;144;pcs;144;pieces
+ ;38;g;38;gram
+ ;17;kg;17;kilogram
+ ;142;ml;142;millilitre
+ ;100;L;100;litre(s)
+ ;24;mm;24;millimeter
+ ;32;°;32;degrees
+ ;64;%;64;percent
+ ;75;year(s);75;year(s)
+ ;19;EA;19;EA
+ 

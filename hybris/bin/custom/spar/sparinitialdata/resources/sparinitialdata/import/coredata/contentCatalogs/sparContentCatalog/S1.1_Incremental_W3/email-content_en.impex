@@ -1,0 +1,31 @@
+#
+# Import the CMS content for the site emails
+#
+$contentCatalog=sparContentCatalog
+$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
+
+# Import config properties into impex macros
+UPDATE GenericItem[processor=de.hybris.platform.commerceservices.impex.impl.ConfigPropertyImportProcessor];pk[unique=true]
+$emailResource=$config-emailResourceValue
+
+# Language
+$lang=en
+
+# Email Pages
+UPDATE EmailPage;$contentCV[unique=true];uid[unique=true];fromEmail[lang=$lang];fromName[lang=$lang]
+;;CustomerRegistrationEmail;"care@sparindia.com";"Sparindia.com"
+;;DeliverySentEmail;"care@sparindia.com";"Sparindia.com"
+;;ForgottenPasswordEmail;"care@sparindia.com";"Sparindia.com"
+;;OrderCancelledEmail;"care@sparindia.com";"Sparindia.com"
+;;OrderCollectionReminderEmail;"care@sparindia.com";"Sparindia.com"
+;;OrderConfirmationEmail;"care@sparindia.com";"Sparindia.com"
+;;OrderMoveToCsEmail;"care@sparindia.com";"Sparindia.com"
+;;OrderPartiallyCanceledEmail;"care@sparindia.com";"Sparindia.com"
+;;OrderPartiallyRefundedEmail;"care@sparindia.com";"Sparindia.com"
+;;OrderRefundEmail;"care@sparindia.com";"Sparindia.com"
+;;ReadyForPickupEmail;"care@sparindia.com";"Sparindia.com"
+;;feedsErrorEmail;"care@sparindia.com";"Sparindia.com"
+;;RMSCorruptedPriceFeedDataEmail;"care@sparindia.com";"SPAR India"
+# Email Pages
+UPDATE EmailPage;$contentCV[unique=true];uid[unique=true];fromEmail[lang=$lang];fromName[lang=$lang]
+;;sparDailyRefundReportEmail;"care@sparindia.com";"Sparindia.com" 

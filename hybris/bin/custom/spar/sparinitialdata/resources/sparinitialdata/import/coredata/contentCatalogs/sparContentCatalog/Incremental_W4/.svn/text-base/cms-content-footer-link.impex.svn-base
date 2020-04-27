@@ -1,0 +1,32 @@
+# ImpEx for Importing CMS Content
+
+# Macros / Replacement Parameter definitions
+$contentCatalog=sparContentCatalog
+$contentCatalogName=Spar Content Catalog
+$productCatalog=sparProductCatalog
+$productCatalogName=Spar Product Catalog
+
+$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
+$productCV=catalogVersion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
+$picture=media(code, $contentCV);
+$image=image(code, $contentCV);
+$media=media(code, $contentCV);
+$page=page(uid, $contentCV);
+$contentPage=contentPage(uid, $contentCV);
+$bottomImage=bottomImage(code,$contentCV)
+
+$product=product(code, $productCV)
+$category=category(code, $productCV)
+
+$siteUid=spar
+# Language
+$lang=en
+
+# Footer Link
+INSERT_UPDATE CMSNavigationNode;uid[unique=true];$contentCV[unique=true];name;parent(uid, $contentCV);links(uid, $contentCV);&nodeRef
+;FooterNavNode;;Footer Nave Nod;;LandmarkRewardsLink,SPARPromiseLink,AboutUsLink,ContactUsLink,FAQLink,PolicyLink,TermsAndConditionsLink;FooterNavNode
+
+# Footer CMS Link Components
+INSERT_UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];linkName[lang=$lang];name;url;&linkRef;&componentRef;target(code)[default='sameWindow'];$category;$product; contentPage(uid,$contentCV);styleAttributes;
+;;LandmarkRewardsLink;Landmark Rewards;LandmarkRewardsLink;/faq#collapseEight;LandmarkRewardsLink;LandmarkRewardsLink;;;;;class="txtCol"
+;;SPARPromiseLink;SPAR Promise;SPARPromiseLink;/aboutus#collapseThree;SPARPromiseLink;SPARPromiseLink;;;;;class="txtCol"

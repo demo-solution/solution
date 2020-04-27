@@ -1,0 +1,59 @@
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/spartest/resources/jmeter/powertools
+END
+storeInputData.csv
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/spartest/resources/jmeter/powertools/storeInputData.csv
+END
+categoryInputData.csv
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/spartest/resources/jmeter/powertools/categoryInputData.csv
+END
+initializationSetup.csv
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/spartest/resources/jmeter/powertools/initializationSetup.csv
+END
+userInputData.csv
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/spartest/resources/jmeter/powertools/userInputData.csv
+END
+productInputData.csv
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/spartest/resources/jmeter/powertools/productInputData.csv
+END
+reviewInputData.csv
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/spartest/resources/jmeter/powertools/reviewInputData.csv
+END
+addToCartInputData.csv
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/spartest/resources/jmeter/powertools/addToCartInputData.csv
+END
+searchInputData.csv
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/spartest/resources/jmeter/powertools/searchInputData.csv
+END
+basketInputData.csv
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/spartest/resources/jmeter/powertools/basketInputData.csv
+END

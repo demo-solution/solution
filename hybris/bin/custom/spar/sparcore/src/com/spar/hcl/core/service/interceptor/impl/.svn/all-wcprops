@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparcore/src/com/spar/hcl/core/service/interceptor/impl
+END
+SparOrderInterceptor.java
+K 25
+svn:wc:ra_dav:version-url
+V 124
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparcore/src/com/spar/hcl/core/service/interceptor/impl/SparOrderInterceptor.java
+END
+FetchDeliverySlotsInterceptor.java
+K 25
+svn:wc:ra_dav:version-url
+V 133
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparcore/src/com/spar/hcl/core/service/interceptor/impl/FetchDeliverySlotsInterceptor.java
+END
+CMSParagraphMediaURLRewriteInterceptor.java
+K 25
+svn:wc:ra_dav:version-url
+V 142
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparcore/src/com/spar/hcl/core/service/interceptor/impl/CMSParagraphMediaURLRewriteInterceptor.java
+END
+SparSaveDeliverySlotsInterceptor.java
+K 25
+svn:wc:ra_dav:version-url
+V 136
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparcore/src/com/spar/hcl/core/service/interceptor/impl/SparSaveDeliverySlotsInterceptor.java
+END

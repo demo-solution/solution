@@ -1,0 +1,33 @@
+# ImpEx for Importing CMS Content
+
+# Macros / Replacement Parameter definitions
+$contentCatalog=sparContentCatalog
+$contentCatalogName=Spar Content Catalog
+$productCatalog=sparProductCatalog
+$productCatalogName=Spar Product Catalog
+
+$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
+$productCV=catalogVersion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
+$picture=media(code, $contentCV);
+$image=image(code, $contentCV);
+$media=media(code, $contentCV);
+$page=page(uid, $contentCV);
+$contentPage=contentPage(uid, $contentCV);
+$bottomImage=bottomImage(code,$contentCV)
+
+$product=product(code, $productCV)
+$category=category(code, $productCV)
+
+$siteResource=jar:com.spar.hcl.initialdata.setup.InitialDataSystemSetup&/sparinitialdata/import/sampledata/contentCatalogs/$contentCatalog
+$productResource=jar:com.spar.hcl.initialdata.setup.InitialDataSystemSetup&/sparinitialdata/import/sampledata/productCatalogs/$productCatalog
+$jarResourceCms=jar:com.spar.hcl.initialdata.setup.InitialDataSystemSetup&/sparinitialdata/import/sampledata/cockpits/cmscockpit
+
+$siteUid=spar
+
+$medias=medias(code, $contentCV);
+$lang=en
+$mediaContainer=media(qualifier, $contentCV)[lang=$lang];
+
+#Change for min HD-deliverycost and delivery slot 
+UPDATE BannerComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef;urlLink;$picture[$lang];title[$lang]
+;;HomePageFreeShippingBanner;Home page Free Ship Banner;HomePageFreeShippingBanner;;/images/banners/homepage/Free-shipping 34x24.png;FREE SHIPPING ABOVE RS. 1000

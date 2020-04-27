@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/S6_Maintenance/!svn/ver/1/custom/sparcommercewebservices/src/com/spar/hcl/queues/impl
+END
+ProductExpressUpdateQueue.java
+K 25
+svn:wc:ra_dav:version-url
+V 121
+/svn/S6_Maintenance/!svn/ver/1/custom/sparcommercewebservices/src/com/spar/hcl/queues/impl/ProductExpressUpdateQueue.java
+END
+OrderStatusUpdateQueue.java
+K 25
+svn:wc:ra_dav:version-url
+V 118
+/svn/S6_Maintenance/!svn/ver/1/custom/sparcommercewebservices/src/com/spar/hcl/queues/impl/OrderStatusUpdateQueue.java
+END
+AbstractUpdateQueue.java
+K 25
+svn:wc:ra_dav:version-url
+V 115
+/svn/S6_Maintenance/!svn/ver/1/custom/sparcommercewebservices/src/com/spar/hcl/queues/impl/AbstractUpdateQueue.java
+END

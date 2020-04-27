@@ -1,0 +1,11 @@
+/* Desktop
+   ----------------------------- */
+@import "../css/sparstyle.css";
+
+/* Small Devices
+   ----------------------------- */
+@import "../css/smalldevice.css";
+
+/* Medium Devices
+   ----------------------------- */
+@import "../css/mediumdevice.css";

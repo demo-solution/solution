@@ -1,0 +1,169 @@
+#
+# ENGLISH LOCALIZATION
+#
+# put localizations of item types into this file
+# Note that you can also add special locatizations which 
+# can be retrieved with the 
+#
+# ...tools.localization.Localization.getLocalizedString(...)
+# 
+# methods.
+#
+# syntax for type localizations:
+#
+# type.<code of type>.name=XY
+# type.<code of type>.<qualifier of attribute>.name=XY
+# type.<code of type>.description=XY
+# type.<code of type>.<qualifier of attribute>.description=XY
+#
+# yourcustomlocalekey=value
+
+type.SparVoucherOrderRestriction.name=Spar voucher order restriction
+type.SparRegularCustomerOrderTotalRestriction.name=Spar Restriction by revenue (to regular customers)
+type.ApparelProduct.name=Apparel Product
+type.ApparelProduct.description=A Product in the Apparel Store
+type.ApparelProduct.genders.name=Gender List
+type.ApparelProduct.genders.description=List of genders that the ApparelProduct is designed for
+type.ApparelProduct.productFeatureComponents.name=Product Feature Components
+
+type.VariantProduct.productFeatureComponents.name=Product Feature Components
+
+type.ApparelStyleVariantProduct.name=Apparel Style Variant
+type.ApparelStyleVariantProduct.description=
+type.ApparelStyleVariantProduct.style.name=Style
+type.ApparelStyleVariantProduct.style.description=
+type.ApparelStyleVariantProduct.swatchColors.name=Swatch Colors
+type.ApparelStyleVariantProduct.swatchColors.description=
+
+type.ApparelSizeVariantProduct.name=Apparel Size Variant
+type.ApparelSizeVariantProduct.description=
+type.ApparelSizeVariantProduct.size.name=Size
+type.ApparelSizeVariantProduct.size.description=
+
+type.ElectronicsColorVariantProduct.name=Electronics Color Variant
+type.ElectronicsColorVariantProduct.description=
+type.ElectronicsColorVariantProduct.color.name=Color
+type.ElectronicsColorVariantProduct.color.description=
+
+
+type.SwatchColorEnum.name=Swatch Color Enum
+type.SwatchColorEnum.BLACK.name=Black
+type.SwatchColorEnum.BLUE.name=Blue
+type.SwatchColorEnum.BROWN.name=Brown
+type.SwatchColorEnum.GREY.name=Grey
+type.SwatchColorEnum.GREEN.name=Green
+type.SwatchColorEnum.PURPLE.name=Purple
+type.SwatchColorEnum.RED.name=Red
+type.SwatchColorEnum.SILVER.name=Silver
+type.SwatchColorEnum.WHITE.name=White
+type.SwatchColorEnum.YELLOW.name=Yellow
+type.SwatchColorEnum.PINK.name=Pink
+type.SwatchColorEnum.ORANGE.name=Orange
+
+type.Gender.name=Gender
+type.Gender.MALE.name=Male
+type.Gender.FEMALE.name=Female
+
+type.Customer.isInternal.name=Internal
+type.Product.internalOnly.name=Internal only
+
+type.DeliverySlot.name=Delivery Slot
+type.DeliverySlot.slotId.name=Slot ID
+type.DeliverySlot.slotDescription.name=Slot Description
+type.DeliverySlot.minimumOrderTimeSlot.name=Minimum Order TimeSlot
+type.DeliverySlot.maximumOrderTimeSlot.name=Maximum Order TimeSlot
+type.DeliverySlot.orderingDay.name=Ordering Day
+type.DeliverySlot.deliveryType.name=Delivery Type
+type.AbstractOrder.deliverySlot.name=Delivery Slot
+type.AbstractOrder.pointOfService.name=Point Of Service
+type.DeliveryTypeEnum.HD.name=Home Delivery
+type.DeliveryTypeEnum.CNC.name=Click & Collect
+
+#########  Added for benefit type ENUM###########
+
+type.BenefitTypeEnum.OFFER.name=OFFER
+type.BenefitTypeEnum.DISCOUNT.name=DISCOUNT
+type.BenefitTypeEnum.EXCLUSIVE.name=EXCLUSIVE
+
+#########  Added for Spar Service Area Labels ###########
+type.SparServiceArea.name=Spar Service Area
+type.SparServiceArea.areaId.name=Area ID
+type.SparServiceArea.displayName.name=Display Name
+type.SparServiceArea.area.name=Area Name
+type.SparServiceArea.pincode.name=Pincode
+type.SparServiceArea.defaultStore.name=Mapped Store
+type.SparServiceArea.defaultCncCenter.name=Nearest CNC Center
+type.SparServiceArea.city.name=City
+type.SparServiceArea.active.name=Home Delivery
+
+
+#############wallet#############
+type.WalletFundingReasonEnum.SHORT_PICK.name=Short Pick
+type.WalletFundingReasonEnum.DELAYED.name=Delayed
+type.WalletFundingReasonEnum.RETURN.name=Return
+type.PaymentModeEnum.wallet.name=wallet
+type.WalletFundingReasonEnum.CANCELLATION.name=Cancellation
+type.WalletFundingReasonEnum.MRP_CSP_CHANGE.name=MRP/CSP Change
+
+
+type.SparProductPercentDiscountPromotion.percentageDiscount.name=Percentage Discount
+
+type.SparPromotionOrderRestriction.name=Spar Promotion Order Restriction
+type.SparWarehousePromotionRestriction.name=Spar Warehouse Promotion Restriction
+
+type.Customer.COActive.name=CO Active
+type.Customer.COemployeeCode.name=CO Employee Code
+type.Customer.COdateOfJoining.name=CO Date Of Joining
+type.Customer.COdateOfBirth.name=CO Date Of Birth
+type.Customer.COemployeediscountamount.name=CO Employee Discount Amount
+
+###############EmployeeDiscountPromotion##########
+type.SparEmployeeDiscountPromotion.name=Employee Discount Promotion
+type.SparEmployeeDiscountPromotion.discountpercentage.name=Discount Percentage
+type.SparEmployeeDiscountPromotion.limitamount.name=Limit Amount
+type.SparEmployeeDiscountPromotion.categories.name=Blocked Categories
+type.SparEmployeeDiscountPromotion.graceamount.name=Grace Amount
+
+text.productbxgetyfpromotion.detaileddescription= \
+<div class="promo-detailedDescription"> \
+<div>Buy a certain number of items, get specified number of different or same items for free.</div> \
+<div>For example: <i>Buy 2 get 1 free</i> (also known as <i>Buy 3 for the price of 2</i>).</div> \
+<div>The items must all be from the range of qualifying products.</div> \
+</div>
+
+
+text.sparproductbxgyfpromotion.detaileddescription = \
+<div class="promo-detailedDescription"> \
+<div>SparProductBXGYFPromotion is based on ProductBOGOFPromotion, it automatically adds the product(s).</div>\
+<div>In addition to ProductBOGOFPromotion, it also supports different types and number of items.</div>\
+</div>
+
+text.sparproductbxgyfpromotion.qualifyingoverview = \
+<div class="promo-detailedDescription"> \
+<div>Here you specify how many items the user must have in their cart and how many of those will be free. </div>\
+<div>In a classic "Buy One Get One Free" the qualifying count is 2 and the free count is 1.</div>\
+</div>
+
+text.sparproductbxgyfpromotion.qualifyingcount = \
+<div class="promo-detailedDescription"> \
+<div>The number of units the user must have in their cart to qualify for this promotion.</div>\
+</div>
+text.sparproductbxgyfpromotion.freecount = \
+<div class="promo-detailedDescription"> \
+<div>The number of units to give away free of charge. This must be less than the qualifying count.</div>\
+</div>
+
+type.SparProductBXGYFPromotion.freeProducts.name=Free Product
+type.SparProductBXGYFPromotion.description=SparProductBXGYFPromotion is based on ProductBOGOFPromotion, it automatically adds the product(s).In addition to ProductBOGOFPromotion, it also supports different types and number of items. 
+type.SparProductBXGYFPromotion.qualifyingCount.name=Qualifying items count
+type.SparProductBXGYFPromotion.qualifyingCount.description=
+type.SparProductBXGYFPromotion.freeCount.name=Free items count
+type.SparProductBXGYFPromotion.freeCount.description=
+type.SparProductBXGYFPromotion.messageFired.name=Fired message
+type.SparProductBXGYFPromotion.messageFired.description= 
+type.SparProductBXGYFPromotion.messageCouldHaveFired.name=Could have fired message
+type.SparProductBXGYFPromotion.messageCouldHaveFired.description==
+type.sparproductbxgyfpromotion.messageFired.defaultvalue=Buy {0} - {1} and get {2} - {3} free
+type.sparproductbxgyfpromotion.messageCouldHaveFired.defaultvalue=Buy {0} - {1} more to get {2} - {3} free
+
+

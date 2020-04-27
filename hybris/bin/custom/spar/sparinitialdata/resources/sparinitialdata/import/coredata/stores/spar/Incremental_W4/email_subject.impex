@@ -1,0 +1,23 @@
+#
+# Import the CMS content for the site emails
+#
+$contentCatalog=sparContentCatalog
+$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
+$wideContent=CMSImageComponent,BannerComponent
+
+# Import config properties into impex macros
+UPDATE GenericItem[processor=de.hybris.platform.commerceservices.impex.impl.ConfigPropertyImportProcessor];pk[unique=true]
+$jarResourceCms=$config-jarResourceCmsValue
+$emailPackageName=$config-emailContextPackageName	
+
+# Import config properties into impex macros
+UPDATE GenericItem[processor=de.hybris.platform.commerceservices.impex.impl.ConfigPropertyImportProcessor];pk[unique=true]
+$emailResource=$config-emailResourceValue
+
+# Language
+$lang=en
+
+UPDATE RendererTemplate;code[unique=true];description[lang=$lang];templateScript[lang=$lang,translator=de.hybris.platform.commerceservices.impex.impl.FileLoaderValueTranslator]
+;hybris_Email_Feed_Error_Subject;"feedsError Email Subject";$emailResource/email-feedErrorSubject.vm
+;hybris_Email_RMS_Corrupted_Price_Feed_Data_Subject;"Email RMS Feed Error Subject";$emailResource/email-rmsCorruptedPriceFeedDataSubject.vm
+;spar_Daily_Refund_Report_Subject;"spar Daily Refund Report Subject";$emailResource/email-sparDailyRefundReportSubject.vm

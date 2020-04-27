@@ -1,0 +1,79 @@
+10
+
+dir
+416
+http://10.2.7.20/svn/S6_Maintenance/custom/spar/sparfacades/src/com/spar/hcl/facades
+http://10.2.7.20/svn/S6_Maintenance
+
+
+
+2019-05-29T07:56:16.283033Z
+401
+ravindra.kr
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+db735611-e5e1-473b-b638-8971ea245bcc
+
+product
+dir
+
+storelocator
+dir
+
+storefinder
+dir
+
+giftzone
+dir
+
+suggestion
+dir
+
+cart
+dir
+
+provider
+dir
+
+landmarkreward
+dir
+
+customer
+dir
+
+sitemap
+dir
+
+populators
+dir
+
+voucher
+dir
+
+order
+dir
+
+constants
+dir
+
+payment
+dir
+
+process
+dir
+
+user
+dir
+

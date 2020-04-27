@@ -1,0 +1,41 @@
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/S6_Maintenance/!svn/ver/1/custom/sparordermanagement/src/com/spar/hcl/actions/order/fraudcheck
+END
+AbstractFraudCheckAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 129
+/svn/S6_Maintenance/!svn/ver/1/custom/sparordermanagement/src/com/spar/hcl/actions/order/fraudcheck/AbstractFraudCheckAction.java
+END
+SendOrderPlacedNotificationAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 138
+/svn/S6_Maintenance/!svn/ver/1/custom/sparordermanagement/src/com/spar/hcl/actions/order/fraudcheck/SendOrderPlacedNotificationAction.java
+END
+NotifyCustomerAboutFraudAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 135
+/svn/S6_Maintenance/!svn/ver/1/custom/sparordermanagement/src/com/spar/hcl/actions/order/fraudcheck/NotifyCustomerAboutFraudAction.java
+END
+FraudCheckOrderAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 126
+/svn/S6_Maintenance/!svn/ver/1/custom/sparordermanagement/src/com/spar/hcl/actions/order/fraudcheck/FraudCheckOrderAction.java
+END
+PrepareOrderForManualCheckAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 137
+/svn/S6_Maintenance/!svn/ver/1/custom/sparordermanagement/src/com/spar/hcl/actions/order/fraudcheck/PrepareOrderForManualCheckAction.java
+END
+OrderManualCheckedAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 129
+/svn/S6_Maintenance/!svn/ver/1/custom/sparordermanagement/src/com/spar/hcl/actions/order/fraudcheck/OrderManualCheckedAction.java
+END

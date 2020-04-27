@@ -1,0 +1,15 @@
+# ImpEx for Importing SPAR Customer Account for Beta Release
+ 
+$passwordEncoding=md5
+$defaultPassword=password
+$setPassword=@password[translator=de.hybris.platform.impex.jalo.translators.ConvertPlaintextToEncodedUserPasswordTranslator][default='$passwordEncoding:$defaultPassword']
+
+$catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Online'])[unique=true,default=$productCatalog:Online]
+
+# Reviews from Customers
+
+INSERT_UPDATE Customer;groups(uid);uid[unique=true];name;$setPassword;customerId
+;"customergroup";"Spar@hybris.com";"Keith Spar";;"Spar@hybris.com";
+
+
+

@@ -1,0 +1,10 @@
+## messageSource=classpath:/sparcore/messages/email-rmsCorruptedPriceFeedsError_$lang.properties
+#if(${ctx.sourceFileName.contains("SPAR_ECOM_PROMOTION")}==true)
+${ctx.messages.getMessage('promotionFileSubject', ${ctx.sourceFileName},${ctx.enviornment})}
+#elseif(${ctx.sourceFileName.contains("SPAR_ECOM_PRICE")}==true)
+${ctx.messages.getMessage('emailSubject', ${ctx.sourceFileName},${ctx.enviornment})}
+#elseif(${ctx.sourceFileName.contains("SPAR_PRODUCT_ONLINEOFFLINESKUS_MAPPING")}==true)
+${ctx.messages.getMessage('onlineOfflineSKUSubject', ${ctx.sourceFileName},${ctx.enviornment})}
+#else
+${ctx.messages.getMessage('servicedataFileSubject', ${ctx.sourceFileName},${ctx.enviornment})}
+#end

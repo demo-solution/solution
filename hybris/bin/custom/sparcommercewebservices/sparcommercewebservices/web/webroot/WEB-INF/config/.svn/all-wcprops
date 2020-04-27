@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/S6_Maintenance/!svn/ver/348/custom/sparcommercewebservices/web/webroot/WEB-INF/config
+END
+v1-web-spring.xml
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/svn/S6_Maintenance/!svn/ver/1/custom/sparcommercewebservices/web/webroot/WEB-INF/config/v1-web-spring.xml
+END
+v2-web-spring.xml
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/svn/S6_Maintenance/!svn/ver/1/custom/sparcommercewebservices/web/webroot/WEB-INF/config/v2-web-spring.xml
+END
+common-web-spring.xml
+K 25
+svn:wc:ra_dav:version-url
+V 110
+/svn/S6_Maintenance/!svn/ver/1/custom/sparcommercewebservices/web/webroot/WEB-INF/config/common-web-spring.xml
+END

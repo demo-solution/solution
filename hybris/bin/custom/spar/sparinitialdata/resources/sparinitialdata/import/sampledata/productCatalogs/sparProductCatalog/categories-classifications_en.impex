@@ -1,0 +1,216 @@
+# ImpEx for Importing Category Classifications
+
+# Macros / Replacement Parameter definitions
+$productCatalog=sparProductCatalog
+$productCatalogName=Spar Product Catalog
+$classificationCatalog=SparClassification
+
+$classCatalogVersion=catalogversion(catalog(id[default='$classificationCatalog']),version[default='2.0'])[unique=true,default='$classificationCatalog:2.0']
+$classSystemVersion=systemVersion(catalog(id[default='$classificationCatalog']),version[default='2.0'])[unique=true]
+
+# Language
+$lang=en
+
+REMOVE ClassificationAttribute;code[unique=true];$classSystemVersion;name[lang=$lang]
+;Headings;;Headings
+;Energy-KJ;;Energy (kJ)
+;Energy-Kcal;;Energy (Kcal)
+;Protein-g;;Protein (g)
+;Carbohydrate-g;;Carbohydrate (g)
+;of which Sugar-g;;of which Sugar (g)
+;of which polyols-g;;of which polyols (g)
+;of which starch-g;;of which starch (g)
+;Fat-g;;Fat (g)
+;of Which Saturated Fat-g;;of Which Saturated Fat (g)
+;of which mono-unsaturates-g;;of which mono-unsaturates (g)
+;of which polyunsaturates-g;;of which polyunsaturates (g)
+;of which cholesterol-mg;;of which cholesterol (mg)
+;Fibre-g;;Fibre (g)
+;Sodium-mg;;Sodium (mg)
+;Vitamin A;;Vitamin A (µg)
+;Vitamin D;;Vitamin D (µg)
+;Vitamin E-mg;;Vitamin E (mg)
+;Vitamin C-mg;;Vitamin C (mg)
+;Thiamin B1-mg;;Thiamin (B1) (mg)
+;Riboflavin B2-mg;;Riboflavin (B2) (mg)
+;Niacin-mg;;Niacin (mg)
+;Vitamin B6-mg;;Vitamin B6 (mg)
+;Folic Acid;;Folic Acid (µg)
+;Vitamin B12;;Vitamin B12 (µg)
+;Biotin-mg;;Biotin (mg)
+;Pantothenic acid-mg;;Pantothenic acid (mg)
+;Calcium-mg;;Calcium (mg)
+;Phosphorus-mg;;Phosphorus (mg)
+;Iron-mg;;Iron (mg)
+;Magnesium-mg;;Magnesium (mg)
+;Zinc-mg;;Zinc (mg)
+;Iodine;;Iodine (µg)
+;Salt-g;;Salt (g)
+;Salt Equivalent-g;;Salt Equivalent (g)
+;Vitamin K;;Vitamin K (µg)
+;Biotin;;Biotin (µg)
+;Potassium-mg;;Potassium (mg)
+;Chloride-mg;;Chloride (mg)
+;Copper-mg;;Copper (mg)
+;Manganese-mg;;Manganese (mg)
+;Fluoride-mg;;Fluoride (mg)
+;Selenium;;Selenium (µg)
+;Chromium;;Chromium (µg)
+;Molybdenum;;Molybdenum (µg)
+;Trans Fat-g;;Trans Fat (g)
+;Nutrition	;;	Nutrition
+;Additives Other Text;;Additives Other Text
+ 
+
+# Insert Classifications
+UPDATE ClassificationClass;code[unique=true];$classCatalogVersion;name[lang=$lang]
+ ;100;;Product Details;
+ ;101;;Branding and Marketing;
+ ;102;;Company Details;
+ ;103;;Addresses;
+ ;104;;Weight & Size;
+ ;105;;Information and Usage Guidelines;
+ ;106;;Additives Informations;
+ ;107;;Creative Content;
+ ;108;;Advisory & Warnings;
+ ;109;;Storage Conditions;
+ ;110;;Cooking Guidelines;
+ ;111;;Country and Origin;
+ ;112;;Food Life Information;
+ ;113;;Additional Category;
+ ;114;;SEO Tags;
+ ;115;;Product Specifications
+ ;116;;Benefits
+ ;117;;Preparation & Usage
+ ;118;;Storage & Care
+ ;119;;Nutrition;
+
+# Insert Classification Attributes
+UPDATE ClassificationAttribute;code[unique=true];$classSystemVersion;name[lang=$lang]
+ ;Further Descrption	;;	Further Descrption
+ ;Description	;;	Description
+ ;Regional Name	;;	Regional Name
+ ;Product Marketing	;;	Product Marketing
+ ;Brand Marketing	;;	Brand Marketing
+ ;Manufacturer Marketing	;;	Manufacturer Marketing
+ ;Company Name	;;	Company Name
+ ;Company Address	;;	Company Address
+ ;Telephone Helpline	;;	Telephone Helpline
+ ;Fax Number	;;	Fax Number
+ ;Email Helpline	;;	Email Helpline
+ ;Web Address	;;	Web Address
+ ;Manufacturers Address	;;	Manufacturers Address
+ ;Importer Address	;;	Importer Address
+ ;Distributor Address	;;	Distributor Address
+ ;Return To	;;	Return To
+ ;Numeric Size	;;	Numeric Size
+ ;Drained Weight	;;	Drained Weight
+ ;Number of units	;;	Number of units
+ ;Unit Type	;;	Unit Type
+ ;Weight	;;	Weight
+ ;Pack Size	;;	Pack Size
+ ;Features	;;	Features
+ ;Box Contents	;;	Box Contents
+ ;Recipes	;;	Recipes
+ ;Lifestyle	;;	Lifestyle
+ ;Other Information	;;	Other Information
+ ;Number of uses	;;	Number of uses
+ ;Usage Other Text	;;	Usage Other Text
+ ;Occasion	;;	Occasion
+ ;New Arrivals	;;	New Arrivals
+ ;Type	;;	Type
+ ;Taggable Ingredients	;;	Taggable Ingredients
+ ;Lifestyle Other Text	;;	Lifestyle Other Text
+ ;BHA/BHT ;;	BHA/BHT (antioxidants)
+ ;AZO Colours	;;	AZO Colours
+ ;MSG;;MSG (Glutamate)
+ ;Benzoate	;;	Benzoate
+ ;Additives	;;	Additives
+ ;Aspartame	;;	Aspartame
+ ;Yeast	;;	Yeast
+ ;Genetically Modified Ingredients	;;	Genetically Modified Ingredients
+ ;Artificial Colours	;;	Artificial Colours
+ ;Artificial Sweeteners	;;	Artificial Sweeteners
+ ;Artificial Flavours	;;	Artificial Flavours
+ ;Artificial Preservatives	;;	Artificial Preservatives
+ ;Tartrazine	;;	Tartrazine
+ ;HVP	;;	HVP (Hydrolised Vegetable Protein)
+ ;Sucrose	;;	Sucrose
+ ;GM Protein/DNA	;;	GM Protein/DNA
+ ;Artificial Antioxidants	;;	Artificial Antioxidants
+ ;Flavour Enhancers	;;	Flavour Enhancers
+ ;Preservatives	;;	Preservatives
+ ;Brand Description	;;	Brand Description
+ ;Design Description	;;	Design Description
+ ;Look Pattern Description	;;	Look/Pattern Description
+ ;Material Description	;;	Material Description
+ ;Technical Details Description	;;	Technical Details Description
+ ;Technology Description	;;	Technology Description
+ ;Utility Description	;;	Utility Description
+ ;Wash Care Description	;;	Wash Care Description
+ ;Benefit Description	;;	Benefit Description
+ ;Safety Warning	;;	Safety Warning
+ ;Lower Age Limit	;;	Lower Age Limit
+ ;Upper Age Limit	;;	Upper Age Limit
+ ;Storage	;;	Storage
+ ;Taggable Allergy Text	;;	Taggable Allergy Text
+ ;Allergy Other Text	;;	Allergy Other Text
+ ;Allergen Tag Format	;;	Allergen Tag Format
+ ;Preparation and Usage	;;	Preparation and Usage
+ ;Min Temp °C	;;	Min Temp °C
+ ;Max Temp °C	;;	Max Temp °C
+ ;Min Humidity %	;;	Min Humidity %
+ ;Max Humidity %	;;	Max Humidity %
+ ;Oven cook	;;	Oven cook
+ ;Microwave	;;	Microwave
+ ;Grill	;;	Grill
+ ;Barbecue	;;	Barbecue
+ ;Shallow Fry	;;	Shallow Fry
+ ;Deep Fry	;;	Deep Fry
+ ;Stir Fry	;;	Stir Fry
+ ;Steam	;;	Steam
+ ;Poach	;;	Poach
+ ;Hob	;;	Hob
+ ;Boil in the Bag	;;	Boil in the Bag
+ ;Other	;;	Other
+ ;Cooking Instructions	;;	Cooking Instructions
+ ;Country of Origin	;;	Country of Origin
+ ;Packed In	;;	Packed In
+ ;Place of Provenance	;;	Place of Provenance
+ ;Fish Catch Area	;;	Fish Catch Area
+ ;Origin Free Text	;;	Origin Free Text
+ ;Sourced ;;	Sourced (Water)
+ ;Harvest Time	;;	Harvest Time
+ ;Availability period	;;	Availability period
+ ;Lead time from farm	;;	Lead time from farm
+ ;Peak Season	;;	Peak Season
+ ;Aging	;;	Aging
+ ;Loose	;;	Loose
+ ;Business	;;	Business
+ ;Division	;;	Division
+ ;Market	;;	Market
+ ;Category	;;	Category
+ ;Family	;;	Family
+ ;Online Business	;;	Online Business
+ ;Online Market	;;	Online Market
+ ;Online Family	;;	Online Family
+ ;Title Tag	;;	Title Tag
+ ;Meta Description	;;	Meta Description
+ ;Meta Keywords	;;	Meta Keywords
+ ;Page URL	;;	Page URL
+ ;Search Tag	;;	Search Tag
+ ;Canonical Tag	;;	Canonical Tag
+ ;Heading Tag	;;	Heading Tag
+ ;Nutritions	;;	Nutrition
+ ;Taggable Ingredients;;Taggable Ingredients
+ ;Additive Other Text;;Additives Other Text
+ ;Material Free Text;;Material Free Text
+ ;Design;;Design
+ ;Colour;;Colour
+ ;Style;;Style
+ ;Shape;;Shape
+ ;Screen Size;;Screen Size
+ ;Product Dimensions;;Product Dimensions
+ ;Benefits Description;;Benefits Description
+ ;Cooking Instructions Guidelines;;Cooking Instructions / Guidelines
+ ;Warranty;;Warranty

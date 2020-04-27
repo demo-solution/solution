@@ -1,0 +1,120 @@
+remove DeliverySlot;warehouses(code);slotId[unique=true];orderingDay[unique=true];deliveryType(code,itemtype(code));minimumOrderTimeSlot[unique=true];maximumOrderTimeSlot[unique=true];slotDescription;active;homeDeliveryId[unique=true];
+;20010;7;0;CNC:DeliveryTypeEnum;0;11;4:00 PM To 5:00 PM:LMG;true;
+;20010;8;0;CNC:DeliveryTypeEnum;0;11;5:00 PM To 6:00 PM:SPAR;true;
+;20010;7;1;CNC:DeliveryTypeEnum;0;11;4:00 PM To 5:00 PM:LMG;true;
+;20010;8;1;CNC:DeliveryTypeEnum;0;11;5:00 PM To 6:00 PM:SPAR;true;
+;20010;7;1;CNC:DeliveryTypeEnum;12;23;4:00 PM To 5:00 PM:LMG;true;
+;20010;8;1;CNC:DeliveryTypeEnum;12;23;5:00 PM To 6:00 PM:SPAR;true;
+;20010;7;2;CNC:DeliveryTypeEnum;12;23;4:00 PM To 5:00 PM:LMG;true;
+;20010;8;2;CNC:DeliveryTypeEnum;12;23;5:00 PM To 6:00 PM:SPAR;true;
+;20010;7;2;CNC:DeliveryTypeEnum;0;11;4:00 PM To 5:00 PM:LMG;true;
+;20010;8;2;CNC:DeliveryTypeEnum;0;11;5:00 PM To 6:00 PM:SPAR;true;
+;20010;7;3;CNC:DeliveryTypeEnum;0;11;4:00 PM To 5:00 PM:LMG;true;
+;20010;8;3;CNC:DeliveryTypeEnum;0;11;5:00 PM To 6:00 PM:SPAR;true;
+;20010;7;4;CNC:DeliveryTypeEnum;0;11;4:00 PM To 5:00 PM:LMG;true;
+;20010;8;4;CNC:DeliveryTypeEnum;0;11;5:00 PM To 6:00 PM:SPAR;true;
+;20010;7;5;CNC:DeliveryTypeEnum;0;11;4:00 PM To 5:00 PM:LMG;true;
+;20010;8;5;CNC:DeliveryTypeEnum;0;11;5:00 PM To 6:00 PM:SPAR;true;
+;20010;7;6;CNC:DeliveryTypeEnum;0;11;4:00 PM To 5:00 PM:LMG;true;
+;20010;8;6;CNC:DeliveryTypeEnum;0;11;5:00 PM To 6:00 PM:SPAR;true;
+;20010;7;6;CNC:DeliveryTypeEnum;12;23;4:00 PM To 5:00 PM:LMG;true;
+;20010;8;6;CNC:DeliveryTypeEnum;12;23;5:00 PM To 6:00 PM:SPAR;true;
+;20010;7;3;CNC:DeliveryTypeEnum;12;23;4:00 PM To 5:00 PM:LMG;true;
+;20010;8;3;CNC:DeliveryTypeEnum;12;23;5:00 PM To 6:00 PM:SPAR;true;
+;20010;7;4;CNC:DeliveryTypeEnum;12;23;4:00 PM To 5:00 PM:LMG;true;
+;20010;8;4;CNC:DeliveryTypeEnum;12;23;5:00 PM To 6:00 PM:SPAR;true;
+;20010;7;5;CNC:DeliveryTypeEnum;12;23;4:00 PM To 5:00 PM:LMG;true;
+;20010;8;5;CNC:DeliveryTypeEnum;12;23;5:00 PM To 6:00 PM:SPAR;true;
+;20010;7;6;CNC:DeliveryTypeEnum;12;23;4:00 PM To 5:00 PM:LMG;true;
+;20010;8;6;CNC:DeliveryTypeEnum;12;23;5:00 PM To 6:00 PM:SPAR;true;
+
+;20001,20007,20010;-5;1;HD:DeliveryTypeEnum;0;20;10:00 AM to 12:30 PM;true;
+;20001,20007,20010;-5;2;HD:DeliveryTypeEnum;0;20;10:00 AM to 12:30 PM;true;
+;20001,20007,20010;-5;3;HD:DeliveryTypeEnum;0;20;10:00 AM to 12:30 PM;true;
+;20001,20007,20010;-5;4;HD:DeliveryTypeEnum;0;20;10:00 AM to 12:30 PM;true;
+;20001,20007,20010;-5;5;HD:DeliveryTypeEnum;0;20;10:00 AM to 12:30 PM;true;
+;20001,20007,20010;-5;6;HD:DeliveryTypeEnum;0;20;10:00 AM to 12:30 PM;true;
+
+;40001;7;0;CNC:DeliveryTypeEnum;0;11;4:00 PM To 5:00 PM:LMG;true;
+;40001;8;0;CNC:DeliveryTypeEnum;0;11;5:00 PM To 6:00 PM:SPAR;true;
+;40001;7;1;CNC:DeliveryTypeEnum;0;11;4:00 PM To 5:00 PM:LMG;true;
+;40001;8;1;CNC:DeliveryTypeEnum;0;11;5:00 PM To 6:00 PM:SPAR;true;
+;40001;7;1;CNC:DeliveryTypeEnum;12;23;4:00 PM To 5:00 PM:LMG;true;
+;40001;8;1;CNC:DeliveryTypeEnum;12;23;5:00 PM To 6:00 PM:SPAR;true;
+;40001;7;2;CNC:DeliveryTypeEnum;12;23;4:00 PM To 5:00 PM:LMG;true;
+;40001;8;2;CNC:DeliveryTypeEnum;12;23;5:00 PM To 6:00 PM:SPAR;true;
+
+
+insert_update DeliverySlot;warehouses(code);slotId[unique=true];orderingDay[unique=true];deliveryType(code,itemtype(code));minimumOrderTimeSlot[unique=true];maximumOrderTimeSlot[unique=true];slotDescription;active;homeDeliveryId[unique=true];
+###morning slot
+;20001,20007,40001,20010;-5;1;HD:DeliveryTypeEnum;0;19;10:00 AM to 12:30 PM;true;1.00
+;20001,20007,40001,20010;-5;2;HD:DeliveryTypeEnum;0;19;10:00 AM to 12:30 PM;true;2.00
+;20001,20007,40001,20010;-5;3;HD:DeliveryTypeEnum;0;19;10:00 AM to 12:30 PM;true;3.00
+;20001,20007,40001,20010;-5;4;HD:DeliveryTypeEnum;0;19;10:00 AM to 12:30 PM;true;4.00
+;20001,20007,40001,20010;-5;5;HD:DeliveryTypeEnum;0;19;10:00 AM to 12:30 PM;true;5.00
+;20001,20007,40001,20010;-5;6;HD:DeliveryTypeEnum;0;19;10:00 AM to 12:30 PM;true;6.00
+;20001,20007,40001,20010;-5;2;HD:DeliveryTypeEnum;20;23;10:00 AM to 12:30 PM;true;2.01
+;20001,20007,40001,20010;-5;3;HD:DeliveryTypeEnum;20;23;10:00 AM to 12:30 PM;true;3.01
+;20001,20007,40001,20010;-5;4;HD:DeliveryTypeEnum;20;23;10:00 AM to 12:30 PM;true;4.01
+;20001,20007,40001,20010;-5;5;HD:DeliveryTypeEnum;20;23;10:00 AM to 12:30 PM;true;5.01
+;20001,20007,40001,20010;-5;6;HD:DeliveryTypeEnum;20;23;10:00 AM to 12:30 PM;true;6.01
+
+### evening HD slots
+##5:00 PM To 7:30 PM slot before 12 pm
+;20001,20007,40001,20010;1;0;HD:DeliveryTypeEnum;0;11;5:00 PM To 7:30 PM;true;0.00
+;20001,20007,40001,20010;2;0;HD:DeliveryTypeEnum;0;11;7:30 PM To 10:00 PM;true;0.01
+;20001,20007,40001,20010;1;1;HD:DeliveryTypeEnum;0;11;5:00 PM To 7:30 PM;true;1.01
+;20001,20007,40001,20010;1;2;HD:DeliveryTypeEnum;0;11;5:00 PM To 7:30 PM;true;2.02
+;20001,20007,40001,20010;1;3;HD:DeliveryTypeEnum;0;11;5:00 PM To 7:30 PM;true;3.02
+;20001,20007,40001,20010;1;4;HD:DeliveryTypeEnum;0;11;5:00 PM To 7:30 PM;true;4.02
+;20001,20007,40001,20010;1;5;HD:DeliveryTypeEnum;0;11;5:00 PM To 7:30 PM;true;5.02
+;20001,20007,40001,20010;1;6;HD:DeliveryTypeEnum;0;11;5:00 PM To 7:30 PM;true;6.02
+##5:00 PM To 7:30 PM slot after 12 pm
+;20001,20007,40001,20010;1;1;HD:DeliveryTypeEnum;12;23;5:00 PM To 7:30 PM;true;1.02
+;20001,20007,40001,20010;1;2;HD:DeliveryTypeEnum;12;23;5:00 PM To 7:30 PM;true;2.03
+;20001,20007,40001,20010;1;3;HD:DeliveryTypeEnum;12;23;5:00 PM To 7:30 PM;true;3.03
+;20001,20007,40001,20010;1;4;HD:DeliveryTypeEnum;12;23;5:00 PM To 7:30 PM;true;4.03
+;20001,20007,40001,20010;1;5;HD:DeliveryTypeEnum;12;23;5:00 PM To 7:30 PM;true;5.03
+;20001,20007,40001,20010;1;6;HD:DeliveryTypeEnum;12;23;5:00 PM To 7:30 PM;true;6.03
+## 7:30 PM To 10:00 PM slot before 12 pm
+;20001,20007,40001,20010;2;1;HD:DeliveryTypeEnum;0;11;7:30 PM To 10:00 PM;true;1.03
+;20001,20007,40001,20010;2;2;HD:DeliveryTypeEnum;0;11;7:30 PM To 10:00 PM;true;2.04
+;20001,20007,40001,20010;2;3;HD:DeliveryTypeEnum;0;11;7:30 PM To 10:00 PM;true;3.04
+;20001,20007,40001,20010;2;4;HD:DeliveryTypeEnum;0;11;7:30 PM To 10:00 PM;true;4.04
+;20001,20007,40001,20010;2;5;HD:DeliveryTypeEnum;0;11;7:30 PM To 10:00 PM;true;5.04
+;20001,20007,40001,20010;2;6;HD:DeliveryTypeEnum;0;11;7:30 PM To 10:00 PM;true;6.04
+##### 7:30 PM To 10:00 PM slot after 12 pm
+;20001,20007,40001,20010;2;1;HD:DeliveryTypeEnum;12;23;7:30 PM To 10:00 PM;true;1.04
+;20001,20007,40001,20010;2;2;HD:DeliveryTypeEnum;12;23;7:30 PM To 10:00 PM;true;2.05
+;20001,20007,40001,20010;2;3;HD:DeliveryTypeEnum;12;23;7:30 PM To 10:00 PM;true;3.05
+;20001,20007,40001,20010;2;4;HD:DeliveryTypeEnum;12;23;7:30 PM To 10:00 PM;true;4.05
+;20001,20007,40001,20010;2;5;HD:DeliveryTypeEnum;12;23;7:30 PM To 10:00 PM;true;5.05
+;20001,20007,40001,20010;2;6;HD:DeliveryTypeEnum;12;23;7:30 PM To 10:00 PM;true;6.05
+##### cnc slots
+;20001,20007,20010;7;0;CNC:DeliveryTypeEnum;0;11;4:00 PM To 6:00 PM:LMG;true;0.04
+;20001,20007,20010;8;0;CNC:DeliveryTypeEnum;0;11;4:00 PM To 6:00 PM:SPAR;true;0.03
+;20001,20007,20010;7;1;CNC:DeliveryTypeEnum;0;11;4:00 PM To 6:00 PM:LMG;true;1.06
+;20001,20007,20010;8;1;CNC:DeliveryTypeEnum;0;11;4:00 PM To 6:00 PM:SPAR;true;1.05
+;20001,20007,20010;7;2;CNC:DeliveryTypeEnum;0;11;4:00 PM To 6:00 PM:LMG;true;2.07
+;20001,20007,20010;8;2;CNC:DeliveryTypeEnum;0;11;4:00 PM To 6:00 PM:SPAR;true;2.06
+;20001,20007,20010;7;3;CNC:DeliveryTypeEnum;0;11;4:00 PM To 6:00 PM:LMG;true;3.07
+;20001,20007,20010;8;3;CNC:DeliveryTypeEnum;0;11;4:00 PM To 6:00 PM:SPAR;true;3.06
+;20001,20007,20010;7;4;CNC:DeliveryTypeEnum;0;11;4:00 PM To 6:00 PM:LMG;true;4.07
+;20001,20007,20010;8;4;CNC:DeliveryTypeEnum;0;11;4:00 PM To 6:00 PM:SPAR;true;4.06
+;20001,20007,20010;7;5;CNC:DeliveryTypeEnum;0;11;4:00 PM To 6:00 PM:LMG;true;5.07
+;20001,20007,20010;8;5;CNC:DeliveryTypeEnum;0;11;4:00 PM To 6:00 PM:SPAR;true;5.06
+;20001,20007,20010;7;6;CNC:DeliveryTypeEnum;0;11;4:00 PM To 6:00 PM:LMG;true;6.07
+;20001,20007,20010;8;6;CNC:DeliveryTypeEnum;0;11;4:00 PM To 6:00 PM:SPAR;true;6.06
+##### cnc slot 4:00 PM To 6:00 PM,4:00 PM To 6:00 PM after 12 pm
+;20001,20007,20010;7;1;CNC:DeliveryTypeEnum;12;23;4:00 PM To 6:00 PM:LMG;true;1.08
+;20001,20007,20010;8;1;CNC:DeliveryTypeEnum;12;23;4:00 PM To 6:00 PM:SPAR;true;1.07
+;20001,20007,20010;7;2;CNC:DeliveryTypeEnum;12;23;4:00 PM To 6:00 PM:LMG;true;2.09
+;20001,20007,20010;8;2;CNC:DeliveryTypeEnum;12;23;4:00 PM To 6:00 PM:SPAR;true;2.08
+;20001,20007,20010;7;3;CNC:DeliveryTypeEnum;12;23;4:00 PM To 6:00 PM:LMG;true;3.09
+;20001,20007,20010;8;3;CNC:DeliveryTypeEnum;12;23;4:00 PM To 6:00 PM:SPAR;true;3.08
+;20001,20007,20010;7;4;CNC:DeliveryTypeEnum;12;23;4:00 PM To 6:00 PM:LMG;true;4.09
+;20001,20007,20010;8;4;CNC:DeliveryTypeEnum;12;23;4:00 PM To 6:00 PM:SPAR;true;4.08
+;20001,20007,20010;7;5;CNC:DeliveryTypeEnum;12;23;4:00 PM To 6:00 PM:LMG;true;5.09
+;20001,20007,20010;8;5;CNC:DeliveryTypeEnum;12;23;4:00 PM To 6:00 PM:SPAR;true;5.08
+;20001,20007,20010;7;6;CNC:DeliveryTypeEnum;12;23;4:00 PM To 6:00 PM:LMG;true;6.09
+;20001,20007,20010;8;6;CNC:DeliveryTypeEnum;12;23;4:00 PM To 6:00 PM:SPAR;true;6.08

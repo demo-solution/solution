@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparcore/resources/sparcore/test
+END
+testBatch.impex
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparcore/resources/sparcore/test/testBatch.impex
+END
+testSystemSetup.impex
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparcore/resources/sparcore/test/testSystemSetup.impex
+END
+testSimpleSuggestionService.csv
+K 25
+svn:wc:ra_dav:version-url
+V 107
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparcore/resources/sparcore/test/testSimpleSuggestionService.csv
+END

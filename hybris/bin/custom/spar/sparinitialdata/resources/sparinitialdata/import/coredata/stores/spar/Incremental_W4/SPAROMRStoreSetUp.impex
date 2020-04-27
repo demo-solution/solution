@@ -1,0 +1,22 @@
+##Store SetUP
+$storePrefix=spar
+$storeUid=$storePrefix
+
+$standardHours=spar-india-standard-hours
+
+INSERT_UPDATE PointOfService;name[unique=true];type(code);address(&addrID);latitude;longitude;geocodeTimestamp[dateformat=dd-MM-yyyy];openingSchedule(code);basestore(uid)[default=$storeUid];features(code)
+;SPAR OMR;STORE;addrOMRStore;12.992942;77.661571;29-04-2025;$standardHours
+
+#Store Address
+INSERT_UPDATE Address;&addrID;firstname;streetname;streetnumber;town[unique=true];postalcode[unique=true];country(isocode);region(isocode);phone1;owner(PointOfService.name)[unique=true]
+;addrOMRStore;Gopalan Signature Mall;Old Madras Road;C.V.Raman Nagar;Bangalore;560016;IN;IN-MH;18605009418;SPAR OMR
+
+#Store warehouse relation
+INSERT_UPDATE PoS2WarehouseRel;source(name)[unique=true];target(code)[unique=true]
+;SPAR OMR;20007
+
+INSERT_UPDATE Address;&addrID;firstname;streetname;streetnumber;town[unique=true];postalcode[unique=true];country(isocode);region(isocode);phone1;owner(PointOfService.name)[unique=true]
+;addr3;SPAR Hypermarkets(Click &Collect Centre Next to Store Entrance);39/3 & 44 Bannerghatta Main Road,;Near Diary Circle,;Bengaluru;560029;IN;IN-KA;18605009418;SPAR Bhavani Nagar
+;addr4;Lifestyle International Pvt. Ltd.;;Yamlur P.O., Off HAL Airport Road,;Bengaluru;560037;IN;IN-KA;18605009418;SPAR LMG CC
+;addr6;SPAR Head Office;2nd Floor,(Above SPAR Hypermarket), Max Hypermarket India Pvt. Ltd 39/3 & 44, Bannerghatta Main Road;Near Diary Circle;Bengaluru;560029;IN;IN-KA;18605009418;SPAR Bannerghatta HO
+;addr7;Lifestyle International Pvt. Ltd.;;Yamlur P.O., Off HAL Airport Road,;Bengaluru;560037;IN;IN-KA;18605009418;SPAR LMG

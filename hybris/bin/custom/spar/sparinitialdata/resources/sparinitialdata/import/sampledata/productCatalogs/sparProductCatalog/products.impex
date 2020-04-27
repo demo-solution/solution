@@ -1,0 +1,49 @@
+# ImpEx for Importing Products into Spar Store
+
+# Macros / Replacement Parameter definitions
+$productCatalog=sparProductCatalog
+#$productCatalogName=SPAR Product Catalog
+$catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
+$supercategories=supercategories(code, $catalogVersion)
+#$baseProduct=baseProduct(code,$catalogVersion)
+$approved=approvalstatus(code)[default='approved']
+
+# Insert Sample Products
+#Variant Type (code) = SparVariantProduct is added as from S1 onwards we will have all product of type variants
+INSERT_UPDATE Product;variantType(code);code[unique=true];$supercategories;$catalogVersion;$approved
+#;100025655;30001
+#;100025659;30001
+#;100025917;30002
+#;100025919;30002
+#;100025923;30002
+#;100025893;30003
+#;100025895;30003
+#;100026465;30004
+#;100026467;30004
+#;100025957;30006
+#;100025909;30006
+#;100025947;30006
+#;100023919;30018
+#;100024115;30018
+#;100036497;30033
+#;100036495;30033
+#;100001359;30112
+#;100001373;30112
+
+#;SparVariantProduct;114409242;30010
+#;SparVariantProduct;114406720;30003
+#;SparVariantProduct;100294915;30027
+#;SparVariantProduct;100296507;30033
+#;SparVariantProduct;100457374;30051
+#;SparVariantProduct;100500005;30084
+#;SparVariantProduct;100723716;30260
+#;SparVariantProduct;102737783;30258
+#;SparVariantProduct;102824810;30246
+#;SparVariantProduct;100041007;30218
+#;SparVariantProduct;100042637;30222
+#;SparVariantProduct;100045215;30130
+#;SparVariantProduct;100032689;30187
+#;SparVariantProduct;100033107;30177
+#;SparVariantProduct;100034967;30180
+#;SparVariantProduct;100035145;30208
+

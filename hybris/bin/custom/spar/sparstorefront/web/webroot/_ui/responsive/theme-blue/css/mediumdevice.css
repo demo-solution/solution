@@ -1,0 +1,42 @@
+/* iPads (portrait and landscape) ----------- */
+@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) {
+	
+	/*----- Location Popup Start Here ----*/
+	.header-bottom .flyout1 .form-group select, .header-bottom .flyout1 .form-group input[type='text']{
+		width:150px;
+	}
+	.btnLocation{width: 35%;}
+	.clickNCollectData .btnLocation{width:100%;}
+	.locContainer{margin: 10px 0px 10px 20px;}
+	.mini-cart-link .miniCartPopup,.mini-cart-link .popup-height{width:550px;z-index:99999;}
+	/*----- Location Popup End Here ----*/
+	
+	/*----- Menu Start Here ----*/
+	.page-homepage .block-vertical-menu-list{display: block;}
+	.vertical-menu-list li a{font-size: 10px;}
+	.block-vertical-menu-list{z-index: 1;}
+	.naviRight>.btn-group>a{text-align:left; line-height: normal;}
+	/*----- Menu End Here ----*/
+	
+	/*----- Cart Start Here ----*/
+	.cart-item-details .thumb a,
+	.cart-item-details .thumb div a.color-black{float:left;}
+	.cart-item-details .thumb div a.color-black{width:80%;}	
+	/*----- Cart End Here ----*/
+	
+	
+	/*----- Mini Cart Start Here ----*/
+	.header-bottom .miniCart:hover .popup-container .miniCartPopup{
+		display: none;
+	}
+	/*-----  Mini Cart End Here ----*/
+	
+	/*----- PLP Start Here ----*/
+	.single-products .out-of-stock{font-size: 9px;}
+	.products-container .single-products .js-qty-selector{width:52%;}
+	/*----- PLP Cart End Here ----*/
+	
+	.shop-menu ul li{
+		padding:0 10px;
+	}	
+}

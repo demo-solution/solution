@@ -1,0 +1,77 @@
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparcore/src/com/spar/hcl/core/brandbank/ws
+END
+DataX0020ExtractSoap.java
+K 25
+svn:wc:ra_dav:version-url
+V 112
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparcore/src/com/spar/hcl/core/brandbank/ws/DataX0020ExtractSoap.java
+END
+package-info.java
+K 25
+svn:wc:ra_dav:version-url
+V 104
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparcore/src/com/spar/hcl/core/brandbank/ws/package-info.java
+END
+GetProductDataForGTINsResponse.java
+K 25
+svn:wc:ra_dav:version-url
+V 122
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparcore/src/com/spar/hcl/core/brandbank/ws/GetProductDataForGTINsResponse.java
+END
+GetProductDataForGTINs.java
+K 25
+svn:wc:ra_dav:version-url
+V 114
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparcore/src/com/spar/hcl/core/brandbank/ws/GetProductDataForGTINs.java
+END
+GetUnsentProductDataResponse.java
+K 25
+svn:wc:ra_dav:version-url
+V 120
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparcore/src/com/spar/hcl/core/brandbank/ws/GetUnsentProductDataResponse.java
+END
+AcknowledgeMessageResponse.java
+K 25
+svn:wc:ra_dav:version-url
+V 118
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparcore/src/com/spar/hcl/core/brandbank/ws/AcknowledgeMessageResponse.java
+END
+GetUnsentProductData.java
+K 25
+svn:wc:ra_dav:version-url
+V 112
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparcore/src/com/spar/hcl/core/brandbank/ws/GetUnsentProductData.java
+END
+AcknowledgeMessage.java
+K 25
+svn:wc:ra_dav:version-url
+V 110
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparcore/src/com/spar/hcl/core/brandbank/ws/AcknowledgeMessage.java
+END
+ArrayOfString.java
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparcore/src/com/spar/hcl/core/brandbank/ws/ArrayOfString.java
+END
+DataX0020Extract.java
+K 25
+svn:wc:ra_dav:version-url
+V 108
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparcore/src/com/spar/hcl/core/brandbank/ws/DataX0020Extract.java
+END
+ExternalCallerHeader.java
+K 25
+svn:wc:ra_dav:version-url
+V 112
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparcore/src/com/spar/hcl/core/brandbank/ws/ExternalCallerHeader.java
+END
+ObjectFactory.java
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparcore/src/com/spar/hcl/core/brandbank/ws/ObjectFactory.java
+END

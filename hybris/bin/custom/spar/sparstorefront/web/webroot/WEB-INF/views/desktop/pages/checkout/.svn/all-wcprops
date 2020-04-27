@@ -1,0 +1,35 @@
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparstorefront/web/webroot/WEB-INF/views/desktop/pages/checkout
+END
+checkoutGuestLogin.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 129
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparstorefront/web/webroot/WEB-INF/views/desktop/pages/checkout/checkoutGuestLogin.jsp
+END
+checkouReturningCustomerLogin.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 140
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparstorefront/web/webroot/WEB-INF/views/desktop/pages/checkout/checkouReturningCustomerLogin.jsp
+END
+checkoutNewCustomerLogin.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 135
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparstorefront/web/webroot/WEB-INF/views/desktop/pages/checkout/checkoutNewCustomerLogin.jsp
+END
+checkoutConfirmationPage.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 135
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparstorefront/web/webroot/WEB-INF/views/desktop/pages/checkout/checkoutConfirmationPage.jsp
+END
+checkoutLoginPage.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 128
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparstorefront/web/webroot/WEB-INF/views/desktop/pages/checkout/checkoutLoginPage.jsp
+END

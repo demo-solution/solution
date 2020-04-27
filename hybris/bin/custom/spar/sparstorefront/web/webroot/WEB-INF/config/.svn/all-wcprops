@@ -1,0 +1,47 @@
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/S6_Maintenance/!svn/ver/224/custom/spar/sparstorefront/web/webroot/WEB-INF/config
+END
+web-application-config.xml
+K 25
+svn:wc:ra_dav:version-url
+V 111
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparstorefront/web/webroot/WEB-INF/config/web-application-config.xml
+END
+spring-cms-config.xml
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparstorefront/web/webroot/WEB-INF/config/spring-cms-config.xml
+END
+spring-filter-config.xml
+K 25
+svn:wc:ra_dav:version-url
+V 109
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparstorefront/web/webroot/WEB-INF/config/spring-filter-config.xml
+END
+spring-mvc-config.xml
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparstorefront/web/webroot/WEB-INF/config/spring-mvc-config.xml
+END
+multi-step-checkout-config.xml
+K 25
+svn:wc:ra_dav:version-url
+V 115
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparstorefront/web/webroot/WEB-INF/config/multi-step-checkout-config.xml
+END
+spring-security-config.xml
+K 25
+svn:wc:ra_dav:version-url
+V 113
+/svn/S6_Maintenance/!svn/ver/224/custom/spar/sparstorefront/web/webroot/WEB-INF/config/spring-security-config.xml
+END
+btg-config.xml
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparstorefront/web/webroot/WEB-INF/config/btg-config.xml
+END

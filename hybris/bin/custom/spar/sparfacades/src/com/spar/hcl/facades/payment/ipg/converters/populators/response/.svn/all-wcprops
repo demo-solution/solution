@@ -1,0 +1,41 @@
+K 25
+svn:wc:ra_dav:version-url
+V 122
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparfacades/src/com/spar/hcl/facades/payment/ipg/converters/populators/response
+END
+SparOrderInfoResultPopulator.java
+K 25
+svn:wc:ra_dav:version-url
+V 156
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparfacades/src/com/spar/hcl/facades/payment/ipg/converters/populators/response/SparOrderInfoResultPopulator.java
+END
+SparCreateSubscriptionResultPopulator.java
+K 25
+svn:wc:ra_dav:version-url
+V 165
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparfacades/src/com/spar/hcl/facades/payment/ipg/converters/populators/response/SparCreateSubscriptionResultPopulator.java
+END
+SparIPGPaymentInfoResultPopulator.java
+K 25
+svn:wc:ra_dav:version-url
+V 161
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparfacades/src/com/spar/hcl/facades/payment/ipg/converters/populators/response/SparIPGPaymentInfoResultPopulator.java
+END
+SparIPGAuthReplyResultPopulator.java
+K 25
+svn:wc:ra_dav:version-url
+V 159
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparfacades/src/com/spar/hcl/facades/payment/ipg/converters/populators/response/SparIPGAuthReplyResultPopulator.java
+END
+SparSubscriptionInfoResultPopulator.java
+K 25
+svn:wc:ra_dav:version-url
+V 163
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparfacades/src/com/spar/hcl/facades/payment/ipg/converters/populators/response/SparSubscriptionInfoResultPopulator.java
+END
+SparSignatureResultPopulator.java
+K 25
+svn:wc:ra_dav:version-url
+V 156
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparfacades/src/com/spar/hcl/facades/payment/ipg/converters/populators/response/SparSignatureResultPopulator.java
+END

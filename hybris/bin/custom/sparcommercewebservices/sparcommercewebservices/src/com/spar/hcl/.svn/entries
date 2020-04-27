@@ -1,0 +1,67 @@
+10
+
+dir
+416
+http://10.2.7.20/svn/S6_Maintenance/custom/sparcommercewebservices/src/com/spar/hcl
+http://10.2.7.20/svn/S6_Maintenance
+
+
+
+2019-01-22T13:05:47.185484Z
+241
+ravindra.kr
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+db735611-e5e1-473b-b638-8971ea245bcc
+
+product
+dir
+
+customer
+dir
+
+stock
+dir
+
+jalo
+dir
+
+queues
+dir
+
+v2
+dir
+
+cart
+dir
+
+catalog
+dir
+
+strategies
+dir
+
+constants
+dir
+
+cronjob
+dir
+
+category
+dir
+
+mobileAppVersion
+dir
+

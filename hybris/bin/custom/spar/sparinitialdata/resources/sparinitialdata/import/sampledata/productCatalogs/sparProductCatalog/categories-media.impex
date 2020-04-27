@@ -1,0 +1,31 @@
+# ImpEx for Importing Categories into Spar Store
+
+# Macros / Replacement Parameter definitions
+$productCatalog=sparProductCatalog
+$productCatalogName=SPAR Product Catalog
+$catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
+$supercategories=source(code, $catalogVersion)[unique=true]
+$categories=target(code, $catalogVersion)[unique=true]
+$siteResource=jar:com.spar.hcl.initialdata.setup.InitialDataSystemSetup&/sparinitialdata/import/sampledata/productCatalogs/$productCatalog
+
+$thumbnail=thumbnail(code, $catalogVersion)
+$picture=picture(code, $catalogVersion)
+$logo=logo(code, $catalogVersion)
+
+
+# Import Category Media
+INSERT_UPDATE Media;code[unique=true];realfilename;@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator];mime[default='image/jpeg'];$catalogVersion
+;/img/categorycarousel/cat-1.jpg;Category_Banners_STAPLES.jpg;$siteResource/images/categorycarousel/Category_Banners_STAPLES.jpg;
+;/img/categorycarousel/cat-2.jpg;Category_Banners_FISH_n_MEAT.jpg;$siteResource/images/categorycarousel/Category_Banners_FISH_n_MEAT.jpg;
+;/img/categorycarousel/cat-3.jpg;Category_Banners_NON_FOOD.jpg;$siteResource/images/categorycarousel/Category_Banners_NON_FOOD.jpg;
+;/img/categorycarousel/cat-4.jpg;Category_Banners_F_Veg.jpg;$siteResource/images/categorycarousel/Category_Banners_F_Veg.jpg;
+
+
+
+
+UPDATE Category;code[unique=true];$thumbnail;$picture;$logo;allowedPrincipals(uid)[default='customergroup'];$catalogVersion
+;10002;/img/categorycarousel/cat-1.jpg;/img/categorycarousel/cat-1.jpg;/img/categorycarousel/cat-1.jpg;
+;10004;/img/categorycarousel/cat-2.jpg;/img/categorycarousel/cat-2.jpg;/img/categorycarousel/cat-2.jpg;
+;10009;/img/categorycarousel/cat-3.jpg;/img/categorycarousel/cat-3.jpg;/img/categorycarousel/cat-3.jpg;
+;10001;/img/categorycarousel/cat-4.jpg;/img/categorycarousel/cat-4.jpg;/img/categorycarousel/cat-4.jpg;
+#;10014;/img/categorycarousel/cat-1.jpg;/img/categorycarousel/cat-1.jpg;/img/categorycarousel/cat-1.jpg;

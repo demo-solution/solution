@@ -1,0 +1,41 @@
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svn/S6_Maintenance/!svn/ver/313/custom/sparordermanagement/resources/sparordermanagement/process
+END
+consignment-process-spring.xml
+K 25
+svn:wc:ra_dav:version-url
+V 126
+/svn/S6_Maintenance/!svn/ver/1/custom/sparordermanagement/resources/sparordermanagement/process/consignment-process-spring.xml
+END
+consignment-process.xml
+K 25
+svn:wc:ra_dav:version-url
+V 119
+/svn/S6_Maintenance/!svn/ver/1/custom/sparordermanagement/resources/sparordermanagement/process/consignment-process.xml
+END
+order-process-spring.xml
+K 25
+svn:wc:ra_dav:version-url
+V 122
+/svn/S6_Maintenance/!svn/ver/313/custom/sparordermanagement/resources/sparordermanagement/process/order-process-spring.xml
+END
+order-process.xml
+K 25
+svn:wc:ra_dav:version-url
+V 113
+/svn/S6_Maintenance/!svn/ver/1/custom/sparordermanagement/resources/sparordermanagement/process/order-process.xml
+END
+return-process-spring.xml
+K 25
+svn:wc:ra_dav:version-url
+V 121
+/svn/S6_Maintenance/!svn/ver/1/custom/sparordermanagement/resources/sparordermanagement/process/return-process-spring.xml
+END
+return-process.xml
+K 25
+svn:wc:ra_dav:version-url
+V 114
+/svn/S6_Maintenance/!svn/ver/1/custom/sparordermanagement/resources/sparordermanagement/process/return-process.xml
+END

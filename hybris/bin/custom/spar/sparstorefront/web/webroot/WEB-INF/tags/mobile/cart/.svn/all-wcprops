@@ -1,0 +1,65 @@
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparstorefront/web/webroot/WEB-INF/tags/mobile/cart
+END
+miniCart.tag
+K 25
+svn:wc:ra_dav:version-url
+V 107
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparstorefront/web/webroot/WEB-INF/tags/mobile/cart/miniCart.tag
+END
+cartItems.tag
+K 25
+svn:wc:ra_dav:version-url
+V 108
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparstorefront/web/webroot/WEB-INF/tags/mobile/cart/cartItems.tag
+END
+ajaxCartItems.tag
+K 25
+svn:wc:ra_dav:version-url
+V 112
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparstorefront/web/webroot/WEB-INF/tags/mobile/cart/ajaxCartItems.tag
+END
+cartPickupValidation.tag
+K 25
+svn:wc:ra_dav:version-url
+V 119
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparstorefront/web/webroot/WEB-INF/tags/mobile/cart/cartPickupValidation.tag
+END
+cartTotals.tag
+K 25
+svn:wc:ra_dav:version-url
+V 109
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparstorefront/web/webroot/WEB-INF/tags/mobile/cart/cartTotals.tag
+END
+implicit.tld
+K 25
+svn:wc:ra_dav:version-url
+V 107
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparstorefront/web/webroot/WEB-INF/tags/mobile/cart/implicit.tld
+END
+cartPotentialPromotions.tag
+K 25
+svn:wc:ra_dav:version-url
+V 122
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparstorefront/web/webroot/WEB-INF/tags/mobile/cart/cartPotentialPromotions.tag
+END
+cartPromotions.tag
+K 25
+svn:wc:ra_dav:version-url
+V 113
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparstorefront/web/webroot/WEB-INF/tags/mobile/cart/cartPromotions.tag
+END
+cartExpressCheckoutEnabled.tag
+K 25
+svn:wc:ra_dav:version-url
+V 125
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparstorefront/web/webroot/WEB-INF/tags/mobile/cart/cartExpressCheckoutEnabled.tag
+END
+cartValidation.tag
+K 25
+svn:wc:ra_dav:version-url
+V 113
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparstorefront/web/webroot/WEB-INF/tags/mobile/cart/cartValidation.tag
+END

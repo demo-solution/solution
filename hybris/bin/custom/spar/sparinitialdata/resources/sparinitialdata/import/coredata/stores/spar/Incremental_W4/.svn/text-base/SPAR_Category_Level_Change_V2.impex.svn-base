@@ -1,0 +1,155 @@
+# ImpEx for Importing CMS Content
+
+$contentCatalog=sparContentCatalog
+$contentCatalogName=Spar Content Catalog
+$productCatalog=sparProductCatalog
+$productCatalogName=Spar Product Catalog
+$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
+$productCV=catalogVersion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
+$picture=media(code, $contentCV);
+$image=image(code, $contentCV);
+$media=media(code, $contentCV);
+$page=page(uid, $contentCV);
+$contentPage=contentPage(uid, $contentCV);
+$product=product(code, $productCV)
+$category=category(code, $productCV)
+$siteResource=jar:com.spar.hcl.initialdata.setup.InitialDataSystemSetup&/sparinitialdata/import/sampledata/contentCatalogs/$contentCatalog
+$productResource=jar:com.spar.hcl.initialdata.setup.InitialDataSystemSetup&/sparinitialdata/import/sampledata/productCatalogs/$productCatalog
+$jarResourceCms=jar:com.spar.hcl.initialdata.setup.InitialDataSystemSetup&/sparinitialdata/import/sampledata/cockpits/cmscockpit
+$siteUid=spar
+$medias=medias(code, $contentCV);
+$lang=en
+$mediaContainer=media(qualifier, $contentCV)[lang=$lang];
+
+
+INSERT_UPDATE BannerComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef;urlLink;$picture[lang=$lang]
+# 1st level Category Banners
+;;PLPRotatingImageBanner13.1;Rotating Image Banner 13.1;PLPRotatingImageBanner13.1;;/images/banners/plp/responsive/ClothingandaccessoriesBranding.jpg;
+;;PLPRotatingImageBanner13.2;Rotating Image Banner 13.2;PLPRotatingImageBanner13.2;;/images/banners/plp/responsive/ClothingandaccessoriesPromotion.jpg;
+
+INSERT_UPDATE PlpRotatingImagesComponent;$contentCV[unique=true];uid[unique=true];name;timeout;banners(&componentRef);&componentRef
+;;SparPLPRotatingImagesComponent13;Spar PLP Rotating Images Component 13;5000;PLPRotatingImageBanner13.1,PLPRotatingImageBanner13.2;SparPLPRotatingImagesComponent13
+
+
+INSERT_UPDATE CMSCategoryRestriction;$contentCV[unique=true];uid[unique=true];name;categories(code, $productCV);components(uid, $contentCV);;;
+;;ClothingAndAccessoriesBannerCategoryRestriction;Restriction for Clothing & Accessories;10013;SparPLPRotatingImagesComponent13;;;
+
+
+INSERT_UPDATE CMSLinkComponent ; $contentCV[unique=true]; uid[unique=true]; name  ; url   ; &linkRef ; &componentRef ; target(code)[default='sameWindow'] ; $category  ; $product ;
+####### 2nd Level #######
+;; SaltSugarJaggeryCategoryLink; Salt, Sugar & Jaggery Link ; /Hybris-Catalogue/SaltSugarJaggery/c/20009; SaltSugarJaggeryCategoryLink ; SaltSugarJaggeryCategoryLink; ; 20009;;
+;; MasalasSpicesCategoryLink; Masalas, Spices Link ; /Hybris-Catalogue/MasalasSpices/c/20012; MasalasSpicesCategoryLink ; MasalasSpicesCategoryLink; ; 20012;;
+;; BakeryBreadsCategoryLink; Bakery & Breads Link ; /Hybris-Catalogue/BakeryBreads/c/20017; BakeryBreadsCategoryLink ; BakeryBreadsCategoryLink; ; 20017;;
+;; ChipsNamkeensSnacksCategoryLink   ; Chips, Namkeens & Snacks Link ; /Hybris-Catalogue/ChipsNamkeensSnacks/c/20046; ChipsNamkeensSnacksCategoryLink ; ChipsNamkeensSnacksCategoryLink; ; 20046;;
+;; AdultDiapersCategoryLink ; Adult Diapers Link; /Hybris-Catalogue/AdultDiapers/c/20069; AdultDiapersCategoryLink; AdultDiapersCategoryLink ; ; 20069;;
+;; BeautyPersonalCareOrganicCategoryLink ; Organic Link; /Hybris-Catalogue/BeautyPersonalCareOrganic/c/20071; BeautyPersonalCareOrganicCategoryLink; BeautyPersonalCareOrganicCategoryLink ; ; 20071;;
+;; FurnitureCategoryLink ; Furniture Link; /Hybris-Catalogue/Furniture/c/20083; FurnitureCategoryLink; FurnitureCategoryLink ; ; 20083;;
+;; HomeDecorFurnishingsCategoryLink ; Home Decor & Furnishings Link; /Hybris-Catalogue/HomeDecorFurnishings/c/20084; HomeDecorFurnishingsCategoryLink; HomeDecorFurnishingsCategoryLink ; ; 20084;;
+;; ClothingCategoryLink ; Clothing Link; /Hybris-Catalogue/Clothing/c/20093; ClothingCategoryLink; ClothingCategoryLink ; ; 20093;;
+;; ClothingAccessoriesCategoryLink ; Clothing & Accessories Link; /Hybris-Catalogue/ClothingAccessories/c/10013; ClothingAccessoriesCategoryLink; ClothingAccessoriesCategoryLink ; ; 10013;;
+;;FruitsVegetablesCategoryLink;Fruits & Vegetables Link;/Hybris-Catalogue/FruitsVegetables/c/10001;FruitsVegetablesCategoryLink;FruitsVegetablesCategoryLink;;10001;;
+;;CutVegetablesFruitsSaladCategoryLink;Cut Vegetables, Fruits & Salad Link;/Hybris-Catalogue/CutVegetablesFruitsSalad/c/20003;CutVegetablesFruitsSaladCategoryLink;CutVegetablesFruitsSaladCategoryLink;;20003;;
+
+
+####### 3rd Level #######
+;;SugarSubstituteCategoryLink;Sugar & Jaggery Link;/Hybris-Catalogue/SugarSubstitute/c/30039;SugarSubstituteCategoryLink;SugarSubstituteCategoryLink;;30039;;
+;;GiftingCategoryLink;Gifting;/Hybris-Catalogue/Beans/c/30059;GiftingCategoryLink;GiftingCategoryLink;;30059;;
+;;BakeryBreadsGiftingCategoryLink;Gifting;/Hybris-Catalogue/Beans/c/30075;BakeryBreadsGiftingCategoryLink;BakeryBreadsGiftingCategoryLink;;30075;;
+;;ChipsGiftingCategoryLink;Gifting;/Hybris-Catalogue/Beans/c/30194;ChipsGiftingCategoryLink;ChipsGiftingCategoryLink;;30194;;
+;;AdultDiapersCategoryLink;Adult Diapers;/Hybris-Catalogue/Beans/c/30289;AdultDiapersCategoryLink;AdultDiapersCategoryLink;;30289;;
+;;CasualGardenSeatingCategoryLink;Casual & Garden Seating;/Hybris-Catalogue/Beans/c/30346;CasualGardenSeatingCategoryLink;CasualGardenSeatingCategoryLink;;30346;;
+;;KidsFurnitureCategoryLink;Kids Furniture;/Hybris-Catalogue/Beans/c/30347;KidsFurnitureCategoryLink;KidsFurnitureCategoryLink;;30347;;
+;;ComforterCategoryLink;Comforter;/Hybris-Catalogue/Beans/c/30354;ComforterCategoryLink;ComforterCategoryLink;;30354;;
+;;CushionPillowFillerCategoryLink;Cushion & Pillow Filler;/Hybris-Catalogue/Beans/c/30357;CushionPillowFillerCategoryLink;CushionPillowFillerCategoryLink;;30357;;
+;;DoorCurtainCategoryLink;Door Curtain;/Hybris-Catalogue/Beans/c/30359;DoorCurtainCategoryLink;DoorCurtainCategoryLink;;30359;;
+;;WindowCurtainCategoryLink;Window Curtain;/Hybris-Catalogue/Beans/c/30361;WindowCurtainCategoryLink;WindowCurtainCategoryLink;;30361;;
+;;KitchenLinenCategoryLink;Kitchen Linen;/Hybris-Catalogue/Beans/c/30367;KitchenLinenCategoryLink;KitchenLinenCategoryLink;;30367;;
+;;FaceAndHandTowelCategoryLink;Face And Hand Towel;/Hybris-Catalogue/Beans/c/30369;FaceAndHandTowelCategoryLink;FaceAndHandTowelCategoryLink;;30369;;
+;;BathTowelCategoryLink;Bath Towel;/Hybris-Catalogue/Beans/c/30370;BathTowelCategoryLink;BathTowelCategoryLink;;30370;;
+;;DiyasCandlesCategoryLink;Diyas & Candles;/Hybris-Catalogue/Beans/c/30375;DiyasCandlesCategoryLink;DiyasCandlesCategoryLink;;30375;;
+;;MensWearCategoryLink;Mens Wear;/Hybris-Catalogue/Beans/c/30403;MensWearCategoryLink;MensWearCategoryLink;;30403;;
+;;LadieswearCategoryLink;Ladies wear;/Hybris-Catalogue/Beans/c/30404;LadieswearCategoryLink;LadieswearCategoryLink;;30404;;
+;;KidswearCategoryLink;Kids wear;/Hybris-Catalogue/Beans/c/30405;KidswearCategoryLink;KidswearCategoryLink;;30405;;
+;;CutVegetablesSaladsCategoryLink;Cut Vegetables & Salads;/Hybris-Catalogue/Beans/c/30018;CutVegetablesSaladsCategoryLink;CutVegetablesSaladsCategoryLink;;30018;;
+
+####### Existing 3rd level categories entry #######
+;;SugarJaggeryCategoryLink;Sugar & Jaggery Link;/Hybris-Catalogue/SugarJaggery/c/30037;SugarJaggeryCategoryLink;SugarJaggeryCategoryLink;;30037;;
+;;SaltCategoryLink;Sugar & Jaggery Link;/Hybris-Catalogue/Salt/c/30038;SaltCategoryLink;SaltCategoryLink;;30038;;
+;;WholeSpicesCategoryLink;Whole Spices;/Hybris-Catalogue/Beans/c/30052;WholeSpicesCategoryLink;WholeSpicesCategoryLink;;30052;;
+;;PowderedSpicesCategoryLink;Powdered Spices;/Hybris-Catalogue/Beans/c/30053;PowderedSpicesCategoryLink;PowderedSpicesCategoryLink;;30053;;
+;;ReadyMasalasCategoryLink;Ready Masalas;/Hybris-Catalogue/Beans/c/30054;ReadyMasalasCategoryLink;ReadyMasalasCategoryLink;;30054;;
+;;SeasoningsHerbsCategoryLink;Seasonings & Herbs;/Hybris-Catalogue/Beans/c/30055;SeasoningsHerbsCategoryLink;SeasoningsHerbsCategoryLink;;30055;;
+;;VinegarCategoryLink;Vinegar;/Hybris-Catalogue/Vinegar/c/30056;VinegarCategoryLink;VinegarCategoryLink;;30056;;
+;;EssenceFlavorsColorsCategoryLink;Essence, Flavors & Colors;/Hybris-Catalogue/Beans/c/30057;EssenceFlavorsColorsCategoryLink;EssenceFlavorsColorsCategoryLink;;30057;;
+;;PanNeedMukhwasCategoryLink;Pan Need & Mukhwas;/Hybris-Catalogue/Beans/c/30058;PanNeedMukhwasCategoryLink;PanNeedMukhwasCategoryLink;;30058;;
+;;BreadsBreadproductsCategoryLink;Breads & Bread products;/Hybris-Catalogue/Beans/c/30068;BreadsBreadproductsCategoryLink;BreadsBreadproductsCategoryLink;;30068;;
+;;BakedsnacksCategoryLink;Baked snacks;/Hybris-Catalogue/Beans/c/30069;BakedsnacksCategoryLink;BakedsnacksCategoryLink;;30069;;
+;;BurgersSandwichCategoryLink;Burgers & Sandwich Link;/Hybris-Catalogue/BurgersSandwich/c/30070;BurgersSandwichCategoryLink;BurgersSandwichCategoryLink;;30070;;
+;;CelebrationcakesCategoryLink;Celebration cakes;/Hybris-Catalogue/Beans/c/30071;CelebrationcakesCategoryLink;CelebrationcakesCategoryLink;;30071;;
+;;PastriesDessertsCategoryLink;Pastries & Desserts;/Hybris-Catalogue/Beans/c/30072;PastriesDessertsCategoryLink;PastriesDessertsCategoryLink;;30072;;
+;;CookiesCategoryLink;Cookies;/Hybris-Catalogue/Beans/c/30073;CookiesCategoryLink;CookiesCategoryLink;;30073;;
+;;EthinicSnacksSavoriesCategoryLink;Ethinic Snacks &Savories;/Hybris-Catalogue/Beans/c/30173;EthinicSnacksSavoriesCategoryLink;EthinicSnacksSavoriesCategoryLink;;30173;;
+;;ChipsCategoryLink;Chips;/Hybris-Catalogue/Beans/c/30191;ChipsCategoryLink;ChipsCategoryLink;;30191;;
+;;NamkeenCategoryLink;Namkeen;/Hybris-Catalogue/Beans/c/30192;NamkeenCategoryLink;NamkeenCategoryLink;;30192;;
+;;OtherSnacksCategoryLink;Other Snacks;/Hybris-Catalogue/Beans/c/30193;OtherSnacksCategoryLink;OtherSnacksCategoryLink;;30193;;
+;;KidsFurnitureCategoryLink;Kids Furniture;/Hybris-Catalogue/Beans/c/30347;KidsFurnitureCategoryLink;KidsFurnitureCategoryLink;;30347;;
+;;BeanBagsCategoryLink;Bean Bags;/Hybris-Catalogue/Beans/c/30344;BeanBagsCategoryLink;BeanBagsCategoryLink;;30344;;
+;;CasualGardenSeatingCategoryLink;Casual & Garden Seating;/Hybris-Catalogue/Beans/c/30346;CasualGardenSeatingCategoryLink;CasualGardenSeatingCategoryLink;;30346;;
+
+UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];linkName[lang=$lang]
+;;CutVegetablesFruitsSaladCategoryLink;"Cut Vegetables, Fruits & Salad" 
+
+
+# Navigation Bar Component
+INSERT_UPDATE NavigationBarComponent; $contentCV[unique=true]; uid[unique=true]; name; wrapAfter  ; link(uid, $contentCV); styleClass ; &componentRef
+;;AdultDiapersBarComponent;AdultDiapersBarComponent;50;AdultDiapersCategoryLink;;AdultDiapersBarComponent
+;;BeautyPersonalCareOrganicBarComponent;BeautyPersonalCareOrganicBarComponent;10;BeautyPersonalCareOrganicCategoryLink;;BeautyPersonalCareOrganicBarComponent
+;;HomeDecorFurnishingsBarComponent;HomeDecorFurnishingsBarComponent;10;HomeDecorFurnishingsCategoryLink;;HomeDecorFurnishingsBarComponent
+;;ClothingAccessoriesBarComponent ; ClothingAccessoriesBarComponent ; 10; ClothingAccessoriesCategoryLink;; ClothingAccessoriesBarComponent
+;;CutVegetablesFruitsSaladBarComponent ; CutVegetablesFruitsSaladBarComponent; 10; CutVegetablesFruitsSaladCategoryLink;; CutVegetablesFruitsSaladBarComponent
+
+INSERT_UPDATE NavigationBarCollectionComponent;$contentCV[unique=true];uid[unique=true];name;components(uid, $contentCV);&componentRef
+;;NavBarComponent;Navigation Bar Collection Component;FruitsVegetablesBarComponent,GroceryStaplesBarComponent,BakeryDairyBarComponent,MeatFishPoultryBarComponent,BeveragesBarComponent,BrandedFoodBarComponent,HomeHygieneBarComponent,BeautyPersonalCareBarComponent,BabyBarComponent,HouseHoldPlasticsUtensilsBarComponent,ToysStationaryBarComponent,ClothingAccessoriesBarComponent;NavBarComponent
+
+INSERT_UPDATE NavigationBarComponent;$contentCV[unique=true];uid[unique=true];navigationNode(&nodeRef);dropDownLayout(code)
+;;ClothingAccessoriesBarComponent;ClothingAccessoriesNavNode
+
+INSERT_UPDATE Media; $contentCV[unique=true]    ; code[unique=true]  ; realfilename; @media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator] ; mime[default='image/jpeg']  ; altText; folder(qualifier)[default='images']
+;;/images/CLOTHING-AND-ACCESSORIES.jpg;CLOTHING-AND-ACCESSORIES.jpg;$siteResource/images/CLOTHING-AND-ACCESSORIES.jpg;image/jpeg;;
+
+
+
+INSERT_UPDATE CMSNavigationNode;uid[unique=true];$contentCV[unique=true];name;parent(uid, $contentCV);links(&linkRef);&nodeRef;previewIcon(code, $contentCV);
+#;ClothingAccessoriesNavNode;;Clothing & Accessories Category;;ClothingAccessoriesCategoryLink;ClothingAccessoriesNavNode
+;ClothingAccessoriesNavNode;;Clothing & Accessories Category;;ClothingAccessoriesCategoryLink;ClothingAccessoriesNavNode;/images/CLOTHING-AND-ACCESSORIES.jpg
+
+##2nd level hierarchy
+;SaltSugarJaggeryNavNode;;Salt, Sugar & Jaggery Category;GroceryStaplesNavNode;SaltSugarJaggeryCategoryLink;SaltSugarJaggeryNavNode
+;MasalaSpicesNavNode;;Masala & Spices Category;GroceryStaplesNavNode;MasalasSpicesCategoryLink;MasalaSpicesNavNode
+;BakeryBreadsNavNode;;Bakery & Breads Category;BakeryDairyNavNode;BakeryBreadsCategoryLink;BakeryBreadsNavNode
+;ChipsNamkeensSnacksNavNode;;Chips, Namkeens & Snacks Category;BrandedFoodNavNode;ChipsNamkeensSnacksCategoryLink;ChipsNamkeensSnacksNavNode
+;AdultDiapersNavNode;;Adult Diapers;BeautyPersonalCareNavNode;AdultDiapersCategoryLink;AdultDiapersNavNode
+;BeautyPersonalCareOrganicNavNode;;BeautyPersonalCare Organic;BeautyPersonalCareNavNode;BeautyPersonalCareOrganicCategoryLink;BeautyPersonalCareOrganicNavNode
+;FurnitureNavNode;;Furniture;HouseHoldNavNode;FurnitureCategoryLink;FurnitureNavNode
+;HomeDecorFurnishingsNavNode;;Home Decor & Furnishings;HouseHoldNavNode;HomeDecorFurnishingsCategoryLink;HomeDecorFurnishingsNavNode
+;ClothingNavNode;;Clothing;ClothingAccessoriesNavNode;ClothingCategoryLink;ClothingNavNode
+;CutVegetablesFruitsSaladNavNode;;Cut Vegetables, Fruits & Salad Nav Node;FruitsVegetablesNavNode;CutVegetablesFruitsSaladCategoryLink;CutVegetablesFruitsSaladNavNode
+
+
+#3rd Level hierarchy
+;SaltSugarJaggerySubNavNode;;Salt, Sugar & Jaggery Sub Category;SaltSugarJaggeryNavNode;SugarJaggeryCategoryLink,SaltCategoryLink,SugarSubstituteCategoryLink;SaltSugarJaggerySubNavNode
+;MasalaSpicesSubNavNode;;Masala & Spices Category;MasalaSpicesNavNode;WholeSpicesCategoryLink,PowderedSpicesCategoryLink,ReadyMasalasCategoryLink,SeasoningsHerbsCategoryLink,VinegarCategoryLink,EssenceFlavorsColorsCategoryLink,PanNeedMukhwasCategoryLink,GiftingCategoryLink;MasalaSpicesSubNavNode
+;BakeryBreadsSubNavNode;;Bakery & Breads Sub Node Category;BakeryBreadsNavNode;BreadsBreadproductsCategoryLink,BakedsnacksCategoryLink,BurgersSandwichCategoryLink,PastriesDessertsCategoryLink,CookiesCategoryLink,BakeryBreadsGiftingCategoryLink;BakeryBreadsSubNavNode
+;ChipsNamkeensSnacksSubNavNode;;Chips, Namkeens & Snacks Sub Node  Category;ChipsNamkeensSnacksNavNode;EthinicSnacksSavoriesCategoryLink,ChipsCategoryLink,NamkeenCategoryLink,OtherSnacksCategoryLink,ChipsGiftingCategoryLink;ChipsNamkeensSnacksSubNavNode
+;AdultDiapersSubNavNode;;Adult Diapers;AdultDiapersNavNode;AdultDiapersCategoryLink;AdultDiapersSubNavNode
+;BeautyPersonalCareOrganicSubNavNode;;BeautyPersonalCare Organic;BeautyPersonalCareOrganicNavNode;BeautyPersonalCareOrganicCategoryLink;BeautyPersonalCareOrganicSubNavNode
+;FurnitureSubNavNode;;Furniture;FurnitureNavNode;BeanBagsCategoryLink,CasualGardenSeatingCategoryLink,KidsFurnitureCategoryLink;FurnitureSubNavNode
+;HomeDecorFurnishingsSubNavNode;;Home Decor & Furnishings;HomeDecorFurnishingsNavNode;ComforterCategoryLink,CushionPillowFillerCategoryLink,DoorCurtainCategoryLink,WindowCurtainCategoryLink,KitchenLinenCategoryLink,FaceAndHandTowelCategoryLink,BathTowelCategoryLink,DiyasCandlesCategoryLink;HomeDecorFurnishingsSubNavNode
+;ClothingSubNavNode;;Clothing;ClothingNavNode;MensWearCategoryLink,LadieswearCategoryLink,KidswearCategoryLink;ClothingSubNavNode
+;CutVegetablesFruitsSaladSubNavNode;;Cut Vegetables, Fruits & Salad Sub Nav Node;CutVegetablesFruitsSaladNavNode;CutVegetablesSaladsCategoryLink;CutVegetablesFruitsSaladSubNavNode
+
+REMOVE CMSNavigationNode;uid[unique=true];$contentCV[unique=true];name;parent(uid, $contentCV);links(&linkRef);&nodeRef;previewIcon(code, $contentCV);
+;FashionAccessoriesNavNode;;Fashion Accessories;ClothingAccessoriesNavNode;LadiesAccessoriesCategoryLink,MensAccessoriesCategoryLink;FashionAccessoriesNavNode
+;OtherAccessoriesNavNode;;Other Accessories;ClothingAccessoriesNavNode;OtherAccessoriesCategoryLink;OtherAccessoriesNavNode
+;InnerWearNavNode;;Inner Wear;ClothingAccessoriesNavNode;MensInnerWearCategoryLink,LadiesInnerwearCategoryLink,KidsInnerwearCategoryLink;InnerWearNavNode
+;FurnitureNavNode;;Furniture;HouseHoldNavNode;FurnitureCategoryLink;FurnitureNavNode

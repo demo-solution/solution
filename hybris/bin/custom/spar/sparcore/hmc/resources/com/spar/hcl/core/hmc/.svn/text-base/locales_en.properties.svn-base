@@ -1,0 +1,56 @@
+sparcoregroup=sparcore
+sparcorenode=sparcore sample
+
+btn.consignment.confirm.pickup=Confirm Pickup
+
+text.sparproductbxgyfpromotion.detaileddescription = \
+<div class="promo-detailedDescription"> \
+<div>SparProductBXGYFPromotion is based on ProductBOGOFPromotion, it automatically adds the product(s).</div>\
+<div>In addition to ProductBOGOFPromotion, it also supports different types and number of items.</div>\
+</div>
+
+text.sparproductbxgyfpromotion.qualifyingoverview = \
+<div class="promo-detailedDescription"> \
+<div>Here you specify how many items the user must have in their cart and how many of those will be free. </div>\
+<div>In a classic "Buy One Get One Free" the qualifying count is 2 and the free count is 1.</div>\
+</div>
+
+text.sparproductbxgyfpromotion.qualifyingcount = \
+<div class="promo-detailedDescription"> \
+<div>The number of units the user must have in their cart to qualify for this promotion.</div>\
+</div>
+text.sparproductbxgyfpromotion.freecount = \
+<div class="promo-detailedDescription"> \
+<div>The number of units to give away free of charge. This must be less than the qualifying count.</div>\
+</div>
+
+
+text.sparorderthresholdfixeddiscountpromotion.messagefired=Text displayed when this promotion fires.
+text.sparorderthresholdfixeddiscountpromotion.messagecouldhavefired=Text displayed when the threshold has not been met.
+text.sparorderthresholdfixeddiscountpromotion.messagefiredargs= \
+<div class="promo-messageDetails"> \
+<table border="0" cellpadding="0" cellspacing="0" class="promo-messageParams"> \
+<thead><tr><th>Position</th><th>Type</th><th>Description</th></tr></thead> \
+<tbody> \
+<tr><td>0</td><td>Double Number</td><td>The order threshold price as a number</td></tr> \
+<tr><td>1</td><td>Currency String</td><td>The order threshold price as a formatted string</td></tr> \
+<tr><td>2</td><td>Double Number</td><td>The discount price as a number</td></tr> \
+<tr><td>3</td><td>Currency String</td><td>The discount price as a formatted string</td></tr> \
+</tbody> \
+</table> \
+</div>
+
+text.sparorderthresholdfixeddiscountpromotion.messagecouldhavefiredargs= \
+<div class="promo-messageDetails"> \
+<table border="0" cellpadding="0" cellspacing="0" class="promo-messageParams"> \
+<thead><tr><th>Position</th><th>Type</th><th>Description</th></tr></thead> \
+<tbody> \
+<tr><td>0</td><td>Double Number</td><td>The order threshold price as a number</td></tr> \
+<tr><td>1</td><td>Currency String</td><td>The order threshold price as a formatted string</td></tr> \
+<tr><td>2</td><td>Double Number</td><td>The discount price as a number</td></tr> \
+<tr><td>3</td><td>Currency String</td><td>The discount price as a formatted string</td></tr> \
+<tr><td>4</td><td>Double Number</td><td>The amount more required to qualify as a number</td></tr> \
+<tr><td>5</td><td>Currency String</td><td>The amount more required to qualify as a formatted string</td></tr> \
+</tbody> \
+</table> \
+</div>

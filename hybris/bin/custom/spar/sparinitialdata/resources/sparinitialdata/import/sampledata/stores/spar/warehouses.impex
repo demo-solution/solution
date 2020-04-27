@@ -1,0 +1,28 @@
+#
+# Create Warehouses for Store
+#
+#% impex.setLocale( Locale.ENGLISH );
+
+$storeUid=spar
+
+
+INSERT_UPDATE PointOfService;name[unique=true];displayName;warehouses(code);address(&addrID);latitude;longitude;geocodeTimestamp[dateformat=dd.MM.yyyy];type(code)[default=WAREHOUSE]
+#;20001;Warehouse Bannerghatta;;;33,5933317;130,3515247;11.12.2025
+#;20002;Warehouse Koramangala;;;35,7116188;139,7082147;11.12.2025
+
+INSERT_UPDATE Address;&addrID;streetnumber[unique=true];streetname;town;country(isocode);postalcode[unique=true];phone1;owner(PointOfService.name)[unique=true]
+#;20001;Street 1;Bannerghatta road;Bengaluru;IN;814-0001;+81 92-823-0236;Spar_Bannerghatta
+#;20002;Street 2;Koramangala;Bengaluru;IN;169-0075;+813 3201 8968;Spar_Koramangala
+
+INSERT_UPDATE BaseStore2WarehouseRel;source(uid)[unique=true];target(code)[unique=true]
+;$storeUid;20001
+;$storeUid;20002
+;$storeUid;20003
+;$storeUid;20007
+;$storeUid;20010
+
+INSERT_UPDATE BaseStore;uid[unique=true];defaultDeliveryOrigin(name)
+#;$storeUid;20001
+##### Pune warehouse relation to basestore
+;$storeUid;40001
+;$storeUid;20010

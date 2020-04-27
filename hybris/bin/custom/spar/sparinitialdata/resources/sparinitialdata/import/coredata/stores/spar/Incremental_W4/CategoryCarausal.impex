@@ -1,0 +1,102 @@
+# ImpEx for Importing CMS Content
+
+# Macros / Replacement Parameter definitions
+$contentCatalog=sparContentCatalog
+$contentCatalogName=Spar Content Catalog
+$productCatalog=sparProductCatalog
+$productCatalogName=Spar Product Catalog
+
+$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
+$productCV=catalogVersion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
+$picture=media(code, $contentCV);
+$image=image(code, $contentCV);
+$media=media(code, $contentCV);
+$page=page(uid, $contentCV);
+$contentPage=contentPage(uid, $contentCV);
+
+$product=product(code, $productCV)
+$category=category(code, $productCV)
+
+$siteResource=jar:com.spar.hcl.initialdata.setup.InitialDataSystemSetup&/sparinitialdata/import/sampledata/contentCatalogs/$contentCatalog
+$productResource=jar:com.spar.hcl.initialdata.setup.InitialDataSystemSetup&/sparinitialdata/import/sampledata/productCatalogs/$productCatalog
+$jarResourceCms=jar:com.spar.hcl.initialdata.setup.InitialDataSystemSetup&/sparinitialdata/import/sampledata/cockpits/cmscockpit
+
+$siteUid=spar
+
+$medias=medias(code, $contentCV);
+$lang=en
+$mediaContainer=media(qualifier, $contentCV)[lang=$lang];
+
+######################################################
+# Landing Page Templates
+#
+# Import the CMS content for the site
+#
+$prefix=spar
+$contentCatalog=$prefixContentCatalog
+$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
+$jarResourceCms=jar:com.spar.hcl.core.setup.CoreSystemSetup&/sparcore/import/cockpits/cmscockpit
+# $jarResourceCms=jar:com.spar.hcl.initialdata.setup.InitialDataSystemSetup&/sparinitialdata/import/sampledata/cockpits/cmscockpit
+# $jarResourceCms=$config-jarResourceCmsValue
+
+INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=true][default='LandingPage2Template'];validComponentTypes(code);compTypeGroup(code)
+;Section3A;;;wide
+
+# Create Content Slots
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active
+;;Section3A-Slot;Section3A Slot for Homepage;true
+
+
+
+# Bind Content Slots to Page Templates
+INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];position[unique=true];pageTemplate(uid,$contentCV)[unique=true][default='LandingPage2Template'];contentSlot(uid,$contentCV)[unique=true];allowOverwrite
+;;Section3A-LandingPage2;Section3A;;Section3A-Slot;true
+
+####################################################
+#
+# Import the CMS content for the site
+#
+$prefix=spar
+$contentCatalog=$prefixContentCatalog
+$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
+$jarResourceCms=jar:com.spar.hcl.core.setup.CoreSystemSetup&/sparcore/import/cockpits/cmscockpit
+# $jarResourceCms=jar:com.spar.hcl.initialdata.setup.InitialDataSystemSetup&/sparinitialdata/import/sampledata/cockpits/cmscockpit
+# $jarResourceCms=$config-jarResourceCmsValue
+
+# Import config properties into impex macros
+UPDATE GenericItem[processor=de.hybris.platform.commerceservices.impex.impl.ConfigPropertyImportProcessor];pk[unique=true]
+# Create PageTemplates
+# These define the layout for pages
+# "FrontendTemplateName" is used to define the JSP that should be used to render the page for pages with multiple possible layouts.
+# "RestrictedPageTypes" is used to restrict templates to page types
+INSERT_UPDATE PageTemplate;$contentCV[unique=true];uid[unique=true];name;frontendTemplateName;restrictedPageTypes(code);active[default=true]
+;;LandingPage2Template;Landing Page 2 Template;layout/landingLayout2Page;CategoryPage,ContentPage
+
+# Add Velocity templates that are in the CMS Cockpit. These give a better layout for editing pages
+# The FileLoaderValueTranslator loads a File into a String property. The templates could also be inserted in-line in this file.
+UPDATE PageTemplate;$contentCV[unique=true];uid[unique=true];velocityTemplate[translator=de.hybris.platform.commerceservices.impex.impl.FileLoaderValueTranslator]
+;;LandingPage2Template      ;$jarResourceCms/structure-view/structure_landingPage2Template.vm
+
+#####################################################
+# Load medias for Spar CMSCockpit
+INSERT_UPDATE AddOnCategoryCarouselComponent;$contentCV[unique=true];uid[unique=true];name;categories(code,$productCV);scroll(code);&componentRef
+;;HybrisHomepageCategoryCarouselComponent1;Spar Homepage Category Carousel;10008,10007,10011,10006;allVisible;HybrisHomepageCategoryCarouselComponent1
+
+# Setup cockpit configuration for Spar CMSCockpit
+INSERT_UPDATE ContentSlot; $contentCV[unique=true]; uid[unique=true]; name ; active ; cmsComponents(&componentRef)
+;;Section3A-Slot;Section3A Slot for Homepage ; true ; HybrisHomepageCategoryCarouselComponent1
+
+REMOVE ContentSlotForPage; $contentCV[unique=true]; uid[unique=true];position[unique=true]; page(uid,$contentCV)[unique=true][default='homepage'];contentSlot(uid,$contentCV)[unique=true]
+;;Section3A-Homepage;Section3A;;Section3A-Homepage
+
+
+###################################################
+$jarResource=jar:com.spar.hcl.cockpits.constants.SparCockpitsConstants&/sparcockpits-config/cockpitgroup
+
+INSERT_UPDATE CockpitUIConfigurationMedia;code[unique=true];mime;realfilename;@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator][forceWrite=true];
+;editorarea_addoncategoryCarouselComponent_cockpitgroup_ui_config;text/xml;editorArea_AddOnCategoryCarouselComponent.xml;$jarResource/editorArea_AddOnCategoryCarouselComponent.xml;
+
+INSERT_UPDATE CockpitUIComponentConfiguration;code[unique=true];factoryBean;objectTemplateCode[unique=true];principal(uid)[unique=true];media(code);
+;editorArea;editorConfigurationFactory;AddOnCategoryCarouselComponent;cockpitgroup;editorarea_addoncategoryCarouselComponent_cockpitgroup_ui_config;
+
+######################################################

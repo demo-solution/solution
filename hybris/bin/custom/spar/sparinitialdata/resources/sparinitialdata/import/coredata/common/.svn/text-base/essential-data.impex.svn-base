@@ -1,0 +1,190 @@
+# Import essential data for the Accelerator
+#
+# Includes:
+# * Languages
+# * Currencies
+# * Titles
+# * Vendors
+# * Warehouses
+# * Supported Credit/Debit cards
+# * User Groups
+# * DistanceUnits for Storelocator
+# * MediaFolders
+# * MediaFormats
+# * Tax & Tax Groups
+# * Jobs
+
+# Languages
+INSERT_UPDATE Language;isocode[unique=true];fallbackLanguages(isocode);active[default=true]
+;en;;;
+;de;en;;
+;ja;en;;
+;zh;en;;
+
+# Currencies
+INSERT_UPDATE Currency;isocode[unique=true];conversion;digits;symbol
+;GBP;1;2;£
+;EUR;1;2;€
+;USD;1,4;2;$
+;JPY;120;0;¥
+
+# SiteMap Language Currencies
+INSERT_UPDATE SiteMapLanguageCurrency;&siteMapLanguageCurrency;language(isoCode)[unique=true];currency(isocode)[unique=true];
+;enUsd;en;USD
+;enJpy;en;JPY
+;enGbp;en;GBP
+;enEur;en;EUR
+;jaUsd;ja;USD
+;jaJpy;ja;JPY
+;jaGbp;ja;GBP
+;jaEur;ja;EUR
+;deUsd;de;USD
+;deJpy;de;JPY
+;deGbp;de;GBP
+;deEur;de;EUR
+;zhUsd;zh;USD
+;zhJpy;zh;JPY
+;zhGbp;zh;GBP
+;zhEur;zh;EUR
+
+# Vendor
+INSERT_UPDATE Vendor;code[unique=true];name
+;default;Default Vendor
+
+REMOVE Warehouse;code[unique=true];name;vendor(code)[default=default];default[default=true]
+;default;Default Warehouse;
+;warehouse_s;Warehouse South;
+;warehouse_e;Warehouse East;
+;warehouse_w;Warehouse West;
+;warehouse_n;Warehouse North;
+
+# Warehouse
+INSERT_UPDATE Warehouse;code[unique=true];name;maxOrdersPerDeliverySlot;active;vendor(code)[default=default];default[default=true]
+;20001;Warehouse Bannerghatta;20;true
+;20007;Warehouse OMR;20;true
+;20010;Warehouse Elements Mall;20;true
+
+# Disable preview for email pages
+UPDATE CMSPageType;code[unique=true];previewDisabled
+;EmailPage;true
+
+# Titles
+INSERT_UPDATE Title;code[unique=true]
+;mr
+;mrs
+;miss
+;ms
+;dr
+;rev
+
+# Media Folders
+INSERT_UPDATE MediaFolder;qualifier[unique=true];path[unique=true]
+;images;images
+;email-body;email-body
+;email-attachments;email-attachments
+
+# Media formats
+INSERT_UPDATE MediaFormat;qualifier[unique=true]
+;1000Wx1000H
+;400Wx400H
+;150Wx150H
+;134Wx72H
+;80Wx80H
+;50Wx50H
+;855Wx280H
+
+# Tax & Tax Groups
+INSERT_UPDATE UserTaxGroup;code[unique=true]
+#;de-taxes
+#;jp-taxes
+#;uk-taxes
+#;us-taxes
+#;ca-taxes
+;in-taxes
+
+INSERT_UPDATE ProductTaxGroup;code[unique=true]
+#;jp-vat-full
+#;eu-vat-full
+#;eu-vat-half
+#;us-sales-tax-full
+#;ca-sales-tax-full
+;in-vat-full
+
+INSERT_UPDATE Tax;code[unique=true];value;currency(isocode)
+#;de-vat-full;19
+#;de-vat-half;7
+#;jp-vat-full;5
+#;uk-vat-full;20
+#;uk-vat-half;5
+#;us-sales-tax-full;0
+#;ca-sales-tax-full;0
+;in-vat-full;0
+
+INSERT_UPDATE ServicelayerJob;code[unique=true];springId[unique=true]
+;cartRemovalJob;cartRemovalJob
+;siteMapMediaJob;siteMapMediaJob
+
+
+# Payment modes added to support multiple payment modes(COD/CreditCard/Debit Card) in SPAR- START
+# Payment Modes
+INSERT_UPDATE StandardPaymentMode;code[unique=true];name[lang=en];description[lang=en];active;paymentinfotype(code)
+;cashondelivery;Cash On Delivery;Payment with COD;true;CashOnDeliveryPaymentInfo
+;creditcard;Credit Card;payment with creditcard;true;CreditCardPaymentInfo
+;wallet;Payment with wallet;Payment with Wallet;true;WalletPaymentInfo
+;multiPaymentMode;Payment with multi payment modes;Payment with multi payment modes;true;MultiPaymentMode
+
+
+
+INSERT_UPDATE StandardPaymentModeValue;paymentmode(code)[unique=true];currency(isoCode)[unique=true];value;;;;
+;cashondelivery;INR;0;;;;
+;creditcard;INR;0;;;;
+
+
+REMOVE DeliveryMode;code[unique=true];active;net;supportedpaymentmodes(code);
+;HD;true;false;cashondelivery;
+;HD;true;false;creditcard;
+
+
+
+INSERT_UPDATE DeliveryMode;code[unique=true];active;net;supportedpaymentmodes(code);
+;standard-gross;true;false;cashondelivery,creditcard,wallet,multiPaymentMode;
+;free-standard-shipping;true;false;cashondelivery,creditcard,wallet,multiPaymentMode;
+
+INSERT_UPDATE PickUpDeliveryMode;code[unique=true];active;supportedpaymentmodes(code);
+;pickup;true;cashondelivery,creditcard,wallet,multiPaymentMode;
+
+# Payment modes added to support multiple payment modes(COD/CreditCard/Debit Card) in SPAR- END
+
+
+# This impex entry is taken from BETA for Spar Export Products
+#REMOVE CronJob; code[unique=true];job(code);singleExecutable;sessionLanguage(isocode)
+#;update-sparIndex-cronJob;solrIndexerJob;false;en
+
+INSERT_UPDATE CronJob; code[unique=true];job(code);singleExecutable;sessionLanguage(isocode)
+#;brandbankCronJob;brandbankJob;false;en
+;sparExportProductsCronJob;sparExportProductsJob;false;en
+;sparOrderExportCronJob;sparAvailStockExportJob;false;en
+;sparImpInvetoryCronJob;sparImpInvetoryJob;false;en
+;update-sparIndex-cronJob;solrIndexerJob;false;en
+;full-sparIndex-cronJob;solrIndexerJob;false;en
+ 
+#REMOVE Trigger;cronjob(code)[unique=true];cronExpression 
+#;update-sparIndex-cronJob;0 0/55 * 1/1 * ? *
+
+INSERT_UPDATE Trigger;cronjob(code)[unique=true];cronExpression
+#% afterEach: impex.getLastImportedItem().setActivationTime(new Date());
+#;brandbankCronJob; 0 0 16 * * ?
+;sparExportProductsCronJob; 0 0 8 * * ?
+;sparOrderExportCronJob;0 0/45 * 1/1 * ? *
+;sparImpInvetoryCronJob;0 0/50 * 1/1 * ? *
+#;update-sparIndex-cronJob;0 0/55 * 1/1 * ? *
+
+
+UPDATE CronJob; code[unique=true];sendEmail;emailAddress
+;update-sparIndex-cronJob;true;seelang@hcl.com                     
+# Cron job for daily refund report
+INSERT_UPDATE CronJob; code[unique=true];job(code);singleExecutable;sessionLanguage(isocode)
+;sparDailyRefundReportCronJob;sparDailyRefundReportJob;false;en
+ 
+INSERT_UPDATE Trigger;cronjob(code)[unique=true];cronExpression
+;sparDailyRefundReportCronJob;0 30 7 1/1 * ? *

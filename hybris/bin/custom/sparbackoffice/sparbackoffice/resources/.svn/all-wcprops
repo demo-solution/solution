@@ -1,0 +1,59 @@
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/S6_Maintenance/!svn/ver/364/custom/sparbackoffice/resources
+END
+sparbackoffice-backoffice-widgets.xml
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/S6_Maintenance/!svn/ver/1/custom/sparbackoffice/resources/sparbackoffice-backoffice-widgets.xml
+END
+sparbackoffice-items.xml
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/S6_Maintenance/!svn/ver/1/custom/sparbackoffice/resources/sparbackoffice-items.xml
+END
+sparbackoffice-spring.xml
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/S6_Maintenance/!svn/ver/1/custom/sparbackoffice/resources/sparbackoffice-spring.xml
+END
+beans.xsd
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/S6_Maintenance/!svn/ver/1/custom/sparbackoffice/resources/beans.xsd
+END
+sparbackoffice-beans.xml
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/S6_Maintenance/!svn/ver/1/custom/sparbackoffice/resources/sparbackoffice-beans.xml
+END
+sparbackoffice.build.number
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/S6_Maintenance/!svn/ver/1/custom/sparbackoffice/resources/sparbackoffice.build.number
+END
+sparbackoffice-backoffice-spring.xml
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/S6_Maintenance/!svn/ver/1/custom/sparbackoffice/resources/sparbackoffice-backoffice-spring.xml
+END
+items.xsd
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/S6_Maintenance/!svn/ver/1/custom/sparbackoffice/resources/items.xsd
+END
+sparbackoffice-backoffice-config.xml
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/S6_Maintenance/!svn/ver/324/custom/sparbackoffice/resources/sparbackoffice-backoffice-config.xml
+END

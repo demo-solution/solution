@@ -1,0 +1,49 @@
+insert_update InclusionExclusionEntry;entryCode[unique=true];areaName;postalCode;areaType(code,itemtype(code))[unique=true];stores(name)
+;areaIEPune001;GondhaleNagar;411028;IN:InclusionExclusionTypeEnum;SPAR Ghorpadi Store
+;areaIEPune002;Vadgaon Sheri;411014;IN:InclusionExclusionTypeEnum;SPAR Ghorpadi Store
+;areaIEPune003;Mundhva;411036;IN:InclusionExclusionTypeEnum;SPAR Ghorpadi Store
+;areaIEPune004;Sasanenagar;411028;IN:InclusionExclusionTypeEnum;SPAR Ghorpadi Store
+;areaIEPune005;Doctor Ambedkar Square Yerawada;411001;IN:InclusionExclusionTypeEnum;SPAR Ghorpadi Store
+;areaIEPune006;Ghorpuri Bazar;411001;IN:InclusionExclusionTypeEnum;SPAR Ghorpadi Store
+;areaIEPune007;Hadapsar;411028;IN:InclusionExclusionTypeEnum;SPAR Ghorpadi Store
+;areaIEPune008;Dukirkline;411014;IN:InclusionExclusionTypeEnum;SPAR Ghorpadi Store
+;areaIEPune009;Mundhva;411036;IN:InclusionExclusionTypeEnum;SPAR Ghorpadi Store
+;areaIEPune010;Pune Cantt East S.O;411001;IN:InclusionExclusionTypeEnum;SPAR Ghorpadi Store
+;areaIEPune011;SachapirStreet;411001;IN:InclusionExclusionTypeEnum;SPAR Ghorpadi Store
+;areaIEPune012;Viman nagar;411014;IN:InclusionExclusionTypeEnum;SPAR Ghorpadi Store
+;areaIEPune013;Shivajinagar Pune;411005;IN:InclusionExclusionTypeEnum;SPAR Ghorpadi Store
+;areaIEPune014;Congress House Road;411005;IN:InclusionExclusionTypeEnum;SPAR Ghorpadi Store
+;areaIEPune015;Pingale Vasti;411036;IN:InclusionExclusionTypeEnum;SPAR Ghorpadi Store
+;areaIEPune016;Koregaon Park;411001;IN:InclusionExclusionTypeEnum;SPAR Ghorpadi Store
+;areaIEPune017;Bund Garden;411001;IN:InclusionExclusionTypeEnum;SPAR Ghorpadi Store
+;areaIEPune018;Gorpadi;411036;IN:InclusionExclusionTypeEnum;SPAR Ghorpadi Store
+;areaIEPune019;Keshav Nagar;411036;IN:InclusionExclusionTypeEnum;SPAR Ghorpadi Store
+;areaIEPune020;BT Kawade Road;411001;IN:InclusionExclusionTypeEnum;SPAR Ghorpadi Store
+;areaIEPune021;Kharadi ;411014;IN:InclusionExclusionTypeEnum;SPAR Ghorpadi Store
+;areaIEPune022;Magarpatta;411028;IN:InclusionExclusionTypeEnum;SPAR Ghorpadi Store
+;areaIEPune023;Chandan Nagar;411014;IN:InclusionExclusionTypeEnum;SPAR Ghorpadi Store
+;areaIEPune024;Mundhwa ;411036;IN:InclusionExclusionTypeEnum;SPAR Ghorpadi Store
+;areaIEPune025;Yerwada;411006;IN:InclusionExclusionTypeEnum;SPAR Ghorpadi Store
+;areaIEPune026;Vadgaon Sheri;411014;IN:InclusionExclusionTypeEnum;SPAR Ghorpadi Store
+;areaIEPune027;MUNDHWA;411036;IN:InclusionExclusionTypeEnum;SPAR Ghorpadi Store
+;areaIEPune028;MUNDHVA GAON,;411036;IN:InclusionExclusionTypeEnum;SPAR Ghorpadi Store
+;areaIEPune029;MUNDHWA - KHARADI Rd;411036;IN:InclusionExclusionTypeEnum;SPAR Ghorpadi Store
+;areaIEPune030;MUNDHWA POST OFFICE;411036;IN:InclusionExclusionTypeEnum;SPAR Ghorpadi Store
+;areaIEPune031;Sasanenagar;411028;IN:InclusionExclusionTypeEnum;SPAR Ghorpadi Store
+;areaIEPune032;SASANE NAGAR Rd;411028;IN:InclusionExclusionTypeEnum;SPAR Ghorpadi Store
+;areaIEPune033;SASANE NAGAR CHOWK;411028;IN:InclusionExclusionTypeEnum;SPAR Ghorpadi Store
+;areaIEPune034;Hadapsar;411028;IN:InclusionExclusionTypeEnum;SPAR Ghorpadi Store
+;areaIEPune035;HADAPSAR GAON;411028;IN:InclusionExclusionTypeEnum;SPAR Ghorpadi Store
+;areaIEPune036;HADAPSAR BUS STOP;411028;IN:InclusionExclusionTypeEnum;SPAR Ghorpadi Store
+;areaIEPune037;DUNKIRK LINE POST OFFICE;411014;IN:InclusionExclusionTypeEnum;SPAR Ghorpadi Store
+;areaIEPune038;KESHAV NAGAR,;411036;IN:InclusionExclusionTypeEnum;SPAR Ghorpadi Store
+;areaIEPune039;Kharadi ;411014;IN:InclusionExclusionTypeEnum;SPAR Ghorpadi Store
+;areaIEPune040;KHARADI BYPASS BUS STOP;411014;IN:InclusionExclusionTypeEnum;SPAR Ghorpadi Store
+;areaIEPune041;KHARADI GAON;411014;IN:InclusionExclusionTypeEnum;SPAR Ghorpadi Store
+;areaIEPune042;KHARADI CHOWK;411014;IN:InclusionExclusionTypeEnum;SPAR Ghorpadi Store
+;areaIEPune043;MAGARPATTA CITY;411028;IN:InclusionExclusionTypeEnum;SPAR Ghorpadi Store
+;areaIEPune044;MAGARPATTA;411028;IN:InclusionExclusionTypeEnum;SPAR Ghorpadi Store
+;areaIEPune045;MAGARPATTA CHOWK;411028;IN:InclusionExclusionTypeEnum;SPAR Ghorpadi Store
+;areaIEPune046;MAGARPATTA CITY SOUTH GATE;411028;IN:InclusionExclusionTypeEnum;SPAR Ghorpadi Store
+;areaIEPune047;MAGARPATTA INNER CIRCLE;411028;IN:InclusionExclusionTypeEnum;SPAR Ghorpadi Store
+;areaIEPune048;CHANDAN NAGAR;411014;IN:InclusionExclusionTypeEnum;SPAR Ghorpadi Store

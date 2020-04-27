@@ -1,0 +1,6 @@
+## Please note that the syntax of the property name should be as follows:
+## propertyName=some string
+## Please DO NOT USE, property.name=some string
+emailSubject={1}: Error in Feed {0}.
+emailBodyline1=Error is found in Feed {0}. Please find attached source file and error log in zip attachment. 
+salutation= Hi All,

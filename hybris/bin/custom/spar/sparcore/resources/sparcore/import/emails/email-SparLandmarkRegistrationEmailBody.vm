@@ -1,0 +1,25 @@
+## messageSource=classpath:/sparcore/messages/email-SparLandmarkRegistrationEmail_$lang.properties
+Please Review and enroll below customer to Landmark Reward Program :
+<br>
+<br>Title - ${ctx.landmarkEnrollMemberData.gender}<br>
+<br>FirstName - ${ctx.landmarkEnrollMemberData.firstName}<br>
+<br>LastName - ${ctx.landmarkEnrollMemberData.lastName}<br>  
+<br>Mobile Number - ${ctx.landmarkEnrollMemberData.mobileNumber}<br>
+<br>Email - ${ctx.landmarkEnrollMemberData.emailID}<br>
+<br>Country - ${ctx.landmarkEnrollMemberData.country}<br>
+<br>Mother Tongue - ${ctx.landmarkEnrollMemberData.motherTongue}<br>
+<br>Occupation - ${ctx.landmarkEnrollMemberData.occupation}<br>
+<br>address1 - ${ctx.landmarkEnrollMemberData.address1}<br>  
+<br>address2 - ${ctx.landmarkEnrollMemberData.address2}<br>
+<br>address3 - ${ctx.landmarkEnrollMemberData.address3}<br>
+<br>city - ${ctx.landmarkEnrollMemberData.city}<br>
+<br>DateOfBirth - ${ctx.landmarkEnrollMemberData.dateOfBirth}<br>  
+<br>suburbanArea - ${ctx.landmarkEnrollMemberData.suburbanArea}<br>
+<br>Nationality - ${ctx.landmarkEnrollMemberData.nationality}<br>
+<br>PinCode - ${ctx.landmarkEnrollMemberData.pinCode}<br>  
+<br>State - ${ctx.landmarkEnrollMemberData.state}<br>
+<br>MaritalStatus - ${ctx.landmarkEnrollMemberData.maritalStatus}<br>
+
+<br>
+Thanks and Regards, <br>
+Customer Care Team

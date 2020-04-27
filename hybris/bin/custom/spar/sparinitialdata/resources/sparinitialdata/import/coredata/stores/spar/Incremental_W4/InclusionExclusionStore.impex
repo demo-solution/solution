@@ -1,0 +1,47 @@
+insert_update InclusionExclusionEntry;entryCode[unique=true];areaName;postalCode;areaType(code,itemtype(code))[unique=true];stores(name)
+;areaIE21;Amruthahalli;560092;IN:InclusionExclusionTypeEnum;SPAR Elements Mall
+;areaIE22;Anandnagar;560024;IN:InclusionExclusionTypeEnum;SPAR Elements Mall
+;areaIE23;Arabic College;560045;IN:InclusionExclusionTypeEnum;SPAR Elements Mall
+;areaIE24;Byatarayanapura;560085;IN:InclusionExclusionTypeEnum;SPAR Elements Mall
+;areaIE25;Doddagubbi;560077;IN:InclusionExclusionTypeEnum;SPAR Elements Mall
+;areaIE26;Dollars Colony;560094;IN:InclusionExclusionTypeEnum;SPAR Elements Mall
+;areaIE27;Dr. Shivarama Karanth Nagar;560077;IN:InclusionExclusionTypeEnum;SPAR Elements Mall
+;areaIE28;G.K.V.K.;560065;IN:InclusionExclusionTypeEnum;SPAR Elements Mall
+;areaIE29;Ganga Nagar;560032;IN:InclusionExclusionTypeEnum;SPAR Elements Mall
+;areaIE30;Gangenahalli;560032;IN:InclusionExclusionTypeEnum;SPAR Elements Mall
+;areaIE31;HBR Layout;560043;IN:InclusionExclusionTypeEnum;SPAR Elements Mall
+;areaIE32;Hebbal Kempapura;560024;IN:InclusionExclusionTypeEnum;SPAR Elements Mall
+;areaIE33;Hebbala;560024;IN:InclusionExclusionTypeEnum;SPAR Elements Mall
+;areaIE34;Hebbal;560024;IN:InclusionExclusionTypeEnum;SPAR Elements Mall
+;areaIE35;Horamavu;560043;IN:InclusionExclusionTypeEnum;SPAR Elements Mall
+;areaIE36;Horamavu Aagra;560016;IN:InclusionExclusionTypeEnum;SPAR Elements Mall
+;areaIE37;ISRO Anthariksha Bhavan;560094;IN:InclusionExclusionTypeEnum;SPAR Elements Mall
+;areaIE38;Jakkur;560064;IN:InclusionExclusionTypeEnum;SPAR Elements Mall
+;areaIE39;Jakkuru;560056;IN:InclusionExclusionTypeEnum;SPAR Elements Mall
+;areaIE40;Jalavayuvihar;560043;IN:InclusionExclusionTypeEnum;SPAR Elements Mall
+;areaIE41;Kacharakanahalli;560084;IN:InclusionExclusionTypeEnum;SPAR Elements Mall
+;areaIE42;Kacharkanahalli;560084;IN:InclusionExclusionTypeEnum;SPAR Elements Mall
+;areaIE43;Kadugondanahalli;560045;IN:InclusionExclusionTypeEnum;SPAR Elements Mall
+;areaIE44;Kalyananagar;560043;IN:InclusionExclusionTypeEnum;SPAR Elements Mall
+;areaIE45;Kanakanagar;560032;IN:InclusionExclusionTypeEnum;SPAR Elements Mall
+;areaIE46;KASTURIN:InclusionExclusionTypeEnum;560043;IN:InclusionExclusionTypeEnum;SPAR Elements Mall
+;areaIE47;Kaval Bairasandra;560056;IN:InclusionExclusionTypeEnum;SPAR Elements Mall
+;areaIE48;Kodigehalli;560092;IN:InclusionExclusionTypeEnum;SPAR Elements Mall
+;areaIE49;Kothanur;560077;IN:InclusionExclusionTypeEnum;SPAR Elements Mall
+;areaIE50;Kushal Nagar;560045;IN:InclusionExclusionTypeEnum;SPAR Elements Mall
+;areaIE51;Lingarajapura;560084;IN:InclusionExclusionTypeEnum;SPAR Elements Mall
+;areaIE52;Lingarajapuram;560084;IN:InclusionExclusionTypeEnum;SPAR Elements Mall
+;areaIE53;Manorayana Palya;560032;IN:InclusionExclusionTypeEnum;SPAR Elements Mall
+;areaIE54;Mathikere;560054;IN:InclusionExclusionTypeEnum;SPAR Elements Mall
+;areaIE55;Nagavara;560045;IN:InclusionExclusionTypeEnum;SPAR Elements Mall
+;areaIE56;Nagawara;560045;IN:InclusionExclusionTypeEnum;SPAR Elements Mall
+;areaIE57;P&T Col. Kavalbyrasandra;560032;IN:InclusionExclusionTypeEnum;SPAR Elements Mall
+;areaIE58;R T Nagar;560032;IN:InclusionExclusionTypeEnum;SPAR Elements Mall
+;areaIE59;Sahakaranagar;560092;IN:InclusionExclusionTypeEnum;SPAR Elements Mall
+;areaIE60;Sanjay Nagar;560094;IN:InclusionExclusionTypeEnum;SPAR Elements Mall
+;areaIE61;Sri Chowdeshwari;560054;IN:InclusionExclusionTypeEnum;SPAR Elements Mall
+;areaIE62;St. Thomas Town;560084;IN:InclusionExclusionTypeEnum;SPAR Elements Mall
+;areaIE63;Thanisandra;562106;IN:InclusionExclusionTypeEnum;SPAR Elements Mall
+;areaIE64;Venkateshapura;560045;IN:InclusionExclusionTypeEnum;SPAR Elements Mall
+;areaIE65;Vidyaranyapura;560097;IN:InclusionExclusionTypeEnum;SPAR Elements Mall
+;areaIE66;Vishwanath Nagenahalli;560049;IN:InclusionExclusionTypeEnum;SPAR Elements Mall

@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/S6_Maintenance/!svn/ver/313/custom/spar/sparcore/resources/sparcore/import/cockpits/cmscockpit
+END
+cmscockpit-users.impex
+K 25
+svn:wc:ra_dav:version-url
+V 120
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparcore/resources/sparcore/import/cockpits/cmscockpit/cmscockpit-users.impex
+END
+btgcockpit-access-rights.impex
+K 25
+svn:wc:ra_dav:version-url
+V 128
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparcore/resources/sparcore/import/cockpits/cmscockpit/btgcockpit-access-rights.impex
+END
+btgcockpit-users.impex
+K 25
+svn:wc:ra_dav:version-url
+V 120
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparcore/resources/sparcore/import/cockpits/cmscockpit/btgcockpit-users.impex
+END
+cmscockpit-access-rights.impex
+K 25
+svn:wc:ra_dav:version-url
+V 128
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparcore/resources/sparcore/import/cockpits/cmscockpit/cmscockpit-access-rights.impex
+END

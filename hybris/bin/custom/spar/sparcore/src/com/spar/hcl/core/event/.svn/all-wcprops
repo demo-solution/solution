@@ -1,0 +1,89 @@
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparcore/src/com/spar/hcl/core/event
+END
+OrderCompletedEventListener.java
+K 25
+svn:wc:ra_dav:version-url
+V 112
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparcore/src/com/spar/hcl/core/event/OrderCompletedEventListener.java
+END
+SendNotPickedUpConsignmentCanceledMessageEventListener.java
+K 25
+svn:wc:ra_dav:version-url
+V 139
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparcore/src/com/spar/hcl/core/event/SendNotPickedUpConsignmentCanceledMessageEventListener.java
+END
+SendOrderPartiallyRefundedMessageEventListener.java
+K 25
+svn:wc:ra_dav:version-url
+V 131
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparcore/src/com/spar/hcl/core/event/SendOrderPartiallyRefundedMessageEventListener.java
+END
+ForgottenPasswordEventListener.java
+K 25
+svn:wc:ra_dav:version-url
+V 115
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparcore/src/com/spar/hcl/core/event/ForgottenPasswordEventListener.java
+END
+RegistrationEventListener.java
+K 25
+svn:wc:ra_dav:version-url
+V 110
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparcore/src/com/spar/hcl/core/event/RegistrationEventListener.java
+END
+SparNeedHelpEventListener.java
+K 25
+svn:wc:ra_dav:version-url
+V 110
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparcore/src/com/spar/hcl/core/event/SparNeedHelpEventListener.java
+END
+SendOrderPartiallyCanceledMessageEventListener.java
+K 25
+svn:wc:ra_dav:version-url
+V 131
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparcore/src/com/spar/hcl/core/event/SendOrderPartiallyCanceledMessageEventListener.java
+END
+OrderRefundEventListener.java
+K 25
+svn:wc:ra_dav:version-url
+V 109
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparcore/src/com/spar/hcl/core/event/OrderRefundEventListener.java
+END
+SubmitOrderEventListener.java
+K 25
+svn:wc:ra_dav:version-url
+V 109
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparcore/src/com/spar/hcl/core/event/SubmitOrderEventListener.java
+END
+SendDeliveryMessageEventListener.java
+K 25
+svn:wc:ra_dav:version-url
+V 117
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparcore/src/com/spar/hcl/core/event/SendDeliveryMessageEventListener.java
+END
+OrderConfirmationEventListener.java
+K 25
+svn:wc:ra_dav:version-url
+V 115
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparcore/src/com/spar/hcl/core/event/OrderConfirmationEventListener.java
+END
+SparNeedHelpEvent.java
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparcore/src/com/spar/hcl/core/event/SparNeedHelpEvent.java
+END
+OrderCancelledEventListener.java
+K 25
+svn:wc:ra_dav:version-url
+V 112
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparcore/src/com/spar/hcl/core/event/OrderCancelledEventListener.java
+END
+SendReadyForPickupMessageEventListener.java
+K 25
+svn:wc:ra_dav:version-url
+V 123
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparcore/src/com/spar/hcl/core/event/SendReadyForPickupMessageEventListener.java
+END

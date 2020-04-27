@@ -1,0 +1,61 @@
+#
+# Import the Solr configuration for the store
+#
+
+# Index Type
+$solrIndexedType=sparProductType
+
+# Language
+$lang=en
+
+# Solr Indexed Property
+UPDATE SolrIndexedProperty;solrIndexedType(identifier)[unique=true];name[unique=true];displayName[lang=$lang]
+;$solrIndexedType;allPromotions;"Promotion"
+;$solrIndexedType;availableInStores;"Stores"
+;$solrIndexedType;category;"Category"
+#;$solrIndexedType;code;"Code"
+;$solrIndexedType;description;"Description"
+;$solrIndexedType;manufacturerName;"Manufacturer Name"
+;$solrIndexedType;name;"Name"
+;$solrIndexedType;summary;"Summary"
+#;$solrIndexedType;unitMRP;"MRP"
+#Variants details
+;$solrIndexedType;unitConditionVariants;"Variant's Unit Condition"
+;$solrIndexedType;stockVariants;"Variant's Stock Level & Status"
+;$solrIndexedType;priceVariants;"Variant's CSP & MRP"
+;$solrIndexedType;descriptionVariants;"Variant's Code & Description"
+;$solrIndexedType;variantsImg-150Wx150H;"Variant's Product Image"
+;$solrIndexedType;variantsImg-80Wx80H;"Variant's Thumbnail Image"
+;$solrIndexedType; brand             ;"BRANDS"
+
+#Entries specific to warehouse 20001 and 20007 and 20010
+;$solrIndexedType; inStockItems_20001;"Show In-Stock Items only"
+;$solrIndexedType; inStockItems_20007;"Show In-Stock Items only"
+;$solrIndexedType; inStockItems_20010;"Show In-Stock Items only"
+;$solrIndexedType; refine_20001	 	 ;"REFINE"
+;$solrIndexedType; refine_20007	 	 ;"REFINE"
+;$solrIndexedType; refine_20010	 	 ;"REFINE"
+
+;$solrIndexedType;price_20001;"PRICE"
+;$solrIndexedType;price_20007;"PRICE"
+;$solrIndexedType;price_20010;"PRICE"
+
+# Define the available sorts
+UPDATE SparSolrSort;indexedType(identifier)[unique=true];code[unique=true];name[lang=$lang];useBoost
+;$solrIndexedType;name-asc;"Name (ascending)";"false";
+;$solrIndexedType;name-desc;"Name (descending)";"false";
+
+# Define the available sorts that are warehouse specific
+UPDATE SparSolrSort;indexedType(identifier)[unique=true];code[unique=true];name[lang=$lang];useBoost
+#Entries specific to warehouse 20001
+;$solrIndexedType;price-asc_20001;"Price (lowest first)";"false";
+;$solrIndexedType;price-desc_20001;"Price (highest first)";"false";
+;$solrIndexedType;relevance_20001;"Relevance";"true";
+#Entries specific to warehouse 20007
+;$solrIndexedType;price-asc_20007;"Price (lowest first)";"false";
+;$solrIndexedType;price-desc_20007;"Price (highest first)";"false";
+;$solrIndexedType;relevance_20007;"Relevance";"true";
+#Entries specific to warehouse 20010
+;$solrIndexedType;price-asc_20010;"Price (lowest first)";"false";
+;$solrIndexedType;price-desc_20010;"Price (highest first)";"false";
+;$solrIndexedType;relevance_20010;"Relevance";"true";

@@ -1,0 +1,550 @@
+#******************************This file is generated - please do not edit it. It will be regenerated after every build.********************************#
+# ImpEx for Importing Categories into Spar Store 
+
+# Macros / Replacement Parameter definitions
+$productCatalog=sparProductCatalog
+$productCatalogName=SPAR Product Catalog
+$catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
+
+
+# Language
+$lang=en
+
+
+# Update Categories with localizations - 14 Division Codes - 98 MARKET Codes - 389 Category Codes
+UPDATE Category;code[unique=true];$catalogVersion;name[lang=$lang]
+;10001;;Fruits & Vegetables
+;10002;;Grocery & Staples
+;10003;;Bakery & Dairy
+;10004;;Meat, Fish & Poultry
+;10005;;Beverages
+;10006;;Branded Food
+;10007;;Home & Hygiene
+;10008;;Beauty &Personal Care
+;10009;;Baby
+;10010;;Toys & Stationary 
+;10011;;House Hold
+;10012;;Electronics
+;10013;;Clothing & Accessories
+;10014;;Telecom & Mobility
+;10015;;Liquor & Tobacco
+
+;20001;;Fresh Fruits
+;20002;;Fresh Vegetables
+;20003;;Cut Vegetables, Fruits & Salad
+;20004;;Organic
+;20005;;Festival
+;20006;;Dals & Pulses
+;20007;;Rice, Wheat & Other Grains
+;20008;;Flours & Sooji
+;20009;;Salt, Sugar & Jaggery
+;20010;;Dry Fruits
+;20011;;Edible Oil & Ghee
+;20012;;Masala & Spices
+;20013;;Cooking Paste
+;20014;;Ready Mixes
+;20015;;Organic
+;20016;;Diabetic
+;20017;;Bakery & Breads
+;20018;;Dairy Products
+#;20019
+;20020;;Fresh Meat & Poultry
+;20021;;Fish & SeaFood
+;20022;;Eggs
+;20023;;Frozen Non Veg
+;20024;;Meat - Delicatessen
+;20025;;Helath Drinks
+;20026;;Tea & cofee
+;20027;;Beverages Additives
+;20028;;Fun Drink Mix
+;20029;;Fruit Juices & Drinks
+;20030;;Soft Drinks
+;20031;;Mineral Water & Soda
+;20032;;Organic
+;20033;;Diabetic
+;20034;;Breakfast Cereals
+;20035;;Noodles, Pastas & Vermicelli
+;20036;;Jams, Spreads & Honey
+;20037;;Canned & Tinned Food
+;20038;;Sauces, Puree & Dips
+;20039;;Pickles & Chutneys
+;20040;;Baking & Dessert Mixes
+;20042;;Ready To Eat
+;20041;;Ready To Cook
+;20043;;Ready To Fry
+;20044;;Biscuits, Cookies & Crackers
+;20045;;Chocolates, Cakes & Confectioneries
+;20046;;Chips, Namkeens & Snacks
+;20047;;Frozen Veg
+;20048;;Ice cream & Desserts
+;20049;;Organic
+;20050;;Diabetic
+;20051;;Home Cleaning
+;20052;;Cleaning Accessories
+;20053;;Laundry
+;20054;;Utensil Cleaners
+;20055;;Freshners & Repellents
+;20056;;Pooja needs
+;20057;;Shoe Care
+;20058;;Toilet roll, kitchen roll & tissues
+;20059;;Food storage & serving needs
+;20060;;Pet Care
+;20061;;Skin Care
+;20062;;Hair Care
+;20063;;Oral Care
+;20064;;Deos & Perfumes
+;20065;;Feminine Care
+;20066;;Men Toiletries
+;20067;;Personal Hygiene
+;20068;;Personal Care Appliances
+;20069;;Adult Diapers
+;20070;;OTC
+;20071;;Organic
+;20072;;Diabetic
+;20073;;Baby Food
+;20074;;Baby care
+;20075;;Infant Care
+;20076;;Stationery
+;20077;;Toys
+;20078;;Plasticware
+;20079;;Kitchen & Dining
+;20080;;Small Appliances
+;20081;;Electrical Needs
+;20082;;Hardware, Safety & Tools
+;20083;;Furniture
+;20084;;Home Décor & Furnishings
+;20085;;Sports & Fitness
+;20086;;Luggage & Travel
+;20087;;Garden & Outdoor
+;20088;;Automotive Accessories
+;20089;;Home Appliances
+;20090;;TVs, Audio & Video
+;20091;;Computer &  Accessories
+;20092;;Inner Wear
+;20093;;Clothing
+;20094;;Fashion Accessories
+;20095;;Other Accessories
+;20096;;Mobiles
+;20097;;Liquor
+;20098;;Cigarettes
+
+
+;30001;;Apples
+;30002;;Seasonal Fruits
+;30003;;Bananas
+;30004;;Citrus Fruits
+;30005;;Exotic Fruits
+;30006;;Papaya & Melons
+;30007;;Mangoes 
+;30008;;Onion, Potato & Tomato
+;30009;;Other Vegetables
+;30010;;Carrots & Root Vegetables
+;30011;;Gourds & Cucumber
+;30012;;Beans, Bhendi & Brinjal
+;30013;;Herbs & Exotic Vegetables
+;30014;;Mushrooms
+;30015;;Leafy Vegetables
+;30016;;Cabbage & Cauliflower
+;30017;;Sprouted Veg
+;30018;;Cut Vegetables & Salads
+;30019;;Cut Fruits
+#;30020
+#;30021
+;30022;;Dals
+;30023;;Pulses
+;30024;;Sonamasuri Rice
+;30025;;Basmati Rice
+;30026;;Boiled Rice
+;30027;;Other Rice
+;30028;;Wheat Whole
+;30029;;Murumura & Puffed Rice
+;30030;;Saboo Dana (Sago)
+;30031;;Soya Chunks
+;30032;;Other Grains
+;30033;;Atta & Maida
+;30034;;Rava & Sooji
+;30035;;Besan
+;30036;;Other Flours
+;30037;;Sugar & Jaggery
+;30038;;Salt
+;30039;;Sugar Substitute
+;30040;;Almond, Cashew & Raisins
+;30041;;Dates
+;30042;;Other Dry Fruits
+;30043;;Gifting
+;30044;;Ghee
+;30045;;Sunflower Oil
+;30046;;Olive Oil
+;30047;;Groundnut Oil
+;30048;;Gingelly Oil
+;30049;;Mustard Oil
+;30050;;Coconut Oil
+;30051;;Other Oils
+;30066;;Blend Oil
+;30052;;Whole Spices
+;30053;;Powdered Spices
+;30054;;Ready Masalas
+;30055;;Seasonings & Herbs
+;30056;;Vinegar
+;30057;;Essence, Flavors & Colors
+;30058;;Pan Need & Mukhwas
+;30059;;Gifting
+;30060;;Ginger & Garlic Pastes
+;30061;;Non Veg Preparations
+;30062;;Tomato & Tamarind Pastes
+;30063;;Idly & Dosa Mix
+;30064;;South & North Indian Mixes
+;30065;;Continental Mixes
+;30096;;Home Made Powders
+#;30067
+;30068;;Breads & Bread products
+;30069;;Baked snacks
+;30070;;Burgers & Sandwich
+;30071;;Celebration cakes
+;30072;;Pastries & Desserts
+;30073;;Cookies
+#;30074
+;30075;;Gifting
+;30076;;Organic
+;30077;;Butter & Cream
+;30078;;Cheese, Panner & Spreads
+#;30079
+;30080;;Yoghurt, Curd, Lassi & Butter Milk
+;30081;;UHT Milk & Flavored Milk
+#;30082
+;30083;;Other Dairy Products
+;30084;;Soy Products
+;30085;;Organic
+;30086;;Diabetic
+;30090;;Idly & Dosa Batter
+#;30087Snacks &Savories
+#;30088Desserts & Sweets
+#;30089Juices & Beverages
+#;30091Pickles
+#;30092Ground coffee
+#;30093Chocolates
+#;30094Loose Tea
+#;30095Speciality Foods
+;30097;;Chicken
+;30098;;Lamb
+;30099;;Beef
+;30100;;Other Meat
+;30101;;River Fish
+;30102;;Sea Fish
+;30103;;Crabs, Prawns & Lobsters
+;30104;;Marinated Fish
+#;30105
+;30106;;Frozen Non Veg
+;30107;;Frozen Non Veg Snacks
+;30108;;Chicken
+;30109;;Lamb
+;30110;;Beef
+;30111;;Pork
+;30112;;Brown Malt Drinks
+;30113;;White Malt Drinks
+;30114;;Junior & Toddler Drinks
+;30115;;Special Malt Drinks
+;30116;;Tea
+;30117;;Tea Bag
+;30118;;Green Tea Bag
+;30119;;Ground Coffee
+;30120;;Instant Coffee
+;30121;;Dairy Whiteners & Milk Powders
+;30122;;Powder Concentrates
+;30123;;Liquid Concentrates
+;30124;;Apple Juice
+;30125;;Orange Juice
+;30126;;Mixed Fruit Juice
+;30127;;Other Fruit Juice
+;30128;;Fruit Drinks
+;30129;;Cola Drink
+;30130;;Lime Drink
+;30131;;Orange Drink
+;30132;;Other Drinks
+;30133;;Energy & Sports
+;30134;;Non Alcoholic & Sparkling
+;30135;;Chocolate Ready Drinks
+;30136;;Soda
+;30137;;Mineral Water
+#;30138
+#;30139
+;30140;;Corn Flakes
+;30141;;Choco Flakes
+;30142;;Wheat Flakes
+;30143;;Muesli
+;30144;;Oats & Porridges
+;30145;;Cereal & Energy Bars
+;30146;;Other Breakfast Cereals
+;30147;;Instant Noodles
+;30148;;Plain Noodles
+;30149;;Cup Noodles
+;30150;;Vermicelli & Sevai
+;30151;;Plain Pastas
+;30152;;Instant Pastas
+;30153;;Jams
+;30154;;Spreads
+;30155;;Salad Dressing
+;30156;;Mayonnaise
+;30157;;Honey
+;30158;;Canned Fruit & Veg
+;30159;;Canned Non Veg
+;30160;;Tomato Sauce & Ketchup
+;30161;;Pasta & Pizza Sauce
+;30162;;Soy & Chilli Sauce
+;30163;;Other Sauces
+;30164;;Mango Pickles
+;30165;;Mixed Veg Pickles
+;30166;;Lime Pickles
+;30167;;Non Veg Pickles
+;30168;;Other Pickles
+;30169;;Olives
+;30198;;Hommade Pickles
+;30170;;Baking Needs
+;30171;;Dessert Mix
+;30172;;Toppings
+;30174;;Ready to Eat
+;30175;;Soups
+;30176;;Papad & Appalams 
+;30177;;Cookies
+;30178;;Glucose
+;30179;;Cream Biscuits
+;30180;;Sweet & Salt
+;30181;;Marie
+;30182;;Other Biscuits
+;30183;;Wafers
+;30184;;Chocolate Bars
+;30185;;Chocolates Coated
+;30186;;Candies & Toffees
+;30187;;Gums, Jelly & Mints
+;30188;;Indian Sweets
+;30189;;Cakes
+;30190;;Gifting
+;30173;;Ethinic Snacks &Savories
+;30191;;Chips
+;30192;;Namkeen
+;30193;;Other Snacks
+;30194;;Gifting
+;30199;;Ethinic Snacks &Savories
+;30195;;Frozen Veg
+;30196;;Frozen Veg Snacks
+;30197;;Diabetic
+#;30200
+;30201;;Toilet Cleaners
+;30202;;Floor Cleaners
+;30203;;Other Cleaners
+;30204;;Mops, Brushes & Scrubbers
+;30205;;Brooms & Dust pans
+;30206;;Bathroom Accessories
+;30207;;Detergent Powder - Bucket Wash
+;30208;;Detergent Powder - Machine Wash
+;30209;;Fabric Prewash & Postwash
+;30210;;Detergent Bars
+;30211;;Liquid Detergent
+;30212;;Special Detergents
+;30213;;Laundry Accessories
+;30214;;Dish wash Liquids & Pastes
+;30215;;Dish wash Scrubbers
+;30216;;Dish wash Bars
+;30217;;Dish wash Powders
+;30218;;Air & Room Freshners
+;30219;;Mosquito Repellents
+;30220;;Pesticides
+;30221;;Car Freshners
+;30222;;Agarbatthi
+;30223;;Pooja Aids
+;30224;;Pooja needs
+;30225;;Shoe Polish
+;30226;;Shoe Accessories
+;30227;;Bag needs
+;30228;;Toilet roll
+;30229;;Kitchen Towel
+;30230;;Paper Napkin
+;30231;;Face & Car Tissues
+;30232;;Wet Wipes
+;30233;;Wrap Needs
+;30234;;Disposable Ware
+;30235;;Pet Food
+;30236;;Pet Accessories
+;30237;;Pet Health & Beauty
+;30238;;Bath Soap & Shower Gels
+#;30239
+;30240;;Body Lotion
+;30241;;Face Cream & Face Wash
+#;30242
+;30243;;Face Packs & Scrubs
+;30244;;Anti Ageing
+;30245;;Toner & Cleanser
+;30246;;Hair Removal
+;30247;;Talc
+;30248;;Specific Applicants
+;30249;;Body Oil & Creams
+;30250;;Skin Care Accessories
+;30251;;Cosmetics
+;30252;;Body Scrubber
+;30253;;Bath Accessories
+;30254;;Herbal
+;30255;;Hair Shampoo
+;30256;;Hair Conditioner
+;30257;;Hair colour
+;30258;;Hair Oils
+;30259;;Hair Gel & Lotion
+;30260;;Hair Accessories
+;30261;;Henna & Herbal Hair wash
+;30262;;Tooth Paste
+;30263;;Tooth Paste Herbal/Sensitive
+;30264;;Tooth Brush
+;30265;;Mouth Wash
+;30266;;Oral Accessories
+;30267;;Tooth Powder
+;30268;;Deo Men
+;30269;;Deo Women
+;30270;;Unisex Deo
+;30271;;Perfume Men
+;30272;;Perfume Women
+;30273;;Sanitary Pads
+;30274;;Sanitary Aids
+;30275;;Shaving Razor, Blade & Cateidges
+#;30276
+;30277;;Shaving Foam, Cream & Gels
+;30278;;After Shave
+;30279;;Men Face Wash & creams
+;30280;;Hand Wash Liquid
+;30281;;Hand Sanitizer
+;30282;;Foot care
+;30283;;Hair Dryer
+;30284;;Hair Straightener
+;30285;;Trimmers
+;30286;;Mens Shavers
+;30287;;Lady Shavers
+;30288;;Epilator
+;30289;;Adult Diapers
+;30290;;Sexual Wellness
+;30291;;Pain Relievers
+;30292;;Antiseptics
+;30293;;Vitamin & Suppliments
+;30294;;Digestion Aids
+;30295;;Medical Dressings
+;30296;;Other OTC
+#;30297
+#;30298
+;30299;;Baby Cereals
+;30300;;Baby Organic Food
+;30301;;Baby Toiletries & Bath Accessories
+;30302;;Baby Diapers & Wipes
+;30303;;Baby Accessories
+;30304;;Feeding Needs
+;30305;;Baby Blankets
+;30306;;Gifting
+#;30307
+;30308;;Office Stationery
+;30309;;Books & Pads
+;30310;;School Accessories
+;30311;;Coloring & Writing
+;30312;;Party Line Products
+;30313;;Hobbies
+;30314;;Gifting
+;30315;;Dolls & Action Figures
+;30316;;Soft Toys
+;30317;;Motion Toys
+;30318;;Educational Toys
+;30319;;Outdoor Toys
+;30320;;Buckets & Mugs
+;30321;;Cloth clips & Hangers
+;30322;;Other Plasticware
+;30323;;Cookware
+;30324;;Stainless Steel Storage
+;30325;;Kitchen Tools
+;30326;;Containers & Bottles
+;30327;;Gas Stoves
+;30328;;Pressure Cookers
+;30329;;Tableware & Cutlery
+;30330;;Melamine
+;30331;;Thermoware
+;30332;;Cups & Mugs
+;30333;;Dinner Set
+;30334;;Bake Ware
+;30335;;Bar & Glassware
+;30336;;Kitchen Rack & Trolleys
+;30337;;Kitchen Appliances
+;30338;;Bulbs & CFL
+;30339;;Electrical Accessories
+;30340;;Electrical Needs
+;30341;;Battery
+;30342;;Mosquito Bats
+#;30343
+;30344;;Bean Bags
+;30345;;Living Room
+;30346;;Casual & Garden Seating
+;30347;;Kids Furniture
+;30348;;Beds
+;30349;;Bed Package
+;30350;;Mattress
+;30351;;Bed Cover
+;30352;;Bed Sheet
+;30353;;Blankets And Throws
+;30354;;Comforter
+;30355;;Jaipuri Razai
+;30356;;Pillow Cover
+;30357;;Cushion & Pillow Filler
+;30358;;Cushion & Sofa Cover
+;30359;;Door Curtain
+;30360;;Deewan Set
+;30361;;Window Curtain
+;30362;;Carpet
+;30363;;Door Mats
+;30364;;Bath Accessories
+;30365;;Floor Mat
+;30366;;Bath Mats
+;30367;;Kitchen Linen
+;30368;;Table Linen
+;30369;;Face And Hand Towel
+;30370;;Bath Towel
+;30371;;Umbrella
+;30372;;Storage & Cover Set
+;30373;;Protector
+;30374;;Home Décor
+;30375;;Diyas & Candles
+;30376;;Festival & Gifting
+;30377;;Outdoor Sports
+;30378;;Indoor Sports
+;30379;;Fitness
+;30380;;Bi-Cycles
+;30381;;Other Sports
+;30382;;Strolleys
+;30383;;Backpacks
+;30384;;Office Bags
+;30385;;Duffle Bags
+;30386;;Travel Accessories
+;30387;;Messenger Bags
+;30388;;Garden
+;30389;;Barbeque
+;30390;;Car Accessories
+;30391;;Bike Accessories
+;30392;;Air Conditioning
+;30393;;Refrigerators
+;30394;;Washing Machines
+;30395;;Home Appliances
+;30396;;LCD & LED
+;30397;;DVD Player
+;30398;;Other Accessories
+#;30399
+;30400;;Mens Inner Wear
+;30401;;Ladies Inner wear
+;30402;;Kids Inner wear
+;30403;;Mens Wear
+;30404;;Ladies wear
+;30405;;Kids wear
+;30406;;Rain Wear
+;30407;;Warm Wear
+;30408;;Ladies Accessories
+;30409;;Mens Accessories
+#;30410
+#;30411
+;30412;;Spirits
+;30413;;Beer
+;30414;;Wine & Champagne
+;30415;;Rum
+;30416;;Brandy
+;30417;;Low Alcohol Beverages
+#;30418;;
+ 

@@ -1,0 +1,17 @@
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/S6_Maintenance/!svn/ver/1/custom/sparcommercewebservices/src/com/spar/hcl/queues/channel
+END
+OrderStatusUpdateChannelListener.java
+K 25
+svn:wc:ra_dav:version-url
+V 131
+/svn/S6_Maintenance/!svn/ver/1/custom/sparcommercewebservices/src/com/spar/hcl/queues/channel/OrderStatusUpdateChannelListener.java
+END
+ProductExpressUpdateChannelListener.java
+K 25
+svn:wc:ra_dav:version-url
+V 134
+/svn/S6_Maintenance/!svn/ver/1/custom/sparcommercewebservices/src/com/spar/hcl/queues/channel/ProductExpressUpdateChannelListener.java
+END

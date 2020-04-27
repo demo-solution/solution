@@ -1,0 +1,131 @@
+/*
+## Navigation
+********************************************************************/
+
+.navigationbarcollectioncomponent{
+	/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#61b56a+0,0d853e+100 */
+background: rgb(97,181,106); /* Old browsers */
+background: -moz-linear-gradient(top, rgba(97,181,106,1) 0%, rgba(13,133,62,1) 100%); /* FF3.6-15 */
+background: -webkit-linear-gradient(top, rgba(97,181,106,1) 0%,rgba(13,133,62,1) 100%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(to bottom, rgba(97,181,106,1) 0%,rgba(13,133,62,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#61b56a', endColorstr='#0d853e',GradientType=0 ); /* IE6-9 */
+	
+	border:1px dotted #a5a5a5;
+	border-width:1px 0 ;
+
+	position:relative;
+	z-index:100;
+	clear: both;
+	border-radius:5px; padding:5px;
+}
+
+
+
+/*
+#### 1. Navigation Level
+********************************************************************/
+
+.navigationbarcollectioncomponent  li.La{
+	float:left;
+	text-align:center;
+	position:relative; border-right:1px solid #25923c;
+}
+
+
+.navigationbarcollectioncomponent  li.La > a{
+	display:block;
+	line-height:2.750em;
+	padding: 0 15px; color:#fff;
+	background:url(../images/drop-down-icon.png) no-repeat right 2px center; margin-right:10px;
+}
+
+
+.navigationbarcollectioncomponent li.La:hover{
+
+}
+
+.navigationbarcollectioncomponent li.parent:hover > a{ 
+
+	padding: 0 15px;
+	background:#fff url(../images/drop-down-icon.png) no-repeat right 2px center;
+	margin:0 0 -1px 0;
+	padding-bottom:1px;
+	box-shadow: 4px 4px 4px rgba(0,0,0,0.4); margin-right:10px;
+}
+
+.navigationbarcollectioncomponent li.parent:hover > a{ 
+	/*border-left:1px dotted #a5a5a5;
+	border-right:1px dotted #a5a5a5;
+	padding-left:11px;
+	padding-right:11px; */color:#000;
+}
+
+/*
+#### 2. Navigation Level
+********************************************************************/
+.navigationbarcollectioncomponent ul.Lb{
+	display:none;
+}
+
+
+.navigationbarcollectioncomponent li.La:hover ul.Lb,
+.navigationbarcollectioncomponent li.La a:focus + ul.Lb{
+	display:block;
+}
+
+
+
+
+.navigationbarcollectioncomponent ul.Lb{
+	position:absolute;
+	background:#fff;
+	left:0;
+	right: 0;
+	text-align:left;
+	padding:0px;
+	border:1px dotted #a5a5a5;
+	z-index:99;
+	border-top:0;
+	width: 240px;
+	top:33px;
+	box-shadow: 4px 4px 4px rgba(0,0,0,0.4);
+	z-index:999;
+	
+}
+
+
+
+.navigationbarcollectioncomponent ul.Lb li.Lb{
+	float:left; width:220px;
+
+}
+
+
+.navigationbarcollectioncomponent ul.Lb li.Lb span.nav-submenu-title{
+	display:block;
+	font-weight:bold;
+	text-transform:capatalize;
+	font-size:12px;
+	margin:0 0 10px 0;
+}
+
+
+
+
+.navigationbarcollectioncomponent ul.Lb li.Lb .Lc{
+/*	float:left;
+	width:181px;*/
+}
+
+
+
+
+
+/*
+#### Special Offer
+********************************************************************/
+
+.navigationbarcollectioncomponent .La.special_offer{
+	background:#eee;
+	float:right;
+}

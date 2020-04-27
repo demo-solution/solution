@@ -1,0 +1,2 @@
+## messageSource=classpath:/sparcore/messages/email-sparExpiredPromoArchError_$lang.properties
+${ctx.messages.getMessage('emailSubject',${ctx.enviornment})}${ctx.promoType}

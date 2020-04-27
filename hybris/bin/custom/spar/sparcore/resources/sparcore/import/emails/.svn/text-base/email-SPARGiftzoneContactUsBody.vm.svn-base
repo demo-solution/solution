@@ -1,0 +1,9 @@
+## messageSource=classpath:/sparcore/messages/email-SparGiftzone_$lang.properties
+Bulk Order Details:
+<br>
+<br>Customer Name: - ${ctx.customerName}<br>
+<br>Customer Email: - ${ctx.customerEmail}<br>
+<br>Contact Number: - ${ctx.customerContact}<br>
+<br>Company Name: - ${ctx.companyName}<br>
+<br>Customer City: - ${ctx.customerCity}<br>
+<br>Customer Remarks: - ${ctx.customerRemarks} <br>

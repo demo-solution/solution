@@ -1,0 +1,52 @@
+/**
+ *
+ */
+package com.spar.hcl.core.strategies.impl;
+
+
+import de.hybris.platform.ordersplitting.model.StockLevelModel;
+import de.hybris.platform.warehousing.atp.strategy.impl.WarehousingAvailabilityCalculationStrategy;
+
+import java.util.Collection;
+import java.util.Map;
+
+
+/**
+ * This class is used to customize the caluclation strategy for stock by removing reserved quantity check.
+ *
+ * @author nileshkumar.c/Rohan_c
+ *
+ */
+public class SparWarehousingAvailabilityCalculationStrategy extends WarehousingAvailabilityCalculationStrategy
+{
+
+	/**
+	 * This method is used to customize the caluclation strategy for stock by removing reserved quantity check.
+	 */
+	@Override
+	public Long calculateAvailability(final Collection<StockLevelModel> stockLevels)
+	{
+		if (stockLevels.isEmpty())
+		{
+			return Long.valueOf(0L);
+		}
+
+		final Map params = setupParameters(stockLevels);
+		Long availquantity = null;
+		Long alocquantity = null;
+		Long cancelquantity = null;
+		availquantity = alocquantity = cancelquantity = new Long(0);
+
+		availquantity = getAvailableToPromiseDao().getAvailabilityForStockLevels(params);
+		if (null != getAvailableToPromiseDao().getAllocationQuantityForStockLevels(params))
+		{
+			alocquantity = getAvailableToPromiseDao().getAllocationQuantityForStockLevels(params);
+		}
+		if (null != getAvailableToPromiseDao().getCancellationQuantityForStockLevels(params))
+		{
+			cancelquantity = getAvailableToPromiseDao().getCancellationQuantityForStockLevels(params);
+		}
+		return Long.valueOf(availquantity.longValue() - alocquantity.longValue() + cancelquantity.longValue());
+	}
+
+}

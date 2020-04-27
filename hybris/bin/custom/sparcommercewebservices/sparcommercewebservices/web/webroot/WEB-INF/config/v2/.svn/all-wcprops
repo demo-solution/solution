@@ -1,0 +1,47 @@
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/S6_Maintenance/!svn/ver/348/custom/sparcommercewebservices/web/webroot/WEB-INF/config/v2
+END
+error-config-v2-spring.xml
+K 25
+svn:wc:ra_dav:version-url
+V 118
+/svn/S6_Maintenance/!svn/ver/1/custom/sparcommercewebservices/web/webroot/WEB-INF/config/v2/error-config-v2-spring.xml
+END
+dto-mappings-v2-spring.xml
+K 25
+svn:wc:ra_dav:version-url
+V 118
+/svn/S6_Maintenance/!svn/ver/1/custom/sparcommercewebservices/web/webroot/WEB-INF/config/v2/dto-mappings-v2-spring.xml
+END
+dto-level-mappings-v2-spring.xml
+K 25
+svn:wc:ra_dav:version-url
+V 126
+/svn/S6_Maintenance/!svn/ver/284/custom/sparcommercewebservices/web/webroot/WEB-INF/config/v2/dto-level-mappings-v2-spring.xml
+END
+security-v2-spring.xml
+K 25
+svn:wc:ra_dav:version-url
+V 114
+/svn/S6_Maintenance/!svn/ver/1/custom/sparcommercewebservices/web/webroot/WEB-INF/config/v2/security-v2-spring.xml
+END
+filter-config-v2-spring.xml
+K 25
+svn:wc:ra_dav:version-url
+V 119
+/svn/S6_Maintenance/!svn/ver/1/custom/sparcommercewebservices/web/webroot/WEB-INF/config/v2/filter-config-v2-spring.xml
+END
+validators-v2-spring.xml
+K 25
+svn:wc:ra_dav:version-url
+V 118
+/svn/S6_Maintenance/!svn/ver/348/custom/sparcommercewebservices/web/webroot/WEB-INF/config/v2/validators-v2-spring.xml
+END
+springmvc-v2-servlet.xml
+K 25
+svn:wc:ra_dav:version-url
+V 116
+/svn/S6_Maintenance/!svn/ver/1/custom/sparcommercewebservices/web/webroot/WEB-INF/config/v2/springmvc-v2-servlet.xml
+END

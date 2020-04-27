@@ -1,0 +1,95 @@
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparstorefront/web/webroot/WEB-INF/tags/desktop/checkout/multi
+END
+pickupCartItems.tag
+K 25
+svn:wc:ra_dav:version-url
+V 125
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparstorefront/web/webroot/WEB-INF/tags/desktop/checkout/multi/pickupCartItems.tag
+END
+checkoutOrderDetails.tag
+K 25
+svn:wc:ra_dav:version-url
+V 130
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparstorefront/web/webroot/WEB-INF/tags/desktop/checkout/multi/checkoutOrderDetails.tag
+END
+selectedDeliveryAddressDetails.tag
+K 25
+svn:wc:ra_dav:version-url
+V 140
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparstorefront/web/webroot/WEB-INF/tags/desktop/checkout/multi/selectedDeliveryAddressDetails.tag
+END
+sparSummaryFlowPayment.tag
+K 25
+svn:wc:ra_dav:version-url
+V 132
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparstorefront/web/webroot/WEB-INF/tags/desktop/checkout/multi/sparSummaryFlowPayment.tag
+END
+checkoutProgressBar.tag
+K 25
+svn:wc:ra_dav:version-url
+V 129
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparstorefront/web/webroot/WEB-INF/tags/desktop/checkout/multi/checkoutProgressBar.tag
+END
+summaryFlowPayment.tag
+K 25
+svn:wc:ra_dav:version-url
+V 128
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparstorefront/web/webroot/WEB-INF/tags/desktop/checkout/multi/summaryFlowPayment.tag
+END
+summaryFlow.tag
+K 25
+svn:wc:ra_dav:version-url
+V 121
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparstorefront/web/webroot/WEB-INF/tags/desktop/checkout/multi/summaryFlow.tag
+END
+deliveryMethodSelector.tag
+K 25
+svn:wc:ra_dav:version-url
+V 132
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparstorefront/web/webroot/WEB-INF/tags/desktop/checkout/multi/deliveryMethodSelector.tag
+END
+deliveryMethodDetails.tag
+K 25
+svn:wc:ra_dav:version-url
+V 131
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparstorefront/web/webroot/WEB-INF/tags/desktop/checkout/multi/deliveryMethodDetails.tag
+END
+pickupGroups.tag
+K 25
+svn:wc:ra_dav:version-url
+V 122
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparstorefront/web/webroot/WEB-INF/tags/desktop/checkout/multi/pickupGroups.tag
+END
+pickupConsolidationOptions.tag
+K 25
+svn:wc:ra_dav:version-url
+V 136
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparstorefront/web/webroot/WEB-INF/tags/desktop/checkout/multi/pickupConsolidationOptions.tag
+END
+summaryFlowDeliveryMode.tag
+K 25
+svn:wc:ra_dav:version-url
+V 133
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparstorefront/web/webroot/WEB-INF/tags/desktop/checkout/multi/summaryFlowDeliveryMode.tag
+END
+summaryFlowDeliveryAddress.tag
+K 25
+svn:wc:ra_dav:version-url
+V 136
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparstorefront/web/webroot/WEB-INF/tags/desktop/checkout/multi/summaryFlowDeliveryAddress.tag
+END
+deliveryCartItems.tag
+K 25
+svn:wc:ra_dav:version-url
+V 127
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparstorefront/web/webroot/WEB-INF/tags/desktop/checkout/multi/deliveryCartItems.tag
+END
+selectedDeliveryMethodDetails.tag
+K 25
+svn:wc:ra_dav:version-url
+V 139
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparstorefront/web/webroot/WEB-INF/tags/desktop/checkout/multi/selectedDeliveryMethodDetails.tag
+END

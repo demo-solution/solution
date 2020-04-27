@@ -1,0 +1,59 @@
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparcore/src/com/spar/hcl/core/employee/discount/ws
+END
+MAXEmployeeDiscountLimitIfc.java
+K 25
+svn:wc:ra_dav:version-url
+V 127
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparcore/src/com/spar/hcl/core/employee/discount/ws/MAXEmployeeDiscountLimitIfc.java
+END
+UpdateEmployeeResponse.java
+K 25
+svn:wc:ra_dav:version-url
+V 122
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparcore/src/com/spar/hcl/core/employee/discount/ws/UpdateEmployeeResponse.java
+END
+UpdateEmployee.java
+K 25
+svn:wc:ra_dav:version-url
+V 114
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparcore/src/com/spar/hcl/core/employee/discount/ws/UpdateEmployee.java
+END
+GetEmployeeDetailsResponse.java
+K 25
+svn:wc:ra_dav:version-url
+V 126
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparcore/src/com/spar/hcl/core/employee/discount/ws/GetEmployeeDetailsResponse.java
+END
+package-info.java
+K 25
+svn:wc:ra_dav:version-url
+V 112
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparcore/src/com/spar/hcl/core/employee/discount/ws/package-info.java
+END
+EmployeeDetails.java
+K 25
+svn:wc:ra_dav:version-url
+V 115
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparcore/src/com/spar/hcl/core/employee/discount/ws/EmployeeDetails.java
+END
+GetEmployeeDetails.java
+K 25
+svn:wc:ra_dav:version-url
+V 118
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparcore/src/com/spar/hcl/core/employee/discount/ws/GetEmployeeDetails.java
+END
+MAXEmployeeDiscountLimitService.java
+K 25
+svn:wc:ra_dav:version-url
+V 131
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparcore/src/com/spar/hcl/core/employee/discount/ws/MAXEmployeeDiscountLimitService.java
+END
+ObjectFactory.java
+K 25
+svn:wc:ra_dav:version-url
+V 113
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparcore/src/com/spar/hcl/core/employee/discount/ws/ObjectFactory.java
+END

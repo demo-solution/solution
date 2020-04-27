@@ -1,0 +1,1006 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2015 hybris AG
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+-->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:int="http://www.springframework.org/schema/integration"
+	xmlns:file="http://www.springframework.org/schema/integration/file"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/integration 
+	http://www.springframework.org/schema/integration/spring-integration.xsd
+	http://www.springframework.org/schema/integration/file 
+	http://www.springframework.org/schema/integration/file/spring-integration-file.xsd
+	http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <context:annotation-config/> 
+
+	<bean id="baseDirectoryBrandbank" class="java.lang.String">
+		<constructor-arg value="#{baseDirectory}/${tenantId}/brandbank" />
+	</bean>
+	
+	<!-- General Setup Start -->
+	<bean id="fileOrderComparatorBrandBank" class="de.hybris.platform.acceleratorservices.dataimport.batch.FileOrderComparator">
+		<property name="prefixPriority">
+			<map>
+				<entry key="ProductMediaFormat" value="4" />
+				<entry key="ProductMedias" value="3" />
+				<entry key="ProductCategoryFeatures" value="2" />
+				<entry key="ProductAttributes" value="1" />
+				<!-- <entry key="ProductAttributeItemPickingTime" value="1" /> --> <!-- commented for itempickingtime -->
+			</map>
+		</property>
+	</bean>
+	<!-- General Setup End -->
+	
+	<!-- 1) Scan for files -->
+	
+	<!-- Allowing duplicate files START -->
+	<!--  <file:inbound-channel-adapter id="batchFilesBrandbank" directory="#{baseDirectoryBrandbank}"
+		filename-regex="^(.*)_(\d+)\.csv" comparator="fileOrderComparator" prevent-duplicates="false">
+		<int:poller fixed-rate="1000" />
+	</file:inbound-channel-adapter>
+	-->
+	<!-- Allowing duplicate files END -->
+	
+	<!-- Preventing duplicate files START -->
+	
+	<bean id="batchSequenceIdParser" class="de.hybris.platform.acceleratorservices.dataimport.batch.util.SequenceIdParser">
+		<property name="parser">
+			<bean class="de.hybris.platform.acceleratorservices.util.RegexParser">
+				<property name="regex" value="_(\d+)\.csv" />
+			</bean>
+		</property>
+	</bean>
+	<bean id="batchLanguageParser" class="de.hybris.platform.acceleratorservices.util.RegexParser">
+		<property name="regex" value="-(\w{2})_(\d+)\.csv" />
+	</bean>
+	
+	
+	<file:inbound-channel-adapter id="batchFilesBrandbank" directory="#{baseDirectoryBrandbank}"
+		filename-regex="^(.*)_(\d+)\.csv" comparator="fileOrderComparatorBrandBank">
+		<int:poller fixed-rate="1000" />
+	</file:inbound-channel-adapter>
+	<!-- Preventing duplicate files END -->
+	
+	<!-- 2) move the file to processing and create header -->
+	<file:outbound-gateway request-channel="batchFilesBrandbank" reply-channel="batchFilesBrandbankProc"
+		directory="#{baseDirectoryBrandbank}/processing" delete-source-files="true" />
+	<int:service-activator input-channel="batchFilesBrandbankProc" output-channel="batchFilesHeaderInit" ref="brandbankHeaderSetupTask"
+		method="execute" />
+	<bean id="brandbankHeaderSetupTask" class="de.hybris.platform.acceleratorservices.dataimport.batch.task.HeaderSetupTask">
+		<property name="catalog" value="sparProductCatalog" />
+		<property name="net" value="false" />
+		<property name="storeBaseDirectory" ref="baseDirectoryBrandbank" />
+	</bean>
+
+
+<!--  Product Category feature impex configuration STARTS -->
+	
+	<!--  Classifying Category 100 (Product Details) START -->
+	<!-- Transformer converters mappings -->
+	<bean id="batchBrandbankProductDetailsConverterMapping" 
+		  class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.mapping.impl.DefaultConverterMapping" 
+		  p:mapping="ProductCategoryFeatures" 
+		  p:converter-ref="batchBrandbankProductDetailsConverter"/>
+	
+	<!-- Brandbank specific converters -->
+	<bean id="batchBrandbankProductDetailsConverter" class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.impl.DefaultImpexConverter">
+		<property name="header">
+			<value>#{defaultImpexProductHeader}
+				# Macros / Replacement Parameter definitions
+				$clAttrModifiers=system='SparClassification',version='2.0',translator=de.hybris.platform.catalog.jalo.classification.impex.ClassificationAttributeTranslator,lang=en
+				
+				# Insert Product Classifications
+				$productCatalog=sparProductCatalog
+                $catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
+	             				
+				# Classification: Product Details, 100
+				$feature1=@Further Descrption[$clAttrModifiers];  
+				$feature2=@Description[$clAttrModifiers];  
+				$feature3=@Regional Name[$clAttrModifiers];
+				
+				# Insert Brandbank Products
+                      
+				UPDATE Product;code[unique=true];$feature1;$feature2;$feature3;$catalogVersion
+			</value>
+		</property>
+		<property name="impexRow">
+			<value>;{+0};{1};{2};{3}</value>
+		</property>
+	</bean>
+	
+	<!--  Classifying Category 100 END -->
+
+
+	<!--  Classifying Category 101 (Branding & Marketing) START -->
+	<!-- Brandbank specific converters -->
+	<bean id="batchBrandbankProductBrandingAndMarketingConverterMapping" 
+		  class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.mapping.impl.DefaultConverterMapping" 
+		  p:mapping="ProductCategoryFeatures" 
+		  p:converter-ref="batchBrandbankProductBrandingAndMarketingConverter"/>
+		  
+	<bean id="batchBrandbankProductBrandingAndMarketingConverter" class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.impl.DefaultImpexConverter">
+		<property name="header">
+			<value>#{defaultImpexProductHeader}
+				# Macros / Replacement Parameter definitions
+				$clAttrModifiers=system='SparClassification',version='2.0',translator=de.hybris.platform.catalog.jalo.classification.impex.ClassificationAttributeTranslator,lang=en
+				
+				# Insert Product Classifications
+				$productCatalog=sparProductCatalog
+                $catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
+			
+				# Classification: Branding and Marketing, 101
+				$feature4=@Product Marketing[$clAttrModifiers];  
+				$feature5=@Brand Marketing[$clAttrModifiers]; 
+				$feature6=@Manufacturer Marketing[$clAttrModifiers]; 
+
+				# Insert Brandbank Products
+				UPDATE Product;code[unique=true];$feature4;$feature5;$feature6;$catalogVersion;
+			</value>
+		</property>
+		<property name="impexRow">
+			<value>;{+0};{4};{5};{6}</value>
+		</property>
+	</bean>
+	
+	<!--  Classifying Category 101 END -->
+	
+	<!--  Classifying Category 102 (Company Details) START -->
+	<!-- Transformer converters mappings -->
+	<bean id="batchBrandbankProductCompanyDetailsConverterMapping" 
+		  class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.mapping.impl.DefaultConverterMapping" 
+		  p:mapping="ProductCategoryFeatures" 
+		  p:converter-ref="batchBrandbankProductCompanyDetailsConverter"/>
+	
+	<!-- Brandbank specific converters -->
+	<bean id="batchBrandbankProductCompanyDetailsConverter" class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.impl.DefaultImpexConverter">
+		<property name="header">
+			<value>#{defaultImpexProductHeader}
+				# Macros / Replacement Parameter definitions
+				$clAttrModifiers=system='SparClassification',version='2.0',translator=de.hybris.platform.catalog.jalo.classification.impex.ClassificationAttributeTranslator,lang=en
+				
+				# Insert Product Classifications
+				$productCatalog=sparProductCatalog
+                $catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
+				
+				# Classification: Company Details, 102
+				$feature7=@Company Name[$clAttrModifiers];  
+				$feature8=@Company Address[$clAttrModifiers];  
+				$feature9=@Telephone Helpline[$clAttrModifiers];  
+				$feature10=@Fax Number[$clAttrModifiers];  
+				$feature11=@Email Helpline[$clAttrModifiers];
+				$feature12=@Web Address[$clAttrModifiers];
+				 
+				# Insert Brandbank Products
+				UPDATE Product;code[unique=true];$feature7;$feature8;$feature9;$feature10;$feature11;$feature12;$catalogVersion;
+			</value>
+		</property>
+		<property name="impexRow">
+			<value>;{+0};{7};{8};{9};{10};{11};{12}</value>
+		</property>
+	</bean>
+	
+	<!--  Classifying Category 102 END -->
+	
+	<!--  Classifying Category 103 (Addresses) START -->
+	<!-- Transformer converters mappings -->
+	<bean id="batchBrandbankProductAddressesConverterMapping" 
+		  class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.mapping.impl.DefaultConverterMapping" 
+		  p:mapping="ProductCategoryFeatures" 
+		  p:converter-ref="batchBrandbankProductAddressesConverter"/>
+	
+	<!-- Brandbank specific converters -->
+	<bean id="batchBrandbankProductAddressesConverter" class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.impl.DefaultImpexConverter">
+		<property name="header">
+			<value>#{defaultImpexProductHeader}
+				# Macros / Replacement Parameter definitions
+				$clAttrModifiers=system='SparClassification',version='2.0',translator=de.hybris.platform.catalog.jalo.classification.impex.ClassificationAttributeTranslator,lang=en
+				
+				# Insert Product Classifications
+				$productCatalog=sparProductCatalog
+                $catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
+						
+				# Classification: Addresses, 103
+				$feature13=@Manufacturers Address[$clAttrModifiers];  
+				$feature14=@Importer Address[$clAttrModifiers];  
+				$feature15=@Distributor Address[$clAttrModifiers];  
+				$feature16=@Return To[$clAttrModifiers];  
+								 
+				# Insert Brandbank Products
+				UPDATE Product;code[unique=true];$feature13;$feature14;$feature15;$feature16;$catalogVersion;
+			</value>
+		</property>
+		<property name="impexRow">
+			<value>;{+0};{13};{14};{15};{16}</value>
+		</property>
+	</bean>
+	
+	<!--  Classifying Category 103 END -->
+
+
+<!--  Classifying Category 104 (Weight & Size) START -->
+	<!-- Transformer converters mappings -->
+	<bean id="batchBrandbankProductWeightAndSizeConverterMapping" 
+		  class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.mapping.impl.DefaultConverterMapping" 
+		  p:mapping="ProductCategoryFeatures" 
+		  p:converter-ref="batchBrandbankProductWeightAndSizeConverter"/>
+	
+	<!-- Brandbank specific converters -->
+	<bean id="batchBrandbankProductWeightAndSizeConverter" class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.impl.DefaultImpexConverter">
+		<property name="header">
+			<value>#{defaultImpexProductHeader}
+				# Macros / Replacement Parameter definitions
+				$clAttrModifiers=system='SparClassification',version='2.0',translator=de.hybris.platform.catalog.jalo.classification.impex.ClassificationAttributeTranslator,lang=en
+				$productCatalog=sparProductCatalog
+                $catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
+				
+				# Insert Product Classifications Numeric Size
+
+				# Classification: Weight and Size, 104
+				$feature17=@Numeric Size[$clAttrModifiers];  
+				$feature18=@Drained Weight[$clAttrModifiers];  
+				$feature19=@Number of units[$clAttrModifiers];  
+				$feature20=@Unit Type[$clAttrModifiers];  
+				$feature21=@Weight[$clAttrModifiers];
+								 
+				# Insert Brandbank Products
+				UPDATE Product;code[unique=true];$feature17;$feature18;$feature19;$feature20;$feature21;$catalogVersion;
+			</value>
+		</property>
+		<property name="impexRow">
+			<value>;{+0};{17};{18};{19};{20};{21}</value>
+		</property>
+	</bean>
+	
+	<!--  Classifying Category 104 END -->
+		
+	
+	<!--  Classifying Category 105 (Information and Usage Guidelines) START -->
+	<!-- Transformer converters mappings -->
+	<bean id="batchBrandbankProductInformationAndUsageGuidelinesConverterMapping" 
+		  class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.mapping.impl.DefaultConverterMapping" 
+		  p:mapping="ProductCategoryFeatures" 
+		  p:converter-ref="batchBrandbankProductInformationAndUsageGuidelinesConverter"/>
+	
+	<!-- Brandbank specific converters -->
+	<bean id="batchBrandbankProductInformationAndUsageGuidelinesConverter" class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.impl.DefaultImpexConverter">
+		<property name="header">
+			<value>#{defaultImpexProductHeader}
+				# Macros / Replacement Parameter definitions
+				$clAttrModifiers=system='SparClassification',version='2.0',translator=de.hybris.platform.catalog.jalo.classification.impex.ClassificationAttributeTranslator,lang=en
+				$productCatalog=sparProductCatalog
+                $catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
+				
+				# Insert Product Classifications
+				
+				# Classification: Information and Usage Guidelines, 105
+				$feature22=@Other Information[$clAttrModifiers];  
+				$feature23=@Number of uses[$clAttrModifiers];  
+				$feature24=@Usage Other Text[$clAttrModifiers];
+				$feature25=@Occasion[$clAttrModifiers];
+				$feature26=@New Arrivals[$clAttrModifiers];
+				 
+				# Insert Brandbank Products
+				UPDATE Product;code[unique=true];$feature22;$feature23;$feature24;$feature25;$feature26;$catalogVersion;
+			</value>
+		</property>
+		<property name="impexRow">
+			<value>;{+0};{22};{23};{24};{25};{26}</value>
+		</property>
+	</bean>
+	
+	<!--  Classifying Category 105 END -->
+
+	<!--  Classifying Category 106 (Additives Informations) START -->
+	<!-- Transformer converters mappings -->
+	<bean id="batchBrandbankProductAdditivesInformationsConverterMapping" 
+		  class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.mapping.impl.DefaultConverterMapping" 
+		  p:mapping="ProductCategoryFeatures" 
+		  p:converter-ref="batchBrandbankProductAdditivesInformationsConverter"/>
+	
+	<!-- Brandbank specific converters -->
+	<bean id="batchBrandbankProductAdditivesInformationsConverter" class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.impl.DefaultImpexConverter">
+		<property name="header">
+			<value>#{defaultImpexProductHeader}
+				# Macros / Replacement Parameter definitions
+				$clAttrModifiers=system='SparClassification',version='2.0',translator=de.hybris.platform.catalog.jalo.classification.impex.ClassificationAttributeTranslator,lang=en
+				$productCatalog=sparProductCatalog
+                $catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
+				
+				# Classification: Additives Informations, 106
+				$feature27=@BHA/BHT[$clAttrModifiers];  
+				$feature28=@AZO Colours[$clAttrModifiers];  
+				$feature29=@MSG[$clAttrModifiers];  
+				$feature30=@Benzoate[$clAttrModifiers]; 
+				$feature31=@Additives[$clAttrModifiers];   
+				$feature32=@Aspartame[$clAttrModifiers];
+				$feature33=@Yeast[$clAttrModifiers];
+				$feature34=@Genetically Modified Ingredients[$clAttrModifiers];
+				$feature35=@Artificial Colours[$clAttrModifiers];
+				$feature36=@Artificial Sweeteners[$clAttrModifiers];
+				$feature37=@Artificial Flavours[$clAttrModifiers];
+				$feature38=@Artificial Preservatives[$clAttrModifiers];
+				$feature39=@Tartrazine[$clAttrModifiers];
+				$feature40=@HVP[$clAttrModifiers];
+				$feature41=@Sucrose[$clAttrModifiers];
+				$feature42=@GM Protein/DNA[$clAttrModifiers];
+				$feature43=@Artificial Antioxidants[$clAttrModifiers];
+				$feature44=@Flavour Enhancers[$clAttrModifiers];
+				$feature45=@Preservatives[$clAttrModifiers];
+				
+				# Insert Brandbank Products
+				UPDATE Product;code[unique=true];$feature27;$feature28;$feature29;$feature30;$feature31;$feature32;$feature33;$feature34;$feature35;$feature36;$feature37;$feature38;$feature39;$feature40;$feature41;$feature42;$feature43;$feature44;$feature45;$catalogVersion;
+			</value>
+		</property>
+		<property name="impexRow">
+			<value>;{+0};{27};{28};{29};{30};{31};{32};{33};{34};{35};{36};{37};{38};{39};{40};{41};{42};{43};{44};{45}</value>
+		</property>
+	</bean>
+	
+	<!--  Classifying Category 106 END -->
+					
+	<!--  Classifying Category 107 (Creative Content) START -->
+	<!-- Transformer converters mappings -->
+	<bean id="batchBrandbankProductCreativeContentConverterMapping" 
+		  class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.mapping.impl.DefaultConverterMapping" 
+		  p:mapping="ProductCategoryFeatures" 
+		  p:converter-ref="batchBrandbankProductCreativeContentConverter"/>
+	
+	<!-- Brandbank specific converters -->
+	<bean id="batchBrandbankProductCreativeContentConverter" class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.impl.DefaultImpexConverter">
+		<property name="header">
+			<value>#{defaultImpexProductHeader}
+				# Macros / Replacement Parameter definitions
+				$clAttrModifiers=system='SparClassification',version='2.0',translator=de.hybris.platform.catalog.jalo.classification.impex.ClassificationAttributeTranslator,lang=en
+				$productCatalog=sparProductCatalog
+                $catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
+
+				# Classification: Creative Content, 107
+				$feature46=@Brand Description[$clAttrModifiers];  
+				$feature47=@Benefit Description[$clAttrModifiers];				
+				 
+				# Insert Brandbank Products
+				UPDATE Product;code[unique=true];$feature46;$feature47;$catalogVersion;
+			</value>
+		</property>
+		<property name="impexRow">
+			<value>;{+0};{46};{47}</value>
+		</property>
+	</bean>
+	
+	<!--  Classifying Category 107 END -->					
+
+<!--  Classifying Category 108 (Advisory & Warnings) START -->
+	<!-- Transformer converters mappings -->
+	<bean id="batchBrandbankProductAdvisoryAndWarningsConverterMapping" 
+		  class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.mapping.impl.DefaultConverterMapping" 
+		  p:mapping="ProductCategoryFeatures" 
+		  p:converter-ref="batchBrandbankProductAdvisoryAndWarningsConverter"/>
+	
+	<!-- Brandbank specific converters -->
+	<bean id="batchBrandbankProductAdvisoryAndWarningsConverter" class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.impl.DefaultImpexConverter">
+		<property name="header">
+			<value>#{defaultImpexProductHeader}
+				# Macros / Replacement Parameter definitions
+				$clAttrModifiers=system='SparClassification',version='2.0',translator=de.hybris.platform.catalog.jalo.classification.impex.ClassificationAttributeTranslator,lang=en
+				
+				# Insert Product Classifications
+				$productCatalog=sparProductCatalog
+                $catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
+ 				
+				# Classification: Advisory and Warnings, 108
+				$feature48=@Lower Age Limit[$clAttrModifiers];  
+				$feature49=@Upper Age Limit[$clAttrModifiers];  
+				$feature50=@Allergen Tag Format[$clAttrModifiers];
+				 
+				# Insert Brandbank Products
+				UPDATE Product;code[unique=true];$feature48;$feature49;$feature50;$catalogVersion;
+			</value>
+		</property>
+		<property name="impexRow">
+			<value>;{+0};{48};{49};{50}</value>
+		</property>
+	</bean>
+	
+	<!--  Classifying Category 108 END -->
+
+	<!--  Classifying Category 109 (Storage Conditions) START -->
+	<!-- Transformer converters mappings -->
+	<bean id="batchBrandbankProductStorageConditionsConverterMapping" 
+		  class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.mapping.impl.DefaultConverterMapping" 
+		  p:mapping="ProductCategoryFeatures" 
+		  p:converter-ref="batchBrandbankProductStorageConditionsConverter"/>
+	
+	<!-- Brandbank specific converters -->
+	<bean id="batchBrandbankProductStorageConditionsConverter" class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.impl.DefaultImpexConverter">
+		<property name="header">
+			<value>#{defaultImpexProductHeader}
+				# Macros / Replacement Parameter definitions
+				$clAttrModifiers=system='SparClassification',version='2.0',translator=de.hybris.platform.catalog.jalo.classification.impex.ClassificationAttributeTranslator,lang=en
+				
+				# Insert Product Classifications
+				$productCatalog=sparProductCatalog
+                $catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
+ 				
+				# Classification: Storage Conditions, 109
+				$feature51=@Min Temp °C[$clAttrModifiers];  
+				$feature52=@Max Temp °C[$clAttrModifiers];  
+				$feature53=@Min Humidity %[$clAttrModifiers];  
+				$feature54=@Max Humidity %[$clAttrModifiers];
+								 
+				# Insert Brandbank Products
+				UPDATE Product;code[unique=true];$feature51;$feature52;$feature53;$feature54;$catalogVersion;
+			</value>
+		</property>
+		<property name="impexRow">
+			<value>;{+0};{51};{52};{53};{54}</value>
+		</property>
+	</bean>
+	
+	<!--  Classifying Category 109 END -->
+	
+<!--  Classifying Category 110 (Cooking Guidelines) START -->
+	<!-- Transformer converters mappings -->
+	<bean id="batchBrandbankProductCookingGuidelinesConverterMapping" 
+		  class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.mapping.impl.DefaultConverterMapping" 
+		  p:mapping="ProductCategoryFeatures" 
+		  p:converter-ref="batchBrandbankProductCookingGuidelinesConverter"/>
+	
+	<!-- Brandbank specific converters -->
+	<bean id="batchBrandbankProductCookingGuidelinesConverter" class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.impl.DefaultImpexConverter">
+		<property name="header">
+			<value>#{defaultImpexProductHeader}
+				# Macros / Replacement Parameter definitions
+				$clAttrModifiers=system='SparClassification',version='2.0',translator=de.hybris.platform.catalog.jalo.classification.impex.ClassificationAttributeTranslator,lang=en
+				
+				# Insert Product Classifications
+				$productCatalog=sparProductCatalog
+                $catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
+ 				
+				# Classification: Cooking Guidelines, 110
+				$feature55=@Oven cook[$clAttrModifiers];  
+				$feature56=@Microwave[$clAttrModifiers];  
+				$feature57=@Grill[$clAttrModifiers];  
+				$feature58=@Barbecue[$clAttrModifiers];  
+				$feature59=@Shallow Fry[$clAttrModifiers];
+				$feature60=@Deep Fry[$clAttrModifiers];
+				$feature61=@Stir Fry[$clAttrModifiers];
+				$feature62=@Steam[$clAttrModifiers];
+				$feature63=@Poach[$clAttrModifiers];
+				$feature64=@Hob[$clAttrModifiers];
+				$feature65=@Boil in the Bag[$clAttrModifiers];
+				$feature66=@Other[$clAttrModifiers];
+				$feature67=@Cooking Instructions[$clAttrModifiers];
+								 
+				# Insert Brandbank Products
+				UPDATE Product;code[unique=true];$feature55;$feature56;$feature57;$feature58;$feature59;$feature60;$feature61;$feature62;$feature63;$feature64;$feature65;$feature66;$feature67;$catalogVersion;
+			</value>
+		</property>
+		<property name="impexRow">
+			<value>;{+0};{55};{56};{57};{58};{59};{60};{61};{62};{63};{64};{65};{66};{67}</value>
+		</property>
+	</bean>
+	
+	<!--  Classifying Category 110 END -->
+	
+	<!--  Classifying Category 111 (Country and Origin) START -->
+	<!-- Transformer converters mappings -->
+	<bean id="batchBrandbankProductCountryAndOriginConverterMapping" 
+		  class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.mapping.impl.DefaultConverterMapping" 
+		  p:mapping="ProductCategoryFeatures" 
+		  p:converter-ref="batchBrandbankProductCountryAndOriginConverter"/>
+	
+	<!-- Brandbank specific converters -->
+	<bean id="batchBrandbankProductCountryAndOriginConverter" class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.impl.DefaultImpexConverter">
+		<property name="header">
+			<value>#{defaultImpexProductHeader}
+				# Macros / Replacement Parameter definitions
+				$clAttrModifiers=system='SparClassification',version='2.0',translator=de.hybris.platform.catalog.jalo.classification.impex.ClassificationAttributeTranslator,lang=en
+				
+				# Insert Product Classifications
+				$productCatalog=sparProductCatalog
+                $catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
+ 				
+				# Classification: Country and Origin, 111
+				$feature68=@Country of Origin[$clAttrModifiers];  
+				$feature69=@Packed In[$clAttrModifiers];  
+				$feature70=@Place of Provenance[$clAttrModifiers];  
+				$feature71=@Fish Catch Area[$clAttrModifiers];  
+				$feature72=@Origin Free Text[$clAttrModifiers];
+				$feature73=@Sourced[$clAttrModifiers];
+				
+				# Insert Brandbank Products
+				UPDATE Product;code[unique=true];$feature68;$feature69;$feature70;$feature71;$feature72;$feature73;$catalogVersion;
+			</value>
+		</property>
+		<property name="impexRow">
+			<value>;{+0};{68};{69};{70};{71};{72};{73}</value>
+		</property>
+	</bean>
+	
+	<!--  Classifying Category 111 END -->
+	
+<!--  Classifying Category 112 (Food Life Information) START -->
+	<!-- Transformer converters mappings -->
+	<bean id="batchBrandbankProductFoodLifeInformationConverterMapping" 
+		  class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.mapping.impl.DefaultConverterMapping" 
+		  p:mapping="ProductCategoryFeatures" 
+		  p:converter-ref="batchBrandbankProductFoodLifeInformationConverter"/>
+	
+	<!-- Brandbank specific converters -->
+	<bean id="batchBrandbankProductFoodLifeInformationConverter" class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.impl.DefaultImpexConverter">
+		<property name="header">
+			<value>#{defaultImpexProductHeader}
+				# Macros / Replacement Parameter definitions
+				$clAttrModifiers=system='SparClassification',version='2.0',translator=de.hybris.platform.catalog.jalo.classification.impex.ClassificationAttributeTranslator,lang=en
+				
+				# Insert Product Classifications
+				$productCatalog=sparProductCatalog
+                $catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
+				
+				# Classification: Food Life Information, 112
+				$feature74=@Harvest Time[$clAttrModifiers];  
+				$feature75=@Availability period[$clAttrModifiers];  
+				$feature76=@Lead time from farm[$clAttrModifiers];  
+				$feature77=@Peak Season[$clAttrModifiers];  
+				$feature78=@Aging[$clAttrModifiers];
+				$feature79=@Loose[$clAttrModifiers];
+				
+				# Insert Brandbank Products
+				UPDATE Product;code[unique=true];$feature74;$feature75;$feature76;$feature77;$feature78;$feature79;$catalogVersion;
+			</value>
+		</property>
+		<property name="impexRow">
+			<value>;{+0};{74};{75};{76};{77};{78};{79}</value>
+		</property>
+	</bean>
+	
+	<!--  Classifying Category 112 END -->
+
+<!--  Classifying Category 113 (Additional Category) START -->
+	<!-- Transformer converters mappings -->
+	<bean id="batchBrandbankProductAdditionalCategoryConverterMapping" 
+		  class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.mapping.impl.DefaultConverterMapping" 
+		  p:mapping="ProductCategoryFeatures" 
+		  p:converter-ref="batchBrandbankProductAdditionalCategoryConverter"/>
+	
+	<!-- Brandbank specific converters -->
+	<bean id="batchBrandbankProductAdditionalCategoryConverter" class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.impl.DefaultImpexConverter">
+		<property name="header">
+			<value>#{defaultImpexProductHeader}
+				# Macros / Replacement Parameter definitions
+				$clAttrModifiers=system='SparClassification',version='2.0',translator=de.hybris.platform.catalog.jalo.classification.impex.ClassificationAttributeTranslator,lang=en
+				
+				# Insert Product Classifications
+				$productCatalog=sparProductCatalog
+                $catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
+				
+				# Classification: Additional Category, 113
+				$feature80=@Business[$clAttrModifiers];  
+				$feature81=@Division[$clAttrModifiers];  
+				$feature82=@Market[$clAttrModifiers];  
+				$feature83=@Category[$clAttrModifiers];  
+				$feature84=@Family[$clAttrModifiers];
+				$feature85=@Online Business[$clAttrModifiers];
+				$feature86=@Online Market[$clAttrModifiers];
+				$feature87=@Online Family[$clAttrModifiers];
+				
+				# Insert Brandbank Products
+				UPDATE Product;code[unique=true];$feature80;$feature81;$feature82;$feature83;$feature84;$feature85;$feature86;$feature87;$catalogVersion;
+			</value>
+		</property>
+		<property name="impexRow">
+			<value>;{+0};{80};{81};{82};{83};{84};{85};{86};{87}</value>
+		</property>
+	</bean>
+	
+	<!--  Classifying Category 113 END -->
+	
+	<!--  Classifying Category 114 (SEO Tags) START -->
+	<!-- Transformer converters mappings -->
+	<bean id="batchBrandbankProductSEOTagsConverterMapping" 
+		  class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.mapping.impl.DefaultConverterMapping" 
+		  p:mapping="ProductCategoryFeatures" 
+		  p:converter-ref="batchBrandbankProductSEOTagsConverter"/>
+	
+	<!-- Brandbank specific converters -->
+	<bean id="batchBrandbankProductSEOTagsConverter" class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.impl.DefaultImpexConverter">
+		<property name="header">
+			<value>#{defaultImpexProductHeader}
+				# Macros / Replacement Parameter definitions
+				$clAttrModifiers=system='SparClassification',version='2.0',translator=de.hybris.platform.catalog.jalo.classification.impex.ClassificationAttributeTranslator,lang=en
+				
+				# Insert Product Classifications
+				$productCatalog=sparProductCatalog
+                $catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
+				
+				# Classification: SEO Tags, 114
+				$feature88=@Title Tag[$clAttrModifiers];  
+				$feature89=@Meta Description[$clAttrModifiers];  
+				$feature90=@Meta Keywords[$clAttrModifiers];  
+				$feature91=@Page URL[$clAttrModifiers];  
+				$feature92=@Search Tag[$clAttrModifiers];
+				$feature93=@Canonical Tag[$clAttrModifiers];
+				$feature94=@Heading Tag[$clAttrModifiers];
+				
+				# Insert Brandbank Products
+				UPDATE Product;code[unique=true];$feature88;$feature89;$feature90;$feature91;$feature92;$feature93;$feature94;$catalogVersion;
+			</value>
+		</property>
+		<property name="impexRow">
+			<value>;{+0};{88};{89};{90};{91};{92};{93};{94}</value>
+		</property>
+	</bean>
+	
+	<!--  Classifying Category 114 END -->
+
+	<!--  Classifying Category 115 (Product Specifications) START -->
+	<!-- Transformer converters mappings -->
+	<bean id="batchBrandbankProductSpecificationsConverterMapping" 
+		  class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.mapping.impl.DefaultConverterMapping" 
+		  p:mapping="ProductCategoryFeatures" 
+		  p:converter-ref="batchBrandbankProductSpecificationsConverter"/>
+	
+	<!-- Brandbank specific converters -->
+	<bean id="batchBrandbankProductSpecificationsConverter" class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.impl.DefaultImpexConverter">
+		<property name="header">
+			<value>#{defaultImpexProductHeader}
+				# Macros / Replacement Parameter definitions
+				$clAttrModifiers=system='SparClassification',version='2.0',translator=de.hybris.platform.catalog.jalo.classification.impex.ClassificationAttributeTranslator,lang=en
+				
+				# Insert Product Classifications
+				$productCatalog=sparProductCatalog
+                $catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
+				
+				# Classification: Product Specifications, 115
+				$feature95=@Material Description[$clAttrModifiers]; 
+				$feature96=@Material Free Text[$clAttrModifiers];
+				$feature97=@Design[$clAttrModifiers];
+				$feature98=@Design Description[$clAttrModifiers];  
+				$feature99=@Colour[$clAttrModifiers];
+				$feature100=@Look Pattern Description[$clAttrModifiers];
+				$feature101=@Style[$clAttrModifiers];
+				$feature102=@Shape[$clAttrModifiers];
+				$feature103=@Pack Size[$clAttrModifiers];
+				$feature104=@Screen Size[$clAttrModifiers];
+				$feature105=@Product Dimensions[$clAttrModifiers];
+				$feature106=@Box Contents[$clAttrModifiers]; 
+				$feature107=@Technology Description[$clAttrModifiers];  
+				$feature108=@Technical Details Description[$clAttrModifiers]; 
+				
+				
+				# Insert Brandbank Products
+				UPDATE Product;code[unique=true];$feature95;$feature96;$feature97;$feature98;$feature99;$feature100;$feature101;$feature102;$feature103;$feature104;$feature105;$feature106;$feature107;$feature108;$catalogVersion;
+			</value>
+		</property>
+		<property name="impexRow">
+			<!--  {21} - Weight Category Feature is used rather than {105} for Product Dimensions -->
+			<value>;{+0};{95};{96};{97};{98};{99};{100};{101};{102};{103};{104};{21};{106};{107};{108}</value>
+		</property>
+	</bean>
+	
+	<!--  Classifying Category 115 END -->
+	
+	
+	<!--  Classifying Category 116 (Benefits) START -->
+	<!-- Transformer converters mappings -->
+	<bean id="batchBrandbankProductBenefitsConverterMapping" 
+		  class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.mapping.impl.DefaultConverterMapping" 
+		  p:mapping="ProductCategoryFeatures" 
+		  p:converter-ref="batchBrandbankProductBenefitsConverter"/>
+	
+	<!-- Brandbank specific converters -->
+	<bean id="batchBrandbankProductBenefitsConverter" class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.impl.DefaultImpexConverter">
+		<property name="header">
+			<value>#{defaultImpexProductHeader}
+				# Macros / Replacement Parameter definitions
+				$clAttrModifiers=system='SparClassification',version='2.0',translator=de.hybris.platform.catalog.jalo.classification.impex.ClassificationAttributeTranslator,lang=en
+				
+				# Insert Product Classifications
+				$productCatalog=sparProductCatalog
+                $catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
+				
+				# Classification: Benefits, 116
+				$feature109=@Benefits Description[$clAttrModifiers]; 
+				$feature110=@Features[$clAttrModifiers]; 
+				$feature111=@Utility Description[$clAttrModifiers];
+				$feature112=@Lifestyle[$clAttrModifiers];
+				$feature113=@Lifestyle Other Text[$clAttrModifiers];  
+				$feature114=@Safety Warning[$clAttrModifiers];  
+				$feature115=@Allergy Other Text[$clAttrModifiers];
+				$feature116=@Taggable Allergy Text[$clAttrModifiers];
+				
+				
+				# Insert Brandbank Products
+				UPDATE Product;code[unique=true];$feature109;$feature110;$feature111;$feature112;$feature113;$feature114;$feature115;$feature116;$catalogVersion;
+			</value>
+		</property>
+		<property name="impexRow">
+			<value>;{+0};{47};{110};{111};{112};{113};{114};{115};{116}</value>
+		</property>
+	</bean>
+	
+	<!--  Classifying Category 116 END -->
+	
+	
+	<!--  Classifying Category 117 (Preparation & Usage) START -->
+	<!-- Transformer converters mappings -->
+	<bean id="batchBrandbankProductPreparationUsageConverterMapping" 
+		  class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.mapping.impl.DefaultConverterMapping" 
+		  p:mapping="ProductCategoryFeatures" 
+		  p:converter-ref="batchBrandbankProductPreparationUsageConverter"/>
+	
+	<!-- Brandbank specific converters -->
+	<bean id="batchBrandbankProductPreparationUsageConverter" class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.impl.DefaultImpexConverter">
+		<property name="header">
+			<value>#{defaultImpexProductHeader}
+				# Macros / Replacement Parameter definitions
+				$clAttrModifiers=system='SparClassification',version='2.0',translator=de.hybris.platform.catalog.jalo.classification.impex.ClassificationAttributeTranslator,lang=en
+				
+				# Insert Product Classifications
+				$productCatalog=sparProductCatalog
+                $catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
+				
+				# Classification: Preparation Usage, 117
+				$feature117=@Recipes[$clAttrModifiers];
+				$feature118=@Preparation and Usage[$clAttrModifiers];
+				$feature119=@Cooking Instructions Guidelines[$clAttrModifiers];
+				
+				
+				# Insert Brandbank Products
+				UPDATE Product;code[unique=true];$feature117;$feature118;$feature119;$catalogVersion;
+			</value>
+		</property>
+		<property name="impexRow">
+			<value>;{+0};{117};{118};{119}</value>
+		</property>
+	</bean>
+	
+	<!--  Classifying Category 117 END -->
+	
+	
+	<!--  Classifying Category 118 (Storage & Care) START -->
+	<!-- Transformer converters mappings -->
+	<bean id="batchBrandbankProductStorageCareConverterMapping" 
+		  class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.mapping.impl.DefaultConverterMapping" 
+		  p:mapping="ProductCategoryFeatures" 
+		  p:converter-ref="batchBrandbankProductStorageCareConverter"/>
+	
+	<!-- Brandbank specific converters -->
+	<bean id="batchBrandbankProductStorageCareConverter" class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.impl.DefaultImpexConverter">
+		<property name="header">
+			<value>#{defaultImpexProductHeader}
+				# Macros / Replacement Parameter definitions
+				$clAttrModifiers=system='SparClassification',version='2.0',translator=de.hybris.platform.catalog.jalo.classification.impex.ClassificationAttributeTranslator,lang=en
+				
+				# Insert Product Classifications
+				$productCatalog=sparProductCatalog
+                $catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
+				
+				# Classification: Storage Care, 118
+				$feature120=@Type[$clAttrModifiers];
+				$feature121=@Storage[$clAttrModifiers];  
+				$feature122=@Wash Care Description[$clAttrModifiers];
+				$feature123=@Warranty[$clAttrModifiers];
+				
+				
+				# Insert Brandbank Products
+				UPDATE Product;code[unique=true];$feature120;$feature121;$feature122;$feature123;$catalogVersion;
+			</value>
+		</property>
+		<property name="impexRow">
+			<value>;{+0};{120};{121};{122};{123}</value>
+		</property>
+	</bean>
+	
+	<!--  Classifying Category 118 END -->
+		
+	<!--  Classifying Category Nutrition (119) START -->
+	<!-- Transformer converters mappings -->
+	<bean id="batchBrandbankProductNutritionConverterMapping" 
+		  class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.mapping.impl.DefaultConverterMapping" 
+		  p:mapping="ProductCategoryFeatures" 
+		  p:converter-ref="batchBrandbankProductNutritionConverter"/>
+
+	<!-- Brandbank specific converters -->
+
+	<bean id="batchBrandbankProductNutritionConverter" class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.impl.DefaultImpexConverter">
+		<property name="header">
+			<value>#{defaultImpexProductHeader}
+				# Macros / Replacement Parameter definitions
+				$clAttrModifiers=system='SparClassification',version='2.0',translator=de.hybris.platform.catalog.jalo.classification.impex.ClassificationAttributeTranslator,lang=en
+				
+				# Insert Product Classifications
+				$productCatalog=sparProductCatalog
+                $catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
+				
+				# Classification: Nutritional, 119
+				$feature124=@Nutritions[$clAttrModifiers];
+				$feature125=@Taggable Ingredients[$clAttrModifiers]; 
+				$feature126=@Additive Other Text[$clAttrModifiers];
+				
+				# Insert Brandbank Products
+				UPDATE Product;code[unique=true];$feature124;$feature125;$feature126;$catalogVersion;
+				
+			</value>
+		</property>
+		<property name="impexRow">
+			<value>;{+0};{124};{125};{126}</value>
+		</property>
+	</bean>
+
+	<!--  Classifying Category Nutrition - 119 - END -->
+	
+<!--  Product Category feature impex configuration ENDS -->
+	
+<!--  MIME impex configuration STARTS -->
+
+<bean id="batchMediaConverterMapping" 
+		  class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.mapping.impl.DefaultConverterMapping" 
+		  p:mapping="ProductMediaFormat" 
+		  p:converter-ref="batchMediaConverter"/>
+
+	<bean id="batchMediaContainerConverterMapping" 
+		  class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.mapping.impl.DefaultConverterMapping" 
+		  p:mapping="ProductMedias" 
+		  p:converter-ref="batchMediaContainerConverter"/>
+
+	<bean id="batchMediaProductConverterMapping" 
+		  class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.mapping.impl.DefaultConverterMapping" 
+		  p:mapping="ProductMedias" 
+		  p:converter-ref="batchMediaProductConverter"/>
+	
+	<!-- Converters -->
+	<bean id="batchMediaConverter" class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.impl.DefaultImpexConverter">
+		<property name="header">
+			<value>#{defaultImpexProductHeader}
+				# Import media from filesystem	
+				$productCatalog=sparProductCatalog
+				$catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
+				<!-- $sparMedia=@media[translator=com.spar.hcl.media.translator.SparMediaDataTranslator] -->
+				$sparMedia=@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator]
+				INSERT_UPDATE Media;mediaFormat(qualifier);code[unique=true];$sparMedia;mime[default='image/jpeg'];$catalogVersion;folder(qualifier)[default=images];realfilename
+			</value>
+		</property>
+		<property name="impexRow">
+			<value>
+			;{0};{+1};{2};;;;{+3}
+			</value>
+		</property>
+	</bean>
+	<bean id="batchMediaContainerConverter" class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.impl.DefaultImpexConverter">
+		<property name="header">
+			<value>#{defaultImpexProductHeader}
+				# Import media container
+				$productCatalog=sparProductCatalog
+				$catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
+				
+				
+				INSERT_UPDATE MediaContainer;qualifier[unique=true];medias(code, $catalogVersion);$catalogVersion
+			</value>
+		</property>
+		<property name="impexRow">
+			<value>;{+1};{2}</value>
+		</property>
+	</bean>
+	<bean id="batchMediaProductConverter" class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.impl.DefaultImpexConverter">
+		<property name="header">
+			<value>#{defaultImpexProductHeader}
+				$productCatalog=sparProductCatalog
+				$catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
+				
+				$thumbnail=thumbnail(code, $catalogVersion)
+				$thumbnails=thumbnails(code, $catalogVersion)
+				$picture=picture(code, $catalogVersion)
+				$detail=detail(code, $catalogVersion)
+				$normal=normal(code, $catalogVersion)
+				$others=others(code, $catalogVersion)
+				$galleryImages=galleryImages(qualifier, $catalogVersion)
+				# Import product media
+				UPDATE Product;code[unique=true];$picture;$thumbnail;$detail;$others;$normal;$thumbnails;$galleryImages;$catalogVersion
+			</value>
+		</property>
+		<property name="impexRow">
+			<!--  "/" is used to support Linux environment -->
+			<value>;{+0};/300Wx300H/{+1};/65Wx65H/{+1};/300Wx300H/{+1};/1000Wx1000H/{+1},/150Wx150H/{+1},/300Wx300H/{+1},/134Wx72H/{+1},/65Wx65H/{+1},/50Wx50H/{+1};/300Wx300H/{+1};/65Wx65H/{+1},/50Wx50H/{+1};{+1}</value>
+		</property>
+	</bean>
+	
+	<!--  MIME impex configuration ENDS -->
+	
+	<!--  Product Attributes from BrandBank Start -->
+	
+	<bean id="batchBrandBankProductAttributesConverterMapping" 
+		  class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.mapping.impl.DefaultConverterMapping" 
+		  p:mapping="ProductAttributes" 
+		  p:converter-ref="batchBrandBankProductAttributesConverter"/>
+	<bean id="batchBrandBankProductAttributesConverter"
+			class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.impl.DefaultImpexConverter">
+			<property name="header">	  
+		 		<value>#{defaultImpexProductHeader}
+		 			$productCatalog=sparProductCatalog
+					$catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
+					$lang=en
+				
+					# Insert Brandbank Products
+					UPDATE Product;code[unique=true];productType;storageType;name[lang=$lang];description[lang=$lang];ingredientDescription[lang=$lang];modelNumber;disclaimer[lang=$lang];pickingAndPacking[lang=$lang];brand[lang=$lang];subBrand[lang=$lang];functionalName[lang=$lang];variant[lang=$lang];$catalogVersion
+
+				</value>
+			</property>
+			<property name="impexRow">
+				<value>
+					;{+0};{1};{2};{3};{4};{5};{6};{7};{8};{9};{10};{11};{12}
+				</value>
+			</property>
+	</bean>
+	
+	<!-- Below is the configuration for ItemPickingTime attribute for a product used in pick list. -->
+	<!-- Commented out for new column of item picking time implementation -->
+	<!-- <bean id="batchBrandBankProductAttributeItemPickingTimeConverterMapping" 
+		  class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.mapping.impl.DefaultConverterMapping" 
+		  p:mapping="ProductAttributeItemPickingTime" 
+		  p:converter-ref="batchBrandBankProductAttributeItemPickingTimeConverter"/>
+	<bean id="batchBrandBankProductAttributeItemPickingTimeConverter"
+			class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.impl.DefaultImpexConverter">
+			<property name="header">	  
+		 		<value>#{defaultImpexProductHeader}
+		 			$productCatalog=sparProductCatalog
+					$catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
+					
+					UPDATE Product;code[unique=true];itemPickingTime;$catalogVersion
+				</value>
+			</property>
+			<property name="impexRow">
+				<value>
+					;{+0};{1}
+				</value>
+			</property>
+	</bean> -->
+	
+	<!--  Product Attributes from BrandBank End -->
+
+
+<!--  This has been commented out in S1 after a design change. UnitCondition in S1 will come from RMS feed.  - START - ROHAN_C-->
+	
+		<!--  Variant Dropdown values (unit Condition in SparVariantProduct) START- Rohan_c -->
+		
+		<!-- <bean id="batchSparVariantUnitConditionConverterMapping"
+		              class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.mapping.impl.DefaultConverterMapping"
+		              p:mapping="ProductCategoryFeatures" p:converter-ref="batchSparVariantUnitConditionConverter" />
+		
+		<bean id="batchSparVariantUnitConditionConverter"
+		                     class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.impl.DefaultImpexConverter">
+		                     <property name="header">
+		                           <value>#{defaultImpexProductHeader}
+		                           		  # Macros / Replacement Parameter definitions
+		                                  $productCatalog=sparProductCatalog
+		                                  $catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
+		                                  UPDATE SparVariantProduct;code[unique=true];unitCondition;$catalogVersion
+		                           </value>
+		                     </property>
+		                     <property name="impexRow">
+		                           <value>
+		                                  ;{+0};{23} {38}
+		                           </value>
+		                     </property>
+		       </bean>
+		 -->
+		<!--  Variant Dropdown values (unit Condition in SparVariantProduct) END- Rohan_c -->
+		
+<!--  This has been commented out in S1 after a design change. UnitCondition in S1 will come from RMS feed.  - END - ROHAN_C-->
+			
+</beans>

@@ -1,0 +1,29 @@
+## Please note that the syntax of the property name should be as follows:
+## propertyName=some string
+## Please DO NOT USE, property.name=some string
+emailSubject=Daily Fraud Report Export
+salutation= Hi All,
+
+orderNumber=Order Number
+orderDate=Order Date
+totalOrderValue=Total Order Value
+customerName=Customer Name
+deliveryDate=Delivery Date
+deliverySlot=Delivery Slot
+orderStatus=Order Status
+cardType=Card Type
+transactionId=Transaction Id
+mobileNumber=Mobile Number
+totalOrderDiscount=Total Order Discount
+noResult=No prepaid orders found for refund on
+customerId=Customer Id
+warehouse=Warehouse
+employeeCode=Employee Code
+creditInBank=Credit In bank
+difference=Diff
+
+complimentaryClosing=Many Thanks
+signature=Customer Services
+contactUsEmailAddress=care@sparindia.com
+termsAndCondition=Terms &amp; Conditions
+myAccount=My Account

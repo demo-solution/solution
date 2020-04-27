@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/S6_Maintenance/!svn/ver/1/custom/sparcommercewebservices/web/src/com/spar/hcl/oauth2
+END
+OAuthClientVoter.java
+K 25
+svn:wc:ra_dav:version-url
+V 111
+/svn/S6_Maintenance/!svn/ver/1/custom/sparcommercewebservices/web/src/com/spar/hcl/oauth2/OAuthClientVoter.java
+END
+HybrisApprovalHandler.java
+K 25
+svn:wc:ra_dav:version-url
+V 116
+/svn/S6_Maintenance/!svn/ver/1/custom/sparcommercewebservices/web/src/com/spar/hcl/oauth2/HybrisApprovalHandler.java
+END
+HybrisOauth2UserFilter.java
+K 25
+svn:wc:ra_dav:version-url
+V 117
+/svn/S6_Maintenance/!svn/ver/1/custom/sparcommercewebservices/web/src/com/spar/hcl/oauth2/HybrisOauth2UserFilter.java
+END
+OAuth2ExceptionRenderer.java
+K 25
+svn:wc:ra_dav:version-url
+V 118
+/svn/S6_Maintenance/!svn/ver/1/custom/sparcommercewebservices/web/src/com/spar/hcl/oauth2/OAuth2ExceptionRenderer.java
+END

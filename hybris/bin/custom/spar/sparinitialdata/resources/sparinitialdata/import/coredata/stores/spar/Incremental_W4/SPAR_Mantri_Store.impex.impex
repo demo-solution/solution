@@ -1,0 +1,25 @@
+##Store Spar Mantri Store Setup
+$storePrefix=spar
+$storeUid=$storePrefix
+
+$standardHours=spar-india-standard-hours
+
+# Warehouse
+INSERT_UPDATE Warehouse;code[unique=true];name;maxOrdersPerDeliverySlot;active;vendor(code)[default=default];default[default=true]
+;20003;Warehouse Mantri;60;true
+
+INSERT_UPDATE BaseStore2WarehouseRel;source(uid)[unique=true];target(code)[unique=true]
+
+##### warehouse relation to basestore
+;$storeUid;20003
+
+INSERT_UPDATE PointOfService;name[unique=true];type(code);address(&addrID);latitude;longitude;geocodeTimestamp[dateformat=dd-MM-yyyy];openingSchedule(code);basestore(uid)[default=$storeUid];features(code)
+;SPAR MANTRI;STORE;addrMantriStore;12.990521;77.570724;29-04-2025;$standardHours
+
+#Store Address
+INSERT_UPDATE Address;&addrID;firstname;streetname;streetnumber;town[unique=true];postalcode[unique=true];country(isocode);region(isocode);phone1;owner(PointOfService.name)[unique=true]
+;addrMantriStore;SPAR Hypermarkets Mantri Square;Sampige Road;Malleshwaram;Bangalore;560003;IN;IN-MH;+91 18605009418;SPAR MANTRI
+
+#Store warehouse relation
+INSERT_UPDATE PoS2WarehouseRel;source(name)[unique=true];target(code)[unique=true]
+;SPAR MANTRI;20003

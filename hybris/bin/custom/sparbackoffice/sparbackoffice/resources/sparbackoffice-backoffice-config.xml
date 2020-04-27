@@ -1,0 +1,405 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!--
+  ~ [y] hybris Platform
+  ~
+  ~ Copyright (c) 2000-2015 hybris AG
+  ~ All rights reserved.
+  ~
+  ~ This software is the confidential and proprietary information of hybris
+  ~ ("Confidential Information"). You shall not disclose such Confidential
+  ~ Information and shall use it only in accordance with the terms of the
+  ~ license agreement you entered into with hybris.
+  -->
+
+<config xmlns="http://www.hybris.com/cockpit/config">
+
+	<!--  Settings for adding node for Asset Tracker Order  Start-->	
+	<context component="oms-explorer-tree">
+	<n:explorer-tree xmlns:n="http://www.hybris.com/cockpitng/config/explorertree">
+		<n:navigation-node id="ordermanagementbackoffice.treenode.orders">
+			<n:type-node id="ordermanagementbackoffice.typenode.order.open"/>
+               <n:type-node id="ordermanagementbackoffice.typenode.order.all" code="Order" />
+               <n:type-node id="ordermanagementbackoffice.typenode.order.open.assettracker" />
+		</n:navigation-node>
+           <n:navigation-node id="ordermanagementbackoffice.treenode.returns">
+               <n:type-node id="ordermanagementbackoffice.typenode.create.return" />
+               <n:type-node id="ordermanagementbackoffice.typenode.all.returns" code="ReturnRequest" />
+           </n:navigation-node>
+	</n:explorer-tree>
+	</context>
+	<!--  Settings for adding node for Asset Tracker Order  End-->
+	
+	<!--  Settings for adding Order Columns for Asset tracker Start-->
+	<context type="Order" component="omslistview">
+		<list:list-view xmlns:list="http://www.hybris.com/cockpitng/component/listView">	
+			<list:column qualifier="code" label="ordermanagementbackoffice.order.listview.ordernumber"/>
+			<list:column qualifier="user.displayName" label="ordermanagementbackoffice.order.details.customer"/>
+			<list:column qualifier="user.uid" label="ordermanagementbackoffice.order.details.customer.uid"/>
+			<list:column qualifier="date" label="ordermanagementbackoffice.order.listview.date "/>
+			<list:column qualifier="deliveryMode" />
+			<list:column qualifier="status" label="ordermanagementbackoffice.order.listview.status" />
+			<list:column qualifier="deliveryDate" label="ordermanagementbackoffice.order.listview.deliveryDate" />
+			<list:column qualifier="deliverySlot" label="ordermanagementbackoffice.order.listview.deliverySlot"/>
+			<list:column qualifier="deliveryAddress" label="ordermanagementbackoffice.order.listview.deliveryAddress"/>
+			<list:column qualifier="deliveryAddress?.phone1" label="ordermanagementbackoffice.order.listview.deliveryAddress.phone1"/>
+			<list:column qualifier="cncPhone" label="ordermanagementbackoffice.order.listview.cnc.phone"/>
+			<list:column qualifier="orderPointOfService" label="ordermanagementbackoffice.order.listview.pointOfService"/>
+			<list:column qualifier="oderRetryNoShow" label="ordermanagementbackoffice.consignment.noshowretry"/>
+			<list:column qualifier="totalPrice" label="ordermanagementbackoffice.order.listview.subtotal" />
+			<list:column qualifier="user.employeeCode" label="ordermanagementbackoffice.order.details.customer.employeeCode"/>
+			<list:column qualifier="paymentStatus" label="ordermanagementbackoffice.order.listview.paymentStatus"/>
+			<list:column qualifier="totalDiscounts" label="ordermanagementbackoffice.order.listview.orderDiscount"/>
+			<list:column qualifier="voucherDescription" label="ordermanagementbackoffice.order.listview.voucherCode"/>
+			<list:column qualifier="totalOrderQty" label="ordermanagementbackoffice.order.listview.orderEntry.quantity"/>	
+			<!-- <list:column qualifier="orderEntryTotal" label="ordermanagementbackoffice.order.listview.orderEntry.totalPrice"/>	
+			<list:column qualifier="orderEntryPromotion" label="ordermanagementbackoffice.order.listview.orderEntry.orderEntryPromotion"/> -->	
+		</list:list-view>
+	</context>
+	<!--  Settings for adding Order Columns for Asset tracker End-->
+	
+	<!--  Settings for Pick List CSV Export Start-->
+	<context component="sparWarehouseListviewActions" type="Consignment">
+        <y:actions xmlns:y="http://www.hybris.com/cockpit/config/hybris">
+            <y:group qualifier="common">
+                <y:label>actiongroup.common</y:label>
+                <y:action id="sparPickUpList" action-id="spar.hybris.cockpitng.listview.action.export.csv"  property="exportColumnsAndData" />
+            </y:group>
+        </y:actions>
+    </context>
+	<!--  Settings for Pick List CSV Export End-->
+	
+	<!--  Settings for Custom CSV Export used for Asset Tracker Start-->    
+    <context component="sparCustomListviewActions" type="GenericItem">
+        <y:actions xmlns:y="http://www.hybris.com/cockpit/config/hybris">
+            <y:group qualifier="common">
+                <y:label>actiongroup.common</y:label>
+                <y:action id="sparCustomExportList" action-id="spar.custom.hybris.cockpitng.listview.action.export.csv"  property="exportColumnsAndData" />
+            </y:group>
+        </y:actions>
+    </context>
+	<!--  Settings for Custom CSV Export used for Asset Tracker End-->
+	
+	
+	<!--  Settings for Custom CSV Export used for OOTB functions for POS and Consignment Start-->    
+    <context component="customWarehouseListviewActions" type="PointOfService">
+        <y:actions xmlns:y="http://www.hybris.com/cockpit/config/hybris">
+            <y:group qualifier="common">
+                <y:label>actiongroup.common</y:label>
+                <y:action  action-id="spar.custom.hybris.cockpitng.listview.action.export.csv"  property="exportColumnsAndData" />
+            </y:group>
+        </y:actions>
+    </context>
+    
+     <context component="customWarehouseListviewActions" type="Consignment">
+        <y:actions xmlns:y="http://www.hybris.com/cockpit/config/hybris">
+            <y:group qualifier="common">
+                <y:label>actiongroup.common</y:label>
+                <y:action  action-id="spar.custom.hybris.cockpitng.listview.action.export.csv"  property="exportColumnsAndData" />
+            </y:group>
+        </y:actions>
+    </context>
+	<!--  Settings for Custom CSV Export used for OOTB functions for POS and Consignment End-->
+	
+	<context merge-by="module" parent="GenericItem" type="Address" component="oms-editor-area">
+		<editorArea:editorArea xmlns:editorArea="http://www.hybris.com/cockpitng/component/editorArea">
+			<editorArea:tab name="warehousingbackoffice.tab.general">
+				<editorArea:section name="ordermanagementbackoffice.section.order.general.properties">
+					<editorArea:attribute qualifier="building" label="ordermanagementbackoffice.order.address.buildingName" />
+					<editorArea:attribute qualifier="appartment" label="ordermanagementbackoffice.order.address.landmark" />
+					<editorArea:attribute qualifier="district" label="ordermanagementbackoffice.order.address.area" />
+					<editorArea:attribute qualifier="longAddress" label="ordermanagementbackoffice.order.address.longAddress" />
+					<editorArea:attribute qualifier="line1" label="ordermanagementbackoffice.order.address.line1" />
+					<editorArea:attribute qualifier="line2" label="ordermanagementbackoffice.order.address.line2" />
+					<editorArea:attribute qualifier="region" label="ordermanagementbackoffice.order.address.state" />
+					<editorArea:attribute qualifier="postalcode" label="ordermanagementbackoffice.order.address.postalcode" />
+					<editorArea:attribute qualifier="country" />
+				</editorArea:section>
+			</editorArea:tab>
+		</editorArea:editorArea>
+	</context>
+	
+	<context type="Address" component="base" merge-by="type" parent="GenericItem">
+        <y:base xmlns:y="http://www.hybris.com/cockpit/config/hybris">
+        		<y:labels>
+					<!-- <y:label>line2+ ', ' +building+ ', ' +line1+ ', ' +district+ ', '+appartment+ ', '+longAddress+ ','+ town+ ', ' +(postalcode != 'NA' ? postalcode : '')</y:label> -->
+					<y:label>line2+ ', ' +building+ ', ' +line1+ ', '+(longAddress != null ? appartment+', '+longAddress  : district +', ' +appartment+ ', '+ town+ ', ' +postalcode)</y:label>
+				</y:labels>
+        </y:base>
+    </context>
+    
+    <!-- Editor-Area for Pick and Pack at Order -Start- -->
+    
+		<context merge-by="type" parent="GenericItem" type="Order" component="oms-editor-area">
+			<editorArea:editorArea
+				xmlns:editorArea="http://www.hybris.com/cockpitng/component/editorArea">
+	          <editorArea:tab name="ordermanagementbackoffice.order.tab.details">
+					<editorArea:section name="ordermanagementbackoffice.section.order.general.information" columns="3">
+						<editorArea:attribute qualifier="user" label="ordermanagementbackoffice.order.details.customer" readonly="true" >
+						    <editorArea:editor-parameter>
+	                            <editorArea:name>disableDisplayingDetails</editorArea:name>
+	                            <editorArea:value>true</editorArea:value>
+	                        </editorArea:editor-parameter>
+						</editorArea:attribute>
+						<editorArea:attribute qualifier="date" label="ordermanagementbackoffice.order.details.created" readonly="true" />
+						<editorArea:attribute qualifier="status" label="ordermanagementbackoffice.order.details.orderstatus" readonly="true" />
+						<editorArea:attribute qualifier="deliveryMode" label="ordermanagementbackoffice.order.details.shipmentmethod" >
+						    <editorArea:editor-parameter>
+	                            <editorArea:name>disableDisplayingDetails</editorArea:name>
+	                            <editorArea:value>true</editorArea:value>
+	                        </editorArea:editor-parameter>
+						</editorArea:attribute>
+						<editorArea:attribute qualifier="paymentAddress" label="ordermanagementbackoffice.order.details.billaddress">
+							<editorArea:editor-parameter>
+								<editorArea:name>referenceSelected/editorArea/editorAreaConfigCtx</editorArea:name>
+								<editorArea:value>oms-editor-area</editorArea:value>
+							</editorArea:editor-parameter>
+						</editorArea:attribute>
+						<editorArea:attribute qualifier="deliveryAddress" label="ordermanagementbackoffice.order.details.shipaddress" >
+							<editorArea:editor-parameter>
+								<editorArea:name>referenceSelected/editorArea/editorAreaConfigCtx</editorArea:name>
+								<editorArea:value>oms-editor-area</editorArea:value>
+							</editorArea:editor-parameter>
+						</editorArea:attribute>
+					</editorArea:section>
+					<editorArea:section name="ordermanagementbackoffice.section.order.hierarchy.linedetails">
+						<editorArea:panel>
+							<editorArea:attribute
+								editor="com.hybris.cockpitng.editor.extendedmultireferenceeditor"
+								qualifier="entries" readonly="true">
+								<editorArea:editor-parameter>
+									<editorArea:name>listConfigContext</editorArea:name>
+									<editorArea:value>referenceListViewOrderEntries
+									</editorArea:value>
+								</editorArea:editor-parameter>
+								<editorArea:editor-parameter>
+									<editorArea:name>disableDisplayingDetails</editorArea:name>
+									<editorArea:value>true</editorArea:value>
+								</editorArea:editor-parameter>
+								<editorArea:editor-parameter>
+									<editorArea:name>disableRemoveReference</editorArea:name>
+									<editorArea:value>true</editorArea:value>
+								</editorArea:editor-parameter>
+							</editorArea:attribute>
+						</editorArea:panel>
+					</editorArea:section>
+					<editorArea:section name="ordermanagementbackoffice.section.order.general.totals" columns="3">
+						<editorArea:attribute qualifier="subtotal" readonly="true" />
+						<editorArea:attribute qualifier="totalTax" label="ordermanagementbackoffice.order.details.taxes" readonly="true" />
+						<editorArea:attribute qualifier="deliveryCost" label="ordermanagementbackoffice.order.details.shipping" readonly="true" />
+						<editorArea:attribute qualifier="totalDiscounts" label="ordermanagementbackoffice.order.details.orderdiscount" readonly="true" />
+						<editorArea:attribute qualifier="totalPrice" label="ordermanagementbackoffice.order.details.total" readonly="true" />
+					</editorArea:section>
+				</editorArea:tab>
+				<editorArea:tab name="ordermanagementbackoffice.order.tab.consignments">
+					<editorArea:section name="ordermanagementbackoffice.section.order.hierarchy.descendants">
+						<editorArea:panel>
+							<editorArea:attribute
+								editor="com.hybris.cockpitng.editor.extendedmultireferenceeditor"
+								qualifier="consignments" readonly="true">
+								<editorArea:editor-parameter>
+									<editorArea:name>listConfigContext</editorArea:name>
+									<editorArea:value>referenceListViewConsignments</editorArea:value>
+								</editorArea:editor-parameter>
+								<editorArea:editor-parameter>
+									<editorArea:name>disableDisplayingDetails</editorArea:name>
+									<editorArea:value>true</editorArea:value>
+								</editorArea:editor-parameter>
+								<editorArea:editor-parameter>
+									<editorArea:name>disableRemoveReference</editorArea:name>
+									<editorArea:value>true</editorArea:value>
+								</editorArea:editor-parameter>
+							</editorArea:attribute>
+						</editorArea:panel>
+					</editorArea:section>
+				</editorArea:tab>
+				<editorArea:tab name="ordermanagementbackoffice.order.tab.payment">
+					<editorArea:section name="ordermanagementbackoffice.section.order.hierarchy.descendants">
+						<editorArea:panel>
+							<editorArea:attribute
+								editor="com.hybris.cockpitng.editor.extendedmultireferenceeditor"
+								qualifier="paymentTransactions" readonly="true">
+								<editorArea:editor-parameter>
+									<editorArea:name>listConfigContext</editorArea:name>
+									<editorArea:value>referenceListViewPaymentTransactions
+									</editorArea:value>
+								</editorArea:editor-parameter>
+								<editorArea:editor-parameter>
+									<editorArea:name>disableRemoveReference</editorArea:name>
+									<editorArea:value>true</editorArea:value>
+								</editorArea:editor-parameter>
+							</editorArea:attribute>
+						</editorArea:panel>
+					</editorArea:section>
+				</editorArea:tab>
+				<editorArea:tab name="ordermanagementbackoffice.order.tab.fraud">
+					<editorArea:section name="ordermanagementbackoffice.section.order.hierarchy.descendants">
+						<editorArea:panel>
+							<editorArea:attribute
+								editor="com.hybris.cockpitng.editor.extendedmultireferenceeditor"
+								qualifier="fraudReports" readonly="true">
+								<editorArea:editor-parameter>
+									<editorArea:name>listConfigContext</editorArea:name>
+									<editorArea:value>referenceListViewFraudReports</editorArea:value>
+								</editorArea:editor-parameter>
+								<editorArea:editor-parameter>
+									<editorArea:name>disableRemoveReference</editorArea:name>
+									<editorArea:value>true</editorArea:value>
+								</editorArea:editor-parameter>
+							</editorArea:attribute>
+						</editorArea:panel>
+					</editorArea:section>
+				</editorArea:tab>
+				
+				<!-- New Tab for Pick and Pack alternate solution -->
+				
+				<editorArea:tab name="ordermanagementbackoffice.order.tab.picknpack">
+					<editorArea:section name="ordermanagementbackoffice.section.order.general.information" columns="3">
+						<editorArea:attribute qualifier="user" label="ordermanagementbackoffice.order.details.customer" readonly="true" >
+						    <editorArea:editor-parameter>
+	                            <editorArea:name>disableDisplayingDetails</editorArea:name>
+	                            <editorArea:value>true</editorArea:value>
+	                        </editorArea:editor-parameter>
+						</editorArea:attribute>
+						<editorArea:attribute qualifier="date" label="ordermanagementbackoffice.order.details.created" readonly="true" />
+						<editorArea:attribute qualifier="status" label="ordermanagementbackoffice.order.details.orderstatus" readonly="true" />
+						<editorArea:attribute qualifier="deliveryMode" label="ordermanagementbackoffice.order.details.shipmentmethod" >
+						    <editorArea:editor-parameter>
+	                            <editorArea:name>disableDisplayingDetails</editorArea:name>
+	                            <editorArea:value>true</editorArea:value>
+	                        </editorArea:editor-parameter>
+						</editorArea:attribute>
+						</editorArea:section>
+						<editorArea:section name="ordermanagementbackoffice.section.order.pickpack.information" columns="2">
+                  <editorArea:attribute qualifier="oderRetryNoShow" editor="com.hybris.cockpitng.editor.boolean.dropdown" readonly="false" label="ordermanagementbackoffice.consignment.noshowretry" />
+				 <editorArea:attribute qualifier="allDeliverySlots" label="ordermanagementbackoffice.consignment.deliveryList" >
+							<editorArea:editor-parameter>
+								<editorArea:name>referenceSelected/list/editorAreaConfigCtx</editorArea:name>
+								<editorArea:value>simple-list</editorArea:value>
+								
+							</editorArea:editor-parameter>
+				 </editorArea:attribute>
+				<editorArea:attribute qualifier="deliveryDate" label="ordermanagementbackoffice.consignment.deliveryDate" >
+							<editorArea:editor-parameter>
+								<editorArea:name>referenceSelected/editorArea/editorAreaConfigCtx</editorArea:name>
+								<editorArea:value>oms-editor-area</editorArea:value>
+							</editorArea:editor-parameter>
+				</editorArea:attribute>
+				<editorArea:attribute qualifier="deliverySlot" label="ordermanagementbackoffice.consignment.deliverySlot" >
+							<editorArea:editor-parameter>
+								<editorArea:name>referenceSelected/editorArea/editorAreaConfigCtx</editorArea:name>
+								<editorArea:value>oms-editor-area</editorArea:value>
+							</editorArea:editor-parameter>
+				</editorArea:attribute>
+				
+				
+			
+				</editorArea:section>
+					<editorArea:section name="ordermanagementbackoffice.section.order.hierarchy.linedetails">
+						<editorArea:panel>
+							<editorArea:attribute editor="com.hybris.cockpitng.editor.extendedmultireferenceeditor" qualifier="entries" >
+								<editorArea:editor-parameter>
+									<editorArea:name>listConfigContext</editorArea:name>
+									<editorArea:value>pickPackConfig</editorArea:value>
+								</editorArea:editor-parameter>
+								<editorArea:editor-parameter>
+			                        <editorArea:name>inlineEditing</editorArea:name>
+			                        <editorArea:value>true</editorArea:value>
+                    			</editorArea:editor-parameter>
+							</editorArea:attribute>
+						</editorArea:panel>
+					</editorArea:section>
+					<editorArea:section name="ordermanagementbackoffice.section.order.general.totals" columns="3">
+						<editorArea:attribute qualifier="subtotal" readonly="true" />
+						<editorArea:attribute qualifier="totalTax" label="ordermanagementbackoffice.order.details.taxes" readonly="true" />
+						<editorArea:attribute qualifier="deliveryCost" label="ordermanagementbackoffice.order.details.shipping" readonly="true" />
+						<editorArea:attribute qualifier="totalDiscounts" label="ordermanagementbackoffice.order.details.orderdiscount" readonly="true" />
+						<editorArea:attribute qualifier="totalPrice" label="ordermanagementbackoffice.order.details.total" readonly="true" />
+					</editorArea:section>
+				</editorArea:tab>
+				
+			</editorArea:editorArea>
+		</context>
+		<!-- Editor-Area for Pick and Pack at Order -End- -->
+		
+		<!-- Actions For recalculation of Order total - Start-  -->
+	    
+	    <context component="omsEditorAreaActions" type="Order" merge-by="type">
+	        <y:actions xmlns:y="http://www.hybris.com/cockpit/config/hybris">
+	            <y:group qualifier="common">
+	                <y:label>actiongroup.common</y:label>
+	                <y:action action-id="de.hybris.ordermanagementbackoffice.actions.cancelorderaction" property="currentObject" />
+	                <y:action action-id="de.hybris.ordermanagementbackoffice.actions.createreturnrequestaction" property="currentObject" />
+	                <y:action action-id="com.hybris.cockpitng.action.order.recalculatetotals" property="currentObject"/>
+	            </y:group>
+	        </y:actions>
+	    </context>
+	    <!-- Actions For recalculation of Order total - End -->
+
+		<!-- Changes For Pick and Pack Solution -Start- -->
+				
+		<context merge-by="type" parent="GenericItem" type="OrderEntry" component="pickPackConfig">
+			<list-view:list-view xmlns:list-view="http://www.hybris.com/cockpitng/component/listView">
+				<list-view:column qualifier="product.code" label="ordermanagementbackoffice.order.hierarchy.productcode" />	
+				<list-view:column qualifier="product.name" label="ordermanagementbackoffice.order.hierarchy.productname" />
+				<list-view:column qualifier="basePrice" label="ordermanagementbackoffice.order.hierarchy.itemCSP" />
+				<list-view:column qualifier="originalCSP" label="ordermanagementbackoffice.order.hierarchy.originalCSP" />
+				<list-view:column qualifier="quantity" label="ordermanagementbackoffice.order.hierarchy.qty" readonly="true"/>
+				<list-view:column qualifier="originalQty" label="ordermanagementbackoffice.order.hierarchy.originalQty" readonly="true"/>
+				<list-view:column qualifier="shortPickQty" label="ordermanagementbackoffice.order.hierarchy.shortPickQuantity" />
+				<list-view:column qualifier="totalPrice" label="ordermanagementbackoffice.order.hierarchy.totalprice" readonly="true"/>
+				<list-view:column qualifier="quantityPending" />
+				<list-view:column qualifier="quantityCancelled" />
+				<list-view:column qualifier="quantityShipped" />
+			</list-view:list-view>
+		</context>
+		
+		<context merge-by="type" parent="GenericItem" type="ConsignmentEntry" component="referenceListViewConsignmentEntries">
+	        <list-view:list-view xmlns:list-view="http://www.hybris.com/cockpitng/component/listView">
+	            <list-view:column qualifier="orderEntry.product.code" label="warehousingbackoffice.consignmentEntry.orderEntry.product.code" spring-bean="nullSafeListCellRenderer"/>
+	            <list-view:column qualifier="orderEntry.product.name" label="warehousingbackoffice.consignmentEntry.orderEntry.product.name" spring-bean="nullSafeListCellRenderer"/>
+	            <list-view:column qualifier="quantity"/>
+	            <list-view:column qualifier="shortPickQty" label="warehousingbackoffice.consignment.hierarchy.shortPickQuantity" />
+	            <list-view:column qualifier="quantityPending"/>
+	            <list-view:column qualifier="quantityCancelled"/>
+	            <list-view:column qualifier="quantityDeclined"/>
+	            <list-view:column qualifier="quantityShipped" />
+	            <list-view:column spring-bean="declineButtonCellRenderer" label="warehousingbackoffice.consignment.hierarchy.actions" />
+	        </list-view:list-view>
+   		 </context>
+		
+    	<context merge-by="type" parent="GenericItem" type="Consignment" component="referenceListViewConsignments">
+			<list-view:list-view xmlns:list-view="http://www.hybris.com/cockpitng/component/listView">
+				<list-view:column qualifier="code" name="ordermanagementbackoffice.order.tab.consignments.code"/>
+				<list-view:column qualifier="trackingID"/>
+				<list-view:column qualifier="deliveryMode"/>
+				<list-view:column qualifier="status"/>
+			</list-view:list-view>
+		</context>
+		<context component="simple-list" type="java.lang.String">
+    	<ysl:simple-list xmlns:ysl="http://www.hybris.com/cockpitng/config/simplelist">
+        	<ysl:name field="#root" />
+   			 </ysl:simple-list>
+		</context>
+		<context merge-by="type" parent="GenericItem" type="FraudReport" component="referenceListViewFraudReports">
+			<list-view:list-view xmlns:list-view="http://www.hybris.com/cockpitng/component/listView">
+				<list-view:column qualifier="code" />
+				<list-view:column qualifier="provider" />
+				<list-view:column qualifier="status" />
+				<list-view:column qualifier="explanation" />
+				<list-view:column qualifier="timestamp" />
+				<list-view:column spring-bean="fraudCheckButtonCellRenderer" label="ordermanagementbackoffice.order.hierarchy.actions" />
+			</list-view:list-view>
+		</context>
+		
+		<context merge-by="type" parent="GenericItem" type="PaymentTransaction" component="referenceListViewPaymentTransactions">
+			<list-view:list-view xmlns:list-view="http://www.hybris.com/cockpitng/component/listView">
+				<list-view:column qualifier="code" />
+				<list-view:column qualifier="info" />
+				<list-view:column qualifier="paymentProvider" />
+				<list-view:column qualifier="plannedAmount" />
+				<list-view:column qualifier="requestId" />
+			</list-view:list-view>
+		</context>
+		<!-- Changes For Pick and Pack Solution -End- -->
+		
+</config>

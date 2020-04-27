@@ -1,0 +1,40 @@
+#incremental impex for content catalog
+
+
+# ImpEx for Importing CMS Content
+
+# Macros / Replacement Parameter definitions
+$contentCatalog=sparContentCatalog
+$contentCatalogName=Spar Content Catalog
+$productCatalog=sparProductCatalog
+$productCatalogName=Spar Product Catalog
+
+$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
+$productCV=catalogVersion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
+
+$product=product(code, $productCV)
+$category=category(code, $productCV)
+
+$siteUid=spar
+$lang=en
+
+######## Entries for the Spar10-10 Link
+INSERT_UPDATE BenefitTypeEnum;code[unique=true];name[lang=en];extensionName
+;HOLI;HOLI;sparpricefactory
+
+INSERT_UPDATE CMSLinkComponent; $contentCV[unique=true];uid[unique=true];name;url;&linkRef;&componentRef; target(code)[default='sameWindow']; $category; $product;linkName;styleAttributes;
+;;Spar10-10_TopLink;Spar10-10_TopLink;/search/?q=%3Arelevance%3AbenefitType%3AHOLI;Spar10-10_TopLink;Spar10-10_TopLink;;;;REGIONAL SPECIAL
+
+
+INSERT_UPDATE CMSNavigationNode;uid[unique=true];$contentCV[unique=true];name;parent(uid, $contentCV);links(&linkRef);&nodeRef;title[lang=$lang]
+;Spar10-10_NavNode;;Spar 10-10 Nav Node;;Spar10-10_TopLink;Spar10-10_NavNode;Spar10-10
+
+INSERT_UPDATE SparTopNavigationBarComponent; $contentCV[unique=true]; uid[unique=true];name;wrapAfter;link(uid, $contentCV);styleClass ;&componentRef
+;;Spar10-10_Component;Spar 10-10 Component;50;Spar10-10_TopLink;;Spar10-10_Component
+
+INSERT_UPDATE SparTopNavigationBarComponent;$contentCV[unique=true];uid[unique=true];navigationNode(&nodeRef);dropDownLayout(code)
+;;Spar10-10_Component;Spar10-10_NavNode
+
+INSERT_UPDATE SparNavigationBarCollectionComponent;$contentCV[unique=true];uid[unique=true];name;components(uid, $contentCV);&componentRef
+;;SparTopNavBarComponent2;Spar Top Navigation Bar Collection Component;ExclusivesBarComponent2,OffersBarComponent2,SdayBarComponent2,Spar10-10_Component;SparTopNavBarComponent2
+

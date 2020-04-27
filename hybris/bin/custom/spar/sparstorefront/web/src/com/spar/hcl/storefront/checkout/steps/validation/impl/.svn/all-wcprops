@@ -1,0 +1,77 @@
+K 25
+svn:wc:ra_dav:version-url
+V 120
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparstorefront/web/src/com/spar/hcl/storefront/checkout/steps/validation/impl
+END
+ResponsiveDeliveryAddressCheckoutStepValidator.java
+K 25
+svn:wc:ra_dav:version-url
+V 172
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparstorefront/web/src/com/spar/hcl/storefront/checkout/steps/validation/impl/ResponsiveDeliveryAddressCheckoutStepValidator.java
+END
+DefaultDeliveryMethodCheckoutStepValidator.java
+K 25
+svn:wc:ra_dav:version-url
+V 168
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparstorefront/web/src/com/spar/hcl/storefront/checkout/steps/validation/impl/DefaultDeliveryMethodCheckoutStepValidator.java
+END
+DefaultMultiStepCheckoutStepValidator.java
+K 25
+svn:wc:ra_dav:version-url
+V 163
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparstorefront/web/src/com/spar/hcl/storefront/checkout/steps/validation/impl/DefaultMultiStepCheckoutStepValidator.java
+END
+ResponsivePaymentCheckoutStepValidator.java
+K 25
+svn:wc:ra_dav:version-url
+V 164
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparstorefront/web/src/com/spar/hcl/storefront/checkout/steps/validation/impl/ResponsivePaymentCheckoutStepValidator.java
+END
+ResponsiveSummaryCheckoutStepValidator.java
+K 25
+svn:wc:ra_dav:version-url
+V 164
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparstorefront/web/src/com/spar/hcl/storefront/checkout/steps/validation/impl/ResponsiveSummaryCheckoutStepValidator.java
+END
+DefaultDeliveryAddressCheckoutStepValidator.java
+K 25
+svn:wc:ra_dav:version-url
+V 169
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparstorefront/web/src/com/spar/hcl/storefront/checkout/steps/validation/impl/DefaultDeliveryAddressCheckoutStepValidator.java
+END
+DefaultPickupCheckoutStepValidator.java
+K 25
+svn:wc:ra_dav:version-url
+V 160
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparstorefront/web/src/com/spar/hcl/storefront/checkout/steps/validation/impl/DefaultPickupCheckoutStepValidator.java
+END
+DefaultPaymentCheckoutStepValidator.java
+K 25
+svn:wc:ra_dav:version-url
+V 161
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparstorefront/web/src/com/spar/hcl/storefront/checkout/steps/validation/impl/DefaultPaymentCheckoutStepValidator.java
+END
+DefaultSummaryCheckoutStepValidator.java
+K 25
+svn:wc:ra_dav:version-url
+V 161
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparstorefront/web/src/com/spar/hcl/storefront/checkout/steps/validation/impl/DefaultSummaryCheckoutStepValidator.java
+END
+ResponsiveDeliveryMethodCheckoutStepValidator.java
+K 25
+svn:wc:ra_dav:version-url
+V 171
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparstorefront/web/src/com/spar/hcl/storefront/checkout/steps/validation/impl/ResponsiveDeliveryMethodCheckoutStepValidator.java
+END
+DeliverySlotValidator.java
+K 25
+svn:wc:ra_dav:version-url
+V 147
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparstorefront/web/src/com/spar/hcl/storefront/checkout/steps/validation/impl/DeliverySlotValidator.java
+END
+ResponsiveMultiStepCheckoutStepValidator.java
+K 25
+svn:wc:ra_dav:version-url
+V 166
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparstorefront/web/src/com/spar/hcl/storefront/checkout/steps/validation/impl/ResponsiveMultiStepCheckoutStepValidator.java
+END

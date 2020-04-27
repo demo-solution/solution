@@ -1,0 +1,23 @@
+UPDATE PointOfService;name[unique=true];storeCatchmentArea
+;SPAR Bannerghatta;5
+;SPAR BEGUMPET;5
+;SPAR BROOKEFILEDS;5
+;SPAR Elements Mall;5
+;SPAR Ghorpadi Store;5
+;SPAR KONDAPUR;5
+;SPAR KUKATPALLY;5
+;SPAR Koramangala;5
+;SPAR LMG;5
+;SPAR MANTRI;5
+;SPAR MGF MALL;5
+;SPAR Mangalore 2 Mall;5
+;SPAR NACHARAM;5
+;SPAR OMR;5
+;SPAR PROZONE;5
+;SPAR Pacific Mall;5
+;SPAR RDC MALL;5
+;SPAR SMG Store;5
+;SPAR VEGA CITY;5
+;SPAR VR Mall Store;5
+;SPAR Vadapalani;5
+;SPAR WSM Store;5

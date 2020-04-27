@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?><!--
+  ~ [y] hybris Platform
+  ~
+  ~ Copyright (c) 2000-2015 hybris AG
+  ~ All rights reserved.
+  ~
+  ~ This software is the confidential and proprietary information of hybris
+  ~ ("Confidential Information"). You shall not disclose such Confidential
+  ~ Information and shall use it only in accordance with the terms of the
+  ~ license agreement you entered into with hybris.
+  -->
+  
+  <widgets xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.hybris.com/schema/cockpitng/widgets.xsd">
+	
+	<!-- Settings for Pick list Widget Start -->
+	<widget-extension widgetId="warehousingCollapsibleContainer">
+    	<remove widgetId="warehousingList"/>
+			<widget id="sparWarehousingList" widgetDefinitionId="spar.hybris.cockpitng.collectionBrowser" slotId="center" template="false">
+	               <setting key="listSubtitle" type="String">emptylist</setting>
+	               <setting key="socketDataType_$T" type="String">java.lang.Object</setting>
+	               <setting key="pageSize" type="Integer">10</setting>
+	               <setting key="maxCharsInCell" type="Integer">70</setting>
+	               <setting key="actionSlotComponentId" type="String">customWarehouseListviewActions</setting>
+	               <setting key="sparActionSlotComponentId" type="String">sparWarehouseListviewActions</setting>
+	               <setting key="multiSelect" type="Boolean">false</setting>
+	               <setting key="colConfigCtxCode" type="String">warehousingbackofficelistview</setting>
+	               <setting key="itemRenderer" type="String">listViewRenderer</setting>
+	               <setting key="sortableListHeader" type="Boolean">true</setting>
+	               <setting key="asyncLoading" type="Boolean">true</setting>
+	               <virtual-sockets />
+	        </widget>
+	</widget-extension>
+	<!-- Settings for Pick list Widget End -->
+	
+	<!-- Settings for Asset Tracker Widget Start -->
+    <widget-extension widgetId="omsCollapsibleContainer">
+  			<remove widgetId="omsList"/>       
+              <widget id="omsList" widgetDefinitionId="com.hybris.cockpitng.collectionBrowser" slotId="center" template="false">
+                  <setting key="listSubtitle" type="String">emptylist</setting>
+                  <setting key="socketDataType_$T" type="String">java.lang.Object</setting>
+                  <setting key="widgetStyleAttribute" type="String"></setting>
+                  <setting key="pageSize" type="Integer">10</setting>
+                  <setting key="maxCharsInCell" type="Integer">70</setting>
+                  <setting key="actionSlotComponentId" type="String">sparCustomListviewActions</setting>
+                  <setting key="multiSelect" type="Boolean">false</setting>
+                  <setting key="colConfigCtxCode" type="String">omslistview</setting>
+                  <setting key="itemRenderer" type="String">listViewRenderer</setting>
+                  <setting key="listTitle" type="String"></setting>
+                  <setting key="sortableListHeader" type="Boolean">true</setting>
+                  <setting key="widgetStyleClass" type="String"></setting>
+                  <setting key="asyncLoading" type="Boolean">true</setting>
+                  <virtual-sockets/>
+              </widget>
+	</widget-extension>
+	<!-- Settings for Asset Tracker Widget End -->
+	
+	<!-- Settings for Asset Tracker Widget Node Start -->
+ 	<widget-extension widgetId="backofficeMainSlot">
+	    <widget id="searchapi_conditionevaluator" widgetDefinitionId="com.hybris.cockpitng.conditionevaluator" slotId="cockpitWidgetChildrenInvisible" template="false">
+            <widget id="searchapi_multiconditionsearch" widgetDefinitionId="com.hybris.backoffice.widgets.multiConditionSearch" slotId="cockpitWidgetChildrenInvisible" template="false"/>
+	        <setting key="expression" type="String" value="#root.id EQ 'ordermanagementbackoffice.typenode.order.open.assettracker'"></setting>
+	        <setting key="socketDataType_$T" type="String" value="com.hybris.backoffice.navigation.NavigationNode"></setting>
+	        <setting key="widgetStyleAttribute" type="String" value=""></setting>
+	        <setting key="widgetStyleClass" type="String" value=""></setting>
+	        <virtual-sockets/>
+	    </widget>
+    </widget-extension>        
+
+	<widget-connection sourceWidgetId="omsExplorerTree" outputId="nodeSelected" targetWidgetId="searchapi_conditionevaluator" inputId="input"/>
+    <widget-connection sourceWidgetId="searchapi_conditionevaluator" outputId="true" targetWidgetId="searchapi_multiconditionsearch" inputId="nodeSelected"/>
+    <widget-connection sourceWidgetId="searchapi_multiconditionsearch" outputId="outContext" targetWidgetId="omsAdvancedSearch" inputId="initContext"/>
+    <widget-connection inputId="input" outputId="nodeSelected" sourceWidgetId="sparbackoffice-explorer-tree" targetWidgetId="sparbackoffice-tree-node-adapter"/>
+    <widget-connection inputId="genericInput" outputId="true" sourceWidgetId="sparbackoffice-tree-node-adapter" targetWidgetId="sparbackoffice-typecode-extractor"/>
+    <widget-connection inputId="genericInput" outputId="true" sourceWidgetId="sparbackoffice-tree-node-adapter" targetWidgetId="sparbackoffice-search-enabler"/>
+    <widget-connection inputId="genericInput" outputId="false" sourceWidgetId="sparbackoffice-tree-node-adapter" targetWidgetId="sparbackoffice-search-disabler"/>
+    <widget-connection inputId="type" outputId="genericOutput" sourceWidgetId="sparbackoffice-typecode-extractor" targetWidgetId="sparbackoffice-search-logic"/>
+    <widget-connection inputId="enabled" outputId="genericOutput" sourceWidgetId="sparbackoffice-search-enabler" targetWidgetId="sparbackoffice-text-search"/>
+    <widget-connection inputId="enabled" outputId="genericOutput" sourceWidgetId="sparbackoffice-search-disabler" targetWidgetId="sparbackoffice-text-search"/>
+    <widget-connection inputId="searchtext" outputId="query" sourceWidgetId="sparbackoffice-text-search" targetWidgetId="sparbackoffice-search-logic"/>
+    <widget-connection inputId="pageable" outputId="pageable" sourceWidgetId="sparbackoffice-search-logic" targetWidgetId="sparbackoffice-simple-list"/>
+	<!-- Settings for Asset Tracker Widget Node End -->
+	
+	<!-- Settings for Pick List Widget Start -->
+	<widget-connection sourceWidgetId="sparWarehousingList" outputId="sortData" targetWidgetId="warehousingAdvancedSearch" inputId="sortData" />
+    <widget-connection sourceWidgetId="sparWarehousingList" outputId="selectedItem" targetWidgetId="warehousingBackofficeSpaceManagement" inputId="listSelectedObject" />
+    <widget-connection sourceWidgetId="sparWarehousingList" outputId="selectedItem" targetWidgetId="warehousingEditorArea" inputId="inputObject" />
+    <widget-connection sourceWidgetId="sparWarehousingList" outputId="previousItemSelectorContext" targetWidgetId="warehousingPreviousItemSelector" inputId="previousItemSelectorContext" />
+    <widget-connection sourceWidgetId="sparWarehousingList" outputId="nextItemSelectorContext" targetWidgetId="warehousingNextItemSelector" inputId="nextItemSelectorContext" />
+	<widget-connection sourceWidgetId="warehousingPreviousItemSelector" outputId="previousItemSelectorInvocation" targetWidgetId="sparWarehousingList" inputId="previousItemSelectorInvocation" />
+	<widget-connection sourceWidgetId="warehousingNextItemSelector" outputId="nextItemSelectorInvocation" targetWidgetId="sparWarehousingList" inputId="nextItemSelectorInvocation" />
+   	<widget-connection sourceWidgetId="warehousingAdvancedSearchEngine" outputId="pageable" targetWidgetId="sparWarehousingList" inputId="pageable" />
+    <!-- Settings for Pick List Widget End -->
+    
+</widgets>

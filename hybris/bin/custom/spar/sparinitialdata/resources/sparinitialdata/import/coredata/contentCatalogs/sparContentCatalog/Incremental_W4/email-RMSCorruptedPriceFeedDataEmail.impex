@@ -1,0 +1,5 @@
+$lang=en
+$contentCatalog=sparContentCatalog
+$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
+UPDATE EmailPage;$contentCV[unique=true];uid[unique=true];fromEmail[lang=$lang];fromName[lang=$lang]
+;;RMSCorruptedPriceFeedDataEmail;"care@sparindia.com";"SPAR India"

@@ -1,0 +1,17 @@
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/S6_Maintenance/!svn/ver/1/custom/sparcommercewebservices/src/com/spar/hcl/queues/cronjob
+END
+ProductExpressUpdateCleanerJob.java
+K 25
+svn:wc:ra_dav:version-url
+V 129
+/svn/S6_Maintenance/!svn/ver/1/custom/sparcommercewebservices/src/com/spar/hcl/queues/cronjob/ProductExpressUpdateCleanerJob.java
+END
+OrderStatusUpdateCleanerJob.java
+K 25
+svn:wc:ra_dav:version-url
+V 126
+/svn/S6_Maintenance/!svn/ver/1/custom/sparcommercewebservices/src/com/spar/hcl/queues/cronjob/OrderStatusUpdateCleanerJob.java
+END

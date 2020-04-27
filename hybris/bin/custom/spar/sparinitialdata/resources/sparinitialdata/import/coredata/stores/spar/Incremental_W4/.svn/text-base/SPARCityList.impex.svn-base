@@ -1,0 +1,6 @@
+INSERT_UPDATE SparCities;city[unique=true];status
+;Bengaluru;true
+;Delhi;true
+;Ghaziabad;true
+;Gurugram;true
+;Pune;true

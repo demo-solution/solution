@@ -1,0 +1,5 @@
+$storeUid=spar
+Remove PointOfService;name[unique=true];type(code);address(&addrID);latitude;longitude;geocodeTimestamp[dateformat=dd-MM-yyyy];openingSchedule(code);basestore(uid)[default=$storeUid];features(code)
+##### Pune POS
+#;SPAR Ghorpadi;POS;addrGhorpadi;18.529603;73.876015;29-04-2025;$standardHours
+;SPAR Ghorpadi Store;STORE;addrGhorpadiStore;18.529603;73.876015;29-04-2025;$standardHours

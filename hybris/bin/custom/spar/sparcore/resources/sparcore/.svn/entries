@@ -1,0 +1,77 @@
+10
+
+dir
+416
+http://10.2.7.20/svn/S6_Maintenance/custom/spar/sparcore/resources/sparcore
+http://10.2.7.20/svn/S6_Maintenance
+
+
+
+2019-05-22T09:50:06.779568Z
+394
+ravindra.kr
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+db735611-e5e1-473b-b638-8971ea245bcc
+
+test
+dir
+
+integration
+dir
+
+processes
+dir
+
+messages
+dir
+
+sparcore-testclasses.xml
+file
+
+
+
+
+2019-03-29T07:57:29.763491Z
+d261d39e9a54c805c80fcbee6ba767ac
+2018-07-05T13:17:52.549136Z
+1
+kuldeepj
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+811
+
+import
+dir
+

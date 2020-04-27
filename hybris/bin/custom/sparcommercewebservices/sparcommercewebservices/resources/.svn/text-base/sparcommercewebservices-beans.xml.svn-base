@@ -1,0 +1,381 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+  ~ [y] hybris Platform
+  ~
+  ~ Copyright (c) 2000-2015 hybris AG
+  ~ All rights reserved.
+  ~
+  ~ This software is the confidential and proprietary information of hybris
+  ~ ("Confidential Information"). You shall not disclose such Confidential
+  ~ Information and shall use it only in accordance with the terms of the
+  ~ license agreement you entered into with hybris.
+  -->
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="beans.xsd">
+
+	<enum class="com.spar.hcl.populator.options.PaymentInfoOption">
+		<value>BASIC</value>
+		<value>BILLING_ADDRESS</value>
+	</enum>
+
+	<!--auth response  -->
+	<bean class="com.spar.hcl.auth.data.LogoutResponse">
+		<property name="success" type="boolean"/>
+	</bean>
+
+	<!-- storesession data -->
+
+	<bean class="com.spar.hcl.storesession.data.LanguageDataList">
+		<property name="languages"
+		          type="java.util.Collection&lt;de.hybris.platform.commercefacades.storesession.data.LanguageData>"/>
+	</bean>
+
+	<bean class="com.spar.hcl.storesession.data.CurrencyDataList">
+		<property name="currencies"
+		          type="java.util.Collection&lt;de.hybris.platform.commercefacades.storesession.data.CurrencyData>"/>
+	</bean>
+
+	<!-- order data -->
+
+	<bean class="com.spar.hcl.order.data.CartDataList">
+		<property name="carts"
+		          type="java.util.List&lt;de.hybris.platform.commercefacades.order.data.CartData>"/>
+	</bean>
+
+	<bean class="com.spar.hcl.order.data.OrderEntryDataList">
+		<property name="orderEntries"
+		          type="java.util.List&lt;de.hybris.platform.commercefacades.order.data.OrderEntryData>"/>
+	</bean>
+
+	<bean class="com.spar.hcl.order.data.CardTypeDataList">
+		<property name="cardTypes"
+		          type="java.util.List&lt;de.hybris.platform.commercefacades.order.data.CardTypeData>"/>
+	</bean>
+
+	<bean class="de.hybris.platform.commercefacades.order.data.CartModificationDataList">
+		<property name="cartModificationList"
+		          type="java.util.List&lt;de.hybris.platform.commercefacades.order.data.CartModificationData>"/>
+	</bean>
+
+	<!-- product data -->
+
+	<bean class="com.spar.hcl.product.data.ProductDataList">
+		<property name="products"
+		          type="java.util.List&lt;de.hybris.platform.commercefacades.product.data.ProductData>"/>
+		<property name="catalog" type="String"/>
+		<property name="version" type="String"/>
+		<property name="totalProductCount" type="int"/>
+		<property name="totalPageCount" type="int"/>
+		<property name="currentPage" type="int"/>
+	</bean>
+
+	<bean class="com.spar.hcl.product.data.PromotionDataList">
+		<property name="promotions"
+		          type="java.util.List&lt;de.hybris.platform.commercefacades.product.data.PromotionData>"/>
+	</bean>
+
+	<bean class="com.spar.hcl.product.data.PromotionResultDataList">
+		<property name="promotions"
+		          type="java.util.List&lt;de.hybris.platform.commercefacades.product.data.PromotionResultData>"/>
+	</bean>
+
+	<bean class="com.spar.hcl.product.data.ReviewDataList">
+		<property name="reviews" type="java.util.List&lt;de.hybris.platform.commercefacades.product.data.ReviewData>"/>
+	</bean>
+
+	<bean class="com.spar.hcl.product.data.SuggestionDataList">
+		<property name="suggestions"
+		          type="java.util.List&lt;de.hybris.platform.commercefacades.product.data.SuggestionData>"/>
+	</bean>
+
+	<!-- user data -->
+
+	<bean class="com.spar.hcl.user.data.TitleDataList">
+		<property name="titles" type="java.util.List&lt;de.hybris.platform.commercefacades.user.data.TitleData>"/>
+	</bean>
+
+	<bean class="com.spar.hcl.user.data.CountryDataList">
+		<property name="countries" type="java.util.List&lt;de.hybris.platform.commercefacades.user.data.CountryData>"/>
+	</bean>
+
+	<bean class="com.spar.hcl.user.data.AddressDataList">
+		<property name="addresses" type="java.util.List&lt;de.hybris.platform.commercefacades.user.data.AddressData>"/>
+	</bean>
+
+	<!-- voucher data -->
+	<bean class="com.spar.hcl.voucher.data.VoucherDataList">
+		<property name="vouchers"
+		          type="java.util.List&lt;de.hybris.platform.commercefacades.voucher.data.VoucherData>"/>
+	</bean>
+
+	<!-- validation data -->
+	<bean class="com.spar.hcl.validation.data.AddressValidationData">
+		<property name="errors" type="de.hybris.platform.commercewebservicescommons.dto.error.ErrorListWsDTO"/>
+		<property name="decision" type="String"/>
+		<property name="suggestedAddressesList"
+		          type="com.spar.hcl.user.data.AddressDataList"/>
+	</bean>
+
+	<!-- Additional title property for CustomerData -->
+	<bean class="de.hybris.platform.commercefacades.user.data.CustomerData"
+	      extends="de.hybris.platform.commercefacades.user.data.PrincipalData">
+		<property name="title" type="String"/>
+	</bean>
+
+	<bean class="com.spar.hcl.user.data.LoginChangeResponse">
+		<property name="success" type="boolean"/>
+	</bean>
+
+	<bean class="com.spar.hcl.user.data.PasswordRestoreResponse">
+		<property name="success" type="boolean"/>
+	</bean>
+
+	<!-- update queues -->
+
+	<bean class="com.spar.hcl.queues.data.ProductExpressUpdateElementData">
+		<property name="code" type="String"/>
+		<property name="catalogId" type="String"/>
+		<property name="catalogVersion" type="String"/>
+	</bean>
+
+	<bean class="com.spar.hcl.queues.data.ProductExpressUpdateElementDataList">
+		<property name="productExpressUpdateElements"
+		          type="java.util.List&lt;com.spar.hcl.queues.data.ProductExpressUpdateElementData>"/>
+	</bean>
+
+	<bean class="com.spar.hcl.queues.data.OrderStatusUpdateElementData">
+		<property name="code" type="String"/>
+		<property name="status" type="String"/>
+		<property name="baseSiteId" type="String"/>
+	</bean>
+
+	<bean class="com.spar.hcl.queues.data.OrderStatusUpdateElementDataList">
+		<property name="orderStatusUpdateElements"
+		          type="java.util.List&lt;com.spar.hcl.queues.data.OrderStatusUpdateElementData>"/>
+	</bean>
+	
+	<bean class="com.spar.hcl.plms.DTO.SparPlmsProductWsDTO">
+		<property name="productid" type="String"/>
+		<property name="shortPickReason" type="String"/>
+		<property name="shortpickqty" type="Long"/>
+		<property name="CSP" type="Double"/>
+		<property name="MRP" type="Double"/>
+		<property name="shortpickqtydouble" type="Double"/>
+		
+	</bean>
+	
+	<bean class="com.spar.hcl.plms.DTO.SparPlmsOrderWsDTO">
+	<property name="orderNo" type="String"/>
+	<property name="status" type="Character"/>
+	<property name="products" type="java.util.ArrayList&lt;com.spar.hcl.plms.DTO.SparPlmsProductWsDTO>"/>	
+	</bean>
+	<bean class="com.spar.hcl.order.DTO.PaymentModeDTO">
+		<property name="code" type="String"/>
+		<property name="name" type="String"/>
+	</bean>
+	
+	<bean class="de.hybris.platform.commercewebservicescommons.dto.order.OrderWsDTO">
+		<property name="paymentMode" type="com.spar.hcl.order.DTO.PaymentModeDTO"/>
+	</bean>
+	
+	<bean class="com.spar.hcl.plms.DTO.PLMSShortPickResponseDTO">
+	<property name="status" type="Boolean"/>
+	<property name="errorcode" type="int"/>
+	<property name="errormessage" type="String"/>
+	<property name="errorreason" type="String"/>
+	</bean>
+	
+	<bean class="de.hybris.platform.commercewebservicescommons.dto.user.UserSignUpWsDTO">
+		<property name="dateOfJoining" type="java.util.Date"/>
+		<property name="employeeCode" type="String"/>
+		<property name="dateOfBirth" type="java.util.Date"/>
+		<property name="whetherEmployee" type="Boolean"/>
+		<property name="loginVia" type="String"/>
+	</bean>
+	
+	<bean class="de.hybris.platform.commercefacades.catalog.data.CategoryHierarchyData">
+        <property name="categoryImage" type="de.hybris.platform.commercefacades.product.data.ImageData"/>
+        <property name="defaultImage " type="de.hybris.platform.commercefacades.product.data.ImageData"/>
+        <property name="fallbackImage" type="de.hybris.platform.commercefacades.product.data.ImageData"/>
+    </bean>
+     
+    <bean class="de.hybris.platform.commercewebservicescommons.dto.catalog.CategoryHierarchyWsDTO">
+        <property name="categoryImage" type="de.hybris.platform.commercewebservicescommons.dto.product.ImageWsDTO"/>
+        <property name="defaultImage" type="de.hybris.platform.commercewebservicescommons.dto.product.ImageWsDTO"/>
+        <property name="fallbackImage" type="de.hybris.platform.commercewebservicescommons.dto.product.ImageWsDTO"/>
+        <property name="products" type="java.util.List&lt;de.hybris.platform.commercewebservicescommons.dto.product.ProductWsDTO>"/>
+    </bean>
+    
+    <bean class="de.hybris.platform.commercewebservicescommons.dto.product.ProductWsDTO">
+    	<property name="disclaimer" type="String"/>
+    	<property name="promoMessage" type="String"/>
+    	<property name="isAvailableForFoodCoupon" type="Boolean"/>
+		<property name="produceEAN" type="String"/>
+		<property name="productBrand" type="String"/>
+		<property name="manufacture" type="String"/>
+		<property name="importedBy" type="String"/>
+		<property name="netQuantity" type="String"/>
+		<property name="productSize" type="String"/>
+		<property name="bestBefore" type="String"/>
+		<property name="usedByDate" type="String"/>
+		<property name="customercare" type="String"/>
+    </bean>
+    
+    
+	<bean class="de.hybris.platform.commercewebservicescommons.dto.order.OrderEntryListWsDTO">
+        <property name="message" type="String"/>
+    </bean>
+    
+    <bean class="de.hybris.platform.commercewebservicescommons.dto.user.AddressWsDTO">
+       <property name="defaultAddress" type="Boolean"/>
+       <property name="buildingName" type="String"/>
+       <property name="area" type="String"/>
+       <property name="message" type="String"/>
+       <property name="landmark" type="String"/>
+    </bean>
+      
+     <bean class="de.hybris.platform.commercewebservicescommons.dto.user.AddressListWsDTO">
+        <property name="message" type="String"/>
+    </bean>
+    
+    <bean class="de.hybris.platform.commercewebservicescommons.dto.order.OrderHistoryWsDTO">
+		<property name="savings" type="de.hybris.platform.commercewebservicescommons.dto.product.PriceWsDTO"/>
+		<property name="deliveryDate" type="java.util.Date"/>
+	</bean>
+	
+    <bean class="de.hybris.platform.commercewebservicescommons.dto.user.UserWsDTO">
+		<property name="employeeCode" type="String"/>
+		<property name="dateOfBirth" type="java.util.Date"/>
+		<property name="custPrimaryMobNumber" type="String"/>
+		<property name="dateOfJoining" type="java.util.Date"/>
+		<property name="whetherEmployee" type="boolean"/>
+		 <property name="isOTPValidate" type="Boolean"/>
+		 <property name="loginVia" type="String"/>
+	</bean>
+	
+	<bean class="com.spar.hcl.facades.deliverySlots.data.DeliverySlotWsDTO">
+		<property name="slotId" type="Integer"/>
+		<property name="orderingDay" type="Integer"/>
+		<property name="minimumOrderTimeSlot" type="Integer"/>
+		<property name="maximumOrderTimeSlot" type="Integer"/>
+		<property name="slotDescription" type="String"/>
+		<property name="deliveryType" type="String"/>
+		<property name="active" type="Boolean"/>
+		<property name="availableSlot" type="Boolean"/>	
+		<property name="homeDeliveryId" type="Double"/>
+		<property name="slotOrdersCapacity" type="Integer"/>
+	</bean>
+	
+	 <bean class="com.spar.hcl.facades.deliverySlots.data.DeliverySlotsListWsDTO">
+		<property name="deliveryDay" type="String"/>
+		<property name="deliverySlots" type="java.util.List&lt;com.spar.hcl.facades.deliverySlots.data.DeliverySlotWsDTO>"/>
+	</bean>
+	
+	 <bean class="com.spar.hcl.facades.deliverySlots.data.AllDeliverySlotListWsDTO">
+		<property name="allDeliverySlots" type="java.util.List&lt;com.spar.hcl.facades.deliverySlots.data.DeliverySlotsListWsDTO>"/>
+	</bean>
+	
+	<bean class="com.spar.hcl.dto.SparOrderTrackingWsDTO">
+       <property name="statusDisplay" type="String"/>
+       <property name="message" type="String"/>
+	</bean>
+	
+	<bean class="com.spar.hcl.dto.SparCitiesWsDTO">
+		<property name="city" type="String"/>
+		<property name="status" type="Boolean"/>
+	</bean>
+	
+	 <bean class="com.spar.hcl.dto.SparCityListWsDTO">
+		<property name="cityList" type="java.util.List&lt;com.spar.hcl.dto.SparCitiesWsDTO>"/>
+	</bean>
+	
+	<bean class="com.spar.hcl.dto.SparBannerComponentWsDTO">
+       <property name="name" type="String"/>
+       <property name="content" type="String"/>  
+       <property name="headline" type="String"/>
+       <property name="image" type="de.hybris.platform.commercefacades.product.data.ImageData"/>
+       <property name="urlLink" type="String"/>
+    </bean>
+   
+    <bean class="com.spar.hcl.dto.SparBannerComponentListWsDTO">
+       <property name="banners" type="java.util.List&lt;com.spar.hcl.dto.SparBannerComponentWsDTO>"/>
+       <property name="message" type="String"/>
+       <property name="timeout" type="Integer"/>
+    </bean>
+	
+	<bean class="com.spar.hcl.dto.SparContentPageWsDTO">
+       <property name="message" type="String"/>
+       <property name="content" type="String"/>
+    </bean>
+    
+	<bean class="de.hybris.platform.commercewebservicescommons.dto.product.ProductWsDTO">
+       <property name="unitMRP" type="de.hybris.platform.commercewebservicescommons.dto.product.PriceWsDTO"/>
+       <property name="savings" type="de.hybris.platform.commercewebservicescommons.dto.product.PriceWsDTO"/>
+    </bean>
+
+	<bean class="de.hybris.platform.commercewebservicescommons.dto.order.OrderEntryWsDTO">
+	 <property name="savings" type="de.hybris.platform.commercewebservicescommons.dto.product.PriceWsDTO"/>	
+	</bean>
+
+	<bean class="de.hybris.platform.commercewebservicescommons.dto.product.VariantOptionWsDTO">
+       <property name="unitMRP" type="de.hybris.platform.commercewebservicescommons.dto.product.PriceWsDTO"/>
+       <property name="savings" type="de.hybris.platform.commercewebservicescommons.dto.product.PriceWsDTO"/>
+       <property name="promoMessage" type="String"/>
+    </bean>
+	
+	<bean class="de.hybris.platform.commercewebservicescommons.dto.product.PromotionResultWsDTO">
+	 <property name="totalDiscount" type="de.hybris.platform.commercewebservicescommons.dto.product.PriceWsDTO"/>	
+	</bean>
+	
+	<bean class="de.hybris.platform.commercewebservicescommons.dto.order.AbstractOrderWsDTO">
+	 <property name="savings" type="de.hybris.platform.commercewebservicescommons.dto.product.PriceWsDTO"/>
+	 <property name="voucherValue" type="de.hybris.platform.commercefacades.product.data.PriceData"/>
+	</bean>
+	<bean class="com.spar.hcl.dto.ChecksumWsDTO">
+       <property name="requestParam" type="java.util.Map&lt;String,String>"/>
+       <property name="checkSum" type="String"/>
+       <property name="validateChecksum" type="boolean"/>
+    </bean>
+    
+      <bean class="com.spar.hcl.dto.ChecksumRequestParamWsDTO">
+		<property name="orderId" type="String"/>
+		<property name="amount" type="String"/>
+		<property name="mid" type="String"/>
+		<property name="industryTypeId" type="String"/>
+		<property name="channelId" type="String"/>
+		<property name="website" type="String"/>
+		<property name="callBackURL" type="String"/>
+		<property name="merchantKey" type="String"/>
+		<property name="mobileNumber" type="String"/>
+	<property name="email" type="String"/>
+	</bean>
+	
+	<bean class="de.hybris.platform.commercewebservicescommons.dto.order.CartWsDTO">
+	<property name="totalFoodCouponAmount" type="java.lang.Double"/>
+	</bean>
+	<bean class="com.spar.hcl.dto.OtpWsDTO">
+		<property name="MobileNumber" type="String"/>
+		<property name="OTP" type="String"/>
+		<property name="isAvailable" type="Boolean"/>
+		<property name="message" type="String"/>
+	</bean>
+	
+	 <bean class="com.spar.hcl.dto.ProductDealsWsDTO">
+		<property name="FoodItems"
+		          type="java.util.List&lt;de.hybris.platform.commercewebservicescommons.dto.product.ProductWsDTO>"/>
+		<property name="HOmeNLiving"
+		          type="java.util.List&lt;de.hybris.platform.commercewebservicescommons.dto.product.ProductWsDTO>"/>
+	</bean>
+	
+	<bean class="de.hybris.platform.commercewebservicescommons.dto.search.facetdata.ProductSearchDealsPageWsDTO"
+		 extends="de.hybris.platform.commercewebservicescommons.dto.search.facetdata.ProductSearchPageWsDTO">
+		<description>POJO containing the DEALS Result page for product.</description>
+		<property name="dealsProducts" type="com.spar.hcl.dto.ProductDealsWsDTO"/>
+	 </bean>
+	 
+	  <bean class="com.spar.hcl.dto.SparMobileAppVersionWsDTO">
+		<property name="versionNumber" type="String"/>
+		<property name="forceUpgrade" type="Boolean"/>
+		<property name="recommendUpgrade" type="Boolean"/>
+		<property name="message" type="String"/>
+	</bean>
+</beans>

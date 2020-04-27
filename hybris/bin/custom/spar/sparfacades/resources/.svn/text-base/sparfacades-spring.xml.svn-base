@@ -1,0 +1,879 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2015 hybris AG
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+-->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd">
+		
+	<context:annotation-config/> 
+
+	<alias alias="simpleSuggestionFacade" name="defaultSimpleSuggestionFacade"/>
+	<bean id="defaultSimpleSuggestionFacade" class="com.spar.hcl.facades.suggestion.impl.DefaultSimpleSuggestionFacade" >
+		<property name="simpleSuggestionService" ref="simpleSuggestionService"/>
+		<property name="userService" ref="userService"/>
+		<property name="categoryService" ref="categoryService"/>
+		<property name="productService" ref="productService"/>
+		<property name="productConverter" ref="carouselProductConverter"/>
+		<property name="cartService" ref="cartService"/>
+	</bean>
+	
+	<bean id="carouselProductConverter" parent="defaultProductConverter">
+		<property name="populators">
+			<list merge="true">
+				<ref bean="productPricePopulator"/>
+			</list>
+		</property>
+	</bean>
+
+	<alias name="acceleratorVariantOptionDataConverter" alias="variantOptionDataConverter"/> 
+	<bean id="acceleratorVariantOptionDataConverter" parent="abstractPopulatingConverter">
+		<lookup-method name="createTarget" bean="variantOptionData"/>
+		<property name="populators">
+			<list>
+				<ref bean="acceleratorVariantOptionDataPopulator"/>
+			</list>
+		</property>
+	</bean>
+
+	<alias name="defaultAcceleratorVariantOptionDataPopulator" alias="acceleratorVariantOptionDataPopulator"/>
+	<bean id="defaultAcceleratorVariantOptionDataPopulator"  class="com.spar.hcl.facades.populators.AcceleratorVariantOptionDataPopulator"
+	      parent="variantOptionDataPopulator" >
+		<property name="mediaService" ref="mediaService"/>
+		<property name="mediaContainerService" ref="mediaContainerService"/>
+		<property name="typeService" ref="typeService"/>
+		<property name="imageFormatMapping" ref="imageFormatMapping"/>
+		<property name="variantAttributeMapping">
+			<map>
+				<entry key="ApparelStyleVariantProduct.style" value="styleSwatch"/>
+			</map>
+		</property>
+	</bean>
+
+
+	<alias name="acceleratorGenderConverter" alias="genderConverter"/> 
+	<bean id="acceleratorGenderConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="com.spar.hcl.facades.product.data.GenderData"/>
+			<property name="populators">
+				<list>
+					<ref bean="genderDataPopulator"/>
+				</list>
+			</property>
+	</bean>
+
+	<alias name="defaultGenderDataPopulator" alias="genderDataPopulator"/>
+	<bean id="defaultGenderDataPopulator" class="com.spar.hcl.facades.populators.GenderDataPopulator" >
+		<property name="typeService" ref="typeService"/>
+	</bean>
+
+	<bean id="apparelProductPopulator" class="com.spar.hcl.facades.populators.ApparelProductPopulator" >
+		<property name="genderConverter" ref="genderConverter"/>
+	</bean>
+
+	<!-- Add the apparelProductPopulator to the productConverter -->
+	<bean parent="modifyPopulatorList">
+		<property name="list" ref="productConverter"/>
+		<property name="add" ref="apparelProductPopulator"/>
+	</bean>
+
+	<!-- accelerator Image Format Mappings -->
+	<alias name="acceleratorImageFormatMapping" alias="imageFormatMapping"/>
+	<bean id="acceleratorImageFormatMapping" parent="defaultImageFormatMapping">
+		<property name="mapping">
+			<map>
+			<!-- OOTB resolutions has been commented out as per the Resolutions coming from BrandBank. -->
+				<entry key="superZoom" value="1000Wx1000H"/>
+				<entry key="zoom" value="400Wx400H"/>
+				<entry key="store" value="150Wx150H"/>
+				<entry key="product" value="400Wx400H"/>
+				<entry key="thumbnail" value="80Wx80H"/>
+				<entry key="cartIcon" value="50Wx50H"/>
+				<entry key="styleSwatch" value="50Wx50H"/>
+				<entry key="plpProduct" value="150Wx150H"/>
+				<entry key="plpFeaturedProduct" value="134Wx72H"/>
+			</map>
+		</property>
+	</bean>
+
+	<alias name="acceleratorProductPrimaryImagePopulator" alias="productPrimaryImagePopulator" />
+	<bean id="acceleratorProductPrimaryImagePopulator" parent="defaultProductPrimaryImagePopulator">
+		<property name="imageFormats">
+			<list>
+				<value>zoom</value>
+				<value>product</value>
+				<value>thumbnail</value>
+				<value>cartIcon</value>
+				<value>plpProduct</value>
+				<value>plpFeaturedProduct</value>
+			</list>
+		</property>
+	</bean>
+
+	<alias name="acceleratorProductGalleryImagesPopulator" alias="productGalleryImagesPopulator" />
+	<bean id="acceleratorProductGalleryImagesPopulator" parent="defaultProductGalleryImagesPopulator">
+		<property name="imageFormats">
+			<list>
+				<value>superZoom</value>
+				<value>zoom</value>
+				<value>product</value>
+				<value>thumbnail</value>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="customerEmailContext" class="com.spar.hcl.facades.process.email.context.CustomerEmailContext" parent="abstractEmailContext" scope="prototype" >
+		<property name="customerConverter" ref="customerConverter"/>
+	</bean>
+	<!-- Code change start by sumit for promotion-->
+		<bean id="rmsCorruptedPriceFeedDataContext"
+		class="com.spar.hcl.facades.process.email.context.RMSCorruptedPriceFeedDataContext"
+		parent="abstractEmailContext" scope="prototype">
+	</bean>
+	<!-- Change end here -->
+	<bean id="forgottenPasswordEmailContext" class="com.spar.hcl.facades.process.email.context.ForgottenPasswordEmailContext" parent="customerEmailContext" scope="prototype" >
+		<property name="customerConverter" ref="customerConverter"/>
+	</bean>
+	
+	<bean id="orderNotificationEmailContext" class="com.spar.hcl.facades.process.email.context.OrderNotificationEmailContext" parent="abstractEmailContext" scope="prototype" >
+		<property name="orderConverter" ref="orderConverter"/>
+	</bean>
+	
+	<bean id="deliverySentEmailContext" class="com.spar.hcl.facades.process.email.context.DeliverySentEmailContext" parent="abstractEmailContext" scope="prototype" >
+		<property name="consignmentConverter" ref="consignmentConverter"/>
+	</bean>
+	
+	<bean id="readyForPickupEmailContext" class="com.spar.hcl.facades.process.email.context.ReadyForPickupEmailContext" parent="abstractEmailContext" scope="prototype" >
+		<property name="consignmentConverter" ref="consignmentConverter"/>
+	</bean>
+	
+	<bean id="orderCancelledEmailContext" class="com.spar.hcl.facades.process.email.context.OrderCancelledEmailContext" parent="abstractEmailContext" scope="prototype" >
+		<property name="orderConverter" ref="orderConverter"/>
+	</bean>
+	
+	<bean id="orderRefundEmailContext" class="com.spar.hcl.facades.process.email.context.OrderRefundEmailContext" parent="abstractEmailContext" scope="prototype" >
+		<property name="orderConverter" ref="orderConverter"/>
+	</bean>
+	<bean id="consignmentCollectionReminderEmailContext" class="com.spar.hcl.facades.process.email.context.ConsignmentCollectionReminderEmailContext" parent="abstractEmailContext" scope="prototype">
+        <property name="consignmentConverter" ref="consignmentConverter"/>
+        <property name="formatFactory" ref="formatFactory"/>
+        <property name="customerServiceUncollectedConsignmentStrategy" ref="customerServiceUncollectedConsignmentStrategy" />
+        <property name="orderConverter" ref="orderConverter"/>
+    </bean>
+
+	<bean id="orderPartiallyModifiedEmailContext" class="com.spar.hcl.facades.process.email.context.OrderPartiallyModifiedEmailContext" parent="abstractEmailContext" scope="prototype" >
+		<property name="orderConverter" ref="orderConverter"/>
+		<property name="orderEntryConverter" ref="orderEntryConverter"/>
+		<property name="priceDataFactory" ref="priceDataFactory"/>		
+	</bean>
+
+	<bean id="orderPartiallyCanceledEmailContext" class="com.spar.hcl.facades.process.email.context.OrderPartiallyCanceledEmailContext" parent="orderPartiallyModifiedEmailContext" scope="prototype" >
+	</bean>
+
+	<bean id="orderPartiallyRefundedEmailContext" class="com.spar.hcl.facades.process.email.context.OrderPartiallyRefundedEmailContext" parent="orderPartiallyModifiedEmailContext" scope="prototype" >
+	</bean>
+
+	<bean id="notPickedUpConsignmentCanceledEmailContext" class="com.spar.hcl.facades.process.email.context.NotPickedUpConsignmentCanceledEmailContext" parent="abstractEmailContext" scope="prototype" >
+		<property name="consignmentConverter" ref="consignmentConverter"/>
+		<property name="priceDataFactory" ref="priceDataFactory"/>
+	</bean>
+
+	<alias name="yacceleratorSearchPagePointOfServiceDistancePopulator" alias="searchPagePointOfServiceDistancePopulator" />
+	<bean id="yacceleratorSearchPagePointOfServiceDistancePopulator" class="com.spar.hcl.facades.storefinder.populators.SearchPagePointOfServiceDistancePopulator" >
+		<property name="pointOfServiceDistanceConverter" ref="pointOfServiceDistanceConverter"/>
+	</bean>
+
+	<bean id="genderData" class="com.spar.hcl.facades.product.data.GenderData" scope="prototype"/>
+	<!-- Added to put the list of Stores for Home Page drop Down -->
+	<bean id="storeFinderFacadeInterface" class="com.spar.hcl.facades.storefinder.impl.StoreFinderFacadeImpl">
+		<property name="storeFinderServiceInterface" ref="storeFinderServiceInterface"/>
+		<property name="storeFinderServiceHelperInterface" ref="storeFinderServiceHelperInterface"/>
+		<property name="pointOfServiceConverter" ref="pointOfServiceConverter"/>
+		<property name="deliverySlotConverter" ref="deliverySlotConverter"/>
+		<property name="baseStoreService" ref="baseStoreService"/>
+		<property name="pointOfServiceDistanceConverter" ref="pointOfServiceDistanceConverter"/>
+		<property name="searchPagePointOfServiceDistanceConverter" ref="searchPagePointOfServiceDistanceConverter"/>
+		<property name="storeFinderService" ref="storeFinderService"/>
+		<property name="warehouseConverter" ref="sparWarehouseConverter"/>		
+		<!-- <property name="serviceAreaConverter" ref="sparServiceAreaConverter"/> -->
+		<property name="sparCitiesConverter" ref="sparCitiesConverter"/>	
+	</bean>
+	
+	<!-- Code modified for Need Help Saif -->
+	<alias name="defaultSparNeedHelpFacade" alias="sparNeedHelpFacade"/>
+	<bean id="defaultSparNeedHelpFacade" class="com.spar.hcl.facades.customer.impl.SparDefaultNeedHelpFacade">
+	    <property name="eventService" ref="eventService"/>
+	</bean>
+	<!-- code change end here -->
+	
+	<!-- Code modified for Gift Zone Pavan -->
+	<alias name="sparDefaultGiftZoneFacade" alias="sparGiftZoneFacade"/>
+	<bean id="sparDefaultGiftZoneFacade" class="com.spar.hcl.facades.giftzone.impl.SparDefaultGiftZoneFacade">
+	    <property name="modelService" ref="modelService"/>
+	    <property name="sparGiftZoneService" ref="sparGiftZoneService"/>
+	    <property name="sparGiftZoneContactUsPopulator" ref="sparGiftZoneContactUsPopulator"/>
+	</bean>
+	<!-- code change end here -->
+	
+	<!--<alias name="defaultSparCheckoutFacade" alias="sparCheckoutFacade"/>
+	<bean id="defaultSparCheckoutFacade" class="com.spar.hcl.facades.order.impl.DefaultSparCheckoutFacade" parent="defaultCheckoutFacade">	
+		<property name="sessionService" ref="sessionService"/>
+	</bean>-->
+	
+	<!-- <alias name="sparDefaultServiceAreaConverter" alias="sparServiceAreaConverter"/>
+	<bean id="sparDefaultServiceAreaConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="com.spar.hcl.facades.service.delivery.data.SparServiceAreaData"/>
+		<property name="populators">
+			<list>
+				<ref bean="sparServiceAreaPopulator"/>
+			</list>
+		</property>
+	</bean>
+	
+	<alias name="sparDefaultServiceAreaPopulator" alias="sparServiceAreaPopulator"/>
+	<bean id="sparDefaultServiceAreaPopulator"
+			class="com.spar.hcl.facades.populators.ServiceAreaPopulator">
+	</bean>	 -->
+	
+	<!--  Entry For Spar cities -Start- -->
+	<alias name="sparDefaultCitiesConverter" alias="sparCitiesConverter"/>
+	<bean id="sparDefaultCitiesConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="com.spar.hcl.facades.service.delivery.data.SparCitiesData"/>
+		<property name="populators">
+			<list>
+				<ref bean="sparCitiesPopulator"/>
+			</list>
+		</property>
+	</bean>
+	
+	<alias name="sparDefaultCitiesPopulator" alias="sparCitiesPopulator"/>
+	<bean id="sparDefaultCitiesPopulator"
+			class="com.spar.hcl.facades.populators.SparCitiesPopulator">
+	</bean>
+	<!--  Entry For Spar cities -End- -->
+	
+	
+	<!--  Entry For Spar GiftZone -Start- -->
+	<alias name="sparDefaultGiftZoneContactUsConverter" alias="sparGiftZoneContactUsConverter"/>
+	<bean id="sparDefaultGiftZoneContactUsConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="com.spar.hcl.facades.service.delivery.data.SparGiftZoneContactUsData"/>
+		<property name="populators">
+			<list>
+				<ref bean="sparGiftZoneContactUsPopulator"/>
+			</list>
+		</property>
+	</bean>
+	
+	<alias name="sparDefaultGiftZoneContactUsPopulator" alias="sparGiftZoneContactUsPopulator"/>
+	<bean id="sparDefaultGiftZoneContactUsPopulator"
+			class="com.spar.hcl.facades.populators.SparGiftZoneContactUsPopulator">
+	</bean>
+	<!--  Entry For Spar GiftZone -End- -->
+	
+
+	<alias name="defaultDeliverySlotConverter" alias="deliverySlotConverter"/>
+	<bean id="defaultDeliverySlotConverter" parent="abstractPopulatingConverter">
+	<property name="targetClass" value="com.spar.hcl.facades.deliverySlots.data.DeliverySlotData"/>
+		<property name="populators">
+			<list merge="true">
+				<ref bean="deliverySlotPopulator"/>
+			</list>
+		</property>
+	</bean>
+
+	<alias name="defaultDeliverySlotPopulator" alias="deliverySlotPopulator"/>
+	<bean id="defaultDeliverySlotPopulator"
+	      class="com.spar.hcl.facades.populators.DeliverySlotPopulator">
+	</bean>
+	
+	
+	<alias name="defaultProductConverter" alias="productConverter"/>
+	<bean id="defaultProductConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="de.hybris.platform.commercefacades.product.data.ProductData"/>
+		<property name="populators">
+			<list>
+				<ref bean="productPricePopulator"/>
+				<ref bean="sparProductPopulator"/>
+				<ref bean="productStockPopulator"/>
+				<ref bean="sparPDPProductPopulator"/>
+			</list>
+		</property>
+	</bean>
+	
+	
+	<alias name="defaultSparProductPopulator" alias="sparProductPopulator"/>
+	<bean id="defaultSparProductPopulator"
+	      class="com.spar.hcl.facades.populators.SparProductPopulator"  parent="productPopulator">
+	      <property name="priceDataFactory" ref="priceDataFactory"/>
+		  <property name="commercePriceService" ref="commercePriceService"/>
+	      <property name="commonI18NService" ref="commonI18NService"/>
+       	  <property name="sparCartService" ref="sparCartService"/>
+		 </bean>
+	
+	<alias name="defaultSparPDPProductPopulator" alias="sparPDPProductPopulator"/>
+	<bean id="defaultSparPDPProductPopulator"
+	      class="com.spar.hcl.facades.populators.SparPDPProductPopulator"  parent="productPopulator">
+	</bean>
+	
+	<bean parent="modifyPopulatorList">
+		<property name="list" ref="defaultAddressReverseConverter"/>
+		<property name="add" ref="sparAddressReversePopulator"/>
+	</bean>
+
+	<alias name="defaultSparAddressReversePopulator" alias="sparAddressReversePopulator"/>
+	<bean id="defaultSparAddressReversePopulator"
+			class="com.spar.hcl.facades.populators.SparAddressReversePopulator" parent="defaultAddressReversePopulator">
+	</bean>
+	
+	<!-- <alias name="defaultServiceAreaReversePopulator" alias="serviceAreaReversePopulator"/>
+	<bean id="defaultServiceAreaReversePopulator"
+			class="com.spar.hcl.facades.populators.ServiceAreaReversePopulator">
+	</bean>
+	 -->
+	
+	<!-- Spar Address Populator START -->
+	
+	<bean parent="modifyPopulatorList">
+		<property name="list" ref="defaultAddressConverter"/>
+		<property name="add" ref="sparAddressPopulator"/>
+	</bean>
+	
+	<alias name="defaultSparAddressPopulator" alias="sparAddressPopulator"/>
+	<bean id="defaultSparAddressPopulator" class="com.spar.hcl.facades.populators.SparAddressPopulator"
+		parent="defaultAddressPopulator">
+		<!-- <property name="serviceAreaConverter" ref="sparServiceAreaConverter"/> -->
+	</bean>
+	
+	<!-- Spar Address Populator END -->
+	
+	<alias name="defaultSparUserFacade" alias="sparUserFacade"/>
+	<bean id="defaultSparUserFacade" class="com.spar.hcl.facades.user.impl.DefaultSparUserFacade" parent="userFacade">
+		<!-- <property name="addressReverseConverter" ref="addressReverseConverter"/> -->
+		<property name="sparAddressReversePopulator" ref="sparAddressReversePopulator"/>
+	</bean>
+	
+	
+	<alias name="defaultCommerceSearchFiltersPopulatorImpl" alias="commerceSearchFiltersPopulator" />
+	<bean id="defaultCommerceSearchFiltersPopulatorImpl" class="com.spar.hcl.facades.populators.SearchFiltersPopulatorImpl">
+		<property name="sessionService" ref="sessionService" />
+	</bean>
+
+	<alias name="defaultCommerceSearchResultProductConverter" alias="commerceSearchResultProductConverter"/>
+	<bean id="defaultCommerceSearchResultProductConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="de.hybris.platform.commercefacades.product.data.ProductData"/>
+		<property name="populators">
+			<list>
+				<ref bean="sparSearchResultProductPopulator"/>
+				<ref bean="searchResultPickupAvailabilityPopulator"/>
+			</list>
+		</property>
+	</bean>
+	
+	<alias name="defaultSparSearchResultProductPopulator" alias="sparSearchResultProductPopulator"/>
+	<bean id="defaultSparSearchResultProductPopulator"
+	      class="com.spar.hcl.facades.populators.SparSearchResultProductPopulator"
+	      parent="defaultCommerceSearchResultProductPopulator">
+	    <property name="commonI18NService" ref="commonI18NService"/>
+		<property name="imageFormatMapping" ref="imageFormatMapping"/>
+		<property name="priceDataFactory" ref="priceDataFactory"/>
+		<property name="productDataUrlResolver" ref="productDataUrlResolver"/>
+		<property name="productFeatureListPopulator" ref="productFeatureListPopulator"/>
+		<property name="productService" ref="productService"/>
+		<property name="stockConverter" ref="stockConverter"/>
+		<property name="stockLevelStatusConverter" ref="stockLevelStatusConverter"/>
+		<property name="typeService" ref="typeService"/>
+		<property name="variantsService" ref="variantsService"/>
+		<property name="storeFinderService" ref="storeFinderServiceInterface"/>
+	</bean>
+
+<!-- Code modified for OTP Integration Pallavi -->
+	<alias name="defaultSparCustomerFacade" alias="sparCustomerFacade"/>
+	<bean id="defaultSparCustomerFacade" class="com.spar.hcl.facades.customer.impl.DefaultSparCustomerFacade">
+	      <property name="modelService" ref="modelService"/>
+	      <property name="userService" ref="userService"/>
+	      <property name="customerNameStrategy" ref="customerNameStrategy"/>
+	      <property name="commonI18NService" ref="commonI18NService"/>
+          <property name="cartService" ref="cartService" />
+          <property name="customerAccountService" ref="customerAccountService"/>
+          <property name="addressConverter" ref="addressConverter"/>
+          <property name="addressReversePopulator" ref="sparAddressReversePopulator"/>
+          <property name="cartCleanStrategy" ref="cartValidationStrategy" />
+          <property name="commerceCartService" ref="commerceCartService"/>
+          <property name="orderFacade" ref="orderFacade"/>
+          <property name="creditCardPaymentInfoConverter" ref="creditCardPaymentInfoConverter"/>
+          <property name="customerConverter" ref="customerConverter"/>
+          <property name="passwordEncoderService" ref="passwordEncoderService" />
+          <property name="sessionService" ref="sessionService"/>
+          <property name="storeSessionFacade" ref="storeSessionFacade"/>
+          <property name="titleConverter" ref="titleConverter"/>
+          <property name="userFacade" ref="userFacade"/>
+          <property name="customerReversePopulator" ref="customerReversePopulator"/>	      
+	</bean>
+<!-- code change end here -->
+	<!-- COD Payment START - ROHAN_C-->
+	
+	<bean id="paymentModeData" class="com.spar.hcl.facades.order.data.PaymentModeData" scope="prototype"/>
+	
+	<alias name="defaultPaymentModeConverter" alias="paymentModeConverter"/>
+	<bean id="defaultPaymentModeConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="com.spar.hcl.facades.order.data.PaymentModeData"/>
+		<property name="populators">
+			<list>
+				<ref bean="sparPaymentModePopulator"/>
+			</list>
+		</property>
+	</bean>
+
+	<alias name="defaultSparPaymentModePopulator" alias="sparPaymentModePopulator"/>
+	<bean id="defaultSparPaymentModePopulator"
+			class="com.spar.hcl.facades.populators.SparPaymentModePopulator">
+	</bean>
+	
+	<!-- Changes done for IPG ROHAN_C START -->
+	<alias name="sparDefaultPaymentFacade" alias="sparPaymentFacade"/>
+	<bean id="sparDefaultPaymentFacade" class="com.spar.hcl.facades.payment.impl.SparDefaultPaymentFacade" parent="paymentFacade">
+		<property name="paymentService" ref="sparAcceleratorPaymentService"/>
+	</bean>
+	<!-- Changes done for IPG ROHAN_C END -->
+	<!-- properties added for voucher story Sumit -->
+	<alias name="defaultSparOrderPopulator" alias="orderPopulator"/>
+	<bean id="defaultSparOrderPopulator"
+	      class="com.spar.hcl.facades.populators.SparOrderPopulator" parent="defaultOrderPopulator">
+      <property name="paymentModeConverter" ref="paymentModeConverter"/>
+      <property name="priceDataFactory" ref="priceDataFactory"/>
+      <property name="commonI18NService" ref="commonI18NService"/>
+      <property name="deliverySlotConverter" ref="deliverySlotConverter"/>
+      <property name="sparCombiOfferPromotionStrategy" ref="sparCombiOfferPromotionStrategy"/> 
+      <property name="voucherService" ref="defaultVoucherService"/>
+	  <property name="voucherConverter" ref="voucherConverter"/>
+	  <property name="appliedVoucherPopulatorList" ref="appliedVoucherPopulatorList"/>
+	 <property name="sparVoucherService" ref="sparVoucherService"/>
+	</bean>
+		
+	<bean parent="modifyPopulatorList">
+		<property name="list" ref="orderEntryConverter"/>
+		<property name="add" ref="sparOrderEntryPopulator"/>
+	</bean>
+	
+	<alias name="defaultSparOrderEntryPopulator" alias="sparOrderEntryPopulator"/>
+	<bean id="defaultSparOrderEntryPopulator"
+	      class="com.spar.hcl.facades.populators.SparOrderEntryPopulator">
+	      <property name="priceDataFactory" ref="priceDataFactory"/>
+	      <property name="commonI18NService" ref="commonI18NService"/>
+		  <property name="promotionResultConverter" ref="promotionResultConverter"/>
+		  <property name="promotionsService" ref="promotionsService"/>
+		  <property name="modelService" ref="modelService"/>
+		  <property name="sparCombiOfferPromotionStrategy" ref="sparCombiOfferPromotionStrategy"/> 
+	</bean>
+	
+	<!-- properties added for voucher story Sumit -->
+	<alias name="defaultSparCartPopulator" alias="cartPopulator"/>
+	<bean id="defaultSparCartPopulator" class="com.spar.hcl.facades.populators.SparCartPopulator" parent="extendedCartPopulator">
+		<property name="paymentModeConverter" ref="paymentModeConverter"/>
+		<property name="priceDataFactory" ref="priceDataFactory"/>
+      	<property name="commonI18NService" ref="commonI18NService"/>
+      	<property name="sparCartService" ref="sparCartService"/>
+		<property name="pointOfServiceConverter" ref="pointOfServiceConverter"/>
+      	<property name="warehouseConverter" ref="sparWarehouseConverter"/>
+      	<property name="promotionResultConverter" ref="promotionResultConverter"/>
+      	<property name="modelService" ref="modelService"/>
+		<property name="sparCombiOfferPromotionStrategy" ref="sparCombiOfferPromotionStrategy"/> 
+		<property name="voucherService" ref="defaultVoucherService"/>
+		<property name="voucherConverter" ref="voucherConverter"/>
+		<property name="appliedVoucherPopulatorList" ref="appliedVoucherPopulatorList"/>
+		<property name="sparVoucherService" ref="sparVoucherService"/>
+	</bean>
+	
+	<alias name="sparDefaultExtendedCartConverter" alias="extendedCartConverter"/>
+	<bean id="sparDefaultExtendedCartConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="de.hybris.platform.commercefacades.order.data.CartData"/>
+		<property name="populators">
+			<list>
+				<ref bean="defaultSparCartPopulator"/>
+				<ref bean="orderAppliedVouchersPopulator"/>
+				<ref bean="pickupOrderEntryGroupPopulator"/>
+				<ref bean="deliveryOrderEntryGroupPopulator"/>
+			</list>
+		</property>
+	</bean>
+
+	
+	<!-- COD Payment END - ROHAN_C -->
+
+	<alias name="defaultCommerceSearchTextPopulator" alias="commerceSearchTextPopulator" />
+	<bean id="defaultCommerceSearchTextPopulator" class="de.hybris.platform.commerceservices.search.solrfacetsearch.populators.SearchTextPopulator">
+		<property name="freeTextQueryBuilders">
+			<list>
+			<bean class="com.spar.hcl.core.search.solrfacetsearch.querybuilder.impl.SparDefaultFreeTextQueryBuilder">
+					<property name="propertyName" value="codeVariants" />
+					<property name="boost" value="200" />
+				</bean>
+				<bean class="com.spar.hcl.core.search.solrfacetsearch.querybuilder.impl.SparDefaultFreeTextQueryBuilder">
+					<property name="propertyName" value="nameVariants" />
+					<property name="boost" value="150" />
+				</bean>
+				<bean class="com.spar.hcl.core.search.solrfacetsearch.querybuilder.impl.SparDefaultFreeTextQueryBuilder">
+					<property name="propertyName" value="name" />
+					<property name="boost" value="100" />
+				</bean> 
+				<bean class="com.spar.hcl.core.search.solrfacetsearch.querybuilder.impl.SparDefaultFreeTextQueryBuilder">
+					<property name="propertyName" value="categoryName" />
+					<property name="boost" value="50" />
+				</bean>
+		</list>
+		</property>
+	</bean>
+	
+	<!-- Commenting to make search results more precise END -->				
+	
+	<alias name="defaultUserFacade" alias="userFacade"/>
+	<bean id="defaultUserFacade" class="de.hybris.platform.commercefacades.user.impl.DefaultUserFacade">
+		<property name="userService" ref="userService"/>
+		<property name="customerAccountService" ref="customerAccountService"/>
+		<property name="commerceCommonI18NService" ref="commerceCommonI18NService"/>
+		<property name="commonI18NService" ref="commonI18NService"/>
+		<property name="modelService" ref="modelService"/>
+		<property name="cartService" ref="cartService"/>
+
+		<property name="addressReversePopulator" ref="sparAddressReversePopulator"/>
+		<property name="addressConverter" ref="addressConverter"/>
+		<property name="titleConverter" ref="titleConverter"/>
+		<property name="creditCardPaymentInfoConverter" ref="creditCardPaymentInfoConverter"/>
+		<property name="cardPaymentInfoReversePopulator" ref="cardPaymentInfoReversePopulator"/>
+		<property name="checkoutCustomerStrategy" ref="checkoutCustomerStrategy"/>
+	</bean>
+
+	<alias name="defaultSparCategoryConverter" alias="sparCategoryConverter"/>
+	<bean id="defaultSparCategoryConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="com.spar.hcl.facades.populators.SparCategoryData"/>
+		<property name="populators">
+			<list>
+				<ref bean="categoryPopulator"/>
+			</list>
+		</property>
+	</bean>
+	<!--  Changes done for Price Factory  - ROHAN_C - START -->
+	
+	<bean id="facetSearchResultConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="de.hybris.platform.solrfacetsearch.search.impl.SolrSearchResult" />
+		<property name="populators">
+			<list>
+				<ref bean="facetSearchResultBasicPopulator" />
+				<ref bean="sparFacetSearchResultFacetsPopulator" />
+				<ref bean="facetSearchResultDocumentsPopulator" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="sparFacetSearchResultFacetsPopulator" class="com.spar.hcl.facades.populators.SparFacetSearchResultFacetsPopulator">
+		<property name="fieldNameTranslator" ref="fieldNameTranslator" />
+		<property name="storeFinderService" ref="storeFinderServiceInterface"/>
+	</bean>
+
+	<alias name="sparDefaultCommerceSearchResponseSortsPopulator" alias="sparCommerceSearchResponseSortsPopulator" />
+	<bean id="sparDefaultCommerceSearchResponseSortsPopulator" class="com.spar.hcl.facades.populators.SparSearchResponseSortsPopulator" >
+		<property name="storeFinderService" ref="storeFinderServiceInterface"/>
+	</bean>
+	
+	<!--  Changes done for Price Factory  - ROHAN_C - END -->
+	
+	<alias name="sparCartFacade" alias="cartFacade" />
+	<bean id="sparCartFacade" class="com.spar.hcl.facades.cart.impl.SparCartFacadeImpl" parent="defaultCartFacade">
+		<property name="cartService" ref="sparCartService"/>
+		<property name="categoryConverter" ref="sparCategoryConverter"/>
+	    <property name="commerceCartCalculationStrategy" ref="checkoutCartCalculationStrategy"/>
+	</bean>
+	
+	<!-- Changes by RAVI to settle down category facets to only 2nd level category -->
+	
+	<!--  sparCommerceSearchResponseSortsPopulator has been injected as part of Price Factory Changes - ROHAN _C - START -->	
+	<alias name="defaultCommerceSolrSearchResponseConverter" alias="commerceSolrSearchResponseConverter" />
+	<bean id="defaultCommerceSolrSearchResponseConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="de.hybris.platform.commerceservices.search.facetdata.ProductCategorySearchPageData" />
+		<property name="populators">
+			<list>
+				<ref bean="commerceSearchResponseQueryPopulator" />
+				<ref bean="commerceSearchResponsePaginationPopulator" />
+				<ref bean="commerceSearchResponseResultsPopulator" />
+				<ref bean="sparCommerceSearchResponseFacetsPopulator" />
+				<ref bean="commerceSearchResponseFacetFilterPopulator" />
+				<ref bean="commerceSearchResponseFacetSortPopulator" />
+				<ref bean="commerceSearchResponseBreadcrumbsPopulator" />
+				<ref bean="sparCommerceSearchResponseSortsPopulator" />
+				<ref bean="commerceSearchResponseFreeTextSearchPopulator" />
+				<ref bean="commerceSearchResponseCategoryCodePopulator" />
+				<ref bean="commerceSearchResponseSubCategoriesPopulator" />
+				<ref bean="commerceSearchResponseSpellingSuggestionPopulator" />
+				<ref bean="commerceSearchResponseKeywordRedirectPopulator" />
+			</list>
+		</property>
+	</bean>
+	<!--  sparCommerceSearchResponseSortsPopulator has been injected as part of Price Factory Changes - ROHAN _C - END -->
+	
+	<alias name="defaultSparCommerceSearchResponseFacetsPopulator" alias="sparCommerceSearchResponseFacetsPopulator" />
+	<bean id="defaultSparCommerceSearchResponseFacetsPopulator" class="com.spar.hcl.facades.populators.SparSearchResponseFacetsPopulator" 
+				parent="commerceSearchResponseFacetsPopulator" />	
+	<bean id="defaultTopValuesProvider" class="com.spar.hcl.facades.provider.impl.SparDefaultTopValuesProvider" />
+
+	<!-- Changes done for IPG ROHAN_C START -->
+	<alias name="defaultSparCreateSubscriptionResultConverter" alias="sparCreateSubscriptionResultConverter"/>
+	<bean id="defaultSparCreateSubscriptionResultConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="de.hybris.platform.acceleratorservices.payment.data.CreateSubscriptionResult"/>
+		<property name="populators">
+			<list>
+				<ref bean="sparAuthReplyIPGResultPopulator"/>
+				<ref bean="sparPaymentInfoIPGResultPopulator"/>
+				<ref bean="sparOrderInfoIPGResultPopulator"/>
+				<ref bean="sparSignatureIPGResultPopulator"/>
+				<ref bean="sparCreateSubscriptionResultPopulator"/>
+				<ref bean="sparSubscriptionInfoIPGResultPopulator"/>
+			</list>
+		</property>
+	</bean>
+	<!-- Changes done for IPG ROHAN_C END -->
+	
+	<!-- delivery date and items list for order history START pallavi -->
+	
+	<alias name="defaultOrderHistoryConverter" alias="orderHistoryConverter"/>
+	<bean id="defaultOrderHistoryConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="de.hybris.platform.commercefacades.order.data.OrderHistoryData"/>
+		<property name="populators">
+			<list>
+				<ref bean="orderHistoryPopulator"/>
+			</list>
+		</property>
+	</bean>
+	
+	<alias name="defaultOrderHistoryPopulator" alias="orderHistoryPopulator"/>
+	<bean id="defaultOrderHistoryPopulator"
+			class="com.spar.hcl.facades.populators.SparOrderHistoryPopulator">
+		<property name="enumerationService" ref="enumerationService"/>
+		<property name="priceDataFactory" ref="priceDataFactory"/>
+		<property name="orderConverter" ref="defaultOrderConverter"/>		
+      <property name="commonI18NService" ref="commonI18NService"/>
+	</bean>
+	<!-- delivery date and items list for order history END  -->	
+	
+	<!-- Changes done for IPG ROHAN_C START -->
+	
+	<alias name="sparDefaultAuthReplyIPGResultPopulator" alias="sparAuthReplyIPGResultPopulator"/>
+	<bean id="sparDefaultAuthReplyIPGResultPopulator"
+	      class="com.spar.hcl.facades.payment.ipg.converters.populators.response.SparIPGAuthReplyResultPopulator"
+	      parent="abstractResultPopulator"/>
+	
+	<alias name="sparIPGDefaultPaymentInfoResultPopulator" alias="sparPaymentInfoIPGResultPopulator"/>
+	<bean id="sparIPGDefaultPaymentInfoResultPopulator"
+	      class="com.spar.hcl.facades.payment.ipg.converters.populators.response.SparIPGPaymentInfoResultPopulator"
+	      parent="abstractResultPopulator"/>
+	
+	<alias name="sparDefaultOrderInfoResultPopulator" alias="sparOrderInfoIPGResultPopulator"/>
+	<bean id="sparDefaultOrderInfoResultPopulator"
+	      class="com.spar.hcl.facades.payment.ipg.converters.populators.response.SparOrderInfoResultPopulator"
+	      parent="abstractResultPopulator"/>
+	
+	<alias name="sparDefaultSignatureResultPopulator" alias="sparSignatureIPGResultPopulator"/>
+	<bean id="sparDefaultSignatureResultPopulator"
+	      class="com.spar.hcl.facades.payment.ipg.converters.populators.response.SparSignatureResultPopulator"
+	      parent="abstractResultPopulator"/>
+
+	<alias name="sparDefaultCreateSubscriptionResultPopulator" alias="sparCreateSubscriptionResultPopulator"/>
+	<bean id="sparDefaultCreateSubscriptionResultPopulator"
+	      class="com.spar.hcl.facades.payment.ipg.converters.populators.response.SparCreateSubscriptionResultPopulator"
+	      parent="abstractResultPopulator"/>
+
+	<alias name="sparDefaultSubscriptionInfoResultPopulator" alias="sparSubscriptionInfoIPGResultPopulator"/>
+	<bean id="sparDefaultSubscriptionInfoResultPopulator"
+	      class="com.spar.hcl.facades.payment.ipg.converters.populators.response.SparSubscriptionInfoResultPopulator"
+	      parent="abstractResultPopulator"/>
+
+	<alias name="sparDefaultPaymentDataConverter" alias="sparPaymentDataConverter"/>
+	<bean id="sparDefaultPaymentDataConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="de.hybris.platform.acceleratorservices.payment.data.PaymentData"/>
+		<property name="populators">
+			<list>
+				<ref bean="paymentDataPopulator"/>
+				<ref bean="sparSignatureIPGRequestPopulator"/>
+				<ref bean="orderPageConfirmationRequestPopulator"/>
+			</list>
+		</property>
+	</bean>
+			
+	<alias name="sparDefaultSignatureRequestPopulator" alias="sparSignatureIPGRequestPopulator"/>
+	<bean id="sparDefaultSignatureRequestPopulator"
+	      class="com.spar.hcl.facades.payment.ipg.converters.populators.request.SparSignatureRequestPopulator">
+		<property name="integrationUtil" ref="sparIPGIntegrationtUtil"/>
+	</bean>
+	
+	<alias name="sparDefaultIPGIntegrationtUtil" alias="sparIPGIntegrationtUtil"/>
+	<bean id="sparDefaultIPGIntegrationtUtil" class=" com.spar.hcl.facades.payment.utils.IPGIntegrationUtil">
+		<property name="algorithm" value="SHA1"/>
+	</bean>
+	
+	<!-- Changes done for IPG ROHAN_C END -->
+	
+	<bean id="sparRMSFeedEmailContext"
+		class="com.spar.hcl.facades.process.email.context.SparRMSFeedEmailContext"
+		parent="abstractEmailContext" scope="prototype">
+	</bean>
+	<bean id="sparDailyRefundReportEmailContext"
+		class="com.spar.hcl.facades.process.email.context.SparDailyRefundReportEmailContext"
+		parent="abstractEmailContext" scope="prototype">
+	</bean>
+	
+	<bean id="SPARNeedHelpEmailContext"
+		class="com.spar.hcl.facades.process.email.context.SPARNeedHelpEmailContext"
+		parent="abstractEmailContext" scope="prototype">
+	</bean>
+	
+	<bean id="SPARGiftzoneContactUsEmailContext"
+		class="com.spar.hcl.facades.process.email.context.SPARGiftzoneContactUsEmailContext"
+		parent="abstractEmailContext" scope="prototype">
+	</bean>
+	
+	<bean id="SPARPLMSManualPickOrderContext"
+		class="com.spar.hcl.facades.process.email.context.SPARPLMSManualPickOrderContext"
+		parent="abstractEmailContext" scope="prototype">
+	</bean>
+	<bean id="SparBlowhornFailedRequestOrderContext"
+		class="com.spar.hcl.facades.process.email.context.SparBlowhornFailedRequestOrderContext"
+		parent="abstractEmailContext" scope="prototype">
+	</bean>
+		<bean id="sparDelayFeedNotificationEmailContext"
+		class="com.spar.hcl.facades.process.email.context.SparDelayFeedNotificationEmailContext"
+		parent="abstractEmailContext" scope="prototype">
+	</bean>
+	
+	
+	<bean id="sparExpiredPromoArchErrorEmailContext"
+		class="com.spar.hcl.facades.process.email.context.SparExpiredPromoArchErrorEmailContext"
+		parent="abstractEmailContext" scope="prototype">
+	</bean>
+	
+	<alias name="sparDefaultWarehouseConverter" alias="sparWarehouseConverter"/>
+	<bean id="sparDefaultWarehouseConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="com.spar.hcl.facades.storelocator.data.WarehouseData"/>
+		<property name="populators">
+			<list>
+				<ref bean="sparWarehousePopulator"/>
+			</list>
+		</property>
+	</bean>
+
+	<alias name="sparDefaultWarehousePopulator" alias="sparWarehousePopulator"/>
+	<bean id="sparDefaultWarehousePopulator"
+			class="com.spar.hcl.facades.storelocator.converters.populator.SparWarehousePopulator">
+	<property name="pointOfServiceConverter" ref="pointOfServiceConverter"/>
+	</bean>	
+	
+	<alias name="sparDefaultPromotionResultPopulator" alias="promotionResultPopulator"/>
+	<bean id="sparDefaultPromotionResultPopulator"
+			class="com.spar.hcl.facades.populators.SparPromotionResultPopulator" parent="defaultPromotionResultPopulator">
+		<property name="modelService" ref="modelService"/>
+		<property name="priceDataFactory" ref="priceDataFactory"/>
+        <property name="commonI18NService" ref="commonI18NService"/>
+	</bean>
+	
+	<alias name="sparDefaultPromotionOrderEntryConsumedPopulator" alias="promotionOrderEntryConsumedPopulator"/>
+	<bean id="sparDefaultPromotionOrderEntryConsumedPopulator"
+			class="com.spar.hcl.facades.populators.SparPromotionOrderEntryConsumedPopulator" parent="defaultPromotionOrderEntryConsumedPopulator">
+		<property name="commercePriceService" ref="commercePriceService"/>
+		<property name="sparCommercePriceService" ref="sparDefaultCommercePriceService"/>
+	</bean>
+	
+	<alias name="sparDefaultCartModificationPopulator" alias="cartModificationPopulator"/>
+	<bean id="sparDefaultCartModificationPopulator"
+			class="com.spar.hcl.facades.populators.SparCartModificationPopulator" parent="defaultCartModificationPopulator">
+		<property name="orderEntryConverter" ref="orderEntryConverter"/>
+	</bean>
+		<bean parent="modifyPopulatorList">
+		<property name="list" ref="customerConverter"/>
+		<property name="add" ref="sparCustomerPopulator"/>
+	</bean>
+		
+		<alias name="sparCustomerPopulator" alias="sparCustomerPopulator"/>
+	<bean id="sparCustomerPopulator"
+			class="com.spar.hcl.facades.populators.SparCustomerPopulator">
+	</bean>
+	
+	<alias name="sparDefaultPlmsConverter" alias="sparPlmsConverter"/>
+	<bean id="sparDefaultPlmsConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="com.spar.hcl.facades.plms.SparOMSOrderData"/>
+		<property name="populators">
+			<list>
+				<ref bean="sparPlmsPopulator"/>
+			</list>
+		</property>
+	</bean> 
+	
+	<bean id="sparPlmsPopulator" class="com.spar.hcl.facades.populators.SparPLMSOrderPopulator">
+		<property name="modelService" ref="modelService"/>
+		<property name="promotionsService" ref="promotionsService"/>
+		<property name="priceService" ref="priceService"/>
+		<property name="sparCartService" ref="sparCartService"/>
+		<property name="storeFinderServiceInterface" ref="storeFinderServiceInterface"/>
+		<property name="promotionResultConverter" ref="promotionResultConverter"/>
+	</bean>
+
+	<alias name="sparDefaultSiteMapConverter" alias="sparSiteMapConverter"/>
+	<bean id="sparDefaultSiteMapConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="com.spar.hcl.facades.sparsitemap.data.SparSiteMapData"/>
+		<property name="populators">
+			<list>
+				<ref bean="sparSiteMapPopulator"/>
+			</list>
+		</property>
+	</bean>
+	
+	<alias name="sparDefaultSiteMapPopulator" alias="sparSiteMapPopulator"/>
+	<bean id="sparDefaultSiteMapPopulator"
+			class="com.spar.hcl.facades.populators.SparSiteMapPopulator">
+	</bean>
+	
+	<bean id="sparDefaultSiteMapFacade"
+			class="com.spar.hcl.facades.sitemap.impl.SparSiteMapFacadeImpl">
+			<property name="sparSiteMapConverter" ref="sparSiteMapConverter"/>
+	</bean>		
+	
+	<bean id="sparDailyFraudReportEmailContext"
+		class="com.spar.hcl.facades.process.email.context.SparDailyFraudReportEmailContext"
+		parent="abstractEmailContext" scope="prototype">
+	</bean>	
+	
+	<alias name="sparDefaultLandmarkRewardFacade" alias="sparLandmarkRewardFacade"/>
+	<bean id="sparDefaultLandmarkRewardFacade" class="com.spar.hcl.facades.landmarkreward.impl.SparDefaultLandmarkRewardFacade">
+		<!-- <property name="addressReverseConverter" ref="addressReverseConverter"/> -->
+	</bean>		
+	
+	<bean id="sparLandmarkRegistrationEmailContext"
+		class="com.spar.hcl.facades.process.email.context.SparLandmarkRegistrationEmailContext"
+		parent="abstractEmailContext" scope="prototype">
+	</bean>
+	
+	<bean id="sparPaymentAmountEmailContext"
+		class="com.spar.hcl.facades.process.email.context.SparPaymentAmountEmailContext"
+		parent="abstractEmailContext" scope="prototype">
+	</bean>		
+	
+	<bean id="sparLandmarkRedemptionEmailContext"
+		class="com.spar.hcl.facades.process.email.context.SparLandmarkRedemptionEmailContext"
+		parent="abstractEmailContext" scope="prototype">
+	</bean>		
+	
+	<bean id="sparDefaultProductFacade"
+			class="com.spar.hcl.facades.product.impl.SparDefaultProductFacade" parent="defaultProductFacade">
+			<property name="priceDataFactory" ref="priceDataFactory"/>
+		    <property name="commercePriceService" ref="commercePriceService"/>
+	</bean>	      			
+</beans>

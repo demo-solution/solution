@@ -1,0 +1,11 @@
+#
+# Import the Product Catalog and Classification Catalog
+#
+
+# Language
+$lang=en
+$productCatalog=sparProductCatalog
+
+# Create Catalog
+UPDATE Catalog;id[unique=true];name[lang=$lang]
+;$productCatalog;"SPAR Product Catalog"

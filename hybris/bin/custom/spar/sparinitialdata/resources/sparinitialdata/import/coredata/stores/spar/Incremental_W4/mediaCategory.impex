@@ -1,0 +1,34 @@
+# ImpEx for Importing Categories into Spar Store
+
+# Macros / Replacement Parameter definitions
+$productCatalog=sparProductCatalog
+$productCatalogName=SPAR Product Catalog
+$catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
+$supercategories=source(code, $catalogVersion)[unique=true]
+$categories=target(code, $catalogVersion)[unique=true]
+$siteResource=jar:com.spar.hcl.initialdata.setup.InitialDataSystemSetup&/sparinitialdata/import/sampledata/productCatalogs/$productCatalog
+
+$thumbnail=thumbnail(code, $catalogVersion)
+$picture=picture(code, $catalogVersion)
+$logo=logo(code, $catalogVersion)
+
+
+# Import Category Media
+INSERT_UPDATE Media;code[unique=true];realfilename;@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator];mime[default='image/jpeg'];$catalogVersion
+
+# images for add on category carousel 
+;/img/categorycarousel/cat-21.jpg;Beauty_PersonalCare.jpg;$siteResource/images/categorycarousel/Beauty_PersonalCare.jpg;
+;/img/categorycarousel/cat-22.jpg;Home_Hygiene.jpg;$siteResource/images/categorycarousel/Home_Hygiene.jpg;
+;/img/categorycarousel/cat-23.jpg;House_hold.jpg;$siteResource/images/categorycarousel/House_hold.jpg;
+;/img/categorycarousel/cat-24.jpg;Imported_Gourmet_food.jpg;$siteResource/images/categorycarousel/Imported_Gourmet_food.jpg;
+
+
+
+UPDATE Category;code[unique=true];$thumbnail;$picture;$logo;allowedPrincipals(uid)[default='customergroup'];$catalogVersion
+;10008;;;/img/categorycarousel/cat-21.jpg;
+;10007;;;/img/categorycarousel/cat-22.jpg;
+;10011;;;/img/categorycarousel/cat-23.jpg;
+;10006;;;/img/categorycarousel/cat-24.jpg;
+
+
+

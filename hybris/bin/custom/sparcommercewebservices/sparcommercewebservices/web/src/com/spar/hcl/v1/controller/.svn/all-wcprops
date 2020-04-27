@@ -1,0 +1,83 @@
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/S6_Maintenance/!svn/ver/1/custom/sparcommercewebservices/web/src/com/spar/hcl/v1/controller
+END
+OrderController.java
+K 25
+svn:wc:ra_dav:version-url
+V 117
+/svn/S6_Maintenance/!svn/ver/1/custom/sparcommercewebservices/web/src/com/spar/hcl/v1/controller/OrderController.java
+END
+StoreController.java
+K 25
+svn:wc:ra_dav:version-url
+V 117
+/svn/S6_Maintenance/!svn/ver/1/custom/sparcommercewebservices/web/src/com/spar/hcl/v1/controller/StoreController.java
+END
+CatalogsController.java
+K 25
+svn:wc:ra_dav:version-url
+V 120
+/svn/S6_Maintenance/!svn/ver/1/custom/sparcommercewebservices/web/src/com/spar/hcl/v1/controller/CatalogsController.java
+END
+VouchersController.java
+K 25
+svn:wc:ra_dav:version-url
+V 120
+/svn/S6_Maintenance/!svn/ver/1/custom/sparcommercewebservices/web/src/com/spar/hcl/v1/controller/VouchersController.java
+END
+CustomerGroupsController.java
+K 25
+svn:wc:ra_dav:version-url
+V 126
+/svn/S6_Maintenance/!svn/ver/1/custom/sparcommercewebservices/web/src/com/spar/hcl/v1/controller/CustomerGroupsController.java
+END
+ProductsController.java
+K 25
+svn:wc:ra_dav:version-url
+V 120
+/svn/S6_Maintenance/!svn/ver/1/custom/sparcommercewebservices/web/src/com/spar/hcl/v1/controller/ProductsController.java
+END
+CustomersController.java
+K 25
+svn:wc:ra_dav:version-url
+V 121
+/svn/S6_Maintenance/!svn/ver/1/custom/sparcommercewebservices/web/src/com/spar/hcl/v1/controller/CustomersController.java
+END
+DefaultController.java
+K 25
+svn:wc:ra_dav:version-url
+V 119
+/svn/S6_Maintenance/!svn/ver/1/custom/sparcommercewebservices/web/src/com/spar/hcl/v1/controller/DefaultController.java
+END
+StoreFinderController.java
+K 25
+svn:wc:ra_dav:version-url
+V 123
+/svn/S6_Maintenance/!svn/ver/1/custom/sparcommercewebservices/web/src/com/spar/hcl/v1/controller/StoreFinderController.java
+END
+CartController.java
+K 25
+svn:wc:ra_dav:version-url
+V 116
+/svn/S6_Maintenance/!svn/ver/1/custom/sparcommercewebservices/web/src/com/spar/hcl/v1/controller/CartController.java
+END
+LogoutController.java
+K 25
+svn:wc:ra_dav:version-url
+V 118
+/svn/S6_Maintenance/!svn/ver/1/custom/sparcommercewebservices/web/src/com/spar/hcl/v1/controller/LogoutController.java
+END
+PromotionsController.java
+K 25
+svn:wc:ra_dav:version-url
+V 122
+/svn/S6_Maintenance/!svn/ver/1/custom/sparcommercewebservices/web/src/com/spar/hcl/v1/controller/PromotionsController.java
+END
+BaseController.java
+K 25
+svn:wc:ra_dav:version-url
+V 116
+/svn/S6_Maintenance/!svn/ver/1/custom/sparcommercewebservices/web/src/com/spar/hcl/v1/controller/BaseController.java
+END

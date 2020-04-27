@@ -1,0 +1,41 @@
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparstorefront/web/webroot/WEB-INF/views/responsive/pages/cart
+END
+cartPage.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 118
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparstorefront/web/webroot/WEB-INF/views/responsive/pages/cart/cartPage.jsp
+END
+cartTotalsDisplay.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 127
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparstorefront/web/webroot/WEB-INF/views/responsive/pages/cart/cartTotalsDisplay.jsp
+END
+cartPromotionsDisplay.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 131
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparstorefront/web/webroot/WEB-INF/views/responsive/pages/cart/cartPromotionsDisplay.jsp
+END
+checkoutDisplay.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 125
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparstorefront/web/webroot/WEB-INF/views/responsive/pages/cart/checkoutDisplay.jsp
+END
+cartDisplay.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 121
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparstorefront/web/webroot/WEB-INF/views/responsive/pages/cart/cartDisplay.jsp
+END
+potentialPromotionsDisplay.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 136
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparstorefront/web/webroot/WEB-INF/views/responsive/pages/cart/potentialPromotionsDisplay.jsp
+END

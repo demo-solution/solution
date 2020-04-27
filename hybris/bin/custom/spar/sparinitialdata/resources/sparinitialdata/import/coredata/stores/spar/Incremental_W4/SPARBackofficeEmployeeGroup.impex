@@ -1,0 +1,42 @@
+# Backoffice employee Global group
+INSERT_UPDATE UserGroup;UID[unique=true];groups(uid)[mode=append]
+;SparBackofficeEmployeeGroup;productmanagergroup,cockpitgroup
+
+$START_USERRIGHTS;;;;;;;;;
+Type;UID;MemberOfGroups;Password;Target;read;change;create;remove;change_perm
+UserGroup;SparBackofficeEmployeeGroup;;;;;;;;
+;;;;AbstractOrder;+;+;+;+;+;
+;;;;AbstractOrderEntry;+;+;+;+;+;
+$END_USERRIGHTS;;;;;
+
+ # Backoffice employee Groups specific to Warehouse
+INSERT_UPDATE StoreEmployeeGroup;uid[unique=true];locname[lang=en];groups(uid);store(name);hmcLoginDisabled;backOfficeLoginDisabled
+;SparBannerghattaGroup_20001;SPAR Bannerghatta Warehouse Employee Group;SparBackofficeEmployeeGroup;SPAR Bannerghatta;true;false
+;SparOMRGroup_20007;SPAR OMR Warehouse Employee Group;SparBackofficeEmployeeGroup;SPAR OMR;true;false
+;SparElementsMallGroup_20010;SPAR Elements Mall Warehouse Employee Group;SparBackofficeEmployeeGroup;SPAR Elements Mall;true;false
+;SparPuneGroup_40001;SPAR Ghorpadi Warehouse Employee Group;SparBackofficeEmployeeGroup;SPAR Ghorpadi Store;true;false
+;SparMantriGroup_20003;SPAR Mantri Warehouse Employee Group;SparBackofficeEmployeeGroup;SPAR MANTRI;true;false
+
+# Import Backoffice Users specific to Groups
+$passwordEncoding=md5
+$defaultPassword=1234
+$setPassword=@password[translator=de.hybris.platform.impex.jalo.translators.ConvertPlaintextToEncodedUserPasswordTranslator][default='$passwordEncoding:$defaultPassword']
+
+INSERT_UPDATE Employee;UID[unique=true];$setPassword;description;name;groups(uid)[mode=append];sessionLanguage(isocode);sessionCurrency(isocode)
+;user_20001;;user_20001;user_20001;SparBannerghattaGroup_20001;en;INR 
+;user_20007;;user_20007;user_20007;SparOMRGroup_20007;en;INR 
+;user_20010;;user_20010;user_20010;SparElementsMallGroup_20010;en;INR 
+;user_40001;;user_40001;user_40001;SparPuneGroup_40001;en;INR 
+
+;Opc.bg;User@bg;Opc.bg;Opc.bg;SparBannerghattaGroup_20001;en;INR 
+;Opc.omr;User@omr;Opc.omr;Opc.omr;SparOMRGroup_20007;en;INR 
+;Opc.elements;User@element;Opc.elements;Opc.elements;SparElementsMallGroup_20010;en;INR 
+;Opc.pune;User@pune;Opc.pune;Opc.pune;SparPuneGroup_40001;en;INR
+;Opc.mantri;User@mantri;Opc.mantri;Opc.mantri;SparMantriGroup_20003;en;INR 
+
+#Search Restriction on Backoffice employee Global group
+
+INSERT_UPDATE SearchRestriction;code[unique=true];name[lang=en];query;principal(UID);restrictedType(code);active;generate
+;sparOrder_restriction;Restrict sparOrder visibility in SparBackofficeEmployeeGroup;"{orderWarehouse} IN ({{select {w.pk} from {Employee as e JOIN PrincipalGroupRelation as pwrel on {e.PK}={pwrel.source} JOIN StoreEmployeeGroup as str on {str.pk} = {pwrel.target} join PointOfService as pos on  {pos.pk}={str.store} JOIN PoS2WarehouseRel as poswrel on {poswrel.source}={pos.pk} join Warehouse  as w on {poswrel.target}={w.pk}} where {e.pk} = ?session.user}})";SparBackofficeEmployeeGroup;Order;true;true
+
+;sparConsignment_restriction;Restrict Spar Order Consignment visibility in SparBackofficeEmployeeGroup;"{warehouse}  IN ({{select {w.pk} from {Employee as e JOIN PrincipalGroupRelation as pwrel on {e.PK}={pwrel.source} JOIN StoreEmployeeGroup as str on {str.pk} = {pwrel.target} join PointOfService as pos on  {pos.pk}={str.store} JOIN PoS2WarehouseRel as poswrel on {poswrel.source}={pos.pk} join Warehouse  as w on {poswrel.target}={w.pk}} where {e.pk} = ?session.user}})";SparBackofficeEmployeeGroup;Consignment;true;true	

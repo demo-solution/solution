@@ -1,0 +1,347 @@
+/*
+ * [y] hybris Platform
+ *
+ * Copyright (c) 2000-2015 hybris AG
+ * All rights reserved.
+ *
+ * This software is the confidential and proprietary information of hybris
+ * ("Confidential Information"). You shall not disclose such Confidential
+ * Information and shall use it only in accordance with the terms of the
+ * license agreement you entered into with hybris.
+ */
+
+.yw-com_hybris_cockpitng_listview {
+    background: #eaedf1;
+    position: relative;
+}
+
+.yw-listview-actioncontainer {
+    padding: 0px 10px 0px;
+}
+
+.yw-listview-spacer {
+    height: 10px;
+}
+
+.yw-listview-caption .yw-listview-title {
+    font-size: 14px;
+    font-family: 'Roboto', Arial, sans-serif;
+    font-weight: 500; /* MEDIUM */
+    color: #043263;
+    text-transform: uppercase;
+}
+
+.yw-listview-caption .yw-listview-subtitle {
+    font-size: 14px;
+    font-family: 'Roboto', Arial, sans-serif;
+    font-weight: 500; /* MEDIUM */
+    color: #085abc;
+}
+
+.yw-coll-browser-container div.z-listbox {
+    border: none;
+    background: #6F7C91;
+}
+
+.yw-coll-browser-container div.z-listbox-body {
+    background: #ffffff;
+}
+
+/* Toolbar */
+
+.yw-listview-actioncontainer .z-paging,
+.yw-listview-actioncontainer .z-paging-os {
+    float: right;
+}
+
+.yw-listview-actioncontainer .yw-listview-actionSlot {
+    float: left;
+}
+
+/* Table Header */
+.yw-coll-browser-container div.z-listbox-header,
+.yw-coll-browser-container div.z-listbox-header tr.z-listhead {
+    background: #6f7c91;
+}
+
+.yw-coll-browser-container .z-listbox-header-bg {
+    background: none;
+}
+
+.yw-coll-browser-container div.z-listbox-header th.z-listheader {
+    border: none;
+    color: #fff;
+}
+
+.yw-coll-browser-container div.z-listheader-content {
+    color: #fff;
+    font-weight: normal;
+    padding: 6px 5px;
+}
+
+.yw-coll-browser-container .z-listbox-header .yw-listview-colheader div.z-listheader-content,
+.yw-coll-browser-container .z-listbox-body .yw-listview-cell .z-listcell-content{
+    padding-left: 12px;
+    padding-right: 11px;
+}
+
+.yw-coll-browser-container .z-listheader-sort div.z-listheader-content .z-listheader-sorticon{
+    left: 2px;
+    top: 50%;
+    height: 20px;
+    margin-top: -11px;
+    font-size: 12px;
+}
+
+.yw-coll-browser-container div.z-listbox-header th.z-listheader-sort:hover,
+.yw-coll-browser-container div.z-listbox-header th.z-listheader-sort-dsc,
+.yw-coll-browser-container div.z-listbox-header th.z-listheader-sort-asc {
+    background: #3c4c66;
+}
+
+/* SORT ARROWS */
+.yw-coll-browser-container .z-listheader-sort-asc .z-listheader-sort-image,
+.yw-coll-browser-container .z-listheader-sort-dsc .z-listheader-sort-image {
+    background: url("img/icon_func_tablehead_sort_sprite.png") no-repeat scroll 0 0 transparent;
+    float: right;
+    height: 4px;
+    left: auto;
+    margin-top: 4px;
+    position: relative;
+}
+
+.yw-coll-browser-container .z-listheader-sort-dsc .z-listheader-sort-image {
+    background-position: 0 -4px;
+}
+
+/* LIST - SEE COCKPIT.CSS */
+
+/* DE404: FIX FOR SELECT ALL CHECKBOX ACTIVE STATE */
+
+.yw-listview-colheader .z-listheader-image-selected {
+    background-position: -26px 0;
+}
+
+/* EMPTY LIST */
+
+.yw-coll-browser-container tbody.z-listbox-empty-body td {
+    padding: 10px 0;
+}
+
+/* STATUSBAR */
+
+.y-statusbar .yw-listview-statusbar-button {
+    background: none repeat scroll 0 0 transparent;
+    color: #043263;
+    font-family: Arial, sans-serif;
+    font-size: 12px;
+    height: auto;
+    left: inherit;
+    padding: 5px;
+}
+
+.y-statusbar .yw-listview-statusbar-button:hover {
+    background: #6f7c91;
+    color: #fff;
+}
+
+.y-statusbar .yw-listview-statusbar-button:hover {
+    cursor: default;
+    color: #043263;
+}
+
+.y-statusbar .yw-listview-statusbar-button-active {
+    color: #fff;
+    background: #085ABC;
+}
+
+.yw-listview-busynotifier .notifierEntry > .z-hbox,
+.yw-listview-busynotifier .notifierEntry > .z-vbox {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+}
+
+.yw-listview-busynotifier .notifierEntry > .z-hbox {
+    margin-top: -10px;
+    margin-left: -90px;
+}
+
+.yw-listview-busynotifier .notifierEntry > .z-vbox {
+    margin-left: -55px;
+}
+
+.yw-listview-busynotifier .notifierEntry {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(70, 83, 102, 0.8);
+    border: none;
+    padding: 0;
+}
+
+.yw-listview-busynotifier .notifierEntry .progressTitle {
+    color: #fff;
+}
+
+.notifierEntry .z-vbox .progressTitle {
+    text-align: center;
+}
+
+.yw-listview-busynotifier .notifierEntry .progressValueLabel {
+    color: #fff;
+    left: 40%;
+}
+
+.yw-listview-busynotifier div.z-progressmeter {
+    background: none repeat scroll 0 0 #27394F;
+    padding: 2px;
+    border: none;
+}
+
+.yw-listview-busynotifier span.z-progressmeter-image {
+    background: none repeat scroll 0 0 #085ABC;
+}
+
+.ye-listview-def-preview-img {
+    max-width: 16px;
+    max-height: 16px;
+    vertical-align: middle;
+}
+
+.ye-listview-preview-popup-image {
+    max-width: 150px;
+    max-height: 200px;
+}
+
+.yw-coll-browser-mold-sel-container {
+    float: right;
+}
+
+.yw-coll-browser-mold-sel-btn {
+    width: 28px;
+    height: 28px;
+    background-repeat: no-repeat;
+}
+
+.yw-coll-browser-mold-sel-btn-list-view-inactive {
+    background-image: url("img/icon_view_list_default.png");
+    cursor: pointer;
+}
+
+.yw-coll-browser-mold-sel-btn-list-view-inactive:hover {
+    background: #6f7c91;
+    background-image: url("img/icon_view_list_hover.png");
+}
+
+.yw-coll-browser-mold-sel-btn-list-view-active {
+    background-image: url("img/icon_view_list_disabled.png");
+}
+
+.yw-coll-browser-mold-sel-btn-tree-view-inactive {
+    background-image: url("img/icon_view_tree_default.png");
+    cursor: pointer;
+}
+
+.yw-coll-browser-mold-sel-btn-tree-view-inactive:hover {
+    background: #6f7c91;
+    background-image: url("img/icon_view_tree_hover.png");
+}
+
+.yw-coll-browser-mold-sel-btn-tree-view-active {
+    background-image: url("img/icon_view_tree_disabled.png");
+}
+
+.yw-treeview-cell {
+    display: inline-block;
+}
+
+.yw-treeview-cell-data-attr {
+    font-style: italic;
+}
+
+.yw-treeview-cell-leaf div {
+    color: #6F7C91;
+}
+
+.yw-treeview-row-subnode {
+    background: #f4f6fa;
+}
+
+.yw-coll-browser-tree-view-table div.z-tree-body td.z-treecell,
+.yw-coll-browser-tree-view-table div.z-tree-footer td.z-treefooter {
+    border-left: 0;
+    border-right: 0;
+    border-top: 0;
+    border-bottom: 1px solid #e0e6ee;
+    padding: 0 0;
+}
+
+.yw-coll-browser-tree-view-table tr.z-treerow-selected {
+    background: #0f56bf;
+
+}
+
+.yw-coll-browser-tree-view-table tr.z-treerow-selected div.z-treefooter-content,
+.yw-coll-browser-tree-view-table tr.z-treerow-selected div.z-treecell-content,
+.yw-coll-browser-tree-view-table tr.z-treerow-selected div.z-treecol-content {
+    color: #fff;
+}
+
+.yw-coll-browser-tree-view-table tr.z-treerow:hover {
+    background: #a6b3c4;
+}
+
+.yw-coll-browser-tree-view-table tr.z-treerow:hover div.z-treefooter-content,
+.yw-coll-browser-tree-view-table tr.z-treerow:hover div.z-treecell-content,
+.yw-coll-browser-tree-view-table tr.z-treerow:hover div.z-treecol-content {
+    color: #fff;
+}
+
+.yw-coll-browser-tree-view-table table {
+    table-layout: auto !important;
+}
+
+.yw-coll-browser-tree-view-table-empty .z-treechildren {
+    font-family: arial, sans-serif;
+    font-size: 12px;
+    font-weight: normal;
+    color: #7d7d7d;
+    font-style: italic;
+    text-align: center;
+}
+
+/* Spacing for IMG + Lable */
+.yw-treeview-cell-preview,
+.yw-treeview-cell-label {
+    margin-left: 3px;
+}
+
+.yw-collection-preview .z-listbox-body {
+    background-color: #eceff3;
+    background-image: url("img/icon_loading_indicator_default.gif");
+    background-position: 50% 5px;
+    background-repeat: no-repeat;
+    /* FIX FOR WRONG ZK WIDTH CALCULATION */
+    width: 100% !important;
+}
+
+.yw-collection-preview .yw-collection-preview-empty-list.z-listbox .z-listbox-body {
+    background: #eceff3;
+}
+
+/* Arrow */
+/* Overwrite for active state */
+.yw-coll-browser-container tr.z-treerow:hover .z-tree-icon,
+.yw-coll-browser-container tr.z-treerow-selected:hover .z-tree-icon,
+.yw-coll-browser-container tr.z-treerow-selected .z-tree-icon {
+    color: #fff;
+
+}
+
+.yw-coll-browser-container .yw-listview-cell .z-listcell-content {
+    line-height: 21px;
+    font-size: 12px;
+}

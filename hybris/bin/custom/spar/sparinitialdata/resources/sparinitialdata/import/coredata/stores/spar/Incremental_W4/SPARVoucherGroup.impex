@@ -1,0 +1,28 @@
+$regulargroup=VoucherUserGroup
+
+
+# Create Customer Group
+INSERT_UPDATE Usergroup;uid[unique=true];groups(uid)[mode=append]
+;$regulargroup;
+
+
+$START_USERRIGHTS;;;;;;;;;
+Type;UID;MemberOfGroups;Password;Target;read;change;create;remove;change_perm
+UserGroup;$regulargroup;;;;;;;;
+;;;;Currency;+;;;;;
+;;;;Media;+;;;;;
+;;;;Principal;+;+;+;+;+;
+;;;;Voucher;+;+;+;+;+;
+;;;;PromotionVoucher;+;+;+;+;+;
+;;;;SerialVoucher;+;+;+;+;+;
+;;;;SparVariantProduct;+;+;+;+;+;
+;;;;Restriction;+;+;+;+;+;
+;;;;DateRestriction;+;+;+;+;+;
+;;;;SparVoucherOrderRestriction;+;+;+;+;+;
+;;;;OrderRestriction;+;+;+;+;+;
+;;;;UserRestriction;+;+;+;+;+;
+;;;;RegularCustomerOrderQuantityRestriction;+;+;+;+;+;
+;;;;RegularCustomerOrderTotalRestriction;+;+;+;+;+;
+;;;;NewCustomerRestriction;+;+;+;+;+;
+;;;;ProductRestriction;+;+;+;+;+;
+$END_USERRIGHTS;;;;;

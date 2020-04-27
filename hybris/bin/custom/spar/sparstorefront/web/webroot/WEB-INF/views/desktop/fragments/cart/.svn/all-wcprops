@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparstorefront/web/webroot/WEB-INF/views/desktop/fragments/cart
+END
+expandGridInCart.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 127
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparstorefront/web/webroot/WEB-INF/views/desktop/fragments/cart/expandGridInCart.jsp
+END
+miniCartPanel.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 124
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparstorefront/web/webroot/WEB-INF/views/desktop/fragments/cart/miniCartPanel.jsp
+END
+addToCartPopup.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 125
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparstorefront/web/webroot/WEB-INF/views/desktop/fragments/cart/addToCartPopup.jsp
+END
+cartPopup.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 120
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparstorefront/web/webroot/WEB-INF/views/desktop/fragments/cart/cartPopup.jsp
+END

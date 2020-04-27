@@ -1,0 +1,179 @@
+K 25
+svn:wc:ra_dav:version-url
+V 128
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparstorefront/web/webroot/WEB-INF/_ui-src/responsive/lib/bootstrap-3.2.0/less/mixins
+END
+size.less
+K 25
+svn:wc:ra_dav:version-url
+V 138
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparstorefront/web/webroot/WEB-INF/_ui-src/responsive/lib/bootstrap-3.2.0/less/mixins/size.less
+END
+grid-framework.less
+K 25
+svn:wc:ra_dav:version-url
+V 148
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparstorefront/web/webroot/WEB-INF/_ui-src/responsive/lib/bootstrap-3.2.0/less/mixins/grid-framework.less
+END
+gradients.less
+K 25
+svn:wc:ra_dav:version-url
+V 143
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparstorefront/web/webroot/WEB-INF/_ui-src/responsive/lib/bootstrap-3.2.0/less/mixins/gradients.less
+END
+vendor-prefixes.less
+K 25
+svn:wc:ra_dav:version-url
+V 149
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparstorefront/web/webroot/WEB-INF/_ui-src/responsive/lib/bootstrap-3.2.0/less/mixins/vendor-prefixes.less
+END
+background-variant.less
+K 25
+svn:wc:ra_dav:version-url
+V 152
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparstorefront/web/webroot/WEB-INF/_ui-src/responsive/lib/bootstrap-3.2.0/less/mixins/background-variant.less
+END
+image.less
+K 25
+svn:wc:ra_dav:version-url
+V 139
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparstorefront/web/webroot/WEB-INF/_ui-src/responsive/lib/bootstrap-3.2.0/less/mixins/image.less
+END
+panels.less
+K 25
+svn:wc:ra_dav:version-url
+V 140
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparstorefront/web/webroot/WEB-INF/_ui-src/responsive/lib/bootstrap-3.2.0/less/mixins/panels.less
+END
+responsive-visibility.less
+K 25
+svn:wc:ra_dav:version-url
+V 155
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparstorefront/web/webroot/WEB-INF/_ui-src/responsive/lib/bootstrap-3.2.0/less/mixins/responsive-visibility.less
+END
+nav-vertical-align.less
+K 25
+svn:wc:ra_dav:version-url
+V 152
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparstorefront/web/webroot/WEB-INF/_ui-src/responsive/lib/bootstrap-3.2.0/less/mixins/nav-vertical-align.less
+END
+tab-focus.less
+K 25
+svn:wc:ra_dav:version-url
+V 143
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparstorefront/web/webroot/WEB-INF/_ui-src/responsive/lib/bootstrap-3.2.0/less/mixins/tab-focus.less
+END
+grid.less
+K 25
+svn:wc:ra_dav:version-url
+V 138
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparstorefront/web/webroot/WEB-INF/_ui-src/responsive/lib/bootstrap-3.2.0/less/mixins/grid.less
+END
+text-overflow.less
+K 25
+svn:wc:ra_dav:version-url
+V 147
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparstorefront/web/webroot/WEB-INF/_ui-src/responsive/lib/bootstrap-3.2.0/less/mixins/text-overflow.less
+END
+forms.less
+K 25
+svn:wc:ra_dav:version-url
+V 139
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparstorefront/web/webroot/WEB-INF/_ui-src/responsive/lib/bootstrap-3.2.0/less/mixins/forms.less
+END
+pagination.less
+K 25
+svn:wc:ra_dav:version-url
+V 144
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparstorefront/web/webroot/WEB-INF/_ui-src/responsive/lib/bootstrap-3.2.0/less/mixins/pagination.less
+END
+alerts.less
+K 25
+svn:wc:ra_dav:version-url
+V 140
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparstorefront/web/webroot/WEB-INF/_ui-src/responsive/lib/bootstrap-3.2.0/less/mixins/alerts.less
+END
+hide-text.less
+K 25
+svn:wc:ra_dav:version-url
+V 143
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparstorefront/web/webroot/WEB-INF/_ui-src/responsive/lib/bootstrap-3.2.0/less/mixins/hide-text.less
+END
+text-emphasis.less
+K 25
+svn:wc:ra_dav:version-url
+V 147
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparstorefront/web/webroot/WEB-INF/_ui-src/responsive/lib/bootstrap-3.2.0/less/mixins/text-emphasis.less
+END
+table-row.less
+K 25
+svn:wc:ra_dav:version-url
+V 143
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparstorefront/web/webroot/WEB-INF/_ui-src/responsive/lib/bootstrap-3.2.0/less/mixins/table-row.less
+END
+clearfix.less
+K 25
+svn:wc:ra_dav:version-url
+V 142
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparstorefront/web/webroot/WEB-INF/_ui-src/responsive/lib/bootstrap-3.2.0/less/mixins/clearfix.less
+END
+buttons.less
+K 25
+svn:wc:ra_dav:version-url
+V 141
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparstorefront/web/webroot/WEB-INF/_ui-src/responsive/lib/bootstrap-3.2.0/less/mixins/buttons.less
+END
+resize.less
+K 25
+svn:wc:ra_dav:version-url
+V 140
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparstorefront/web/webroot/WEB-INF/_ui-src/responsive/lib/bootstrap-3.2.0/less/mixins/resize.less
+END
+labels.less
+K 25
+svn:wc:ra_dav:version-url
+V 140
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparstorefront/web/webroot/WEB-INF/_ui-src/responsive/lib/bootstrap-3.2.0/less/mixins/labels.less
+END
+border-radius.less
+K 25
+svn:wc:ra_dav:version-url
+V 147
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparstorefront/web/webroot/WEB-INF/_ui-src/responsive/lib/bootstrap-3.2.0/less/mixins/border-radius.less
+END
+list-group.less
+K 25
+svn:wc:ra_dav:version-url
+V 144
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparstorefront/web/webroot/WEB-INF/_ui-src/responsive/lib/bootstrap-3.2.0/less/mixins/list-group.less
+END
+reset-filter.less
+K 25
+svn:wc:ra_dav:version-url
+V 146
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparstorefront/web/webroot/WEB-INF/_ui-src/responsive/lib/bootstrap-3.2.0/less/mixins/reset-filter.less
+END
+progress-bar.less
+K 25
+svn:wc:ra_dav:version-url
+V 146
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparstorefront/web/webroot/WEB-INF/_ui-src/responsive/lib/bootstrap-3.2.0/less/mixins/progress-bar.less
+END
+nav-divider.less
+K 25
+svn:wc:ra_dav:version-url
+V 145
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparstorefront/web/webroot/WEB-INF/_ui-src/responsive/lib/bootstrap-3.2.0/less/mixins/nav-divider.less
+END
+center-block.less
+K 25
+svn:wc:ra_dav:version-url
+V 146
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparstorefront/web/webroot/WEB-INF/_ui-src/responsive/lib/bootstrap-3.2.0/less/mixins/center-block.less
+END
+opacity.less
+K 25
+svn:wc:ra_dav:version-url
+V 141
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparstorefront/web/webroot/WEB-INF/_ui-src/responsive/lib/bootstrap-3.2.0/less/mixins/opacity.less
+END

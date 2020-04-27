@@ -1,0 +1,59 @@
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/spartest
+END
+.classpath
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/spartest/.classpath
+END
+project.properties
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/spartest/project.properties
+END
+ruleset.xml
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/spartest/ruleset.xml
+END
+.project
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/spartest/.project
+END
+external-dependencies.xml
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/spartest/external-dependencies.xml
+END
+extensioninfo.xml
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/spartest/extensioninfo.xml
+END
+.springBeans
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/spartest/.springBeans
+END
+.pmd
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/spartest/.pmd
+END
+buildcallbacks.xml
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/spartest/buildcallbacks.xml
+END

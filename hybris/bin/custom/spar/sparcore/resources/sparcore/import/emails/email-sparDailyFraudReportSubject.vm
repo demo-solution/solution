@@ -1,0 +1,2 @@
+## messageSource=classpath:/sparcore/messages/email-sparDailyFraudReportExport_$lang.properties
+${ctx.messages.getMessage('emailSubject')} for ${ctx.exportDate}

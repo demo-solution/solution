@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  ~ [y] hybris Platform
+  ~
+  ~ Copyright (c) 2000-2015 hybris AG
+  ~ All rights reserved.
+  ~
+  ~ This software is the confidential and proprietary information of hybris
+  ~ ("Confidential Information"). You shall not disclose such Confidential
+  ~ Information and shall use it only in accordance with the terms of the
+  ~ license agreement you entered into with hybris.
+  -->
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context" xmlns:security="http://www.springframework.org/schema/security"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context
+		http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/security
+		http://www.springframework.org/schema/security/spring-security.xsd">
+
+	<context:component-scan
+		base-package="com.spar.hcl.v1, com.spar.hcl.auth, com.spar.hcl.context, com.spar.hcl.conv, com.spar.hcl.errors, com.spar.hcl.exceptions, com.spar.hcl.filter, com.spar.hcl.formatters, com.spar.hcl.oauth2, com.spar.hcl.resolver, com.spar.hcl.util.ws, com.spar.hcl.xstream"
+		scope-resolver="de.hybris.platform.spring.IgnoreTenantScopeMetadataResolver" />
+
+	<security:global-method-security order="-2147483648" secured-annotations="enabled" />
+
+	<bean id="jspViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="viewClass" value="org.springframework.web.servlet.view.JstlView" />
+		<property name="prefix" value="/WEB-INF/jsp/" />
+		<property name="suffix" value=".jsp" />
+	</bean>
+
+	<bean id="cwsSearchQueryCodec" class="com.spar.hcl.util.ws.impl.DefaultSearchQueryCodec" />
+
+	<bean id="addressDataErrorsPopulator" class="com.spar.hcl.populator.AddressDataErrorsPopulator">
+		<constructor-arg>
+			<map>
+				<entry key="addressline1" value="line1" />
+				<entry key="addressline2" value="line2" />
+			</map>
+		</constructor-arg>
+	</bean>
+
+</beans>

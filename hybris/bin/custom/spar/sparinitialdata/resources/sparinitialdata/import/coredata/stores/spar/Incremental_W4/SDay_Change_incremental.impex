@@ -1,0 +1,35 @@
+#incremental impex for content catalog
+# ImpEx for Importing CMS Content
+# Macros / Replacement Parameter definitions
+$contentCatalog=sparContentCatalog
+$contentCatalogName=Spar Content Catalog
+$productCatalog=sparProductCatalog
+$productCatalogName=Spar Product Catalog
+
+$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
+$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
+$productCV=catalogVersion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
+$product=product(code, $productCV)
+$category=category(code, $productCV)
+$jarResource=jar:com.spar.hcl.cockpits.constants.SparCockpitsConstants&/sparcockpits-config/cockpitgroup
+
+## Rename linkName to Spar Brands from Republic maha sale
+REMOVE CMSLinkComponent; $contentCV[unique=true];uid[unique=true];name;url;&linkRef;&componentRef; target(code)[default='sameWindow']; $category; $product;linkName;styleAttributes;
+;;SdayLink2;SdayLink2;/search/?q=%3Arelevance%3AbenefitType%3ASDAY;SdayLink2;SdayLink2;;;;SPAR Products
+
+INSERT_UPDATE CMSLinkComponent; $contentCV[unique=true];uid[unique=true];name;url;&linkRef;&componentRef; target(code)[default='sameWindow']; $category; $product;linkName;styleAttributes;
+;;SdayTopLink2;SdayTopLink2 ;/search/?q=%3Arelevance%3AbenefitType%3ASDAY;SdayTopLink2;SdayTopLink2;;;;SPAR Products;class="btn btn-green";
+
+
+# Load medias for Spar CMSCockpit
+# Added for change in CMS Link component by Saif 
+
+INSERT_UPDATE CockpitUIConfigurationMedia;code[unique=true];mime;realfilename;@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator][forceWrite=true];
+;editorarea_SparNavigationBarCollectionComponent_cockpitgroup_ui_config;text/xml;editorarea_SparNavigationBarCollectionComponent.xml;$jarResource/editorarea_SparNavigationBarCollectionComponent.xml;
+;editorarea_SparTopNavigationBarComponent_cockpitgroup_ui_config;text/xml;editorarea_SparTopNavigationBarComponent.xml;$jarResource/editorarea_SparTopNavigationBarComponent.xml;
+
+# Setup cockpit configuration for Spar CMSCockpit
+# Added for change in CMS Link component by Saif
+INSERT_UPDATE CockpitUIComponentConfiguration;code[unique=true];factoryBean;objectTemplateCode[unique=true];principal(uid)[unique=true];media(code);
+;editorArea;editorConfigurationFactory;SparNavigationBarCollectionComponent;cockpitgroup;editorarea_SparNavigationBarCollectionComponent_cockpitgroup_ui_config;
+;editorArea;editorConfigurationFactory;SparTopNavigationBarComponent;cockpitgroup;editorarea_SparTopNavigationBarComponent_cockpitgroup_ui_config;

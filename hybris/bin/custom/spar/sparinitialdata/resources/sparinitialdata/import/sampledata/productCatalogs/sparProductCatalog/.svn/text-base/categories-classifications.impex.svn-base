@@ -1,0 +1,678 @@
+# ImpEx for Importing Category Classifications
+
+# Macros / Replacement Parameter definitions
+$productCatalog=sparProductCatalog
+$productCatalogName=Spar Product Catalog
+$classificationCatalog=SparClassification
+$catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
+$classCatalogVersion=catalogversion(catalog(id[default='$classificationCatalog']),version[default='2.0'])[unique=true,default='$classificationCatalog:2.0']
+$classSystemVersion=systemVersion(catalog(id[default='$classificationCatalog']),version[default='2.0'])[unique=true]
+$class=classificationClass(ClassificationClass.code,$classCatalogVersion)[unique=true]
+$supercategories=source(code, $classCatalogVersion)[unique=true]
+$categories=target(code, $catalogVersion)[unique=true]
+$attribute=classificationAttribute(code,$classSystemVersion)[unique=true]
+$unit=unit(code,$classSystemVersion)
+
+REMOVE ClassAttributeAssignment;$class;$attribute;position;$unit;attributeType(code[default=string]);multiValued[default=false];range[default=false];localized[default=true]
+ ;119;Headings;1;300
+ ;119;Energy-KJ;1;300
+ ;119;Energy-Kcal;1;300
+ ;119;Protein-g;1;300
+ ;119;Carbohydrate-g;1;300
+ ;119;of which Sugar-g;1;300
+ ;119;of which polyols-g;1;300
+ ;119;of which starch-g;1;300
+ ;119;Fat-g;1;300
+ ;119;of Which Saturated Fat-g;1;300
+ ;119;of which mono-unsaturates-g;1;300
+ ;119;of which polyunsaturates-g;1;300
+ ;119;of which cholesterol-mg;1;300
+ ;119;Fibre-g;1;300
+ ;119;Sodium-mg;1;300
+ ;119;Vitamin A;1;300
+ ;119;Vitamin D;1;300
+ ;119;Vitamin E-mg;1;300
+ ;119;Vitamin C-mg;1;300
+ ;119;Thiamin B1-mg;1;300
+ ;119;Riboflavin B2-mg;1;300
+ ;119;Niacin-mg;1;300
+ ;119;Vitamin B6-mg;1;300
+ ;119;Folic Acid;1;300
+ ;119;Vitamin B12;1;300
+ ;119;Biotin-mg;1;300
+ ;119;Pantothenic acid-mg;1;300
+ ;119;Calcium-mg;1;300
+ ;119;Phosphorus-mg;1;300
+ ;119;Iron-mg;1;300
+ ;119;Magnesium-mg;1;300
+ ;119;Zinc-mg;1;300
+ ;119;Iodine;1;300
+ ;119;Salt-g;1;300
+ ;119;Salt Equivalent-g;1;300
+ ;119;Vitamin K;1;300
+ ;119;Biotin;1;300
+ ;119;Potassium-mg;1;300
+ ;119;Chloride-mg;1;300
+ ;119;Copper-mg;1;300
+ ;119;Manganese-mg;1;300
+ ;119;Fluoride-mg;1;300
+ ;119;Selenium;1;300
+ ;119;Chromium;1;300
+ ;119;Molybdenum;1;300
+ ;119;Trans Fat-g;1;300
+
+# Insert Classifications
+INSERT_UPDATE ClassificationClass;$classCatalogVersion;code[unique=true];allowedPrincipals(uid)[default='customergroup']
+;;100
+;;101
+;;102
+;;103
+;;104
+;;105
+;;106
+;;107
+;;108
+;;109
+;;110
+;;111
+;;112
+;;113
+;;114
+;;115
+;;116
+;;117
+;;118
+;;119
+
+REMOVE ClassificationAttribute;$classSystemVersion;code[unique=true]
+;;Functional Name
+;;Variant
+;;Regulated Product Name
+;;Model Number
+;;Brand
+;;Sub Brand
+;;Picking and Packaging
+;;Additives Other Text
+;;Nutrition
+;;About Product Description
+;;Ingredient Description
+;;Disclaimer
+
+;;Headings
+;;Energy-KJ
+;;Energy-Kcal
+;;Protein-g
+;;Carbohydrate-g
+;;of which Sugar-g
+;;of which polyols-g
+;;of which starch-g
+;;Fat-g
+;;of Which Saturated Fat-g
+;;of which mono-unsaturates-g
+;;of which polyunsaturates-g
+;;of which cholesterol-mg
+;;Fibre-g
+;;Sodium-mg
+;;Vitamin A
+;;Vitamin D
+;;Vitamin E-mg
+;;Vitamin C-mg
+;;Thiamin B1-mg
+;;Riboflavin B2-mg
+;;Niacin-mg
+;;Vitamin B6-mg
+;;Folic Acid
+;;Vitamin B12
+;;Biotin-mg
+;;Pantothenic acid-mg
+;;Calcium-mg
+;;Phosphorus-mg
+;;Iron-mg
+;;Magnesium-mg
+;;Zinc-mg
+;;Iodine
+;;Salt-g
+;;Salt Equivalent-g
+;;Vitamin K
+;;Biotin
+;;Potassium-mg
+;;Chloride-mg
+;;Copper-mg
+;;Manganese-mg
+;;Fluoride-mg
+;;Selenium
+;;Chromium
+;;Molybdenum
+;;Trans Fat-g
+
+# Insert Classification Attributes
+INSERT_UPDATE ClassificationAttribute;$classSystemVersion;code[unique=true]
+;;Further Descrption
+;;Description
+;;Regional Name
+;;Product Marketing
+;;Brand Marketing
+;;Manufacturer Marketing
+;;Company Name
+;;Company Address
+;;Telephone Helpline
+;;Fax Number
+;;Email Helpline
+;;Web Address
+;;Manufacturers Address
+;;Importer Address
+;;Distributor Address
+;;Return To
+;;Numeric Size
+;;Drained Weight
+;;Number of units
+;;Unit Type
+;;Weight
+;;Pack Size
+;;Features
+;;Box Contents
+;;Recipes
+;;Lifestyle
+;;Other Information
+;;Number of uses
+;;Usage Other Text
+;;Occasion
+;;New Arrivals
+;;Type
+;;Taggable Ingredients
+;;Lifestyle Other Text
+;;BHA/BHT
+;;AZO Colours
+;;MSG
+;;Benzoate
+;;Additives
+;;Aspartame
+;;Yeast
+;;Genetically Modified Ingredients
+;;Artificial Colours
+;;Artificial Sweeteners
+;;Artificial Flavours
+;;Artificial Preservatives
+;;Tartrazine
+;;HVP
+;;Sucrose
+;;GM Protein/DNA
+;;Artificial Antioxidants
+;;Flavour Enhancers
+;;Preservatives
+;;Brand Description
+;;Design Description
+;;Look Pattern Description
+;;Material Description
+;;Technical Details Description
+;;Technology Description
+;;Utility Description
+;;Wash Care Description
+;;Benefit Description
+;;Safety Warning
+;;Lower Age Limit
+;;Upper Age Limit
+;;Storage
+;;Taggable Allergy Text
+;;Allergy Other Text
+;;Allergen Tag Format
+;;Preparation and Usage
+;;Min Temp °C
+;;Max Temp °C
+;;Min Humidity %
+;;Max Humidity %
+;;Oven cook
+;;Microwave
+;;Grill
+;;Barbecue
+;;Shallow Fry
+;;Deep Fry
+;;Stir Fry
+;;Steam
+;;Poach
+;;Hob
+;;Boil in the Bag
+;;Other
+;;Cooking Instructions
+;;Country of Origin
+;;Packed In
+;;Place of Provenance
+;;Fish Catch Area
+;;Origin Free Text
+;;Sourced
+;;Harvest Time
+;;Availability period
+;;Lead time from farm
+;;Peak Season
+;;Aging
+;;Loose
+;;Business
+;;Division
+;;Market
+;;Category
+;;Family
+;;Online Business
+;;Online Market
+;;Online Family
+;;Title Tag
+;;Meta Description
+;;Meta Keywords
+;;Page URL
+;;Search Tag
+;;Canonical Tag
+;;Heading Tag
+
+;;Nutritions
+;;Additive Other Text
+;;Material Free Text
+;;Design
+;;Colour
+;;Style
+;;Shape
+;;Screen Size
+;;Product Dimensions
+;;Benefits Description
+;;Cooking Instructions Guidelines
+;;Warranty
+
+
+# Links ClassificationClasses to Categories
+INSERT_UPDATE CategoryCategoryRelation;$categories;$supercategories
+ ;10001;100
+ ;10002;100
+ ;10003;100
+ ;10004;100
+ ;10005;100
+ ;10006;100
+ ;10007;100
+ ;10008;100
+ ;10009;100
+ ;10010;110
+ ;10011;100
+ ;10012;100
+ ;10013;100
+ ;10014;100
+ ;10015;100
+ ;10001;101
+ ;10002;101
+ ;10003;101
+ ;10004;101
+ ;10005;101
+ ;10006;101
+ ;10007;101
+ ;10008;101
+ ;10009;101
+ ;10010;111
+ ;10011;101
+ ;10012;101
+ ;10013;101
+ ;10014;101
+ ;10015;101
+ ;10001;102
+ ;10002;102
+ ;10003;102
+ ;10004;102
+ ;10005;102
+ ;10006;102
+ ;10007;102
+ ;10008;102
+ ;10009;102
+ ;10010;112
+ ;10011;102
+ ;10012;102
+ ;10013;102
+ ;10014;102
+ ;10015;102
+ ;10001;103
+ ;10002;103
+ ;10003;103
+ ;10004;103
+ ;10005;103
+ ;10006;103
+ ;10007;103
+ ;10008;103
+ ;10009;103
+ ;10010;113
+ ;10011;103
+ ;10012;103
+ ;10013;103
+ ;10014;103
+ ;10015;103
+ ;10001;104
+ ;10002;104
+ ;10003;104
+ ;10004;104
+ ;10005;104
+ ;10006;104
+ ;10007;104
+ ;10008;104
+ ;10009;104
+ ;10010;114
+ ;10011;104
+ ;10012;104
+ ;10013;104
+ ;10014;104
+ ;10015;104
+ ;10001;105
+ ;10002;105
+ ;10003;105
+ ;10004;105
+ ;10005;105
+ ;10006;105
+ ;10007;105
+ ;10008;105
+ ;10009;105
+ ;10010;115
+ ;10011;105
+ ;10012;105
+ ;10013;105
+ ;10014;105
+ ;10015;105
+ ;10002;106
+ ;10003;106
+ ;10005;106
+ ;10006;106
+ ;10009;106
+ ;10015;106
+ ;10001;107
+ ;10002;107
+ ;10003;107
+ ;10004;107
+ ;10005;107
+ ;10006;107
+ ;10007;107
+ ;10008;107
+ ;10009;107
+ ;10010;107
+ ;10011;107
+ ;10012;107
+ ;10013;107
+ ;10014;107
+ ;10015;107
+ ;10002;108
+ ;10003;108
+ ;10005;108
+ ;10006;108
+ ;10007;108
+ ;10008;108
+ ;10009;108
+ ;10011;108
+ ;10014;108
+ ;10015;108
+ ;10001;109
+ ;10002;109
+ ;10003;109
+ ;10004;109
+ ;10005;109
+ ;10006;109
+ ;10007;109
+ ;10008;109
+ ;10009;109
+ ;10015;109
+ ;20014;110
+ ;20020;110
+ ;20021;110
+ ;20022;110
+ ;20023;110
+ ;20024;110
+ ;20034;110
+ ;20035;110
+ ;20040;110
+ ;20042;110
+ ;10001;111
+ ;10002;111
+ ;10003;111
+ ;10004;111
+ ;10005;111
+ ;10006;111
+ ;10007;111
+ ;10008;111
+ ;20001;112
+ ;20002;112
+ ;20006;112
+ ;20007;112
+ ;10001;113
+ ;10002;113
+ ;10003;113
+ ;10004;113
+ ;10005;113
+ ;10006;113
+ ;10007;113
+ ;10008;113
+ ;10009;113
+ ;10010;113
+ ;10011;113
+ ;10012;113
+ ;10013;113
+ ;10014;113
+ ;10015;113
+ ;10001;114
+ ;10002;114
+ ;10003;114
+ ;10004;114
+ ;10005;114
+ ;10006;114
+ ;10007;114
+ ;10008;114
+ ;10009;114
+ ;10010;114
+ ;10011;114
+ ;10012;114
+ ;10013;114
+ ;10014;114
+ ;10015;114
+ ;10001;115
+ ;10002;115
+ ;10003;115
+ ;10004;115
+ ;10005;115
+ ;10006;115
+ ;10007;115
+ ;10008;115
+ ;10009;115
+ ;10010;115
+ ;10011;115
+ ;10012;115
+ ;10013;115
+ ;10014;115
+ ;10015;115
+ ;10001;116
+ ;10002;116
+ ;10003;116
+ ;10004;116
+ ;10005;116
+ ;10006;116
+ ;10007;116
+ ;10008;116
+ ;10009;116
+ ;10010;116
+ ;10011;116
+ ;10012;116
+ ;10013;116
+ ;10014;116
+ ;10015;116
+ ;10001;117
+ ;10002;117
+ ;10003;117
+ ;10004;117
+ ;10005;117
+ ;10006;117
+ ;10007;117
+ ;10008;117
+ ;10009;117
+ ;10010;117
+ ;10011;117
+ ;10012;117
+ ;10013;117
+ ;10014;117
+ ;10015;117
+ ;10001;118
+ ;10002;118
+ ;10003;118
+ ;10004;118
+ ;10005;118
+ ;10006;118
+ ;10007;118
+ ;10008;118
+ ;10009;118
+ ;10010;118
+ ;10011;118
+ ;10012;118
+ ;10013;118
+ ;10014;118
+ ;10015;118
+ ;10001;119
+ ;10002;119
+ ;10003;119
+ ;10004;119
+ ;10005;119
+ ;10006;119
+ ;10009;119
+ 
+
+INSERT_UPDATE ClassAttributeAssignment;$class;$attribute;position;$unit;attributeType(code[default=string]);multiValued[default=false];range[default=false];localized[default=true]
+ ;100;Further Descrption;3;300
+ ;100;Description;4;300
+ ;100;Regional Name;7;300
+ 
+ ;101;Product Marketing;3;300
+ ;101;Brand Marketing;4;300
+ ;101;Manufacturer Marketing;5;300
+ 
+ ;102;Company Name;1;300
+ ;102;Company Address;2;300
+ ;102;Telephone Helpline;3;300
+ ;102;Fax Number;4;300
+ ;102;Email Helpline;5;300
+ ;102;Web Address;6;300
+ 
+ ;103;Manufacturers Address;1;300
+ ;103;Importer Address;2;300
+ ;103;Distributor Address;3;300
+ ;103;Return To;4;300
+ 
+ ;104;Numeric Size;1;300
+ ;104;Drained Weight;2;300
+ ;104;Number of units;3;300
+ ;104;Unit Type;4;300
+ ;104;Weight;5;300
+ 
+ ;105;Other Information;5;300
+ ;105;Number of uses;6;300
+ ;105;Usage Other Text;7;300
+ ;105;Occasion;8;300
+ ;105;New Arrivals;9;300
+
+ ;106;BHA/BHT;1;300
+ ;106;AZO Colours;2;300
+ ;106;MSG;3;300
+ ;106;Benzoate;4;300
+ ;106;Additives;5;300
+ ;106;Aspartame;6;300
+ ;106;Yeast;7;300
+ ;106;Genetically Modified Ingredients;8;300
+ ;106;Artificial Colours;9;300
+ ;106;Artificial Sweeteners;10;300
+ ;106;Artificial Flavours;11;300
+ ;106;Artificial Preservatives;12;300
+ ;106;Tartrazine;13;300
+ ;106;HVP;14;300
+ ;106;Sucrose;15;300
+ ;106;GM Protein/DNA;16;300
+ ;106;Artificial Antioxidants;17;300
+ ;106;Flavour Enhancers;18;300
+ ;106;Preservatives;19;300
+ 
+ ;107;Brand Description;2;300
+ ;107;Benefit Description;11;300
+ 
+ ;108;Lower Age Limit;2;300
+ ;108;Upper Age Limit;3;300
+ ;108;Allergen Tag Format;8;300
+ 
+ ;109;Min Temp °C;2;300
+ ;109;Max Temp °C;3;300
+ ;109;Min Humidity %;4;300
+ ;109;Max Humidity %;5;300
+ 
+ ;110;Oven cook;1;300
+ ;110;Microwave;2;300
+ ;110;Grill;3;300
+ ;110;Barbecue;4;300
+ ;110;Shallow Fry;5;300
+ ;110;Deep Fry;6;300
+ ;110;Stir Fry;7;300
+ ;110;Steam;8;300
+ ;110;Poach;9;300
+ ;110;Hob;10;300
+ ;110;Boil in the Bag;11;300
+ ;110;Other;12;300
+ ;110;Cooking Instructions;13;300
+ 
+ ;111;Country of Origin;1;300
+ ;111;Packed In;2;300
+ ;111;Place of Provenance;3;300
+ ;111;Fish Catch Area;4;300
+ ;111;Origin Free Text;5;300
+ ;111;Sourced;6;300
+ 
+ ;112;Harvest Time;7;300
+ ;112;Availability period;8;300
+ ;112;Lead time from farm;9;300
+ ;112;Peak Season;10;300
+ ;112;Aging;11;300
+ ;112;Loose;12;300
+ 
+ ;113;Business;1;300
+ ;113;Division;2;300
+ ;113;Market;3;300
+ ;113;Category;4;300
+ ;113;Family;5;300
+ ;113;Online Business;6;300
+ ;113;Online Market;7;300
+ ;113;Online Family;8;300
+ 
+ ;114;Title Tag;1;300
+ ;114;Meta Description;2;300
+ ;114;Meta Keywords;3;300
+ ;114;Page URL;4;300
+ ;114;Search Tag;5;300
+ ;114;Canonical Tag;6;300
+ ;114;Heading Tag;7;300
+ 
+ ;115;Material Description;1;300
+ ;115;Material Free Text;2;300
+ ;115;Design;3;300
+ ;115;Design Description;4;300
+ ;115;Colour;5;300
+ ;115;Look Pattern Description;6;300
+ ;115;Style;7;300
+ ;115;Shape;8;300
+ ;115;Pack Size;9;300
+ ;115;Screen Size;10;300
+ ;115;Product Dimensions;11;300
+ ;115;Box Contents;12;300
+ ;115;Technology Description;13;300
+ ;115;Technical Details Description;14;300
+ 
+ ;116;Benefits Description;1;300
+ ;116;Features;2;300
+ ;116;Utility Description;3;300
+ ;116;Lifestyle;4;300
+ ;116;Lifestyle Other Text;5;300
+ ;116;Safety Warning;6;300
+ ;116;Allergy Other Text;7;300
+ ;116;Taggable Allergy Text;8;300
+
+ ;117;Recipes;1;300
+ ;117;Preparation and Usage;2;300
+ ;117;Cooking Instructions Guidelines;3;300
+ 
+ ;118;Type;2;300
+ ;118;Storage;3;300
+ ;118;Wash Care Description;4;300
+ ;118;Warranty;5;300
+
+ ;119;Nutritions;1;300
+ ;119;Taggable Ingredients;2;300
+ ;119;Additive Other Text;3;300

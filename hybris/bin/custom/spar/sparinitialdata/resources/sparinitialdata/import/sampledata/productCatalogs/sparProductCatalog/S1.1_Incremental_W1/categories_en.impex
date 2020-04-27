@@ -1,0 +1,17 @@
+# incremental ImpEx for Importing Categories into Spar Store 
+
+# Macros / Replacement Parameter definitions
+$productCatalog=sparProductCatalog
+$productCatalogName=SPAR Product Catalog
+$catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
+
+
+# Language
+$lang=en
+
+
+# Update Categories with localizations - 14 Division Codes - 98 MARKET Codes - 389 Category Codes
+UPDATE Category;code[unique=true];$catalogVersion;name[lang=$lang]
+;20025;;Health Drinks
+;20026;;Tea & Coffee
+;20027;;Beverage Additives

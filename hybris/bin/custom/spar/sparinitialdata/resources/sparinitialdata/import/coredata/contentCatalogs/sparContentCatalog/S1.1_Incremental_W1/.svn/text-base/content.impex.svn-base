@@ -1,0 +1,321 @@
+#incremental impex for content catalog
+
+
+# ImpEx for Importing CMS Content
+
+# Macros / Replacement Parameter definitions
+$contentCatalog=sparContentCatalog
+$contentCatalogName=Spar Content Catalog
+$productCatalog=sparProductCatalog
+$productCatalogName=Spar Product Catalog
+
+$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
+$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
+$productCV=catalogVersion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
+$picture=media(code, $contentCV);
+$image=image(code, $contentCV);
+$media=media(code, $contentCV);
+$page=page(uid, $contentCV);
+$contentPage=contentPage(uid, $contentCV);
+$bottomImage=bottomImage(code,$contentCV)
+
+$product=product(code, $productCV)
+$category=category(code, $productCV)
+
+$siteResource=jar:com.spar.hcl.initialdata.setup.InitialDataSystemSetup&/sparinitialdata/import/sampledata/contentCatalogs/$contentCatalog
+$productResource=jar:com.spar.hcl.initialdata.setup.InitialDataSystemSetup&/sparinitialdata/import/sampledata/productCatalogs/$productCatalog
+$jarResourceCms=jar:com.spar.hcl.initialdata.setup.InitialDataSystemSetup&/sparinitialdata/import/sampledata/cockpits/cmscockpit
+$jarResourceCms=jar:com.spar.hcl.initialdata.setup.InitialDataSystemSetup&/sparinitialdata/import/sampledata/cockpits/cmscockpit
+
+$wideContent=CMSImageComponent,BannerComponent
+$siteUid=spar
+
+$medias=medias(code, $contentCV);
+$lang=en
+$mediaContainer=media(qualifier, $contentCV)[lang=$lang];
+
+# Import config properties into impex macros
+UPDATE GenericItem[processor=de.hybris.platform.commerceservices.impex.impl.ConfigPropertyImportProcessor];pk[unique=true]
+$jarResourceCms=$config-jarResourceCmsValue
+$emailPackageName=$config-emailContextPackageName	
+
+# Import config properties into impex macros
+UPDATE GenericItem[processor=de.hybris.platform.commerceservices.impex.impl.ConfigPropertyImportProcessor];pk[unique=true]
+$emailResource=$config-emailResourceValue
+$siteUid=spar
+# Language
+$lang=en
+
+######## Entry for the Health and Wellness Link
+INSERT_UPDATE BenefitTypeEnum;code[unique=true];name[lang=en];extensionName
+;HEALTHANDWELLNESS;HEALTHANDWELLNESS;sparpricefactory
+
+INSERT_UPDATE CMSLinkComponent; $contentCV[unique=true];uid[unique=true];name;url;&linkRef;&componentRef; target(code)[default='sameWindow']; $category; $product;linkName;styleAttributes;
+;;CombiOffersLink2;Offer ;/search/?q=%3Arelevance%3AbenefitType%3AOFFER%3AcombiOffer%3Atrue;CombiOffersLink2;CombiOffersLink2;;;;Combi Offers
+;;DiscountLink2;Discount;/search/?q=%3Arelevance%3AbenefitType%3ADISCOUNT;DiscountLink2;DiscountLink2;;;;Discounts
+;;OffersTopLink2;OffersTopLink2 ;/;OffersTopLink2;OffersTopLink2;;;;Offers;
+;;ExclusivesTopLink2;ExclusivesTopLink2 ;/;ExclusivesTopLink2;ExclusivesTopLink2;;;;Exclusives;data-toggle="dropdown" class="btn btn-red dropdown-toggle";
+#;;ExclusivesLink2;ExclusivesLink2 ;/search/?q=%3Arelevance%3AbenefitType%3AEXCLUSIVE;ExclusivesLink2;ExclusivesLink2;;;;Exclusives;data-toggle="dropdown" class="btn btn-red dropdown-toggle";
+;;ExclusivesLink2;ExclusivesLink2;/search/?q=%3Arelevance%3AbenefitType%3AEXCLUSIVE;ExclusivesLink2;ExclusivesLink2;;;;Gift Options 
+;;ExclusivesLink3;ExclusivesLink3;/search/?q=%3Arelevance%3AbenefitType%3AHEALTHANDWELLNESS;ExclusivesLink3;ExclusivesLink3;;;;Health & Wellness
+
+
+INSERT_UPDATE CMSNavigationNode;uid[unique=true];$contentCV[unique=true];name;parent(uid, $contentCV);links(&linkRef);&nodeRef;title[lang=$lang]
+;OffersBarNavNode2;;Offer Nav Node;;OffersTopLink2;OffersBarNavNode2
+;DiscountNavNode2;;Discount Nav Node;OffersBarNavNode2;DiscountLink2;DiscountNavNode2
+;CombiOffersNavNode2;;Combi Nav Node;OffersBarNavNode2;CombiOffersLink2;CombiOffersNavNode2
+;ExclusivesNavNode2;;Exclusives Nav Node;;ExclusivesTopLink2;ExclusivesNavNode2;Exclusive
+;ExclusivesChildNavNode2;;Exclusives Child Nav Node;ExclusivesNavNode2;ExclusivesLink2,ExclusivesLink3;ExclusivesChildNavNode2;Exclusives
+
+INSERT_UPDATE SparTopNavigationBarComponent; $contentCV[unique=true]; uid[unique=true];name;wrapAfter;link(uid, $contentCV);styleClass ;&componentRef
+;;OffersBarComponent2;OffersBarComponent2;50;OffersTopLink2;;OffersBarComponent2
+;;ExclusivesBarComponent2;ExclusivesBarComponent2;50;ExclusivesTopLink2;;ExclusivesBarComponent2
+
+INSERT_UPDATE SparTopNavigationBarComponent;$contentCV[unique=true];uid[unique=true];navigationNode(&nodeRef);dropDownLayout(code)
+;;OffersBarComponent2;OffersBarNavNode2
+;;ExclusivesBarComponent2;ExclusivesNavNode2
+
+##### Daily Refund Report Email Configurations #######
+
+INSERT_UPDATE EmailPageTemplate;$contentCV[unique=true];uid[unique=true];name;active;frontendTemplateName;subject(code);htmlTemplate(code);restrictedPageTypes(code)
+;;sparDailyRefundReportEmailTemplate;spar Daily Refund Report Email Template;true;sparDailyRefundReportEmail;spar_Daily_Refund_Report_Subject;spar_Daily_Refund_Report_Body;EmailPage
+
+UPDATE EmailPageTemplate;$contentCV[unique=true];uid[unique=true];velocityTemplate[translator=de.hybris.platform.commerceservices.impex.impl.FileLoaderValueTranslator]
+;;sparDailyRefundReportEmailTemplate;$jarResourceCms/structure-view/structure_sparDailyRefundReportEmailTemplate.vm
+
+INSERT_UPDATE RendererTemplate;code[unique=true];contextClass;rendererType(code)[default='velocity']
+;spar_Daily_Refund_Report_Body;$emailPackageName.SparDailyRefundReportEmailContext
+;spar_Daily_Refund_Report_Subject;$emailPackageName.SparDailyRefundReportEmailContext
+
+UPDATE RendererTemplate;code[unique=true];description[lang=$lang];templateScript[lang=$lang,translator=de.hybris.platform.commerceservices.impex.impl.FileLoaderValueTranslator]
+;spar_Daily_Refund_Report_Body;"spar Daily Refund Report Body";$emailResource/email-sparDailyRefundReportBody.vm
+;spar_Daily_Refund_Report_Subject;"spar Daily Refund Report Subject";$emailResource/email-sparDailyRefundReportSubject.vm
+
+INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=true][default='sparDailyRefundReportEmailTemplate'];validComponentTypes(code)
+;SiteLogo;;;logo
+;TopContent;;$wideContent;
+;BottomContent;;$wideContent;
+
+# Create Content Slots
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active
+;;EmailTopSlot;Default Email Top Slot;true
+;;EmailBottomSlot;Default Email Bottom Slot;true
+
+INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];position[unique=true];pageTemplate(uid,$contentCV)[unique=true][default='sparDailyRefundReportEmailTemplate'];contentSlot(uid,$contentCV)[unique=true];allowOverwrite
+;;SiteLogo-sparDailyRefundReportEmail;SiteLogo;;EmailSiteLogoSlot;true
+;;TopContent-sparDailyRefundReportEmail;TopContent;;EmailTopSlot;true
+;;BottomContent-sparDailyRefundReportEmail;BottomContent;;EmailBottomSlot;true
+
+INSERT_UPDATE EmailPage;$contentCV[unique=true];uid[unique=true];name;masterTemplate(uid,$contentCV);defaultPage;approvalStatus(code)[default='approved']
+;;sparDailyRefundReportEmail;spar Daily Refund Report Email;sparDailyRefundReportEmailTemplate;true;
+
+
+# Preview Image for use in the CMS Cockpit
+INSERT_UPDATE Media;$contentCV[unique=true];code[unique=true];mime;realfilename;@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator][forceWrite=true]
+;;EmailPageModel_preview;text/gif;EmailPageModel_preview.gif;$jarResourceCms/preview-images/EmailPageModel_preview.gif
+
+UPDATE EmailPage;$contentCV[unique=true];uid[unique=true];previewImage(code, $contentCV)
+;;sparDailyRefundReportEmail;EmailPageModel_preview
+
+# CMS components and Email velocity templates
+UPDATE RendererTemplate;code[unique=true];description[lang=$lang];templateScript[lang=$lang,translator=de.hybris.platform.commerceservices.impex.impl.FileLoaderValueTranslator]
+;spar_Daily_Refund_Report_Body;"spar Daily Refund Report Body";$emailResource/email-sparDailyRefundReportBody.vm
+;spar_Daily_Refund_Report_Subject;"spar Daily Refund Report Subject";$emailResource/email-sparDailyRefundReportSubject.vm
+
+
+# Email Pages
+UPDATE EmailPage;$contentCV[unique=true];uid[unique=true];fromEmail[lang=$lang];fromName[lang=$lang]
+;;sparDailyRefundReportEmail;"care@sparindia.com";"Customer Services Team"
+
+######################### RMS Corrupted Price Feed Data Email Configuration#######
+
+
+INSERT_UPDATE EmailPageTemplate;$contentCV[unique=true];uid[unique=true];name;active;frontendTemplateName;subject(code);htmlTemplate(code);restrictedPageTypes(code)
+;;RMSCorruptedPriceFeedDataEmailTemplate;RMS Corrupted Price Feed Data Email Template;true;rmsCorruptedPriceFeedDataEmail;hybris_Email_RMS_Corrupted_Price_Feed_Data_Subject;hybris_Email_RMS_Corrupted_Price_Feed_Data_Body;EmailPage
+
+
+UPDATE EmailPageTemplate;$contentCV[unique=true];uid[unique=true];velocityTemplate[translator=de.hybris.platform.commerceservices.impex.impl.FileLoaderValueTranslator]
+;;RMSCorruptedPriceFeedDataEmailTemplate;$jarResourceCms/structure-view/structure_rmsCorruptedPriceFeedDataEmailTemplate.vm
+
+
+INSERT_UPDATE RendererTemplate;code[unique=true];contextClass;rendererType(code)[default='velocity']
+;hybris_Email_RMS_Corrupted_Price_Feed_Data_Body;$emailPackageName.RMSCorruptedPriceFeedDataContext
+;hybris_Email_RMS_Corrupted_Price_Feed_Data_Subject;$emailPackageName.RMSCorruptedPriceFeedDataContext
+
+
+UPDATE RendererTemplate;code[unique=true];description[lang=$lang];templateScript[lang=$lang,translator=de.hybris.platform.commerceservices.impex.impl.FileLoaderValueTranslator]
+;hybris_Email_RMS_Corrupted_Price_Feed_Data_Body;"Email RMS Feed Error Body";$emailResource/email-rmsCorruptedPriceFeedDataBody.vm
+;hybris_Email_RMS_Corrupted_Price_Feed_Data_Subject;"Email RMS Feed Error Subject";$emailResource/email-rmsCorruptedPriceFeedDataSubject.vm
+
+
+INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=true][default='RMSCorruptedPriceFeedDataEmailTemplate'];validComponentTypes(code)
+;SiteLogo;;;logo
+;TopContent;;$wideContent;
+;BottomContent;;$wideContent;
+
+# Create Content Slots
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active
+;;EmailTopSlot;Default Email Top Slot;true
+;;EmailBottomSlot;Default Email Bottom Slot;true
+
+INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];position[unique=true];pageTemplate(uid,$contentCV)[unique=true][default='RMSCorruptedPriceFeedDataEmailTemplate'];contentSlot(uid,$contentCV)[unique=true];allowOverwrite
+;;SiteLogo-RMSCorruptedPriceFeedDataEmail;SiteLogo;;EmailSiteLogoSlot;true
+;;TopContent-RMSCorruptedPriceFeedDataEmail;TopContent;;EmailTopSlot;true
+;;BottomContent-RMSCorruptedPriceFeedDataEmail;BottomContent;;EmailBottomSlot;true
+
+INSERT_UPDATE EmailPage;$contentCV[unique=true];uid[unique=true];name;masterTemplate(uid,$contentCV);defaultPage;approvalStatus(code)[default='approved']
+;;RMSCorruptedPriceFeedDataEmail;RMS Corrupted Price Feed Data Email;RMSCorruptedPriceFeedDataEmailTemplate;true;
+
+# Preview Image for use in the CMS Cockpit
+INSERT_UPDATE Media;$contentCV[unique=true];code[unique=true];mime;realfilename;@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator][forceWrite=true]
+;;EmailPageModel_preview;text/gif;EmailPageModel_preview.gif;$jarResourceCms/preview-images/EmailPageModel_preview.gif
+
+UPDATE EmailPage;$contentCV[unique=true];uid[unique=true];previewImage(code, $contentCV)
+;;RMSCorruptedPriceFeedDataEmail;EmailPageModel_preview
+
+# CMS components and Email velocity templates
+UPDATE RendererTemplate;code[unique=true];description[lang=$lang];templateScript[lang=$lang,translator=de.hybris.platform.commerceservices.impex.impl.FileLoaderValueTranslator]
+;hybris_Email_RMS_Corrupted_Price_Feed_Data_Body;"Email RMS Feed Error Body";$emailResource/email-rmsCorruptedPriceFeedDataBody.vm
+;hybris_Email_RMS_Corrupted_Price_Feed_Data_Subject;"Email RMS Feed Error Subject";$emailResource/email-rmsCorruptedPriceFeedDataSubject.vm
+
+# Email Pages
+UPDATE EmailPage;$contentCV[unique=true];uid[unique=true];fromEmail[lang=$lang];fromName[lang=$lang]
+;;RMSCorruptedPriceFeedDataEmail;"care@sparindia.com";"SPAR Price Load Error"
+
+#########################################################################################
+
+####################################Order Confirmation Email Configuration###############
+# Email page Template
+
+INSERT_UPDATE EmailPageTemplate;$contentCV[unique=true];uid[unique=true];name;active;frontendTemplateName;subject(code);htmlTemplate(code);restrictedPageTypes(code)
+;;OrderConfirmationEmailTemplate;Order Confirmation Email Template;true;orderConfirmationEmail;hybris_Email_Order_Confirmation_Subject;hybris_Email_Order_Confirmation_Body;EmailPage
+
+# Templates for CMS Cockpit Page Edit
+
+UPDATE EmailPageTemplate;$contentCV[unique=true];uid[unique=true];velocityTemplate[translator=de.hybris.platform.commerceservices.impex.impl.FileLoaderValueTranslator]
+;;OrderConfirmationEmailTemplate;$jarResourceCms/structure-view/structure_orderConfirmationEmailTemplate.vm
+
+
+INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=true][default='OrderConfirmationEmailTemplate'];validComponentTypes(code)
+;SiteLogo;;;logo
+;TopContent;;$wideContent;
+;BottomContent;;$wideContent;
+
+# Create Content Slots
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active
+;;EmailTopSlot;Default Email Top Slot;true
+;;EmailBottomSlot;Default Email Bottom Slot;true
+
+INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];position[unique=true];pageTemplate(uid,$contentCV)[unique=true][default='OrderConfirmationEmailTemplate'];contentSlot(uid,$contentCV)[unique=true];allowOverwrite
+;;SiteLogo-OrderConfirmationEmail;SiteLogo;;EmailSiteLogoSlot;true
+;;TopContent-OrderConfirmationEmail;TopContent;;EmailTopSlot;true
+;;BottomContent-OrderConfirmationEmail;BottomContent;;EmailBottomSlot;true
+
+# Email Pages
+INSERT_UPDATE EmailPage;$contentCV[unique=true];uid[unique=true];name;masterTemplate(uid,$contentCV);defaultPage;approvalStatus(code)[default='approved']
+;;OrderConfirmationEmail;Order Confirmation Email;OrderConfirmationEmailTemplate;true;
+
+# Email velocity templates
+INSERT_UPDATE RendererTemplate;code[unique=true];contextClass;rendererType(code)[default='velocity']
+;hybris_Email_Order_Confirmation_Body;$emailPackageName.OrderNotificationEmailContext
+;hybris_Email_Order_Confirmation_Subject;$emailPackageName.OrderNotificationEmailContext
+
+# Preview Image for use in the CMS Cockpit
+INSERT_UPDATE Media;$contentCV[unique=true];code[unique=true];mime;realfilename;@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator][forceWrite=true]
+;;EmailPageModel_preview;text/gif;EmailPageModel_preview.gif;$jarResourceCms/preview-images/EmailPageModel_preview.gif
+
+UPDATE EmailPage;$contentCV[unique=true];uid[unique=true];previewImage(code, $contentCV)
+;;OrderConfirmationEmail;EmailPageModel_preview
+
+# CMS components and Email velocity templates
+#UPDATE RendererTemplate;code[unique=true];description[lang=$lang];templateScript[lang=$lang,translator=de.hybris.platform.commerceservices.impex.impl.FileLoaderValueTranslator]
+#;hybris_Email_Order_Confirmation_Body;"Order Confirmation Email Body";$emailResource/email-orderConfirmationBody.vm
+#;hybris_Email_Order_Confirmation_Subject;"Order Confirmation Email Subject";$emailResource/email-orderConfirmationSubject.vm
+
+# Email Pages
+#UPDATE EmailPage;$contentCV[unique=true];uid[unique=true];fromEmail[lang=$lang];fromName[lang=$lang]
+#;;OrderConfirmationEmail;"care@sparindia.com";"Customer Services Team"
+
+
+#########################################################################################
+
+UPDATE PageTemplate;$contentCV[unique=true];uid[unique=true];velocityTemplate[translator=de.hybris.platform.commerceservices.impex.impl.FileLoaderValueTranslator]
+;;LandingPage2Template;$jarResourceCms/structure-view/structure_landingPage2Template.vm
+
+####################added for landmark
+
+INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=true][default='LandingPage2Template'];validComponentTypes(code);compTypeGroup(code)
+;HomePageSparLandmarkBannerSlot;;;wide
+
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active
+;;HomePageSparLandmarkBannerSlot;Home Page Spar Landmark BannerSlot;true
+
+INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];position[unique=true];pageTemplate(uid,$contentCV)[unique=true][default='LandingPage2Template'];contentSlot(uid,$contentCV)[unique=true];allowOverwrite
+;;HomePageSparLandmarkBannerSlot-LandingPage2;HomePageSparLandmarkBanner;;HomePageSparLandmarkBannerSlot;true
+
+INSERT_UPDATE Media; $contentCV[unique=true]; code[unique=true]; realfilename; @media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator] ; mime[default='image/jpeg']; altText; folder(qualifier)[default='images']
+#added for landmark image 
+;;/images/Landmark-Reward-Web-Banner.jpg;Landmark-Reward-Web-Banner.jpg;$siteResource/images/Landmark-Reward-Web-Banner.jpg;image/jpeg;Landmark offer;  
+
+INSERT_UPDATE BannerComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef;urlLink;$picture[lang=$lang];headline[lang=en]
+#landmark banner
+;;HomePageLandmarkBanner;Landmark Image Banner;HomePageLandmarkBanner;;/images/Landmark-Reward-Web-Banner.jpg;LANDMARK REWARDS
+
+
+#landmark banner
+INSERT_UPDATE HomePageLandmarkBannerImageComponent;$contentCV[unique=true];uid[unique=true];name;banner($contentCV,uid);&componentRef
+;;SparLandmarkBannerImageComponent;Spar Landmark Banner Images Component 1;HomePageLandmarkBanner;SparLandmarkBannerImageComponent
+
+
+
+INSERT_UPDATE ContentSlot                          ; $contentCV[unique=true]    ; uid[unique=true]                                     ; name                                                                                                                                                                                                           ; active                                                                                                                                                                                                                                       ; cmsComponents(&componentRef)
+                                                   ;                            ; Section4Slot-Homepage                                ; Section4 Slot for Homepage                                                                                                                                                                                     ; true                                                                                                                                                                                                                                         ;HomePageLandmarkBanner
+
+												   
+											   
+#banner by landmark
+INSERT_UPDATE ContentSlot; $contentCV[unique=true]; uid[unique=true]; name; active;cmsComponents(&componentRef);;;
+;;HomePageSparLandmarkBannerSlot; home page slot for landmark; true; SparLandmarkBannerImageComponent;;;
+
+### end of spar landmark======
+
+## payment banner start-------------
+
+
+INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=true][default='LandingPage2Template'];validComponentTypes(code);compTypeGroup(code)
+;HomePagePaymentBannerSlot;;;wide
+;HomePageSparPaymentBanner;;;wide
+
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active
+;;HomePagePaymentBannerSlot;Home Page Spar Payment BannerSlot;true
+
+INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];position[unique=true];pageTemplate(uid,$contentCV)[unique=true][default='LandingPage2Template'];contentSlot(uid,$contentCV)[unique=true];allowOverwrite
+;;HomePagePaymentBannerSlot-LandingPage2;HomePageSparPaymentBanner;;HomePagePaymentBannerSlot;true
+
+INSERT_UPDATE Media                                ; $contentCV[unique=true]    ; code[unique=true]; realfilename                                              ; @media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator]                                                                                                                                                                   ; mime[default='image/jpeg']                                                                                                                                                       ; altText                                  ; folder(qualifier)[default='images']
+#added for payment image 
+;;/images/banners/homepage/Free-shipping 34x24.png;Free-shipping 34x24.png;$siteResource/images/banners/homepage/Free-shipping 34x24.png;image/png;Free Ship;
+;;/images/banners/homepage/Card-34x24.png;Card-34x24.png;$siteResource/images/banners/homepage/Card-34x24.png;image/png;Card Payment;
+;;/images/banners/homepage/OntimeDeli-34x24.png;OntimeDeli-34x24.png;$siteResource/images/banners/homepage/OntimeDeli-34x24.png;image/png;Same Day delivery;
+;;/images/banners/homepage/lower_payment_banner.png;lower_payment_banner.png;$siteResource/images/banners/homepage/lower_payment_banner.png;image/png;Lower Pyamnet Cards Banner;
+
+#payment banner
+INSERT_UPDATE BannerComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef;urlLink;$picture[$lang];title[$lang]
+;;HomePageSameDeliveryBanner;Same delivery Banner;HomePageSameDeliveryBanner;;/images/banners/homepage/OntimeDeli-34x24.png;SAME DAY DELIVERY AVAILABLE
+;;HomePageCardPaymentBanner;Home Page Card Image Banner;HomePageCardPaymentBanner;;/images/banners/homepage/Card-34x24.png;WE ACCEPT FOOD COUPONS/CASH/CARD ON DELIVERY
+;;HomePageFreeShippingBanner;Home page Free Ship Banner;HomePageFreeShippingBanner;;/images/banners/homepage/Free-shipping 34x24.png;FREE SHIPPING ABOVE RS. 500
+;;HomePageLowerPaymentCardBanner;Home page Lower cards Pay Banner;HomePageLowerPaymentCardBanner;;/images/banners/homepage/lower_payment_banner.png;
+
+#payment banner
+INSERT_UPDATE HomePagePaymentBannerImageComponent;$contentCV[unique=true];uid[unique=true];name;banners(&componentRef);&componentRef
+;;SparPaymentBannerImageComponent;Spar  Payment Banner Images Component 1;HomePageSameDeliveryBanner,HomePageCardPaymentBanner,HomePageFreeShippingBanner,HomePageLowerPaymentCardBanner;SparPaymentBannerImageComponent
+
+
+INSERT_UPDATE ContentSlot; $contentCV[unique=true]; uid[unique=true]; name; active; cmsComponents(&componentRef)
+;;Section2BSlot-Homepage; Section2B Slot for Homepage;true;
+												   
+#banner by payment
+INSERT_UPDATE ContentSlot; $contentCV[unique=true]; uid[unique=true]; name; active;cmsComponents(&componentRef);;;
+;;HomePagePaymentBannerSlot; home page slot for Payment; true; SparPaymentBannerImageComponent;;;
+
+## payment banner end-------

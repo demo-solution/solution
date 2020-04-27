@@ -1,0 +1,17 @@
+K 25
+svn:wc:ra_dav:version-url
+V 113
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparstorefront/web/webroot/WEB-INF/views/responsive/fragments/password
+END
+passwordResetRequestPopup.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 143
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparstorefront/web/webroot/WEB-INF/views/responsive/fragments/password/passwordResetRequestPopup.jsp
+END
+forgotPasswordValidationMessage.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 149
+/svn/S6_Maintenance/!svn/ver/1/custom/spar/sparstorefront/web/webroot/WEB-INF/views/responsive/fragments/password/forgotPasswordValidationMessage.jsp
+END
