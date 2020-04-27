@@ -1,0 +1,76 @@
+<hybrisconfig xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:noNamespaceSchemaLocation='../bin/platform/resources/schemas/extensions.xsd'>
+  <extensions>
+    <path dir='${HYBRIS_BIN_DIR}' autoload='false' />
+     <extension name='ldap' />
+    <!--<extension name='virtualjdbc' />-->
+    <extension name='springintegrationlibs' />
+    <!-- <extension name='hmc' /> -->
+    <extension name='voucher' />
+    <!-- <extension name='platformhmc' /> -->
+    <extension name='sparpromotions' />
+    <extension name='customerreview' />
+    <extension name='backoffice' />
+    <!-- <extension name='cockpit' /> -->
+    <!-- <extension name='admincockpit' /> -->
+    <!-- <extension name='reportcockpit' /> -->
+    <!-- <extension name='productcockpit' /> -->
+    <extension name='solrfacetsearch' />
+    <extension name='basecommerce' />
+    <extension name='cms2' />
+    <extension name='cms2lib' />
+    <!-- <extension name='btg' /> -->
+    <extension name='ticketsystem' />
+    <extension name='payment' />
+    <!-- <extension name='cmscockpit' /> -->
+    <!-- <extension name='solrfacetsearchhmc' /> -->
+    <extension name='commerceservices' />
+    <extension name='commercewebservicescommons' />
+    <extension name='acceleratorservices' />
+    <extension name='acceleratorcms' />
+    <!--extension name='yacceleratorcore' /-->
+    <extension name='commercefacades' />
+    <extension name='acceleratorfacades' />
+    <extension name='addonsupport' />
+    <extension name='acceleratorstorefrontcommons' />
+    <!--extension name='yacceleratorfacades' /-->
+    <!--  <extension name='commercesearch' />-->
+    <!-- <extension name='commercesearchhmc' /> -->
+    <extension name='acceleratorwebservicesaddon' />
+    <extension name='yaddon' />
+    <!--extension name='yacceleratorinitialdata' /-->
+    <!--extension name='apparelstore' /-->
+    <!--extension name='yacceleratorstorefront' /-->
+    <!-- <extension name='cscockpit' /> -->
+    <!--extension name='yacceleratorcockpits' /-->
+    <!-- <extension name='instore' /> -->
+    <!--extension name='electronicsstore' /-->
+    <extension name='warehousingbackoffice' />
+    <extension name='warehousing' />
+    <!-- extension name='yacceleratorordermanagement' /-->
+    <!-- <extension name='ordermanagementbackoffice' /> -->
+    <extension name='platformbackoffice' />
+    <extension name='solrserver' />
+	<!--extension name='yacceleratorfulfilmentprocess' />
+	<extension name='yacceleratortest' />
+	
+	<extension name="sparfulfilmentprocess"/-->
+	<!--<extension name="sparcockpits"/>-->
+	<extension name="sparcore"/>
+	<extension name="sparinitialdata"/>
+	<extension name="sparfacades"/>
+	<!--extension name="spartest"/-->
+	<extension name='sparstorefront'/>
+	<extension name="sparordermanagement"/>
+	<!--<extension name='sparbmecat' />-->
+	<!-- <extension name="sparintegration"/> -->
+	<extension name="sparbackoffice"/>
+	<!--extension name="sparinboundfeeds"/>
+	<extension name="sparcronjobs"/-->
+	<extension name="sparpricefactory"/>
+	
+	<extension name="sparpromotions"/>
+	
+	<extension name="sparcommercewebservices"/>
+	
+	</extensions>
+</hybrisconfig>
