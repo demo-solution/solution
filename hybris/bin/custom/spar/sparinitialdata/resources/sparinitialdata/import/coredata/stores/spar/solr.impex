@@ -37,8 +37,8 @@ INSERT_UPDATE SolrServerConfig;name[unique=true];mode(code);embeddedMaster
 ;$serverConfigName;standalone;false;
 
 INSERT_UPDATE SolrEndpointUrl;solrServerConfig(name)[unique=true];url[unique=true];master[unique=true,default=false]
-;$serverConfigName;$solrEndpointUrl1;false
-;$serverConfigName;$solrEndpointUrl2;true
+;$serverConfigName;https://localhost:8983/solr;true
+#;$serverConfigName;$solrEndpointUrl2;true
 
 # Create the solr indexer configuration
 INSERT_UPDATE SolrIndexConfig;name[unique=true];batchSize;numberOfThreads;indexMode(code);

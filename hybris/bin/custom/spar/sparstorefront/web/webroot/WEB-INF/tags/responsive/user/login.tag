@@ -42,7 +42,7 @@
 								<div class="" role="tabpanel" id="step1">
 									<div class="step-content" style="display: block;">
 										<i class="fa fa-user"></i>		
-										<h3>Login to Spar</h3>															
+										<h3>Login to Store</h3>															
 										<div class="col-sm-12 col-md-12 col-lg-12">
 											<formElement:formInputBox idKey="j_username"
 												labelKey="login.email" path="j_username" mandatory="true" />
@@ -86,7 +86,7 @@
 												</div>
 											</div> 
 											<div class="clearfix"></div>
-											<div class="divider divider-brk"><h5>New to SPAR?</h5></div>
+											<div class="divider divider-brk"><h5>New to Store?</h5></div>
 											<div class="mt10"><button type="button" id="createAccount" class="btn">SIGN UP</button></div>											
 										</div>
 									</div>
