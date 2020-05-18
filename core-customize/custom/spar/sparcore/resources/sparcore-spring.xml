@@ -1,0 +1,1283 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- [y] hybris Platform Copyright (c) 2000-2015 hybris AG All rights reserved. This software is the confidential and proprietary information of hybris ("Confidential Information"). 
+	You shall not disclose such Confidential Information and shall use it only in accordance with the terms of the license agreement you entered into with hybris. -->
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:util="http://www.springframework.org/schema/util" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/util
+	   http://www.springframework.org/schema/util/spring-util.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd">
+
+	<context:annotation-config />
+
+	<!-- Spring Integration -->
+	<!-- Commenting as its not required in SPAR - ROHAN_C -START -->
+	<!-- <import resource="classpath:/sparcore/integration/hot-folder-store-electronics-spring.xml"/> -->
+	<!-- <import resource="classpath:/sparcore/integration/hot-folder-store-apparel-spring.xml"/> -->
+	<!-- <import resource="classpath:/sparcore/integration/hot-folder-common-spring.xml"/> -->
+	<!-- Commenting as its not required in SPAR - ROHAN_C END -->
+
+	<!-- SPAR BB XML START -->
+	<import resource="classpath:/sparcore/integration/hot-folder-store-brandbank-spring.xml" />
+	<!-- SPAR BB XML END -->
+
+	<!-- SPAR Product Data XML START -->
+	<import resource="classpath:/sparcore/integration/hot-folder-store-spar-spring.xml" />
+	<!-- SPAR Product Data XML END -->
+	<!-- SystemSetup for the SparCore -->
+	<bean id="acceleratorCoreSystemSetup" class="com.spar.hcl.core.setup.CoreSystemSetup" parent="abstractCoreSystemSetup" />
+
+	<!-- Solr field value providers -->
+
+	<bean id="volumeAwareProductPriceValueProvider" class="com.spar.hcl.core.search.solrfacetsearch.provider.impl.VolumeAwareProductPriceValueProvider"
+		parent="abstractPropertyFieldValueProvider">
+		<property name="fieldNameProvider" ref="solrFieldNameProvider" />
+		<property name="priceService" ref="priceService" />
+		<property name="commonI18NService" ref="commonI18NService" />
+		<property name="sessionService" ref="sessionService" />
+		<property name="userService" ref="userService" />
+		<property name="priceComparator" ref="volumePriceComparator" />
+		<property name="catalogVersionService" ref="catalogVersionService" />
+	</bean>
+
+	<bean id="volumePriceComparator" class="com.spar.hcl.core.comparators.VolumeAwarePriceInformationComparator" scope="singleton" />
+
+	<bean id="productVolumePricesProvider" class="com.spar.hcl.core.search.solrfacetsearch.provider.impl.ProductVolumePricesProvider"
+		parent="abstractPropertyFieldValueProvider">
+		<property name="fieldNameProvider" ref="solrFieldNameProvider" />
+		<property name="priceService" ref="priceService" />
+	</bean>
+
+
+	<bean id="electronicsCategorySource" parent="abstractCategorySource">
+		<property name="rootCategory" value="1" />
+		<!-- '1' is the root icecat category -->
+	</bean>
+	<bean id="electronicsBrandCategorySource" parent="abstractCategorySource">
+		<property name="rootCategory" value="brands" />
+		<!-- 'brands' is the root of the brands hierarchy -->
+	</bean>
+
+	<bean id="apparelCategorySource" parent="abstractCategorySource">
+		<property name="rootCategory" value="categories" />
+		<!-- 'categories' is the root apparel category -->
+	</bean>
+	<bean id="apparelBrandCategorySource" parent="abstractCategorySource">
+		<property name="rootCategory" value="brands" />
+		<!-- 'brands' is the root of the brands hierarchy -->
+	</bean>
+	<bean id="apparelCollectionCategorySource" parent="abstractCategorySource">
+		<property name="rootCategory" value="collections" /> <!-- 'collections' is the root of the collections hierarchy -->
+	</bean>
+
+	<bean id="abstractCategoryCodeValueProvider" abstract="true" class="com.spar.hcl.core.search.solrfacetsearch.provider.impl.SparCategoryCodeValueProvider"
+		parent="abstractPropertyFieldValueProvider">
+		<property name="fieldNameProvider" ref="solrFieldNameProvider" />
+		<property name="commonI18NService" ref="commonI18NService" />
+	</bean>
+	<bean id="abstractCategoryNameValueProvider" abstract="true" class="com.spar.hcl.core.search.solrfacetsearch.provider.impl.SparCategoryNameValueProvider"
+		parent="abstractPropertyFieldValueProvider">
+		<property name="fieldNameProvider" ref="solrFieldNameProvider" />
+		<property name="commonI18NService" ref="commonI18NService" />
+	</bean>
+
+	<bean id="electronicsCategoryCodeValueProvider" parent="abstractCategoryCodeValueProvider">
+		<property name="categorySource" ref="electronicsCategorySource" />
+	</bean>
+	<bean id="electronicsBrandCategoryCodeValueProvider" parent="abstractCategoryCodeValueProvider">
+		<property name="categorySource" ref="electronicsBrandCategorySource" />
+	</bean>
+	<bean id="electronicsCategoryNameValueProvider" parent="abstractCategoryNameValueProvider">
+		<property name="categorySource" ref="electronicsCategorySource" />
+	</bean>
+	<bean id="electronicsBrandCategoryNameValueProvider" parent="abstractCategoryNameValueProvider">
+		<property name="categorySource" ref="electronicsBrandCategorySource" />
+	</bean>
+
+	<bean id="apparelCategoryCodeValueProvider" parent="abstractCategoryCodeValueProvider">
+		<property name="categorySource" ref="apparelCategorySource" />
+	</bean>
+	<bean id="apparelBrandCategoryCodeValueProvider" parent="abstractCategoryCodeValueProvider">
+		<property name="categorySource" ref="apparelBrandCategorySource" />
+	</bean>
+	<bean id="apparelCollectionCategoryCodeValueProvider" parent="abstractCategoryCodeValueProvider">
+		<property name="categorySource" ref="apparelCollectionCategorySource" />
+	</bean>
+	<bean id="apparelCategoryNameValueProvider" parent="abstractCategoryNameValueProvider">
+		<property name="categorySource" ref="apparelCategorySource" />
+	</bean>
+	<bean id="apparelBrandCategoryNameValueProvider" parent="abstractCategoryNameValueProvider">
+		<property name="categorySource" ref="apparelBrandCategorySource" />
+	</bean>
+	<bean id="apparelCollectionCategoryNameValueProvider" parent="abstractCategoryNameValueProvider">
+		<property name="categorySource" ref="apparelCollectionCategorySource" />
+	</bean>
+
+	<bean id="image515ValueProvider" parent="abstractImageValueProvider">
+		<property name="mediaFormat" value="515Wx515H" />
+	</bean>
+	<bean id="image300ValueProvider" parent="abstractImageValueProvider">
+		<property name="mediaFormat" value="300Wx300H" />
+	</bean>
+	<bean id="image96ValueProvider" parent="abstractImageValueProvider">
+		<property name="mediaFormat" value="96Wx96H" />
+	</bean>
+	<bean id="image65ValueProvider" parent="abstractImageValueProvider">
+		<property name="mediaFormat" value="65Wx65H" />
+	</bean>
+	<bean id="image30ValueProvider" parent="abstractImageValueProvider">
+		<property name="mediaFormat" value="30Wx30H" />
+	</bean>
+
+	<bean id="productUrlValueProvider" class="de.hybris.platform.commerceservices.search.solrfacetsearch.provider.impl.ProductUrlValueProvider"
+		parent="abstractPropertyFieldValueProvider">
+		<property name="urlResolver" ref="productModelUrlResolver" />
+		<property name="fieldNameProvider" ref="solrFieldNameProvider" />
+		<property name="i18nService" ref="i18nService" />
+		<property name="commonI18NService" ref="commonI18NService" />
+	</bean>
+
+	<bean id="promotionCodeValueProvider" class="de.hybris.platform.commerceservices.search.solrfacetsearch.provider.impl.PromotionCodeValueProvider"
+		parent="abstractPropertyFieldValueProvider">
+		<property name="promotionsService" ref="promotionsService" />
+		<property name="fieldNameProvider" ref="solrFieldNameProvider" />
+	</bean>
+
+	<bean id="promotionImageValueProvider" class="de.hybris.platform.commerceservices.search.solrfacetsearch.provider.impl.PrimaryPromotionImageValueProvider"
+		parent="abstractPropertyFieldValueProvider">
+		<property name="promotionsService" ref="promotionsService" />
+		<property name="fieldNameProvider" ref="solrFieldNameProvider" />
+	</bean>
+
+	<bean id="colorFacetValueProvider" class="com.spar.hcl.core.search.solrfacetsearch.provider.impl.ColorFacetValueProvider"
+		parent="abstractPropertyFieldValueProvider">
+		<property name="fieldNameProvider" ref="solrFieldNameProvider" />
+	</bean>
+
+	<bean id="colorFacetDisplayNameProvider" class="com.spar.hcl.core.search.solrfacetsearch.provider.impl.ColorFacetDisplayNameProvider">
+		<property name="enumerationService" ref="enumerationService" />
+		<property name="i18nService" ref="i18nService" />
+		<property name="commonI18NService" ref="commonI18NService" />
+	</bean>
+
+	<bean id="apparelPointOfServiceFacetDisplayNameProvider" class="com.spar.hcl.core.search.solrfacetsearch.provider.impl.PointOfServiceFacetDisplayNameProvider">
+		<property name="pointOfServiceService" ref="pointOfServiceService" />
+	</bean>
+
+	<bean id="electronicsPointOfServiceFacetDisplayNameProvider" class="com.spar.hcl.core.search.solrfacetsearch.provider.impl.PointOfServiceFacetDisplayNameProvider">
+		<property name="pointOfServiceService" ref="pointOfServiceService" />
+	</bean>
+
+	<bean id="genderValueProvider" class="com.spar.hcl.core.search.solrfacetsearch.provider.impl.GenderValueProvider" parent="abstractPropertyFieldValueProvider">
+		<property name="fieldNameProvider" ref="solrFieldNameProvider" />
+	</bean>
+
+	<bean id="genderFacetDisplayNameProvider" class="com.spar.hcl.core.search.solrfacetsearch.provider.impl.GenderFacetDisplayNameProvider">
+		<property name="enumerationService" ref="enumerationService" />
+		<property name="i18nService" ref="i18nService" />
+		<property name="commonI18NService" ref="commonI18NService" />
+	</bean>
+
+	<!-- Event listeners are singletons, therefore the dependency for a bean in tenant-scope must be configured with a lookup method. -->
+	<bean id="orderCancelledEventListener" class="com.spar.hcl.core.event.OrderCancelledEventListener" parent="abstractSiteEventListener">
+		<property name="modelService" ref="modelService" />
+		<property name="businessProcessService" ref="businessProcessService" />
+	</bean>
+	<bean id="orderRefundEventListener" class="com.spar.hcl.core.event.OrderRefundEventListener" parent="abstractSiteEventListener">
+		<property name="modelService" ref="modelService" />
+		<property name="businessProcessService" ref="businessProcessService" />
+	</bean>
+	<bean id="customerRegistrationEventListener" class="com.spar.hcl.core.event.RegistrationEventListener" parent="abstractSiteEventListener">
+		<property name="modelService" ref="modelService" />
+		<property name="businessProcessService" ref="businessProcessService" />
+	</bean>
+	<bean id="forgottenPasswordEventListener" class="com.spar.hcl.core.event.ForgottenPasswordEventListener" parent="abstractSiteEventListener">
+		<property name="modelService" ref="modelService" />
+		<property name="businessProcessService" ref="businessProcessService" />
+	</bean>
+
+	<bean id="sparNeedHelpEventListener" class="com.spar.hcl.core.event.SparNeedHelpEventListener" parent="abstractSiteEventListener">
+		<property name="modelService" ref="modelService" />
+		<property name="businessProcessService" ref="businessProcessService" />
+		<property name="baseSiteService" ref="baseSiteService" />
+		<property name="configurationService" ref="configurationService" />
+	</bean>
+
+	<bean id="submitOrderEventListener" class="com.spar.hcl.core.event.SubmitOrderEventListener" parent="abstractSiteEventListener">
+		<property name="businessProcessService" ref="businessProcessService" />
+		<property name="modelService" ref="modelService" />
+		<property name="baseStoreService" ref="baseStoreService" />
+	</bean>
+	<bean id="orderConfirmationEventListener" class="com.spar.hcl.core.event.OrderConfirmationEventListener" parent="abstractSiteEventListener">
+		<property name="modelService" ref="modelService" />
+		<property name="businessProcessService" ref="businessProcessService" />
+	</bean>
+	<bean id="sendDeliveryMessageEventListener" class="com.spar.hcl.core.event.SendDeliveryMessageEventListener" parent="abstractEventListener">
+		<property name="modelService" ref="modelService" />
+		<property name="businessProcessService" ref="businessProcessService" />
+	</bean>
+	<bean id="sendReadyForPickupMessageEventListener" class="com.spar.hcl.core.event.SendReadyForPickupMessageEventListener" parent="abstractEventListener">
+		<property name="modelService" ref="modelService" />
+		<property name="businessProcessService" ref="businessProcessService" />
+	</bean>
+	<bean id="sendOrderPartiallyCanceledMessageEventListener" class="com.spar.hcl.core.event.SendOrderPartiallyCanceledMessageEventListener"
+		parent="abstractEventListener">
+		<property name="modelService" ref="modelService" />
+		<property name="businessProcessService" ref="businessProcessService" />
+	</bean>
+	<bean id="sendOrderPartiallyRefundedMessageEventListener" class="com.spar.hcl.core.event.SendOrderPartiallyRefundedMessageEventListener"
+		parent="abstractEventListener">
+		<property name="modelService" ref="modelService" />
+		<property name="businessProcessService" ref="businessProcessService" />
+	</bean>
+	<bean id="sendNotPickedUpConsignmentCanceledMessageEventListener" class="com.spar.hcl.core.event.SendNotPickedUpConsignmentCanceledMessageEventListener"
+		parent="abstractEventListener">
+		<property name="modelService" ref="modelService" />
+		<property name="businessProcessService" ref="businessProcessService" />
+	</bean>
+	<bean id="orderCompletedEventListener" class="com.spar.hcl.core.event.OrderCompletedEventListener" parent="abstractSiteEventListener">
+		<property name="modelService" ref="modelService" />
+		<property name="businessProcessService" ref="businessProcessService" />
+	</bean>
+
+	<!-- Process resources definition -->
+
+	<bean id="customerRegistrationEmailProcessDefinitionResource" class="de.hybris.platform.processengine.definition.ProcessDefinitionResource">
+		<property name="resource" value="classpath:/sparcore/processes/customerRegistrationEmailProcess.xml" />
+	</bean>
+	<bean id="forgottenPasswordEmailProcessDefinitionResource" class="de.hybris.platform.processengine.definition.ProcessDefinitionResource">
+		<property name="resource" value="classpath:/sparcore/processes/forgottenPasswordEmailProcess.xml" />
+	</bean>
+	<bean id="orderConfirmationEmailProcessDefinitionResource" class="de.hybris.platform.processengine.definition.ProcessDefinitionResource">
+		<property name="resource" value="classpath:/sparcore/processes/orderConfirmationEmailProcess.xml" />
+	</bean>
+	<bean id="sendDeliveryEmailProcessDefinitionResource" class="de.hybris.platform.processengine.definition.ProcessDefinitionResource">
+		<property name="resource" value="classpath:/sparcore/processes/sendDeliveryEmailProcess.xml" />
+	</bean>
+	<bean id="sendReadyForPickupEmailProcessDefinitionResource" class="de.hybris.platform.processengine.definition.ProcessDefinitionResource">
+		<property name="resource" value="classpath:/sparcore/processes/sendReadyForPickupEmailProcess.xml" />
+	</bean>
+	<bean id="sendOrderCancelledEmailProcessDefinitionResource" class="de.hybris.platform.processengine.definition.ProcessDefinitionResource">
+		<property name="resource" value="classpath:/sparcore/processes/sendOrderCancelledEmailProcess.xml" />
+	</bean>
+	<bean id="sendOrderRefundEmailProcessDefinitionResource" class="de.hybris.platform.processengine.definition.ProcessDefinitionResource">
+		<property name="resource" value="classpath:/sparcore/processes/sendOrderRefundEmailProcess.xml" />
+	</bean>
+	<bean id="sendOrderPartiallyCanceledEmailProcessDefinitionResource" class="de.hybris.platform.processengine.definition.ProcessDefinitionResource">
+		<property name="resource" value="classpath:/sparcore/processes/sendOrderPartiallyCanceledEmailProcess.xml" />
+	</bean>
+	<bean id="sendOrderPartiallyRefundedEmailProcessDefinitionResource" class="de.hybris.platform.processengine.definition.ProcessDefinitionResource">
+		<property name="resource" value="classpath:/sparcore/processes/sendOrderPartiallyRefundedEmailProcess.xml" />
+	</bean>
+	<bean id="sendNotPickedUpConsignmentCanceledEmailProcessDefinitionResource" class="de.hybris.platform.processengine.definition.ProcessDefinitionResource">
+		<property name="resource" value="classpath:/sparcore/processes/sendNotPickedUpConsignmentCanceledEmailProcess.xml" />
+	</bean>
+
+	<!-- Actions -->
+	<bean id="abstractAction" class="de.hybris.platform.processengine.action.AbstractAction" abstract="true">
+		<property name="modelService" ref="modelService" />
+		<property name="processParameterHelper" ref="processParameterHelper" />
+	</bean>
+
+	<bean id="sendEmail" class="de.hybris.platform.acceleratorservices.process.email.actions.SendEmailAction" parent="abstractAction">
+		<property name="emailService" ref="emailService" />
+	</bean>
+
+	<bean id="abstractGenerateEmailAction" class="de.hybris.platform.acceleratorservices.process.email.actions.GenerateEmailAction" parent="abstractAction"
+		abstract="true">
+		<property name="modelService" ref="modelService" />
+		<property name="cmsEmailPageService" ref="cmsEmailPageService" />
+		<property name="contextResolutionStrategy" ref="processContextResolutionStrategy" />
+		<property name="emailGenerationService" ref="emailGenerationService" />
+	</bean>
+
+	<bean id="generateCustomerRegistrationEmail" parent="abstractGenerateEmailAction">
+		<property name="frontendTemplateName" value="CustomerRegistrationEmailTemplate" />
+	</bean>
+
+	<bean id="generateForgottenPasswordEmail" parent="abstractGenerateEmailAction">
+		<property name="frontendTemplateName" value="ForgottenPasswordEmailTemplate" />
+	</bean>
+
+	<bean id="generateOrderConfirmationEmail" parent="abstractGenerateEmailAction">
+		<property name="frontendTemplateName" value="OrderConfirmationEmailTemplate" />
+	</bean>
+
+	<bean id="generateDeliverySentEmail" parent="abstractGenerateEmailAction">
+		<property name="frontendTemplateName" value="DeliverySentEmailTemplate" />
+	</bean>
+
+	<bean id="generateReadyForPickupEmail" parent="abstractGenerateEmailAction">
+		<property name="frontendTemplateName" value="ReadyForPickupEmailTemplate" />
+	</bean>
+
+	<bean id="generateOrderCancelledEmail" parent="abstractGenerateEmailAction">
+		<property name="frontendTemplateName" value="OrderCancelledEmailTemplate" />
+	</bean>
+
+	<bean id="generateOrderRefundEmail" parent="abstractGenerateEmailAction">
+		<property name="frontendTemplateName" value="OrderRefundEmailTemplate" />
+	</bean>
+
+	<bean id="generateOrderPartiallyCanceledEmail" parent="abstractGenerateEmailAction">
+		<property name="frontendTemplateName" value="OrderPartiallyCanceledEmailTemplate" />
+	</bean>
+	<bean id="generateOrderPartiallyRefundedEmail" parent="abstractGenerateEmailAction">
+		<property name="frontendTemplateName" value="OrderPartiallyRefundedEmailTemplate" />
+	</bean>
+	<bean id="generateNotPickedUpConsignmentCanceledEmail" parent="abstractGenerateEmailAction">
+		<property name="frontendTemplateName" value="NotPickedUpConsignmentCanceledEmailTemplate" />
+	</bean>
+
+	<bean id="removeSentEmail" class="de.hybris.platform.acceleratorservices.process.email.actions.RemoveSentEmailAction" parent="abstractAction">
+		<property name="modelService" ref="modelService" />
+	</bean>
+
+	<!-- Simple Suggestion Service -->
+	<alias alias="simpleSuggestionService" name="defaultSimpleSuggestionService" />
+	<bean id="defaultSimpleSuggestionService" class="com.spar.hcl.core.suggestion.impl.DefaultSimpleSuggestionService">
+		<property name="simpleSuggestionDao" ref="simpleSuggestionDao" />
+	</bean>
+	<alias alias="simpleSuggestionDao" name="defaultSimpleSuggestionDao" />
+	<bean id="defaultSimpleSuggestionDao" class="com.spar.hcl.core.suggestion.dao.impl.DefaultSimpleSuggestionDao" parent="abstractItemDao">
+		<property name="flexibleSearchService" ref="flexibleSearchService" />
+	</bean>
+
+	<bean id="mccSiteUrlHelper" class="com.spar.hcl.core.util.MccSiteUrlHelper">
+		<property name="siteBaseUrlResolutionService" ref="siteBaseUrlResolutionService" />
+		<property name="cmsSiteService" ref="cmsSiteService" />
+	</bean>
+
+
+	<!-- checkout flow configuration -->
+
+	<!-- <bean id="pickUpInStoreCheckoutFlowStrategy" class="com.spar.hcl.core.checkout.flow.impl.PickUpInStoreCheckoutFlowStrategy">
+		<property name="pickupStrategy" ref="pickupStrategy" />
+		<property name="defaultStrategy" ref="siteCheckoutFlowStrategy" />
+		<property name="multiStepCheckoutFlowStrategy" ref="multiStepCheckoutFlowStrategy" />
+	</bean>
+
+	<bean id="siteCheckoutFlowStrategy" class="com.spar.hcl.core.checkout.flow.impl.SiteCheckoutFlowStrategy">
+		This strategy looks up a strategy based on the current site UID
+		<property name="cmsSiteService" ref="cmsSiteService" />
+		<property name="siteMappings">
+			<map>
+				<entry key="electronics" value-ref="newCustomerCheckoutFlowStrategy" />
+				<entry key="apparel-de" value-ref="multiStepCheckoutFlowStrategy" />
+				<entry key="apparel-uk" value-ref="multiStepCheckoutFlowStrategy" />
+				<entry key="powertoolsstore" value-ref="multiStepCheckoutFlowStrategy" />
+			</map>
+		</property>
+		Default to SINGLE step checkout
+		<property name="defaultStrategy" ref="multiStepCheckoutFlowStrategy" />
+	</bean>
+
+	<bean id="newCustomerCheckoutFlowStrategy" class="com.spar.hcl.core.checkout.flow.impl.NewCustomerCheckoutFlowStrategy">
+		This strategy works out if the user has created any data
+		<property name="userService" ref="userService" />
+		<property name="customerAccountService" ref="customerAccountService" />
+		<property name="defaultStrategy" ref="multiStepCheckoutFlowStrategy"/>
+		<property name="newCustomerStrategy" ref="multiStepCheckoutFlowStrategy"/>
+	</bean> -->
+
+	<!-- Product Reference Lookup Strategies -->
+	<alias name="apparelCrossSellingProductReferenceTargetStrategy" alias="crossSellingProductReferenceTargetStrategy" />
+	<bean id="apparelCrossSellingProductReferenceTargetStrategy" parent="defaultCrossSellingProductReferenceTargetStrategy">
+		<property name="productReferenceTargetStrategies">
+			<list merge="true">
+				<ref bean="apparelSizeProductReferenceTargetStrategy" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="apparelSizeProductReferenceTargetStrategy" class="com.spar.hcl.core.strategies.impl.ApparelSizeProductReferenceTargetStrategy">
+		<property name="commerceCategoryService" ref="commerceCategoryService" />
+		<property name="rootCategoryCode" value="categories" />
+	</bean>
+
+	<!-- New entry for Spar -->
+
+	<!-- Added to put the list of Stores for Home Page drop Down -->
+	<bean id="storeFinderServiceInterface" class="com.spar.hcl.core.storefinder.impl.DefaultStoreFinderServiceImpl">
+		<property name="flexibleSearchService" ref="flexibleSearchService" />
+		<property name="baseStoreService" ref="baseStoreService" />
+		<!-- Properties added by sumit -->
+		<property name="geoWebServiceWrapper" ref="geoServiceWrapper" />
+		<property name="pointOfServiceDao" ref="pointOfServiceDao" />
+		<property name="pointOfServiceGenericDao" ref="pointOfServiceGenericDao" />
+		<property name="pointOfServicePagedGenericDao" ref="pointOfServicePagedGenericDao" />
+		<!-- Change end here -->
+
+	</bean>
+
+	<!-- Change start by sumit -->
+	<bean id="storeFinderServiceHelperInterface" class="com.spar.hcl.core.storefinder.impl.DefaultStoreFinderServiceImpl">
+		<property name="flexibleSearchService" ref="flexibleSearchService" />
+		<property name="baseStoreService" ref="baseStoreService" />
+		<!-- Properties added by sumit -->
+		<property name="geoWebServiceWrapper" ref="geoServiceWrapper" />
+		<property name="pointOfServiceDao" ref="pointOfServiceDao" />
+		<property name="pointOfServiceGenericDao" ref="pointOfServiceGenericDao" />
+		<property name="pointOfServicePagedGenericDao" ref="pointOfServicePagedGenericDao" />
+		<!-- Change end here -->
+
+	</bean>
+
+	<!-- Change end here -->
+
+
+	<bean id="sparCategorySource" parent="abstractCategorySource">
+		<!-- property name="rootCategory" value="10001"/ -->
+	</bean>
+	<bean id="sparBrandCategorySource" parent="abstractCategorySource">
+		<property name="rootCategory" value="brands" />
+	</bean>
+	<bean id="sparCategoryCodeValueProvider" parent="abstractCategoryCodeValueProvider">
+		<property name="categorySource" ref="sparCategorySource" />
+	</bean>
+	<bean id="sparBrandCategoryCodeValueProvider" parent="abstractCategoryCodeValueProvider">
+		<property name="categorySource" ref="sparBrandCategorySource" />
+	</bean>
+	<bean id="sparCategoryNameValueProvider" parent="abstractCategoryNameValueProvider">
+		<property name="categorySource" ref="sparCategorySource" />
+	</bean>
+	<bean id="sparBrandCategoryNameValueProvider" parent="abstractCategoryNameValueProvider">
+		<property name="categorySource" ref="sparBrandCategorySource" />
+	</bean>
+
+	<bean id="sparPointOfServiceFacetDisplayNameProvider" class="com.spar.hcl.core.search.solrfacetsearch.provider.impl.PointOfServiceFacetDisplayNameProvider">
+		<property name="pointOfServiceService" ref="pointOfServiceService" />
+	</bean>
+
+	<!-- ValueProvider for Variants for Solr - START - Rohan -->
+
+	<bean id="sparVariantsStockStatusValueProvider" class="com.spar.hcl.core.search.solrfacetsearch.provider.impl.SparVariantsStockStatusValueProvider"
+		parent="abstractPropertyFieldValueProvider">
+		<property name="fieldNameProvider" ref="solrFieldNameProvider" />
+		<property name="commerceStockService" ref="sparCommerceStockService" />
+	</bean>
+
+	<bean id="sparVariantsMRPValueProvider" class="com.spar.hcl.core.search.solrfacetsearch.provider.impl.SparVariantsMRPValueProvider"
+		parent="abstractPropertyFieldValueProvider">
+		<property name="fieldNameProvider" ref="solrFieldNameProvider" />
+		<property name="priceService" ref="defaultPriceService" />
+	</bean>
+
+	<bean id="sparVariantsBrandValueProvider" class="com.spar.hcl.core.search.solrfacetsearch.provider.impl.SparVariantsBrandValueProvider"
+		parent="abstractPropertyFieldValueProvider">
+		<property name="fieldNameProvider" ref="solrFieldNameProvider" />
+	</bean>
+
+	<bean id="sparVariantsCodeValueProvider" class="com.spar.hcl.core.search.solrfacetsearch.provider.impl.SparVariantsCodeValueProvider"
+		parent="abstractPropertyFieldValueProvider">
+		<property name="fieldNameProvider" ref="solrFieldNameProvider" />
+	</bean>
+
+	<bean id="sparVariantsNameValueProvider" class="com.spar.hcl.core.search.solrfacetsearch.provider.impl.SparVariantsNameValueProvider"
+		parent="abstractPropertyFieldValueProvider">
+		<property name="fieldNameProvider" ref="solrFieldNameProvider" />
+	</bean>
+
+	<bean id="sparVariantsUnitConditionValueProvider" class="com.spar.hcl.core.search.solrfacetsearch.provider.impl.SparVariantsUnitConditionValueProvider"
+		parent="abstractPropertyFieldValueProvider">
+		<property name="fieldNameProvider" ref="solrFieldNameProvider" />
+	</bean>
+
+	<bean id="sparVariantsStockValueProvider" class="com.spar.hcl.core.search.solrfacetsearch.provider.impl.SparVariantsStockValueProvider"
+		parent="abstractPropertyFieldValueProvider">
+		<property name="fieldNameProvider" ref="solrFieldNameProvider" />
+		<property name="commerceStockService" ref="sparCommerceStockService" />
+	</bean>
+
+	<bean id="sparVariantsPriceValueProvider" class="com.spar.hcl.core.search.solrfacetsearch.provider.impl.SparVariantsPriceValueProvider"
+		parent="abstractPropertyFieldValueProvider">
+		<property name="fieldNameProvider" ref="solrFieldNameProvider" />
+		<property name="priceService" ref="defaultPriceService" />
+	</bean>
+
+	<bean id="sparVariantsProductOnBogoValueProvider" class="com.spar.hcl.core.search.solrfacetsearch.provider.impl.SparVariantsProductOnBogoValueProvider"
+		parent="abstractPropertyFieldValueProvider">
+		<property name="fieldNameProvider" ref="solrFieldNameProvider" />
+		<property name="priceService" ref="defaultPriceService" />
+	</bean>
+
+	<bean id="sparVariantsPromotionDiscountValueProvider" class="com.spar.hcl.core.search.solrfacetsearch.provider.impl.SparVariantsPromotionDiscountValueProvider"
+		parent="abstractPropertyFieldValueProvider">
+		<property name="fieldNameProvider" ref="solrFieldNameProvider" />
+		<property name="priceService" ref="defaultPriceService" />
+	</bean>
+
+	<bean id="sparVariantsDescriptionValueProvider" class="com.spar.hcl.core.search.solrfacetsearch.provider.impl.SparVariantsDescriptionValueProvider"
+		parent="abstractPropertyFieldValueProvider">
+		<property name="fieldNameProvider" ref="solrFieldNameProvider" />
+	</bean>
+
+	<bean id="sparVariantsPrimaryImageValueProvider" class="com.spar.hcl.core.search.solrfacetsearch.provider.impl.SparVariantImageValueProvider"
+		parent="abstractImageValueProvider">
+		<property name="mediaService" ref="mediaService" />
+		<property name="mediaContainerService" ref="mediaContainerService" />
+		<property name="fieldNameProvider" ref="solrFieldNameProvider" />
+		<property name="mediaFormat" value="150Wx150H" />
+	</bean>
+
+	<bean id="sparVariantsThumbnailImageValueProvider" class="com.spar.hcl.core.search.solrfacetsearch.provider.impl.SparVariantImageValueProvider"
+		parent="abstractImageValueProvider">
+		<property name="mediaService" ref="mediaService" />
+		<property name="mediaContainerService" ref="mediaContainerService" />
+		<property name="fieldNameProvider" ref="solrFieldNameProvider" />
+		<property name="mediaFormat" value="80Wx80H" />
+	</bean>
+
+	<bean id="sparVariantsUrlValueProvider" class="com.spar.hcl.core.search.solrfacetsearch.provider.impl.SparVariantsUrlValueProvider"
+		parent="abstractPropertyFieldValueProvider">
+		<property name="urlResolver" ref="productModelUrlResolver" />
+		<property name="fieldNameProvider" ref="solrFieldNameProvider" />
+		<property name="i18nService" ref="i18nService" />
+		<property name="commonI18NService" ref="commonI18NService" />
+	</bean>
+
+	<bean id="sparVariantsChildSKUsValueProvider" class="com.spar.hcl.core.search.solrfacetsearch.provider.impl.SparVariantsChildSKUsValueProvider"
+		parent="abstractPropertyFieldValueProvider">
+		<property name="fieldNameProvider" ref="solrFieldNameProvider" />
+	</bean>
+
+	<bean id="sparPromotionPercentDiscountValueProvider" class="com.spar.hcl.core.search.solrfacetsearch.provider.impl.SparPromotionPercentDiscountValueProvider"
+		parent="productPriceValueProvider">
+		<property name="fieldNameProvider" ref="solrFieldNameProvider" />
+		<property name="priceService" ref="defaultPriceService" />
+	</bean>
+
+	<bean id="sparProductOnBogoValueProvider" class="com.spar.hcl.core.search.solrfacetsearch.provider.impl.SparProductOnBogoValueProvider"
+		parent="abstractPropertyFieldValueProvider">
+		<property name="fieldNameProvider" ref="solrFieldNameProvider" />
+		<property name="priceService" ref="defaultPriceService" />
+	</bean>
+
+	<bean id="dynamicHybrisCustomerAttributeBean" class="com.spar.hcl.core.model.DynamicHybrisCustomerAttributeBean" />
+
+	<!-- Cart Restoration -->
+	<bean id="sparExportProductsJob" class="com.spar.hcl.core.jobs.SparExportProductsJob" parent="abstractJobPerformable">
+		<property name="flexibleSearchService" ref="flexibleSearchService" />
+		<property name="catalogVersionService" ref="catalogVersionService" />
+	</bean>
+
+	<!-- SPAR Payment Service for COD & IPG - START -->
+	<alias name="sparDefaultAcceleratorPaymentService" alias="sparAcceleratorPaymentService" />
+	<bean id="sparDefaultAcceleratorPaymentService" class="com.spar.hcl.core.services.payment.impl.SparDefaultAcceleratorPaymentService"
+		parent="acceleratorPaymentService">
+		<property name="codPaymentInfoCreateStrategy" ref="sparCashOnDeliveryPaymentInfoCreateStrategy" />
+		<property name="walletPaymentInfoCreateStrategy" ref="sparWalletPaymentInfoCreateStrategy" />
+		<property name="landmarkRewardPaymentInfoCreateStrategy" ref="sparLandmarkRewardPaymentInfoCreateStrategy" />
+		<property name="sparPayTMPaymentInfoCreateStrategy" ref="sparPayTMPaymentInfoCreateStrategy" />
+		<property name="sparIPGPaymentResponseInterpretationStrategy" ref="sparIPGPaymentResponseInterpretationStrategy" />
+		<property name="creditCardPaymentInfoCreateStrategy" ref="SparIPGPaymentInfoCreateStrategy" />
+		<property name="signatureValidationStrategy" ref="sparSignatureValidationStrategy" />
+		<property name="createSubscriptionResultValidationStrategy" ref="sparCreateSubscriptionResultValidationStrategy" />
+		<property name="paymentFormActionUrlStrategy" ref="sparPaymentFormActionUrlStrategy" />
+		<property name="paymentDataConverter" ref="sparPaymentDataConverter" />
+		<property name="createSubscriptionRequestStrategy" ref="sparCreateSubscriptionRequestStrategy" />
+		<property name="commerceCheckoutService" ref="commerceCheckoutService" />
+	</bean>
+
+	<alias name="defaultSparCashOnDeliveryPaymentInfoCreateStrategy" alias="sparCashOnDeliveryPaymentInfoCreateStrategy" />
+	<bean id="defaultSparCashOnDeliveryPaymentInfoCreateStrategy"
+		class="com.spar.hcl.core.payment.cashondelivery.strategies.impl.SparDefaultCashOnDeliveryPaymentInfoCreateStrategy">
+		<property name="modelService" ref="modelService" />
+		<property name="commonI18NService" ref="commonI18NService" />
+		<property name="customerEmailResolutionService" ref="customerEmailResolutionService" />
+		<property name="userService" ref="userService" />
+	</bean>
+
+	<!-- SPAR Payment Service for COD & IPG - END -->
+	<alias name="defaultSparWalletPaymentInfoCreateStrategy" alias="sparWalletPaymentInfoCreateStrategy" />
+	<bean id="defaultSparWalletPaymentInfoCreateStrategy" class="com.spar.hcl.core.payment.wallet.strategies.impl.SparDefaultWalletPaymentInfoCreateStrategy">
+		<property name="modelService" ref="modelService" />
+		<property name="commonI18NService" ref="commonI18NService" />
+		<property name="customerEmailResolutionService" ref="customerEmailResolutionService" />
+		<property name="userService" ref="userService" />
+	</bean>
+
+	<!-- SPAR Payment Service for COD & IPG - END -->
+	<alias name="defaultSparLandmarkRewardPaymentInfoCreateStrategy" alias="sparLandmarkRewardPaymentInfoCreateStrategy" />
+	<bean id="defaultSparLandmarkRewardPaymentInfoCreateStrategy"
+		class="com.spar.hcl.core.payment.landmarkreward.strategies.impl.SparDefaultLandmarkRewardPaymentInfoCreateStrategy">
+		<property name="modelService" ref="modelService" />
+		<property name="commonI18NService" ref="commonI18NService" />
+		<property name="customerEmailResolutionService" ref="customerEmailResolutionService" />
+		<property name="userService" ref="userService" />
+	</bean>
+
+	<!-- SPAR Payment Service for COD & IPG & Landmark Rewards - END -->
+
+	<alias name="defaultSparPayTMPaymentInfoCreateStrategy" alias="sparPayTMPaymentInfoCreateStrategy" />
+	<bean id="defaultSparPayTMPaymentInfoCreateStrategy" class="com.spar.hcl.core.payment.PayTM.strategies.impl.SparDefaultPayTMPaymentInfoCreateStrategy">
+		<property name="modelService" ref="modelService" />
+		<property name="commonI18NService" ref="commonI18NService" />
+		<property name="customerEmailResolutionService" ref="customerEmailResolutionService" />
+		<property name="userService" ref="userService" />
+	</bean>
+
+	<!-- SPAR Delivery mode strategy for Home delivery and CNC center - Start -->
+	<alias name="sparDefaultDeliveryModeLookupStrategy" alias="deliveryModeLookupStrategy" />
+	<bean id="sparDefaultDeliveryModeLookupStrategy" parent="defaultDeliveryModeLookupStrategy"
+		class="com.spar.hcl.core.service.order.impl.SparDefaultDeliveryModeLookupStrategy">
+	</bean>
+	<!-- SPAR Delivery mode strategy for Home delivery and CNC center - End -->
+
+	<!-- Value provider to set Variant's data in base product - START -->
+
+	<bean id="sparProductPriceValueProvider" class="com.spar.hcl.core.search.solrfacetsearch.provider.impl.SparProductPriceValueProvider"
+		parent="productPriceValueProvider">
+		<property name="fieldNameProvider" ref="solrFieldNameProvider" />
+		<property name="priceService" ref="defaultPriceService" />
+	</bean>
+
+	<bean id="sparProductDisplayFlagValueProvider" class="com.spar.hcl.core.search.solrfacetsearch.provider.impl.SparProductDisplayFlagValueProvider"
+		parent="productPriceValueProvider">
+		<property name="fieldNameProvider" ref="solrFieldNameProvider" />
+		<property name="priceService" ref="defaultPriceService" />
+	</bean>
+
+	<bean id="sparProductPriceRangeValueProvider" class="com.spar.hcl.core.search.solrfacetsearch.provider.impl.SparProductPriceRangeValueProvider"
+		parent="productPriceValueProvider">
+		<property name="fieldNameProvider" ref="solrFieldNameProvider" />
+		<property name="priceService" ref="defaultPriceService" />
+	</bean>
+
+
+	<bean id="sparProductStoreStockValueProvider" class="com.spar.hcl.core.search.solrfacetsearch.provider.impl.SparProductStoreStockValueProvider"
+		parent="productStoreStockValueProvider">
+		<property name="fieldNameProvider" ref="solrFieldNameProvider" />
+		<property name="commerceStockService" ref="sparCommerceStockService" />
+	</bean>
+
+	<bean id="sparBrandFacetValuesProvider" class="com.spar.hcl.core.search.solrfacetsearch.provider.impl.SparBrandFacetValuesProvider"
+		parent="abstractPropertyFieldValueProvider">
+		<property name="fieldNameProvider" ref="solrFieldNameProvider" />
+	</bean>
+
+	<bean id="sparProductInStockFlagFacetValuesProvider" class="com.spar.hcl.core.search.solrfacetsearch.provider.impl.SparProductInStockFlagFacetValuesProvider"
+		parent="productInStockFlagValueProvider">
+		<property name="fieldNameProvider" ref="solrFieldNameProvider" />
+		<property name="commerceStockService" ref="sparCommerceStockService" />
+	</bean>
+
+	<bean id="sparRefineFacetValuesProvider" class="com.spar.hcl.core.search.solrfacetsearch.provider.impl.SparRefineFacetValuesProvider"
+		parent="abstractPropertyFieldValueProvider">
+		<property name="fieldNameProvider" ref="solrFieldNameProvider" />
+		<property name="priceService" ref="defaultPriceService" />
+	</bean>
+
+	<bean id="sparSpringELValueProvider" class="com.spar.hcl.core.search.solrfacetsearch.provider.impl.SparSpringELValueProvider" parent="springELValueProvider">
+	</bean>
+
+	<bean id="sparProductInStockFlagValueProvider" class="com.spar.hcl.core.search.solrfacetsearch.provider.impl.SparProductInStockFlagValueProvider"
+		parent="productInStockFlagValueProvider">
+		<property name="fieldNameProvider" ref="solrFieldNameProvider" />
+		<property name="commerceStockService" ref="sparCommerceStockService" />
+	</bean>
+
+	<bean id="sparIsProductShownMPValueProvider" class="com.spar.hcl.core.search.solrfacetsearch.provider.impl.SparIsProductShownMPValueProvider"
+		parent="abstractPropertyFieldValueProvider">
+		<property name="fieldNameProvider" ref="solrFieldNameProvider" />
+		<property name="sparCartService" ref="sparCartService" />
+		<property name="categorySource" ref="sparCategorySource" />
+	</bean>
+
+	<bean id="sparIsAvailableForFoodCouponValueProvider" class="com.spar.hcl.core.search.solrfacetsearch.provider.impl.SparIsAvailableForFoodCouponValueProvider"
+		parent="abstractPropertyFieldValueProvider">
+		<property name="fieldNameProvider" ref="solrFieldNameProvider" />
+		<property name="sparCartService" ref="sparCartService" />
+		<property name="categorySource" ref="sparCategorySource" />
+	</bean>
+
+	<!-- Value provider to set Variant's data in base product - END -->
+
+	<!-- Uploading image in paragraph component - START -->
+	<bean id="contentFormatHelper" class="com.spar.hcl.core.helper.ContentFormatHelper">
+		<property name="modelService" ref="modelService"></property>
+		<property name="mediaService" ref="mediaService"></property>
+		<property name="flexibleSearchService" ref="flexibleSearchService"></property>
+	</bean>
+
+
+	<bean id="cMSParagraphMediaURLRewriteInterceptor" class="com.spar.hcl.core.service.interceptor.impl.CMSParagraphMediaURLRewriteInterceptor">
+		<property name="contentFormatHelper" ref="contentFormatHelper"></property>
+	</bean>
+	<bean id="cMSParagraphMediaURLRewriteInterceptorMapping" class="de.hybris.platform.servicelayer.interceptor.impl.InterceptorMapping">
+		<property name="interceptor" ref="cMSParagraphMediaURLRewriteInterceptor" />
+		<property name="typeCode" value="CMSParagraphComponent" />
+	</bean>
+	<bean id="sparOrderInterceptor" class="com.spar.hcl.core.service.interceptor.impl.SparOrderInterceptor" scope="tenant">
+		<property name="modelService" ref="modelService" />
+	</bean>
+	<bean id="SparOrderInterceptorMapping" scope="tenant" class="de.hybris.platform.servicelayer.interceptor.impl.InterceptorMapping">
+		<property name="interceptor" ref="sparOrderInterceptor" />
+		<property name="typeCode" value="AbstractOrderEntry" />
+	</bean>
+
+	<!-- Uploading image in paragraph component - END -->
+	<!-- properties added for voucher story Sumit -->
+	<bean id="sparCartService" class="com.spar.hcl.core.service.cart.impl.SparCartServiceImpl" parent="cartService">
+		<property name="productService" ref="productService"></property>
+		<property name="baseStoreService" ref="baseStoreService" />
+		<property name="commerceDeliveryModeStrategy" ref="commerceDeliveryModeStrategy" />
+		<property name="promotionService" ref="promotionsService" />
+		<property name="sparCombiOfferPromotionStrategy" ref="sparCombiOfferPromotionStrategy" />
+		<property name="priceService" ref="defaultPriceService" />
+		<property name="modelService" ref="modelService" />
+		<property name="voucherService" ref="voucherService" />
+		<property name="voucherModelService" ref="voucherModelService" />
+	</bean>
+
+	<alias name="sparVoucherService" alias="sparVoucherService" />
+	<bean id="sparVoucherService" class="com.spar.hcl.core.service.voucher.impl.SparVoucherServiceImpl">
+	</bean>
+
+	<alias name="sparGiftZoneService" alias="sparGiftZoneService" />
+	<bean id="sparGiftZoneService" class="com.spar.hcl.core.service.giftzone.impl.SparGiftZoneServiceImpl">
+	</bean>
+
+	<alias alias="commerceDeliveryModeStrategy" name="sparDefaultCommerceDeliveryModeStrategy" />
+	<bean id="sparDefaultCommerceDeliveryModeStrategy" class="com.spar.hcl.core.service.order.impl.SparDefaultCommerceDeliveryModeStrategy"
+		parent="defaultCommerceDeliveryModeStrategy">
+		<property name="commerceCartCalculationStrategy" ref="checkoutCartCalculationStrategy" />
+		<property name="modelService" ref="modelService" />
+		<property name="deliveryService" ref="deliveryService" />
+	</bean>
+
+
+	<!-- SPAR IPG changes - ROHAN_C START -->
+	<alias name="sparDefaultPaymentResponseInterpretationStrategy" alias="sparIPGPaymentResponseInterpretationStrategy" />
+	<bean id="sparDefaultPaymentResponseInterpretationStrategy" class="com.spar.hcl.core.payment.ipg.strategies.impl.SparIPGPaymentResponseInterpretationStrategyImpl">
+		<property name="sparCreateSubscriptionResultConverter" ref="sparCreateSubscriptionResultConverter" />
+	</bean>
+
+	<alias name="sparDefaultIPGPaymentInfoCreateStrategy" alias="SparIPGPaymentInfoCreateStrategy" />
+	<bean id="sparDefaultIPGPaymentInfoCreateStrategy" class="com.spar.hcl.core.payment.ipg.strategies.impl.SparIPGPaymentInfoCreateStrategyImpl"
+		parent="creditCardPaymentInfoCreateStrategy" />
+
+	<alias name="sparDefaultSignatureValidationStrategy" alias="sparSignatureValidationStrategy" />
+	<bean id="sparDefaultSignatureValidationStrategy" class="com.spar.hcl.core.payment.ipg.strategies.impl.SparDefaultSignatureValidationStrategy"
+		parent="signatureValidationStrategy" />
+
+	<alias name="sparDefaultCreateSubscriptionResultValidationStrategy" alias="sparCreateSubscriptionResultValidationStrategy" />
+	<bean id="sparDefaultCreateSubscriptionResultValidationStrategy"
+		class="com.spar.hcl.core.payment.ipg.strategies.impl.SparDefaultCreateSubscriptionResultValidationStrategy">
+		<property name="erroCodeToFormFieldMappingStrategy" ref="erroCodeToFormFieldMappingStrategy" />
+	</bean>
+
+	<alias name="sparDefaultPaymentFormActionUrlStrategy" alias="sparPaymentFormActionUrlStrategy" />
+	<bean id="sparDefaultPaymentFormActionUrlStrategy" class="com.spar.hcl.core.payment.ipg.strategies.impl.SparDefaultPaymentFormActionUrlStrategy">
+		<property name="baseSiteService" ref="baseSiteService" />
+		<property name="siteBaseUrlResolutionService" ref="siteBaseUrlResolutionService" />
+		<property name="siteConfigService" ref="siteConfigService" />
+	</bean>
+
+	<alias name="sparDefaultCreateSubscriptionRequestStrategy" alias="sparCreateSubscriptionRequestStrategy" />
+	<bean id="sparDefaultCreateSubscriptionRequestStrategy" class="com.spar.hcl.core.payment.ipg.strategies.impl.SparDefaultCreateSubscriptionRequestStrategy"
+		parent="createSubscriptionRequestStrategy">
+		<property name="cartService" ref="cartService" />
+		<property name="customerBillToDataConverter" ref="customerBillToDataConverter" />
+		<property name="customerShipToDataConverter" ref="customerShipToDataConverter" />
+		<property name="paymentInfoDataConverter" ref="paymentInfoDataConverter" />
+		<property name="siteConfigService" ref="siteConfigService" />
+		<property name="customerEmailResolutionService" ref="customerEmailResolutionService" />
+		<property name="hostedOrderPageVersion" value="7" />
+	</bean>
+
+	<!-- SPAR IPG changes - ROHAN_C END -->
+
+	<!-- fOR STOCK AND CALCULATION STRETEGY -->
+	<alias alias="sparavailableToPromiseDao" name="spardefaultAvailableToPromiseDao" />
+	<bean id="spardefaultAvailableToPromiseDao" class="com.spar.hcl.core.strategies.impl.SparDefaultAvailableToPromiseDao" parent="abstractItemDao" scope="tenant" />
+
+	<bean id="sparWarehousingAvailabilityCalculationStrategy" parent="defaultCommerceStockLevelCalculationStrategy"
+		class="com.spar.hcl.core.strategies.impl.SparWarehousingAvailabilityCalculationStrategy">
+		<property name="availableToPromiseDao" ref="sparavailableToPromiseDao"/>
+		<property name="baseStoreService" ref="baseStoreService" />
+	</bean>
+
+	<alias alias="commerceStockService" name="sparCommerceStockService" />
+	<bean id="sparCommerceStockService" class="com.spar.hcl.core.stock.impl.SparDefaultCommerceStockService" parent="defaultCommerceStockService">
+		<property name="sparWarehousingAvailabilityCalculationStrategy" ref="sparWarehousingAvailabilityCalculationStrategy" />
+		<property name="warehouseSelectionStrategy" ref="sparWarehouseSelectionStrategy" />
+	</bean>
+
+	<alias name="defaultAbstractCommerceCartStrategy" alias="abstractCommerceCartStrategy" />
+	<bean id="defaultAbstractCommerceCartStrategy" class="de.hybris.platform.commerceservices.order.impl.AbstractCommerceCartStrategy" abstract="true">
+		<property name="productService" ref="productService" />
+		<property name="cartService" ref="cartService" />
+		<property name="modelService" ref="modelService" />
+		<property name="baseStoreService" ref="baseStoreService" />
+		<property name="commerceStockService" ref="sparCommerceStockService" />
+		<property name="entryOrderChecker" ref="commerceOrderEntryModifiableChecker" />
+		<property name="cartEntryDao" ref="cartEntryDao" />
+		<property name="commerceCartCalculationStrategy" ref="commerceCartCalculationStrategy" />
+	</bean>
+
+	<alias name="defaultCartValidationWithoutCartAlteringStrategy" alias="cartValidationWithoutCartAlteringStrategy" />
+	<bean id="defaultCartValidationWithoutCartAlteringStrategy" class="de.hybris.platform.commerceservices.strategies.impl.CartValidationWithoutCartAlteringStrategy">
+		<property name="productService" ref="productService" />
+		<property name="commerceStockService" ref="sparCommerceStockService" />
+		<property name="baseStoreService" ref="baseStoreService" />
+	</bean>
+
+	<alias name="defaultCartValidationStrategy" alias="cartValidationStrategy" />
+	<bean id="defaultCartValidationStrategy" class="de.hybris.platform.commerceservices.strategies.impl.DefaultCartValidationStrategy">
+		<property name="modelService" ref="modelService" />
+		<property name="cartService" ref="cartService" />
+		<property name="productService" ref="productService" />
+		<property name="commerceStockService" ref="sparCommerceStockService" />
+		<property name="baseStoreService" ref="baseStoreService" />
+		<property name="userService" ref="userService" />
+	</bean>
+	<!-- fOR RMS Feed Data import and export -->
+	<bean id="sparAvailStockExportJob" class="com.spar.hcl.core.jobs.SparAvailStockExportJob" autowire="byName" />
+
+	<!-- Job for Daily Refund Report Export -->
+	<bean id="sparDailyRefundReportJob" class="com.spar.hcl.core.jobs.SparDailyRefundReportJob" autowire="byName" />
+
+	<bean id="sparImpInvetoryJob" class="com.spar.hcl.core.jobs.SparImpInvetoryJob" autowire="byName" />
+
+	<bean id="sparDelayFeedNotificationJob" class="com.spar.hcl.core.jobs.SparDelayFeedNotificationJob" autowire="byName" />
+
+	<!-- Job for Offline Database service Area Import -->
+	<!-- <bean id="sparServiceAreaImportJob" class="com.spar.hcl.core.jobs.SparServiceAreaImportJob" autowire="byName" /> -->
+
+	<!-- Job for update index for price feed cronjob -->
+	<bean id="sparImpPriceJob" class="com.spar.hcl.core.jobs.SparImpPriceJob" autowire="byName" />
+
+	<!-- Job for Expired Promotion Export -->
+	<bean id="sparExpiredPromotionArchiveJob" class="com.spar.hcl.core.jobs.SparExpiredPromotionArchiveJob" autowire="byName">
+		<property name="flexibleSearchService" ref="flexibleSearchService" />
+	</bean>
+
+	<bean id="SparResaInvoicingJob" class="com.spar.hcl.core.jobs.SparResaInvoicingJob" autowire="byName">
+		<property name="flexibleSearchService" ref="flexibleSearchService" />
+	</bean>
+
+	<bean id="sparPromotionDiscountUpdationtJob" class="com.spar.hcl.core.jobs.SparPromotionDiscountUpdationtJob" autowire="byName">
+		<property name="flexibleSearchService" ref="flexibleSearchService" />
+		<property name="modelService" ref="modelService" />
+	</bean>
+
+	<!-- SPAR RMS Feed email start -->
+
+	<bean id="sparEmailGenerationService" class="com.spar.hcl.core.email.service.impl.SparEmailGenerationService" parent="defaultEmailGenerationService" />
+
+	<bean id="generateRMSFeedExcutedEmail" class="de.hybris.platform.acceleratorservices.process.email.actions.GenerateEmailAction" parent="abstractGenerateEmailAction">
+		<property name="cmsEmailPageService" ref="cmsEmailPageService" />
+		<property name="frontendTemplateName" value="feedsErrorEmailTemplate" />
+		<property name="contextResolutionStrategy" ref="processContextResolutionStrategy" />
+		<property name="emailGenerationService" ref="sparEmailGenerationService" />
+	</bean>
+	<bean id="SparFeedsErrorEmailProcessDefinitionResource" class="de.hybris.platform.processengine.definition.ProcessDefinitionResource">
+		<property name="resource" value="classpath:/sparcore/processes/SparFeedsErrorEmailProcess.xml" />
+	</bean>
+
+	<bean id="generateSparDailyRefundReportEmail" class="de.hybris.platform.acceleratorservices.process.email.actions.GenerateEmailAction"
+		parent="abstractGenerateEmailAction">
+		<property name="cmsEmailPageService" ref="cmsEmailPageService" />
+		<property name="frontendTemplateName" value="sparDailyRefundReportEmailTemplate" />
+		<property name="contextResolutionStrategy" ref="processContextResolutionStrategy" />
+		<property name="emailGenerationService" ref="sparEmailGenerationService" />
+	</bean>
+	<bean id="generateSparPLMSManualpickOrderEmail" class="de.hybris.platform.acceleratorservices.process.email.actions.GenerateEmailAction"
+		parent="abstractGenerateEmailAction">
+		<property name="cmsEmailPageService" ref="cmsEmailPageService" />
+		<property name="frontendTemplateName" value="SPARPLMSManualPickOrderEmailTemplate" />
+		<property name="contextResolutionStrategy" ref="processContextResolutionStrategy" />
+		<property name="emailGenerationService" ref="sparEmailGenerationService" />
+	</bean>
+
+	<bean id="generateSparBlowhornFailedOrderRequestEmail" class="de.hybris.platform.acceleratorservices.process.email.actions.GenerateEmailAction"
+		parent="abstractGenerateEmailAction">
+		<property name="cmsEmailPageService" ref="cmsEmailPageService" />
+		<property name="frontendTemplateName" value="SparBlowhornFailedRequestOrderEmailTemplate" />
+		<property name="contextResolutionStrategy" ref="processContextResolutionStrategy" />
+		<property name="emailGenerationService" ref="sparEmailGenerationService" />
+	</bean>
+
+	<bean id="SparDailyRefundReportEmailProcessDefinitionResource" class="de.hybris.platform.processengine.definition.ProcessDefinitionResource">
+		<property name="resource" value="classpath:/sparcore/processes/SparDailyRefundReportEmailProcess.xml" />
+	</bean>
+
+	<bean id="SparPLMSManualpickOrderEmailProcessDefinitionResource" class="de.hybris.platform.processengine.definition.ProcessDefinitionResource">
+		<property name="resource" value="classpath:/sparcore/processes/SparPLMSManualpickOrderEmailProcess.xml" />
+	</bean>
+
+	<bean id="SparBlowhornFailedOrderRequestEmailProcessDefinitionResource" class="de.hybris.platform.processengine.definition.ProcessDefinitionResource">
+		<property name="resource" value="classpath:/sparcore/processes/SparBlowhornFailedOrderRequestEmailProcess.xml" />
+	</bean>
+
+	<!-- Spar Need Help Email - Start -->
+	<bean id="generateSparNeedHelpEmail" class="de.hybris.platform.acceleratorservices.process.email.actions.GenerateEmailAction" parent="abstractGenerateEmailAction">
+		<property name="cmsEmailPageService" ref="cmsEmailPageService" />
+		<property name="frontendTemplateName" value="SPARNeedHelpEmailTemplate" />
+		<property name="contextResolutionStrategy" ref="processContextResolutionStrategy" />
+		<property name="emailGenerationService" ref="sparEmailGenerationService" />
+	</bean>
+	<bean id="SparNeedHelpEmailProcessDefinitionResource" class="de.hybris.platform.processengine.definition.ProcessDefinitionResource">
+		<property name="resource" value="classpath:/sparcore/processes/SparNeedHelpEmailProcess.xml" />
+	</bean>
+	<!-- Spar Need Help Email - End -->
+
+
+	<!-- Spar Need Help Email - Start -->
+	<bean id="generateSparGiftzoneContactUsEmail" class="de.hybris.platform.acceleratorservices.process.email.actions.GenerateEmailAction"
+		parent="abstractGenerateEmailAction">
+		<property name="cmsEmailPageService" ref="cmsEmailPageService" />
+		<property name="frontendTemplateName" value="SPARGiftzoneContactUsEmailTemplate" />
+		<property name="contextResolutionStrategy" ref="processContextResolutionStrategy" />
+		<property name="emailGenerationService" ref="sparEmailGenerationService" />
+	</bean>
+	<bean id="SparGiftzoneContactUsEmailProcessDefinitionResource" class="de.hybris.platform.processengine.definition.ProcessDefinitionResource">
+		<property name="resource" value="classpath:/sparcore/processes/SparGiftzoneContactUsEmailProcess.xml" />
+	</bean>
+	<!-- Spar Need Help Email - End -->
+
+	<!-- code for delay feed notification for price -->
+
+	<bean id="generatesparDelayFeedNotificationEmail" class="de.hybris.platform.acceleratorservices.process.email.actions.GenerateEmailAction"
+		parent="abstractGenerateEmailAction">
+		<property name="cmsEmailPageService" ref="cmsEmailPageService" />
+		<property name="frontendTemplateName" value="sparDelayFeedNotificationEmailTemplate" />
+		<property name="contextResolutionStrategy" ref="processContextResolutionStrategy" />
+		<property name="emailGenerationService" ref="sparEmailGenerationService" />
+	</bean>
+	<bean id="SparDelayFeedNotificationProcessDefinitionResource" class="de.hybris.platform.processengine.definition.ProcessDefinitionResource">
+		<property name="resource" value="classpath:/sparcore/processes/SparDelayFeedNotificationProcess.xml" />
+	</bean>
+
+	<!-- end code for delay feed notification for price -->
+
+
+
+	<bean id="generateSparExpiredPromoArchErrorEmail" class="de.hybris.platform.acceleratorservices.process.email.actions.GenerateEmailAction"
+		parent="abstractGenerateEmailAction">
+		<property name="cmsEmailPageService" ref="cmsEmailPageService" />
+		<property name="frontendTemplateName" value="sparExpiredPromoArchErrorEmailTemplate" />
+		<property name="contextResolutionStrategy" ref="processContextResolutionStrategy" />
+		<property name="emailGenerationService" ref="sparEmailGenerationService" />
+	</bean>
+	<bean id="SparExpiredPromoArchErrorEmailProcessDefinitionResource" class="de.hybris.platform.processengine.definition.ProcessDefinitionResource">
+		<property name="resource" value="classpath:/sparcore/processes/SparExpiredPromoArchErrorEmailProcess.xml" />
+	</bean>
+
+	<!-- Code change start by sumit for promotion story -->
+
+	<bean id="generateRMSCorruptedPriceFeedDataProcessEmail" class="de.hybris.platform.acceleratorservices.process.email.actions.GenerateEmailAction"
+		parent="abstractGenerateEmailAction">
+		<property name="cmsEmailPageService" ref="cmsEmailPageService" />
+		<property name="frontendTemplateName" value="RMSCorruptedPriceFeedDataEmailTemplate" />
+		<property name="contextResolutionStrategy" ref="processContextResolutionStrategy" />
+		<property name="emailGenerationService" ref="sparEmailGenerationService" />
+	</bean>
+
+	<!-- Code change start for email for PaymentAmount difference from order amount -->
+	<bean id="sparPaymentAmountEmailProcess" class="de.hybris.platform.processengine.definition.ProcessDefinitionResource">
+		<property name="resource" value="classpath:/sparcore/processes/SparPaymentAmountEmailProcess.xml" />
+	</bean>
+
+	<bean id="generateSparPaymentAmountEmail" class="de.hybris.platform.acceleratorservices.process.email.actions.GenerateEmailAction"
+		parent="abstractGenerateEmailAction">
+		<property name="cmsEmailPageService" ref="cmsEmailPageService" />
+		<property name="frontendTemplateName" value="SparPaymentAmountEmailTemplate" />
+		<property name="contextResolutionStrategy" ref="processContextResolutionStrategy" />
+		<property name="emailGenerationService" ref="sparEmailGenerationService" />
+	</bean>
+	<!-- Code change start for email for PaymentAmount difference from order amount -->
+
+	<!-- Code change start for email for Landmark Redemption Email -->
+	<bean id="sparLandmarkRedemptionEmailProcess" class="de.hybris.platform.processengine.definition.ProcessDefinitionResource">
+		<property name="resource" value="classpath:/sparcore/processes/SparLandmarkRedemptionEmailProcess.xml" />
+	</bean>
+
+	<bean id="generateSparLandmarkRedemptionEmail" class="de.hybris.platform.acceleratorservices.process.email.actions.GenerateEmailAction"
+		parent="abstractGenerateEmailAction">
+		<property name="cmsEmailPageService" ref="cmsEmailPageService" />
+		<property name="frontendTemplateName" value="SparLandmarkRedemptionEmailTemplate" />
+		<property name="contextResolutionStrategy" ref="processContextResolutionStrategy" />
+		<property name="emailGenerationService" ref="sparEmailGenerationService" />
+	</bean>
+	<!-- Code change start for email for Landmark Redemption Email -->
+
+
+	<!-- Code change start by sumit for promotion story -->
+
+
+	<bean id="RMSCorruptedPriceFeedDataProcessDefinitionResource" class="de.hybris.platform.processengine.definition.ProcessDefinitionResource">
+		<property name="resource" value="classpath:/sparcore/processes/RMSCorruptedPriceFeedDataProcess.xml" />
+	</bean>
+	<!-- Change end here -->
+
+	<alias alias="sparWarehouseSelectionStrategy" name="sparWarehousingWarehouseSelectionStrategy" />
+	<bean id="sparWarehousingWarehouseSelectionStrategy" class="com.spar.hcl.warehousing.atp.strategy.impl.SparWarehouseSelectionStrategyImpl"
+		parent="warehouseSelectionStrategy" />
+
+	<alias alias="stockLevelStatusStrategy" name="commerceStockLevelStatusStrategy" />
+	<bean id="commerceStockLevelStatusStrategy" class="de.hybris.platform.commerceservices.stock.strategies.impl.CommerceStockLevelStatusStrategy">
+		<property name="defaultLowStockThreshold" value="5" />
+		<property name="commerceStockLevelCalculationStrategy" ref="sparWarehousingAvailabilityCalculationStrategy" />
+	</bean>
+	
+	<alias name="defaultAbstractOrderPrepareInterceptor" alias="abstractOrderPrepareInterceptor" />
+	<bean id="defaultAbstractOrderPrepareInterceptor" class="de.hybris.platform.order.interceptors.DefaultAbstractOrderPrepareInterceptor">
+		<property name="keyGenerator" ref="orderCodeGenerator" />
+		<!-- define qualifiers of order attributes, which, when modified, the order and orderEntries need to be recalculated. -->
+		<property name="attributesForOrderEntriesRecalculation">
+			<list>
+				<value>date</value>
+				<value>user</value>
+				<value>currency</value>
+				<value>net</value>
+				<value>orderWarehouse</value>
+			</list>
+		</property>
+	</bean>
+
+	<alias name="spardefaultCommerceAddToCartStrategy" alias="sparCommerceAddToCartStrategy" />
+	<bean id="spardefaultCommerceAddToCartStrategy" class="com.spar.hcl.order.strategy.impl.SparDefaultCommerceAddToCartStrategy" parent="commerceAddToCartStrategy">
+		<property name="commerceAddToCartMethodHooks" ref="commerceAddToCartMethodHooks" />
+		<property name="configurationService" ref="configurationService" />
+		<property name="cartService" ref="sparCartService" />
+		<property name="deliveryService" ref="deliveryService" />
+	</bean>
+
+	<alias alias="commerceCartService" name="defaultCommerceCartService" />
+	<bean id="defaultCommerceCartService" class="de.hybris.platform.commerceservices.order.impl.DefaultCommerceCartService">
+		<property name="modelService" ref="modelService" />
+		<property name="baseSiteService" ref="baseSiteService" />
+		<property name="commerceCartDao" ref="commerceCartDao" />
+		<property name="cartValidationStrategy" ref="cartValidationStrategy" />
+		<property name="commerceCartCalculationStrategy" ref="commerceCartCalculationStrategy" />
+		<property name="commerceCartEstimateTaxesStrategy" ref="commerceCartEstimateTaxesStrategy" />
+		<property name="commerceCartHashCalculationStrategy" ref="commerceCartHashCalculationStrategy" />
+		<property name="sessionService" ref="sessionService" />
+		<property name="staleCartRemovalStrategy" ref="staleCartRemovalStrategy" />
+		<property name="commerceAddToCartStrategy" ref="sparCommerceAddToCartStrategy" />
+		<property name="commerceUpdateCartEntryStrategy" ref="commerceUpdateCartEntryStrategy" />
+		<property name="commerceCartRestorationStrategy" ref="commerceCartRestorationStrategy" />
+		<property name="commerceCartSplitStrategy" ref="commerceCartSplitStrategy" />
+		<property name="commerceRemoveEntriesStrategy" ref="commerceRemoveEntriesStrategy" />
+		<property name="commerceCartMergingStrategy" ref="commerceCartMergingStrategy" />
+	</bean>
+
+	<alias name="sparDefaultSolrQueryConverter" alias="solrSearchQueryConverter" />
+	<alias name="sparDefaultSolrQueryConverter" alias="solrQueryConverter" />
+	<bean id="sparDefaultSolrQueryConverter" class="com.spar.hcl.core.search.solrfacetsearch.search.impl.SparDefaultSolrQueryConverter"
+		parent="defaultSolrQueryConverter">
+		<property name="queryPostProcessors" ref="solrQueryPostProcessors" />
+		<property name="fieldNameTranslator" ref="fieldNameTranslator" />
+		<property name="defaultLimit" value="${facet.limit.default}" />
+		<property name="forbiddenChar" value="${solr.indexedproperty.forbidden.char}" />
+		<property name="facetSort" value="COUNT" />
+	</bean>
+
+	<bean id="dayRestrictionDynamicDescription" class="com.spar.hcl.core.model.DayRestrictionDescription" scope="tenant" />
+
+
+	<bean id="cmsDayRestrictionEvaluator" class="com.spar.hcl.core.servicelayer.services.evaluator.impl.SparCMSDayRestrictionEvaluator" scope="tenant" autowire="byName" />
+
+	<bean id="cmsDayRestrictionEvaluatorMapping" class="de.hybris.platform.cms2.servicelayer.services.evaluator.CMSRestrictionEvaluatorMapping" scope="tenant">
+		<property name="restrictionTypeCode" value="SparCMSDayRestriction" />
+		<property name="restrictionEvaluator" ref="cmsDayRestrictionEvaluator" />
+	</bean>
+
+	<bean id="bannerWarehouseRestrictionEvaluator" class="com.spar.hcl.core.servicelayer.services.evaluator.impl.SparBannerWarehouseRestrictionEvaluator" scope="tenant"
+		autowire="byName" />
+
+	<bean id="bannerWarehouseRestrictionEvaluatorMapping" class="de.hybris.platform.cms2.servicelayer.services.evaluator.CMSRestrictionEvaluatorMapping" scope="tenant">
+		<property name="restrictionTypeCode" value="SparBannerWarehouseRestriction" />
+		<property name="restrictionEvaluator" ref="bannerWarehouseRestrictionEvaluator" />
+	</bean>
+
+	<!-- Added for offer tab start -->
+	<bean id="sparProductBenefitTypeValueProvider" class="com.spar.hcl.core.search.solrfacetsearch.provider.impl.SparProductBenefitTypeValueProvider"
+		parent="abstractPropertyFieldValueProvider">
+		<property name="fieldNameProvider" ref="solrFieldNameProvider" />
+		<property name="priceService" ref="defaultPriceService" />
+	</bean>
+	<bean id="sparInclusionExclusionService" class="com.spar.hcl.core.inclusionexclusion.service.impl.SparInclusionExclusionAreaListServiceImpl">
+		<property name="inclusionExclusionAreaListDao" ref="sparInclusionExclusionAreaListDao" />
+	</bean>
+
+	<bean id="sparInclusionExclusionAreaListDao" class="com.spar.hcl.core.inclusionexclusion.dao.impl.SparInclusionExclusionAreaListDAOImpl" />
+	<bean id="sparProductCombiOfferValueProvider" class="com.spar.hcl.core.search.solrfacetsearch.provider.impl.SparProductCombiOfferValueProvider"
+		parent="abstractPropertyFieldValueProvider">
+		<property name="fieldNameProvider" ref="solrFieldNameProvider" />
+		<property name="priceService" ref="defaultPriceService" />
+	</bean>
+	<!-- Added for offer tab end -->
+
+	<bean id="sparProductPopularityValueProvider" class="com.spar.hcl.core.search.solrfacetsearch.provider.impl.SparProductPopularityValueProvider"
+		parent="abstractPropertyFieldValueProvider">
+		<property name="fieldNameProvider" ref="solrFieldNameProvider" />
+		<property name="priceService" ref="defaultPriceService" />
+	</bean>
+
+	<bean id="sparProductDiscountRangeValueProvider" class="com.spar.hcl.core.search.solrfacetsearch.provider.impl.SparProductDiscountRangeValueProvider"
+		parent="productPriceValueProvider">
+		<property name="fieldNameProvider" ref="solrFieldNameProvider" />
+		<property name="priceService" ref="defaultPriceService" />
+	</bean>
+
+	<alias name="defaultSparCommerceCartValidateBOGOStrategy" alias="sparCommerceCartValidateBOGOStrategy" />
+	<bean id="defaultSparCommerceCartValidateBOGOStrategy" class="com.spar.hcl.order.promotion.strategy.impl.SparCommerceCartValidateBOGOStrategyImpl">
+		<property name="modelService" ref="modelService" />
+		<property name="promotionService" ref="promotionsService" />
+		<property name="baseSiteService" ref="baseSiteService" />
+		<property name="timeService" ref="timeService" />
+	</bean>
+
+	<alias alias="commerceCartService" name="sparDefaultCommerceCartService" />
+	<bean id="sparDefaultCommerceCartService" class="com.spar.hcl.order.service.impl.SparDefaultCommerceCartService" parent="defaultCommerceCartService">
+		<property name="commerceCartValidateBOGOStrategy" ref="sparCommerceCartValidateBOGOStrategy" />
+		<property name="cartService" ref="cartService" />
+		<property name="productService" ref="productService" />
+	</bean>
+
+	<bean id="sparVariantsPromoMessageValueProvider" class="com.spar.hcl.core.search.solrfacetsearch.provider.impl.SparVariantsPromoMessageValueProvider"
+		parent="abstractPropertyFieldValueProvider">
+		<property name="fieldNameProvider" ref="solrFieldNameProvider" />
+		<property name="priceService" ref="defaultPriceService" />
+	</bean>
+
+	<bean id="sparVariantsOfferTypeValueProvider" class="com.spar.hcl.core.search.solrfacetsearch.provider.impl.SparVariantsOfferTypeValueProvider"
+		parent="abstractPropertyFieldValueProvider">
+		<property name="fieldNameProvider" ref="solrFieldNameProvider" />
+		<property name="priceService" ref="defaultPriceService" />
+	</bean>
+
+
+	<bean id="fetchDeliverySlotsInterceptor" class="com.spar.hcl.core.service.interceptor.impl.FetchDeliverySlotsInterceptor">
+	</bean>
+	<bean id="fetchDeliverySlotsInterceptorMapping" class="de.hybris.platform.servicelayer.interceptor.impl.InterceptorMapping">
+		<property name="interceptor" ref="fetchDeliverySlotsInterceptor" />
+		<property name="typeCode" value="Order" />
+	</bean>
+
+
+	<bean id="sparCombiOfferPromotionStrategy" class="com.spar.hcl.order.promotion.strategy.impl.SparCombiOfferPromotionStrategyImpl">
+		<property name="combiPromotionType">
+			<list>
+				<value>Bundle</value>
+				<value>One to one perfect partner bundle</value>
+				<value>Perfect partner bundle</value>
+				<value>Stepped Multi-buy</value>
+			</list>
+		</property>
+	</bean>
+
+
+	<bean id="sparSaveDeliverySlotsInterceptor" class="com.spar.hcl.core.service.interceptor.impl.SparSaveDeliverySlotsInterceptor">
+		<property name="sparPlmsService" ref="sparPlmsService"></property>
+	</bean>
+	<bean id="sparSaveDeliverySlotsInterceptorMapping" class="de.hybris.platform.servicelayer.interceptor.impl.InterceptorMapping">
+		<property name="interceptor" ref="sparSaveDeliverySlotsInterceptor" />
+		<property name="typeCode" value="Order" />
+	</bean>
+
+	<bean id="sparSolrQueryPostProcessor" class="com.spar.hcl.core.search.solr.postprocessor.SparSolrQueryPostProcessor" />
+
+	<alias name="defaultSolrQueryPostProcessors" alias="solrQueryPostProcessors" />
+	<util:list id="defaultSolrQueryPostProcessors">
+		<ref bean="sparSolrQueryPostProcessor" />
+	</util:list>
+
+	<alias name="sparDefaultCommerceUpdateCartEntryStrategy" alias="commerceUpdateCartEntryStrategy" />
+	<bean id="sparDefaultCommerceUpdateCartEntryStrategy" class="com.spar.hcl.order.strategy.impl.SparDefaultCommerceUpdateCartEntryStrategy"
+		parent="abstractCommerceCartStrategy">
+		<property name="commerceUpdateCartEntryHooks" ref="commerceUpdateCartEntryMethodHooks" />
+		<property name="configurationService" ref="configurationService" />
+	</bean>
+
+	<alias alias="commercePriceService" name="sparDefaultCommercePriceService" />
+	<bean id="sparDefaultCommercePriceService" class="com.spar.hcl.price.service.impl.SparDefaultCommercePriceService" parent="defaultCommercePriceService">
+	</bean>
+
+	<alias name="defaultProductModelUrlResolver" alias="productModelUrlResolver" />
+	<bean id="defaultProductModelUrlResolver" class="com.spar.hcl.url.impl.SparDefaultProductModelUrlResolver">
+		<property name="threadContextService" ref="threadContextService" />
+		<property name="commerceCategoryService" ref="commerceCategoryService" />
+		<property name="baseSiteService" ref="baseSiteService" />
+		<property name="defaultPattern" value="/{category-path}/{product-name}/p/{product-code}" />
+		<property name="productAndCategoryHelper" ref="productAndCategoryHelper"/>
+	</bean>
+
+	<bean id="sparSiteMapListDao" class="com.spar.hcl.core.sitemap.dao.impl.SparSiteMapListDAOImpl" />
+
+	<bean id="sparSiteMapListService" class="com.spar.hcl.core.sitemap.service.impl.SparSiteMapServiceImpl">
+		<property name="sparSiteMapListDao" ref="sparSiteMapListDao" />
+	</bean>
+
+	<bean id="sparMobileVerificationDao" class="com.spar.hcl.core.mobileverification.dao.impl.SparMobileVerificationDAOimpl" />
+
+	<bean id="sparMobileVerificationService" class="com.spar.hcl.core.mobileverification.service.impl.SparMobileVerificationServiceImpl">
+		<property name="sparMobileVerificationDao" ref="sparMobileVerificationDao" />
+	</bean>
+
+	<bean id="sparOrderDao" class="com.spar.hcl.core.order.impl.SparOrderDaoImpl" />
+
+	<bean id="sparOrderService" class="com.spar.hcl.core.order.service.impl.SparOrderServicempl">
+		<property name="sparOrderDao" ref="sparOrderDao" />
+		<property name="modelService" ref="modelService" />
+	</bean>
+
+	<!-- Job for Daily Refund Report Export -->
+	<bean id="sparDailyFraudReportJob" class="com.spar.hcl.core.jobs.SparDailyFraudReportJob" autowire="byName" />
+
+
+	<bean id="SparDailyFraudReportEmailProcessDefinitionResource" class="de.hybris.platform.processengine.definition.ProcessDefinitionResource">
+		<property name="resource" value="classpath:/sparcore/processes/SparDailyFraudReportEmailProcess.xml" />
+	</bean>
+
+	<bean id="generateSparDailyFraudReportEmail" class="de.hybris.platform.acceleratorservices.process.email.actions.GenerateEmailAction"
+		parent="abstractGenerateEmailAction">
+		<property name="cmsEmailPageService" ref="cmsEmailPageService" />
+		<property name="frontendTemplateName" value="sparDailyFraudReportEmailTemplate" />
+		<property name="contextResolutionStrategy" ref="processContextResolutionStrategy" />
+		<property name="emailGenerationService" ref="sparEmailGenerationService" />
+	</bean>
+
+	<!-- Code change start for Customer Registration to Landmark System -->
+	<bean id="sparLandmarkRegistrationEmailProcess" class="de.hybris.platform.processengine.definition.ProcessDefinitionResource">
+		<property name="resource" value="classpath:/sparcore/processes/SparLandmarkRegistrationEmail.xml" />
+	</bean>
+
+	<bean id="generateSparLandmarkRegistrationEmail" class="de.hybris.platform.acceleratorservices.process.email.actions.GenerateEmailAction"
+		parent="abstractGenerateEmailAction">
+		<property name="cmsEmailPageService" ref="cmsEmailPageService" />
+		<property name="frontendTemplateName" value="SparLandmarkRegistrationEmailTemplate" />
+		<property name="contextResolutionStrategy" ref="processContextResolutionStrategy" />
+		<property name="emailGenerationService" ref="sparEmailGenerationService" />
+	</bean>
+
+	<bean id="sparIPGResponseHashGenerationUtilService" class="com.spar.hcl.core.util.SparIPGResponseHashGenerationUtilService">
+		<property name="algorithm" value="SHA1" />
+	</bean>
+
+	<!-- Code change start for email for Customer Registration to Landmark System -->
+	<bean id="totalOrderQuantityAttributeHandler" class="com.spar.hcl.core.order.attibute.handler.TotalOrderQuantityAttributeHandler" />
+
+	<bean id="sparDefaultCustomerAccountService" class="com.spar.hcl.core.customeraccount.service.impl.SparDefaultCustomerAccountService"
+		parent="defaultCustomerAccountService">
+	</bean>
+
+	<bean id="sparLocalMediaWebUrlStretegy" class="com.spar.hcl.core.media.url.SparLocalMediaWebUrlStretegy" parent="localMediaWebURLStrategy" />
+
+	<bean id="sparOnlineOfflineSKUService" class="com.spar.hcl.core.onlineOfflineSKU.service.impl.SparOnlineOfflineSKUServiceImpl" />
+	<bean id="sparOnlineOfflineSKUDAO" class="com.spar.hcl.core.onlineOfflineSKU.dao.impl.SparOnlineOfflineSKUDAOImpl" />
+	<bean id="de.hybris.platform.voucher.jalo.SerialVoucher" class="com.spar.hcl.jalo.vouchers.SparSerialVoucher" scope="prototype" />
+	
+	<alias alias="commerceCartCalculationStrategy" name="sparCommerceCartCalculationStrategy" />
+	<bean id="sparCommerceCartCalculationStrategy" class="com.spar.hcl.core.strategies.impl.SparCommerceCartCalculationStrategy" parent="defaultCommerceCartCalculationStrategy" />
+	
+	<alias alias="calculationService" name="sparCalculationService" />
+	<bean id="sparCalculationService" class="com.spar.hcl.core.order.impl.SparCalculationService" parent="defaultCalculationService" />
+	
+</beans>

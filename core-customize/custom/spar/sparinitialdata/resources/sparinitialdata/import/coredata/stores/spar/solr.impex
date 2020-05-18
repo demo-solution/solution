@@ -1,0 +1,237 @@
+#
+# Import the Solr configuration for the store
+#
+
+$prefix=spar
+
+$productCatalog=sparProductCatalog
+$catalogVersions=catalogVersions(catalog(id),version);
+$serverConfigName=sparSolrServerConfig
+$indexConfigName=sparSolrIndexConfig
+$searchConfigName=sparPageSize
+$facetSearchConfigName=sparIndex
+$facetSearchConfigDescription=Spar Solr Index
+$searchIndexNamePrefix=$prefix
+$solrIndexedType=sparProductType
+$indexBaseSite=$prefix
+$indexLanguages=en
+$indexCurrencies=INR
+$priceRangeINR=sparPriceRangeINR
+
+#
+# Setup the Solr server, indexer, and search configs
+#
+
+REMOVE SolrIndexedType;identifier[unique=true];
+;$solrIndexedType
+
+
+# Import config properties into impex macros
+UPDATE GenericItem[processor=de.hybris.platform.commerceservices.impex.impl.ConfigPropertyImportProcessor];pk[unique=true]
+$solrEndpointUrl1=$config-solrEndpointUrl1
+$solrEndpointUrl2=$config-solrEndpointUrl2
+
+
+# Create the solr server configuration
+INSERT_UPDATE SolrServerConfig;name[unique=true];mode(code);embeddedMaster
+;$serverConfigName;standalone;false;
+
+INSERT_UPDATE SolrEndpointUrl;solrServerConfig(name)[unique=true];url[unique=true];master[unique=true,default=false]
+;$serverConfigName;https://localhost:8983/solr;true
+#;$serverConfigName;$solrEndpointUrl2;true
+
+# Create the solr indexer configuration
+INSERT_UPDATE SolrIndexConfig;name[unique=true];batchSize;numberOfThreads;indexMode(code);
+;$indexConfigName;100;1;TWO_PHASE;
+
+# Create the faceted search configuration
+INSERT_UPDATE SolrSearchConfig;description[unique=true];pageSize
+;$searchConfigName;20
+
+#
+# Setup the indexed types, their properties, and the update queries
+#
+
+# Declare the indexed type Product
+INSERT_UPDATE SolrIndexedType;identifier[unique=true];type(code);variant;sorts(&sortRefID)
+#Top-Rated is not required in SPAR
+;$solrIndexedType;Product;false;sortRef1,sortRef2,sortRef3,sortRef4,sortRef5,sortRef6,sortRef7,sortRef8,sortRef9,sortRef10,sortRef11
+
+INSERT_UPDATE SolrFacetSearchConfig;name[unique=true];description;indexNamePrefix;languages(isocode);currencies(isocode);solrServerConfig(name);solrSearchConfig(description);solrIndexConfig(name);solrIndexedTypes(identifier);enabledLanguageFallbackMechanism;$catalogVersions
+;$facetSearchConfigName;$facetSearchConfigDescription;$searchIndexNamePrefix;$indexLanguages;$indexCurrencies;$serverConfigName;$searchConfigName;$indexConfigName;$solrIndexedType;true;$productCatalog:Online
+
+UPDATE BaseSite;uid[unique=true];solrFacetSearchConfiguration(name)
+;$indexBaseSite;$facetSearchConfigName
+
+# Define price range set
+INSERT_UPDATE SolrValueRangeSet;name[unique=true];qualifier;type;solrValueRanges(&rangeValueRefID)
+;$priceRangeINR;INR;double;rangeRefINR1,rangeRefINR2,rangeRefINR3,rangeRefINR4,rangeRefINR5,rangeRefINR6,rangeRefINR7,rangeRefINR8,rangeRefINR9,rangeRefINR10,rangeRefINR11,rangeRefINR12,rangeRefINR13
+
+# Define price ranges
+INSERT_UPDATE SolrValueRange;&rangeValueRefID;solrValueRangeSet(name)[unique=true];name[unique=true];from;to
+;rangeRefINR1 ;$priceRangeINR;    Rs0-Rs19.99;   0; 19.99
+;rangeRefINR2 ;$priceRangeINR;   Rs20-Rs49.99;  20; 49.99
+;rangeRefINR3 ;$priceRangeINR;   Rs50-Rs99.99;  50; 99.99
+;rangeRefINR4 ;$priceRangeINR; Rs100-Rs199.99; 100;199.99
+;rangeRefINR5 ;$priceRangeINR; Rs200-Rs299.99; 200;299.99
+;rangeRefINR6 ;$priceRangeINR; Rs300-Rs399.99; 300;399.99
+;rangeRefINR7 ;$priceRangeINR; Rs400-Rs499.99; 400;499.99
+;rangeRefINR8 ;$priceRangeINR; Rs500-Rs599.99; 500;599.99
+;rangeRefINR9 ;$priceRangeINR; Rs600-Rs699.99; 600;699.99
+;rangeRefINR10;$priceRangeINR; Rs700-Rs799.99; 700;799.99
+;rangeRefINR11;$priceRangeINR; Rs800-Rs899.99; 800;899.99
+;rangeRefINR12;$priceRangeINR; Rs900-Rs999.99; 900;999.99
+;rangeRefINR13;$priceRangeINR; Rs1,000-Rs100,000;1000;100000
+
+
+# Non-facet properties
+INSERT_UPDATE SolrIndexedProperty;solrIndexedType(identifier)[unique=true];name[unique=true];type(code);sortableType(code);currency[default=false];localized[default=false];multiValue[default=false];useForSpellchecking[default=false];useForAutocomplete[default=false];fieldValueProvider;valueProviderParameter
+;$solrIndexedType; itemtype               ;string ;            ;    ;    ;    ;    ;    ;
+#This has been commented so that Base Product PartNumber can not be searched. All the searh on code will be done using codeVariants (Removes "didy you mean 10001552_B?" messages from search results 
+#;$solrIndexedType; code                   ;string ;            ;    ;    ;    ;true;true;springELValueProvider;code
+;$solrIndexedType; name                   ;text   ;sortabletext;    ;true;    ;true;true;sparSpringELValueProvider;getName(#lang)
+;$solrIndexedType; description            ;text   ;            ;    ;true;    ;    ;    ;;
+;$solrIndexedType; summary                ;text   ;            ;    ;true;    ;    ;    ;;
+;$solrIndexedType; manufacturerName       ;text   ;            ;    ;    ;    ;true;true;;
+;$solrIndexedType; manufacturerAID        ;string ;            ;    ;    ;    ;    ;    ;;
+;$solrIndexedType; ean                    ;string ;            ;    ;    ;    ;true;true;;
+;$solrIndexedType; keywords               ;text   ;            ;    ;true;    ;true;true;productKeywordsValueProvider;
+;$solrIndexedType; reviewAvgRating        ;double ;            ;    ;true;    ;    ;    ;productReviewAverageRatingValueProvider;
+;$solrIndexedType; img-515Wx515H          ;string ;            ;    ;    ;    ;    ;    ;image515ValueProvider;
+;$solrIndexedType; img-300Wx300H          ;string ;            ;    ;    ;    ;    ;    ;image300ValueProvider;
+;$solrIndexedType; img-96Wx96H            ;string ;            ;    ;    ;    ;    ;    ;image96ValueProvider;
+;$solrIndexedType; img-65Wx65H            ;string ;            ;    ;    ;    ;    ;    ;image65ValueProvider;
+;$solrIndexedType; img-30Wx30H            ;string ;            ;    ;    ;    ;    ;    ;image30ValueProvider;
+;$solrIndexedType; url                    ;string ;            ;    ;true;    ;    ;    ;productUrlValueProvider;
+;$solrIndexedType; primaryPromotionCode   ;string ;            ;    ;    ;    ;    ;    ;promotionCodeValueProvider;
+;$solrIndexedType; primaryPromotionBanner ;string ;            ;    ;    ;    ;    ;    ;promotionImageValueProvider;
+;$solrIndexedType; pickupAvailableFlag    ;boolean;            ;    ;    ;    ;    ;    ;productPickupAvailabilityValueProvider
+;$solrIndexedType; ERPShortDescription    ;text  ;            ;    ;true;    ;    ;    ;;
+#Variants Value providers
+;$solrIndexedType; brandVariants  		  ;text;    		   ;    ;    ;true;    ;    ;sparVariantsBrandValueProvider;
+;$solrIndexedType; nameVariants  		  ;text;    		   ;    ;    ;true;    ;    ;sparVariantsNameValueProvider;
+;$solrIndexedType; codeVariants  		  ;string;    		   ;    ;    ;true;    ;    ;sparVariantsCodeValueProvider;
+;$solrIndexedType; unitConditionVariants  ;string;    		   ;    ;    ;true;    ;    ;sparVariantsUnitConditionValueProvider;
+;$solrIndexedType; descriptionVariants    ;string;    		   ;    ;    ;true;    ;    ;sparVariantsDescriptionValueProvider;
+;$solrIndexedType; variantsImg-150Wx150H  ;string ;            ;    ;    ;true;    ;    ;sparVariantsPrimaryImageValueProvider;
+;$solrIndexedType; variantsImg-80Wx80H    ;string ;            ;    ;    ;true;    ;    ;sparVariantsThumbnailImageValueProvider
+;$solrIndexedType; variantsUrl            ;string ;            ;    ;true;true;    ;    ;sparVariantsUrlValueProvider;
+;$solrIndexedType; isProductShownMP       ;boolean;            ;    ;    ;    ;    ;    ;sparIsProductShownMPValueProvider;
+;$solrIndexedType; stockVariants    	  ;string;    		   ;    ;    ;true;    ;    ;sparVariantsStockValueProvider;
+;$solrIndexedType; stockStatusVariants 	  ;string;    		   ;    ;    ;true;    ;    ;sparVariantsStockStatusValueProvider;
+;$solrIndexedType; priceVariants    	  ;string;    		   ;    ;    ;true;    ;    ;sparVariantsPriceValueProvider;
+;$solrIndexedType; mrpVariants  		  ;string;    		   ;    ;    ;true;    ;    ;sparVariantsMRPValueProvider;
+;$solrIndexedType; childSKUsVariants  	  ;string;    		   ;    ;    ;true;    ;    ;sparVariantsChildSKUsValueProvider;
+;$solrIndexedType; isAvailableForFoodCoupon;boolean;    	   ;    ;    ;    ;    ;    ;sparIsAvailableForFoodCouponValueProvider;
+
+#This is a warehouse specific index property that will be used to retrieve warehouse specific price value for base products and is also used in sorting 
+INSERT_UPDATE SolrIndexedProperty;solrIndexedType(identifier)[unique=true];name[unique=true];type(code);sortableType(code);currency[default=false];localized[default=false];multiValue[default=false];useForSpellchecking[default=false];useForAutocomplete[default=false];fieldValueProvider;valueProviderParameter
+;$solrIndexedType; priceValue_20001             ;double ;            ;true;    ;	  ;    ;    ;sparProductPriceValueProvider;20001
+;$solrIndexedType; priceValue_20007             ;double ;            ;true;    ;	  ;    ;    ;sparProductPriceValueProvider;20007
+;$solrIndexedType; priceValue_20010             ;double ;            ;true;    ;	  ;    ;    ;sparProductPriceValueProvider;20010
+;$solrIndexedType; inStockFlag_20001            ;boolean;            ;    ;    ;    ;    ;    ;sparProductInStockFlagValueProvider;20001
+;$solrIndexedType; inStockFlag_20007            ;boolean;            ;    ;    ;    ;    ;    ;sparProductInStockFlagValueProvider;20007
+;$solrIndexedType; inStockFlag_20010            ;boolean;            ;    ;    ;    ;    ;    ;sparProductInStockFlagValueProvider;20010
+
+# Category fields
+INSERT_UPDATE SolrIndexedProperty;solrIndexedType(identifier)[unique=true];name[unique=true];type(code);localized[default=false];multiValue[default=true];categoryField[default=true];useForSpellchecking[default=false];useForAutocomplete[default=false];fieldValueProvider
+;$solrIndexedType; categoryName     ;text   ;true;;;true;true;$prefixCategoryNameValueProvider
+#;$solrIndexedType; brandName        ;text   ;true;;;;;$prefixBrandCategoryNameValueProvider
+
+# Category facets
+INSERT_UPDATE SolrIndexedProperty;solrIndexedType(identifier)[unique=true];name[unique=true];type(code);multiValue[default=true];facet[default=true];facetType(code);facetSort(code);priority;visible;categoryField[default=true];fieldValueProvider;facetDisplayNameProvider;topValuesProvider
+;$solrIndexedType; allCategories    ;string;;;Refine        ;Alpha;-9999;false;;categoryCodeValueProvider;
+;$solrIndexedType; categoryPath     ;string;;;Refine        ;Alpha;-9999;false;false;categoryPathValueProvider;
+;$solrIndexedType; category         ;string;;;Refine        ;Alpha; 6000;true;;$prefixCategoryCodeValueProvider;categoryFacetDisplayNameProvider;defaultTopValuesProvider
+
+
+# Other facet properties that are warehouse specific - ROHAN_C
+#Pirce index property is warehouse specific. As and when new warehouse is added, a new index property should also be configure with name price_{warehousecode}
+INSERT_UPDATE SolrIndexedProperty;solrIndexedType(identifier)[unique=true];name[unique=true];type(code);sortableType(code);currency[default=false];localized[default=false];multiValue[default=false];facet[default=true];facetType(code);facetSort(code);priority;visible;useForSpellchecking[default=false];useForAutocomplete[default=false];fieldValueProvider;facetDisplayNameProvider;customFacetSortProvider;topValuesProvider;rangeSets(name);valueProviderParameter
+;$solrIndexedType; price_20001            ;double;    ;true ;     ;   ;     ;MultiSelectOr ;Alpha ; 4000;true;     ;     ;sparProductPriceRangeValueProvider    ;;;defaultTopValuesProvider;$priceRangeINR;20001
+;$solrIndexedType; price_20007           ;double;    ;true ;     ;   ;     ;MultiSelectOr ;Alpha ; 4000;true;     ;     ;sparProductPriceRangeValueProvider    ;;;defaultTopValuesProvider;$priceRangeINR;20007
+;$solrIndexedType; price_20010           ;double;    ;true ;     ;   ;     ;MultiSelectOr ;Alpha ; 4000;true;     ;     ;sparProductPriceRangeValueProvider    ;;;defaultTopValuesProvider;$priceRangeINR;20010
+
+
+#Stock Facet is warehouse specific.
+INSERT_UPDATE SolrIndexedProperty;solrIndexedType(identifier)[unique=true];name[unique=true];type(code);sortableType(code);currency[default=false];localized[default=false];multiValue[default=false];facet[default=true];facetType(code);facetSort(code);priority;visible;useForSpellchecking[default=false];useForAutocomplete[default=false];fieldValueProvider;facetDisplayNameProvider;customFacetSortProvider;topValuesProvider;rangeSets(name);valueProviderParameter
+;$solrIndexedType; inStockItems_20001     ;string	;    ;     ;     ;true ;     ;MultiSelectOr	;Custom; 3000;true;		;	  ;sparProductInStockFlagFacetValuesProvider;;;;;20001
+;$solrIndexedType; inStockItems_20007     ;string	;    ;     ;     ;true ;     ;MultiSelectOr	;Custom; 3000;true;		;	  ;sparProductInStockFlagFacetValuesProvider;;;;;20007
+;$solrIndexedType; inStockItems_20010     ;string	;    ;     ;     ;true ;     ;MultiSelectOr	;Custom; 3000;true;		;	  ;sparProductInStockFlagFacetValuesProvider;;;;;20010
+
+#Refine Facet is warehouse specific.
+INSERT_UPDATE SolrIndexedProperty;solrIndexedType(identifier)[unique=true];name[unique=true];type(code);sortableType(code);currency[default=false];localized[default=false];multiValue[default=false];facet[default=true];facetType(code);facetSort(code);priority;visible;useForSpellchecking[default=false];useForAutocomplete[default=false];fieldValueProvider;facetDisplayNameProvider;customFacetSortProvider;topValuesProvider;rangeSets(name);valueProviderParameter
+;$solrIndexedType; refine_20001           ;string ;		 ;	   ;     ;true ;     ;MultiSelectOr ;Custom; 3500;true;		;	  ;sparRefineFacetValuesProvider;;;;;20001
+;$solrIndexedType; refine_20007           ;string ;		 ;	   ;     ;true ;     ;MultiSelectOr ;Custom; 3500;true;		;	  ;sparRefineFacetValuesProvider;;;;;20007
+;$solrIndexedType; refine_20010           ;string ;	 	 ;	   ;     ;true ;     ;MultiSelectOr ;Custom; 3500;true;		;	  ;sparRefineFacetValuesProvider;;;;;20010
+
+
+
+# Other facet properties
+#availableinstores is made facetable as it regressed the search behaviour across stores {Do not make availableInStores as non-facetable}- ROHAN_C
+INSERT_UPDATE SolrIndexedProperty;solrIndexedType(identifier)[unique=true];name[unique=true];type(code);sortableType(code);currency[default=false];localized[default=false];multiValue[default=false];facet[default=true];facetType(code);facetSort(code);priority;visible;useForSpellchecking[default=false];useForAutocomplete[default=false];fieldValueProvider;facetDisplayNameProvider;customFacetSortProvider;topValuesProvider;rangeSets(name);valueProviderParameter
+;$solrIndexedType; allPromotions    ;string ;    ;     ;     ;true ;true;MultiSelectOr ;Alpha ; 3000   ;false;    ;     ;promotionCodeValueProvider  ;promotionFacetDisplayNameProvider;                         ;
+;$solrIndexedType; availableInStores;string ;    ;     ;     ;true ;true;MultiSelectOr ;Custom;10000;false;     ;     ;sparProductStoreStockValueProvider;$prefixPointOfServiceFacetDisplayNameProvider;distanceAttributeSortProvider
+#Spar Specific Facets configuration - Rohan_C
+;$solrIndexedType; brand            ;string 	;	 ;	   ;     ;true ;     ;MultiSelectOr ;Custom; 5000;true;		;	  ;sparBrandFacetValuesProvider;
+
+# Create the queries that will be used to extract data for Solr
+INSERT_UPDATE SolrIndexerQuery;solrIndexedType(identifier)[unique=true];identifier[unique=true];type(code);injectCurrentDate[default=true];injectCurrentTime[default=true];injectLastIndexTime[default=true];query;user(uid)
+;$solrIndexedType;$searchIndexNamePrefix-fullQuery;full;;;false;"SELECT {P:PK} FROM {Product AS P join ArticleApprovalStatus AS A on {P:APPROVALSTATUS}={A:PK}} WHERE {P:PK} NOT IN ({{ SELECT {V:PK} FROM {VariantProduct as V} }}) AND {A:CODE} ='approved'";anonymous
+;$solrIndexedType;$searchIndexNamePrefix-updateQuery;update;;;;"
+SELECT DISTINCT tbl.pk, tbl.code FROM (
+	{{
+		SELECT DISTINCT {p:PK} AS pk, {p:code} AS code
+		FROM {Product AS p LEFT JOIN CustomerReview AS cr ON {cr:product}={p:PK} join ArticleApprovalStatus AS A on {p.APPROVALSTATUS}={A.PK} }
+		WHERE ({p:modifiedtime} >= ?lastIndexTime OR {cr:modifiedtime} >= ?lastIndexTime) AND {p:PK} NOT IN ({{ SELECT {PK} FROM {VariantProduct} }}) AND {A:CODE} ='approved'
+	}}
+	UNION
+	{{
+		SELECT {p:PK}  AS pk, {p:code} AS code FROM {Product AS p join ArticleApprovalStatus AS A on {p.APPROVALSTATUS}={A.PK}} WHERE {p:code} IN (
+			{{
+				SELECT DISTINCT {sl:productCode} FROM {StockLevel AS sl} WHERE {sl:modifiedtime} >= ?lastIndexTime
+			}}
+		) AND {A.CODE} ='approved' AND {p:PK} NOT IN ({{ SELECT {PK} FROM {VariantProduct} }})
+	}}
+) tbl ORDER BY tbl.code
+";anonymous
+;$solrIndexedType;$searchIndexNamePrefix-deleteQuery;delete;;;false;"SELECT {PK} FROM {Product}";anonymous
+
+
+# Define the available sorts
+INSERT_UPDATE SparSolrSort;&sortRefID;indexedType(identifier)[unique=true];code[unique=true];useBoost
+;sortRef3;$solrIndexedType;name-asc;false
+;sortRef4;$solrIndexedType;name-desc;false
+
+# Define the available sorts that are warehouse specific
+INSERT_UPDATE SparSolrSort;&sortRefID;indexedType(identifier)[unique=true];code[unique=true];useBoost;warehouse
+;sortRef1;$solrIndexedType;relevance_20001;true;20001
+;sortRef2;$solrIndexedType;relevance_20007;true;20007
+;sortRef5;$solrIndexedType;price-asc_20001;false;20001
+;sortRef6;$solrIndexedType;price-desc_20001;false;20001
+;sortRef7;$solrIndexedType;price-asc_20007;false;20007
+;sortRef8;$solrIndexedType;price-desc_20007;false;20007
+;sortRef9;$solrIndexedType;relevance_20010;true;20010
+;sortRef10;$solrIndexedType;price-asc_20010;false;20010
+;sortRef11;$solrIndexedType;price-desc_20010;false;20010
+
+
+# Define the sort fields
+INSERT_UPDATE SolrSortField;sort(indexedType(identifier),code)[unique=true];fieldName[unique=true];ascending[unique=true]
+;$solrIndexedType:name-asc;name;true
+;$solrIndexedType:name-desc;name;false
+
+# Define the sort fields that are warehouse specific
+INSERT_UPDATE SolrSortField;sort(indexedType(identifier),code)[unique=true];fieldName[unique=true];ascending[unique=true]
+;$solrIndexedType:price-asc_20001;priceValue_20001;true
+;$solrIndexedType:price-desc_20001;priceValue_20001;false
+;$solrIndexedType:price-asc_20007;priceValue_20007;true
+;$solrIndexedType:price-desc_20007;priceValue_20007;false
+;$solrIndexedType:price-asc_20010;priceValue_20010;true
+;$solrIndexedType:price-desc_20010;priceValue_20010;false
+;$solrIndexedType:relevance_20001;inStockFlag_20001;false
+;$solrIndexedType:relevance_20001;score;false
+;$solrIndexedType:relevance_20007;inStockFlag_20007;false
+;$solrIndexedType:relevance_20007;score;false
+;$solrIndexedType:relevance_20010;inStockFlag_20010;false
+;$solrIndexedType:relevance_20010;score;false

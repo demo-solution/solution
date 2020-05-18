@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2013 hybris AG
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+
+  
+-->
+
+<items xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="items.xsd">
+
+	<relations>
+		<!-- New Design items Relation XML entry for Promotion to warehouses - Start
+		<relation code="Promotion2WarehouseRel" autocreate="true" generate="false" localized="false">
+			<deployment table="Promotion2WarehouseRel" typecode="31008" />
+			<sourceElement type="Warehouse" cardinality="many" qualifier="warehouses" />
+			<targetElement type="ProductPromotion" qualifier="productPromotion"
+				collectiontype="set" cardinality="many" ordered="false" >
+				<modifiers read="true" write="true" search="true"
+					optional="false" />
+			</targetElement>
+		</relation>
+		New Design items Relation XML entry for  Promotion to warehouses - End -->
+		
+		<relation code="PromoRestr2CategoryRel"
+			autocreate="true"
+			generate="true"
+			localized="false">
+			<deployment table="Prom0Restr2CatRel" typecode="9131"/>
+					
+			<sourceElement qualifier="categories" type="Category" cardinality="many">
+				<description>Categories</description>
+				<modifiers read="true" write="true" search="true" optional="true"/>
+			</sourceElement>
+			<targetElement qualifier="sparCategoryItemPromotionRestriction" type="SparCategoryItemPromotionRestriction" cardinality="many">
+				<description>Promotion restrictions for category</description>
+				<modifiers read="true" write="true" search="true" optional="true" partof="true"/>
+			</targetElement>
+			
+		</relation>
+		
+		
+		<relation code="Promo2CategoryRestRel"
+			autocreate="true"
+			generate="true"
+			localized="false">
+			<deployment table="Prom2CatRestrRel" typecode="9133"/>
+					
+			<sourceElement qualifier="categories" type="Category" cardinality="many">
+				<description>Categories</description>
+				<modifiers read="true" write="true" search="true" optional="true"/>
+			</sourceElement>
+			<targetElement qualifier="sparPromotionCategoryRestriction" type="SparPromotionCategoryRestriction" cardinality="many">
+				<description>Promotion restrictions for category</description>
+				<modifiers read="true" write="true" search="true" optional="true" partof="true"/>
+			</targetElement>
+			
+		</relation>
+		
+		
+	</relations> 
+	
+	<itemtypes>
+		<itemtype code="SparProductBOGOFPromotion" extends="ProductBOGOFPromotion" jaloclass="com.spar.hcl.promotions.jalo.SparProductBOGOFPromotion" autocreate="true" generate="true" >
+			<description>Customization for ProductBOGOFPromotion. Adds the free count product along with the qualifying count..</description>
+		</itemtype>
+	
+	<itemtype code="SparProductPercentDiscountPromotion"
+			extends="ProductMultiBuyPromotion"
+			jaloclass="com.spar.hcl.promotions.jalo.SparProductPercentDiscountPromotion"
+			autocreate="true"
+			generate="true">
+
+			<attributes>
+				<attribute
+					qualifier="percentageDiscount"
+					autocreate="true"
+					type="java.lang.Double">
+					<defaultvalue>Double.valueOf(1.0D)</defaultvalue>
+					<description>Percentage discount.</description>
+					<modifiers read="true" write="true" search="true" optional="true"/>
+					<persistence type="property"/>
+				</attribute>
+			</attributes>
+			
+			
+		</itemtype>		
+		
+		<itemtype code="SparProductFixedPriceDiscountPromotion"
+			extends="ProductMultiBuyPromotion"
+			jaloclass="com.spar.hcl.promotions.jalo.SparProductFixedPriceDiscountPromotion"
+			autocreate="true"
+			generate="true">
+		</itemtype>
+		
+		<itemtype code="SparProductBXGYFPromotion"
+			extends="ProductBOGOFPromotion"
+			jaloclass="com.spar.hcl.promotions.jalo.SparProductBXGYFPromotion"
+			autocreate="true"
+			generate="true">
+			<attributes>
+				<attribute
+					qualifier="freeProducts"
+					autocreate="true"
+					type="ProductCollection">
+					<description>The collections of potential free products.</description>
+					<modifiers read="true" write="true" search="true" optional="true"/>
+					<persistence type="property"/>
+				</attribute>
+				
+		</attributes>		
+		</itemtype>
+		
+		
+		<itemtype code="SparCategoryItemAtFixedPricePromotion"
+			extends="ProductFixedPricePromotion"
+			jaloclass="com.spar.hcl.promotions.jalo.SparCategoryItemAtFixedPricePromotion"
+			autocreate="true"
+			generate="true">
+			<attributes>
+				<attribute
+					qualifier="thresholdTotals"
+					autocreate="true"
+					type="PromotionPriceRowCollectionType">
+					<description>The cart total value threshold in specific currencies.</description>
+					<persistence type="property" />
+					<modifiers read="true" write="true" search="false" initial="false" optional="true" partof="true"/>
+				</attribute>
+				
+				<attribute qualifier="messageCouldHaveFired" type="localized:java.lang.String">
+					<description>The message to show when the promotion could have potentially fire.</description>
+					<modifiers read="true" write="true" optional="true" />
+					<persistence type="property">
+						<columntype>
+							<value>HYBRIS.LONG_STRING</value>
+						</columntype>
+					</persistence>
+				</attribute>
+				
+			</attributes>	
+		</itemtype>
+		
+		 <itemtype code="SparCategoryItemAtFixedDiscPromotion"
+			extends="ProductPercentageDiscountPromotion"
+			jaloclass="com.spar.hcl.promotions.jalo.SparCategoryItemAtFixedDiscPromotion"
+			autocreate="true"
+			generate="true">
+			<attributes>
+				<attribute
+					qualifier="thresholdTotals"
+					autocreate="true"
+					type="PromotionPriceRowCollectionType">
+					<description>The cart total value threshold in specific currencies.</description>
+					<persistence type="property" />
+					<modifiers read="true" write="true" search="false" initial="false" optional="true" partof="true"/>
+				</attribute>
+				
+				<attribute qualifier="messageCouldHaveFired" type="localized:java.lang.String">
+					<description>The message to show when the promotion could have potentially fire.</description>
+					<modifiers read="true" write="true" optional="true" />
+					<persistence type="property">
+						<columntype>
+							<value>HYBRIS.LONG_STRING</value>
+						</columntype>
+					</persistence>
+				</attribute>
+			</attributes>
+		</itemtype> 
+		
+		<itemtype code="SparCategoryItemPromotionRestriction"
+				extends="AbstractPromotionRestriction"
+				jaloclass="com.spar.hcl.jalo.promotions.SparCategoryItemPromotionRestriction"
+				autocreate="true"
+				generate="true">
+				<description>Spar Promotion Category Restriction</description>
+ 			</itemtype>
+		
+		 <itemtype code="SparPromotionCategoryRestriction"
+				extends="AbstractPromotionRestriction"
+				jaloclass="com.spar.hcl.jalo.promotions.SparPromotionCategoryRestriction"
+				autocreate="true"
+				generate="true">
+		 </itemtype>
+		
+	     <itemtype code="SparOrderThresholdFixedDiscountPromotion"
+				extends="OrderThresholdDiscountPromotion"
+				jaloclass="com.spar.hcl.jalo.promotions.SparOrderThresholdFixedDiscountPromotion"
+				autocreate="true"
+				generate="true">
+		</itemtype>
+ 		
+ 		<itemtype code="SparOrderThresholdPercentDiscountPromotion"
+			extends="OrderPromotion"
+			jaloclass="com.spar.hcl.jalo.promotions.SparOrderThresholdPercentDiscountPromotion"
+			autocreate="true"
+			generate="true">
+
+			<attributes>
+
+				<attribute
+					qualifier="thresholdTotals"
+					autocreate="true"
+					type="PromotionPriceRowCollectionType">
+					<description>The cart total value threshold in specific currencies.</description>
+					<persistence type="property" />
+					<modifiers read="true" write="true" search="false" initial="false" optional="true" partof="true"/>
+				</attribute>
+
+				<attribute
+					qualifier="percentageDiscount"
+					autocreate="true"
+					type="java.lang.Double">
+					<defaultvalue>Double.valueOf(10.0D)</defaultvalue>
+					<description>Percentage discount.</description>
+					<modifiers read="true" write="true" search="true" optional="true"/>
+					<persistence type="property"/>
+				</attribute>
+
+
+				<attribute qualifier="messageFired" type="localized:java.lang.String">
+					<description>The message to show when the promotion has fired.</description>
+					<modifiers read="true" write="true" optional="true" />
+					<persistence type="property">
+						<columntype>
+							<value>HYBRIS.LONG_STRING</value>
+						</columntype>
+					</persistence>
+				</attribute>
+
+				<attribute qualifier="messageCouldHaveFired" type="localized:java.lang.String">
+					<description>The message to show when the promotion could have potentially fire.</description>
+					<modifiers read="true" write="true" optional="true" />
+					<persistence type="property">
+						<columntype>
+							<value>HYBRIS.LONG_STRING</value>
+						</columntype>
+					</persistence>
+				</attribute>
+
+			</attributes>
+		</itemtype>
+	
+		</itemtypes>
+	
+</items>

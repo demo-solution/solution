@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ [y] hybris Platform
+ 
+ Copyright (c) 2000-2015 hybris AG
+ All rights reserved.
+ 
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+ -->
+        
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+	
+	<context:annotation-config/>
+	
+	<!-- Order Process Actions -->
+	<bean id="abstractOrderAction" class="com.spar.hcl.actions.order.AbstractOrderAction" abstract="true" parent="abstractAction">
+		<property name="timeService" ref="timeService"/>
+	</bean>
+	
+	<bean id="checkOrderAction" class="com.spar.hcl.actions.order.CheckOrderAction" parent="abstractAction">
+		<property name="checkOrderService" ref="checkOrderService"/>
+	</bean>
+	
+	<bean id="geocodeShippingAddressAction" class="com.spar.hcl.actions.order.GeocodeShippingAddressAction" parent="abstractAction">
+		<property name="geoWebServiceWrapper" ref="geoServiceWrapper"/>
+		<property name="addressConverter" ref="deliveryAddressGeocodeConverter"/>
+	</bean>
+		
+	<bean id="sourceOrderAction" class="com.spar.hcl.actions.order.SourceOrderAction" parent="abstractAction">
+		<property name="sourcingService" ref="sourcingService"/>
+		<property name="allocationService" ref="allocationService"/>
+		<property name="businessProcessService" ref="businessProcessService"/>
+		<property name="sparPlmsService" ref="sparPlmsService"/>
+		<property name="sparBlowhornService" ref="sparBlowhornService"/>
+	</bean>
+	
+	<bean id="completeOrderAction" class="com.spar.hcl.actions.order.CompleteOrderAction" parent="abstractAction" />
+	
+	<!-- Fraud Check Actions -->
+	<bean id="abstractFraudCheckAction" class="com.spar.hcl.actions.order.fraudcheck.AbstractFraudCheckAction" abstract="true" parent="abstractOrderAction" />
+	
+	<bean id="fraudCheckOrderInternalAction" class="com.spar.hcl.actions.order.fraudcheck.FraudCheckOrderAction" parent="abstractFraudCheckAction">
+		<property name="fraudService" ref="fraudService"/>
+		<property name="providerName" value="hybris"/>
+	</bean>
+	
+	<bean id="prepareOrderForManualCheckAction" class="com.spar.hcl.actions.order.fraudcheck.PrepareOrderForManualCheckAction" parent="abstractAction">
+		<property name="eventService" ref="eventService"/>
+	</bean>
+	
+	<bean id="notifyCustomerAboutFraudAction" class="com.spar.hcl.actions.order.fraudcheck.NotifyCustomerAboutFraudAction" parent="abstractAction">
+		<property name="eventService" ref="eventService"/>
+	</bean>
+	
+	<bean id="sendOrderPlacedNotificationAction" class="com.spar.hcl.actions.order.fraudcheck.SendOrderPlacedNotificationAction" parent="abstractAction">
+		<property name="eventService" ref="eventService"/>
+	</bean>
+	
+	<bean id="orderManualCheckedAction" class="com.spar.hcl.actions.order.fraudcheck.OrderManualCheckedAction" parent="abstractOrderAction"/>
+	
+	<!-- Consignment Subprocess Completion Action -->
+	<bean id="verifyOrderCompletionAction" class="com.spar.hcl.actions.order.VerifyOrderCompletionAction" parent="abstractAction"/>
+	
+	<!-- Cancellation Actions -->
+	<bean id="verifyOrderPostCancellationAction" class="com.spar.hcl.actions.order.cancel.VerifyOrderPostCancellationAction" parent="abstractAction">
+		<property name="sparPlmsService" ref="sparPlmsService"></property>
+		<property name="sparBlowhornService" ref="sparBlowhornService"></property>
+	</bean>
+	
+	<!-- <bean id="cancelOrderAction" class="com.spar.hcl.actions.order.cancel.CancelOrderAction" parent="abstractAction">
+		<property name="orderCancellationService" ref="orderCancellationService"/>
+	</bean> -->
+	
+	<!-- Payment Actions-->
+	<bean id="postTaxesAction" class="com.spar.hcl.actions.order.payment.PostTaxesAction" parent="abstractAction">
+		<property name="externalTaxesService" ref="externalTaxesService"/>
+	</bean>
+	
+	<bean id="takePaymentAction" class="com.spar.hcl.actions.order.payment.TakePaymentAction" parent="abstractAction">
+		<property name="paymentService" ref="paymentService"/>
+	</bean>
+	
+	<bean id="sendPaymentFailedNotificationAction" class="com.spar.hcl.actions.order.payment.SendPaymentFailedNotificationAction" parent="abstractAction">
+		<property name="eventService" ref="eventService"/>
+	</bean>
+	
+</beans>

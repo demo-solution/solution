@@ -1,0 +1,245 @@
+{
+    "commerceSuiteVersion": "1905",
+	"extensions":
+	[
+	
+	],
+	 "useConfig":{
+		"extensions": {
+            "location": "config/localextensions.xml"
+        },
+		"solr": {
+            "location": "config/solr"
+        },
+        "properties": [
+            {
+                "location": "config/local.properties"
+            }
+	]
+	},
+	"storefrontAddons": [
+        {
+            "addon": "smarteditaddon",
+            "storefront": "sparstorefront",
+            "template": "yacceleratorstorefront"
+        },
+		{
+            "addon": "textfieldconfiguratortemplateaddon",
+            "storefront": "sparstorefront",
+            "template": "yacceleratorstorefront"
+        },
+		{
+            "addon": "assistedservicestorefront",
+            "storefront": "sparstorefront",
+            "template": "yacceleratorstorefront"
+        },
+		{
+            "addon": "commerceorgsamplesaddon",
+            "storefront": "sparstorefront",
+            "template": "yacceleratorstorefront"
+        },
+	    {
+            "addon": "promotionenginesamplesaddon",
+            "storefront": "sparstorefront",
+            "template": "yacceleratorstorefront"
+        },
+		{
+            "addon": "adaptivesearchsamplesaddon",
+            "storefront": "sparstorefront",
+            "template": "yacceleratorstorefront"
+        },
+		{
+			"addon":"pcmbackofficesamplesaddon",
+			"storefront": "sparstorefront",
+            "template": "yacceleratorstorefront"
+		},
+		{
+			"addon":"orderselfserviceaddon",
+			"storefront": "sparstorefront",
+            "template": "yacceleratorstorefront"
+		}
+    ],
+		"aspects": [
+    {
+      "name": "backoffice",
+      "properties": [
+	  
+      ],
+      "webapps": [
+        {
+          "name": "hac",
+          "contextPath": "/hac"
+        },
+        {
+          "name": "mediaweb",
+          "contextPath": "/medias"
+        },
+        {
+          "name": "backoffice",
+          "contextPath": "/backoffice"
+        },
+		{
+		"name": "smartedit",
+         "contextPath": "/smartedit"
+		},
+		{
+          "name": "cmssmartedit",
+          "contextPath": "/cmssmartedit"
+        },
+		{
+			"name": "smarteditwebservices",
+          "contextPath": "/smarteditwebservices"
+		},
+		{
+          "name":"odata2webservices",
+          "contextPath": "/odata2webservices"
+        },
+		{
+		   "name": "acceleratorservices",
+          "contextPath": "/acceleratorservices"
+		},
+		{
+			"name": "oauth2",
+			"contextPath": "/authorizationserver"
+		},
+		{
+          "name": "cmswebservices",
+          "contextPath": "/cmswebservices"
+        },
+		{
+          "name": "personalizationsmartedit",
+          "contextPath": "/personalizationsmartedit"
+        },
+		{
+          "name": "personalizationpromotionssmartedit",
+          "contextPath": "/personalizationpromotionssmartedit"
+        },
+		{
+          "name": "personalizationsearchsmartedit",
+          "contextPath": "/personalizationsearchsmartedit"
+        },
+		{
+          "name": "cmssmarteditwebservices",
+          "contextPath": "/cmssmarteditwebservices"
+        },
+		{
+          "name": "permissionswebservices",
+          "contextPath": "/permissionswebservices"
+        },
+		{
+          "name": "previewwebservices",
+          "contextPath": "/previewwebservices"
+        },
+		{
+          "name": "personalizationwebservices",
+          "contextPath": "/personalizationwebservices"
+        },
+		{
+          "name": "sparstorefront",
+          "contextPath": "/sparstorefront"
+        },
+		{
+			"name": "sparcommercewebservices",
+			"contextPath": "/rest"
+		}
+      ]
+    },
+    {
+      "name": "accstorefront",
+      "properties": [
+        {
+          "key": "spring.session.enabled",
+          "value": "true"
+        },
+		{
+            "key":"storefrontContextRoot",
+            "value":""
+        }
+      ],
+      "webapps": [
+		{
+			"name": "sparstorefront",
+            "contextPath": ""
+        },
+        {
+          "name": "mediaweb",
+          "contextPath": "/medias"
+        },
+		{
+          "name": "hac",
+          "contextPath": "/hac"
+		},
+		{
+          "name": "acceleratorservices",
+          "contextPath": "/acceleratorservices"
+        },
+        {
+          "name": "oauth2",
+          "contextPath": "/authorizationserver"
+        },
+       {
+          "name": "smartedit",
+          "contextPath": "/smartedit"
+        },
+        {
+          "name": "cmssmartedit",
+          "contextPath": "/cmssmartedit"
+        },
+        {
+          "name": "cmssmarteditwebservices",
+          "contextPath": "/cmssmarteditwebservices"
+        },
+        {
+          "name": "smarteditwebservices",
+          "contextPath": "/smarteditwebservices"
+        },
+        {
+          "name": "cmscockpit",
+          "contextPath": "/cmscockpit"
+        },
+        {
+          "name": "cmswebservices",
+          "contextPath": "/cmswebservices"
+        },
+        {
+          "name": "cscockpit",
+          "contextPath": "/cscockpit"
+        },
+        {
+          "name": "maintenanceweb",
+          "contextPath": "/maintenance"
+        },
+        {
+          "name": "permissionswebservices",
+          "contextPath": "/permissionswebservices"
+        },
+        {
+          "name": "personalizationsmartedit",
+          "contextPath": "/personalizationsmartedit"
+        },
+        {
+          "name": "personalizationwebservices",
+          "contextPath": "/personalizationwebservices"
+        },
+        {
+          "name": "previewwebservices",
+          "contextPath": "/previewwebservices"
+        }
+      ]
+    },
+    {
+      "name": "backgroundProcessing",
+      "properties": [],
+      "webapps": [
+        {
+          "name": "hac",
+          "contextPath": ""
+        },
+        {
+          "name": "mediaweb",
+          "contextPath": "/medias"
+        }
+      ]
+    }
+  ]
+}
