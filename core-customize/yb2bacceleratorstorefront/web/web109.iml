@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="JAVA_MODULE" version="4">
+  <component name="FacetManager">
+    <facet type="web" name="Web">
+      <configuration>
+        <descriptors>
+          <deploymentDescriptor name="web.xml" url="file://$MODULE_DIR$/webroot/WEB-INF/web.xml" />
+        </descriptors>
+        <webroots>
+          <root url="file://$MODULE_DIR$/webroot" relative="/" />
+        </webroots>
+        <sourceRoots>
+          <root url="file://$MODULE_DIR$/src" />
+        </sourceRoots>
+      </configuration>
+    </facet>
+  </component>
+  <component name="NewModuleRootManager" inherit-compiler-output="true">
+    <exclude-output />
+    <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/testsrc" isTestSource="true" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="lib51" level="project" />
+    <orderEntry type="library" name="lib8" level="project" />
+    <orderEntry type="library" name="coreserver" level="project" />
+    <orderEntry type="library" name="jstl-1.22" level="project" />
+    <orderEntry type="library" name="libs7" level="project" />
+    <orderEntry type="library" name="jstl-impl-1.26" level="project" />
+    <orderEntry type="library" name="catalogserver" level="project" />
+    <orderEntry type="library" name="jstl-1.21" level="project" />
+    <orderEntry type="library" name="lib60" level="project" />
+    <orderEntry type="library" name="lib46" level="project" />
+    <orderEntry type="library" name="lib39" level="project" />
+    <orderEntry type="library" name="lib67" level="project" />
+    <orderEntry type="library" name="lib3" level="project" />
+    <orderEntry type="library" name="lib42" level="project" />
+    <orderEntry type="library" name="lib61" level="project" />
+    <orderEntry type="library" name="lib35" level="project" />
+    <orderEntry type="library" name="jstl-impl-1.23" level="project" />
+    <orderEntry type="library" name="lib6" level="project" />
+    <orderEntry type="library" name="jstl-1.2" level="project" />
+    <orderEntry type="library" name="libs4" level="project" />
+    <orderEntry type="library" name="lib44" level="project" />
+    <orderEntry type="library" name="lib32" level="project" />
+    <orderEntry type="library" name="lib47" level="project" />
+    <orderEntry type="library" name="javax.servlet.jsp.jstl-1.2.5" level="project" />
+    <orderEntry type="library" name="jstl-impl-1.25" level="project" />
+    <orderEntry type="library" name="lib14" level="project" />
+    <orderEntry type="library" name="lib69" level="project" />
+    <orderEntry type="library" name="lib36" level="project" />
+    <orderEntry type="library" name="owasp-java-html-sanitizer-20160924.1" level="project" />
+    <orderEntry type="library" name="lib43" level="project" />
+    <orderEntry type="library" name="jackson-databind-2.9.8" level="project" />
+    <orderEntry type="library" name="paymentserver" level="project" />
+    <orderEntry type="library" name="lib48" level="project" />
+    <orderEntry type="library" name="libs1" level="project" />
+    <orderEntry type="library" name="lib34" level="project" />
+    <orderEntry type="library" name="lib66" level="project" />
+    <orderEntry type="library" name="jstl-impl-1.24" level="project" />
+    <orderEntry type="library" name="jstl-impl-1.2" level="project" />
+    <orderEntry type="library" name="lib24" level="project" />
+    <orderEntry type="library" name="jackson-databind-2.9.81" level="project" />
+    <orderEntry type="library" name="solrj-lib" level="project" />
+    <orderEntry type="library" name="lib54" level="project" />
+    <orderEntry type="library" name="jstl-1.23" level="project" />
+    <orderEntry type="library" name="standard-1.1.2" level="project" />
+    <orderEntry type="library" name="wiremock-standalone-2.19.0" level="project" />
+    <orderEntry type="library" name="selenium-server-standalone-3.0.1" level="project" />
+    <orderEntry type="library" name="jackson-databind-2.9.82" level="project" />
+    <orderEntry type="library" name="lib25" level="project" />
+    <orderEntry type="library" name="lib33" level="project" />
+    <orderEntry type="library" name="jstl-1.26" level="project" />
+    <orderEntry type="library" name="jstl-impl-1.22" level="project" />
+    <orderEntry type="library" name="ext" level="project" />
+    <orderEntry type="library" name="lib18" level="project" />
+    <orderEntry type="library" name="lib13" level="project" />
+    <orderEntry type="library" name="lib15" level="project" />
+    <orderEntry type="library" name="jstl-1.27" level="project" />
+    <orderEntry type="library" name="libs" level="project" />
+    <orderEntry type="library" name="lib4" level="project" />
+    <orderEntry type="library" name="lib55" level="project" />
+    <orderEntry type="library" name="lib64" level="project" />
+    <orderEntry type="library" name="lib63" level="project" />
+    <orderEntry type="library" name="lib30" level="project" />
+    <orderEntry type="library" name="lib29" level="project" />
+    <orderEntry type="library" name="jstl-1.25" level="project" />
+    <orderEntry type="library" name="jstl-impl-1.21" level="project" />
+    <orderEntry type="library" name="bin" level="project" />
+    <orderEntry type="library" name="jstl-1.24" level="project" />
+    <orderEntry type="library" name="libs2" level="project" />
+    <orderEntry type="library" name="basecommerceserver" level="project" />
+    <orderEntry type="library" name="cms2server" level="project" />
+    <orderEntry type="library" name="libs6" level="project" />
+    <orderEntry type="module" module-name="commonwebsrc" />
+    <orderEntry type="module" module-name="web92" />
+    <orderEntry type="module" module-name="web95" />
+    <orderEntry type="module" module-name="acceleratorcms" />
+    <orderEntry type="module" module-name="acceleratorservices" />
+    <orderEntry type="module" module-name="commonwebsrc2" />
+    <orderEntry type="module" module-name="core" />
+    <orderEntry type="module" module-name="acceleratorfacades" />
+    <orderEntry type="module" module-name="commonweb" />
+    <orderEntry type="module" module-name="web75" />
+    <orderEntry type="module" module-name="commerceservices" />
+    <orderEntry type="module" module-name="commercefacades" />
+    <orderEntry type="module" module-name="promotionenginesamplesaddon" />
+    <orderEntry type="module" module-name="cms2" />
+    <orderEntry type="module" module-name="yacceleratorfacades" />
+    <orderEntry type="module" module-name="pcmbackofficesamplesaddon" />
+    <orderEntry type="module" module-name="bootstrap" />
+    <orderEntry type="module" module-name="platformservices" />
+    <orderEntry type="module" module-name="commonwebsrc3" />
+    <orderEntry type="module" module-name="acceleratorstorefrontcommons" />
+    <orderEntry type="module" module-name="catalog" />
+    <orderEntry type="module" module-name="commonwebsrc1" />
+    <orderEntry type="module" module-name="web98" />
+    <orderEntry type="module" module-name="platform1" />
+    <orderEntry type="module" module-name="classificationsystems" />
+  </component>
+</module>
